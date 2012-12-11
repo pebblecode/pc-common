@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
-
 using PebbleCode.Framework.Utilities;
 using System.Collections.Specialized;
 using System.Reflection;
@@ -59,12 +58,12 @@ namespace PebbleCode.Framework.Configuration
         /// Dumps public property getter values for a particular Settings type
         /// </summary>
         /// <param name="t"></param>
-        public static void DumpSettings(Type t, ILogger logger)
+        public static void DumpSettings(Type t)
         {
             try
             {
                 NameValueCollection vals = ApplicationSettingsHelper.ListSettings(t);
-                logger.WriteInfo(string.Format("Logging {0}", t.Name), Category.General);
+                Logger.WriteInfo(string.Format("Logging {0}", t.Name), Category.General);
 
                 foreach (string key in vals.Keys)
                 {
@@ -77,7 +76,7 @@ namespace PebbleCode.Framework.Configuration
                     {
                         value = vals[key];
                     }
-                    logger.WriteInfo(
+                    Logger.WriteInfo(
                         string.Format("    {0} : {1}",
                         key,
                         value),
@@ -86,7 +85,7 @@ namespace PebbleCode.Framework.Configuration
             }
             catch (Exception ex)
             {
-                logger.WriteUnexpectedException(ex, "Failed to list settings for " + t.FullName, Category.General);
+                Logger.WriteUnexpectedException(ex, "Failed to list settings for " + t.FullName, Category.General);
             }
         }
     }

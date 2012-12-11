@@ -5,17 +5,10 @@ using System.Management;
 using System.Text;
 using System.Diagnostics;
 using PebbleCode.Framework.Logging;
-
 namespace PebbleCode.Framework.SystemInfo
 {
     public class SysInfo
     {
-        private ILogger _logger;
-        public SysInfo(ILogger logger)
-        {
-            _logger = logger;
-        }
-
         public string GetRamDiskUsage()
         {
             try
@@ -43,7 +36,7 @@ namespace PebbleCode.Framework.SystemInfo
             }
             catch (Exception ex)
             {
-                _logger.WriteWarning("Failed to get disk statistics: " + ex.Message, Category.GeneralError);
+                Logger.WriteWarning("Failed to get disk statistics: " + ex.Message, Category.GeneralError);
             }
             return "Fail to get system info";
         }
