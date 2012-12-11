@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PC.ExpressionCalculator", "PC.ExpressionCalculator\PC.ExpressionCalculator.fsproj", "{D2851C80-FB66-420A-B542-B7F6CFDE35F3}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PC.ExpressionTree", "PC.ExpressionTree\PC.ExpressionTree.fsproj", "{FABF3870-0D70-4A30-BD3A-8D576BD0BC2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PC.FsharpExtensions", "PC.FsharpExtensions\PC.FsharpExtensions.csproj", "{31465FE1-47B3-4A86-9560-F029469A9E79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2851C80-FB66-420A-B542-B7F6CFDE35F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2851C80-FB66-420A-B542-B7F6CFDE35F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2851C80-FB66-420A-B542-B7F6CFDE35F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2851C80-FB66-420A-B542-B7F6CFDE35F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FABF3870-0D70-4A30-BD3A-8D576BD0BC2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FABF3870-0D70-4A30-BD3A-8D576BD0BC2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FABF3870-0D70-4A30-BD3A-8D576BD0BC2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FABF3870-0D70-4A30-BD3A-8D576BD0BC2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31465FE1-47B3-4A86-9560-F029469A9E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31465FE1-47B3-4A86-9560-F029469A9E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31465FE1-47B3-4A86-9560-F029469A9E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31465FE1-47B3-4A86-9560-F029469A9E79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
