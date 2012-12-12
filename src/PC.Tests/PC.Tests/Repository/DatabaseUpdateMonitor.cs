@@ -11,6 +11,6 @@
 
         private static void CheckForChanges(object state) { }
     
-        internal static void IndicateChanged() { }
+        public static void IndicateChanged() { }
     }
 }

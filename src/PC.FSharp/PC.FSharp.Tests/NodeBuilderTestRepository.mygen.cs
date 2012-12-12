@@ -24,7 +24,7 @@ using PebbleCode.Framework.IoC;
 using PebbleCode.Framework.Logging;
 using PebbleCode.Repository;
 using PebbleCode.Repository.Exceptions;
-
+using PebbleCode.Tests.Repository;
 using PebbleCode.Tests.Entities;
 
 namespace PebbleCode.Repository
@@ -343,7 +343,7 @@ namespace PebbleCode.Repository
 		private void RaiseModelChanged()
 		{		
 			//Allow other clients to learn of changes
-            DatabaseUpdateMonitor.IndicateChanged();
+            PebbleCode.Repository.DatabaseUpdateMonitor.IndicateChanged();
 		}
 	}
 
