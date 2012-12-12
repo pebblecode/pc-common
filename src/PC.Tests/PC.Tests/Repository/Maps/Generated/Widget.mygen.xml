@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Widget" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<alias>
+		<typeAlias alias="Widget" type="PebbleCode.Tests.Entities.Widget, PC.Tests" />
+		<typeAlias alias="WidgetList" type="PebbleCode.Tests.Entities.WidgetList, PC.Tests" />
+	</alias>
+			
+	<resultMaps>
+		<resultMap id="WidgetResult" class="Widget">
+			<result property="DbId" column="id" type="int" dbType="Int"/>
+			<result property="DbThingId" column="thing_id" type="int" dbType="Int"/>
+			<result property="DbDescription" column="description" type="string" dbType="varchar"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		
+		<!-- Reusable fragment for select all columns in the table -->
+		<sql id="WidgetColumnNamesFragment">
+			widget.id,
+			widget.thing_id,
+			widget.description
+		</sql>
+	
+		<!-- Select entity by primary key -->
+		<select id="SelectWidget" parameterClass="int" listClass="WidgetList" resultMap="WidgetResult">
+			SELECT
+				<include refid="WidgetColumnNamesFragment"/>
+			FROM
+				widget
+			<dynamic prepend="WHERE">
+				<isParameterPresent>id = #value#</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<!-- Select entities by primary key -->
+		<select id="SelectWidgets" parameterClass="list" listClass="WidgetList" resultMap="WidgetResult">
+			SELECT
+				<include refid="WidgetColumnNamesFragment"/>
+			FROM
+				widget
+			WHERE
+				id IN
+				<iterate open="(" close=")" conjunction=", ">
+				  #[]#
+				</iterate>
+		</select>
+
+		<!-- Select entities by thingId -->
+		<select id="SelectWidgetByThingId" parameterClass="int" listClass="WidgetList" resultMap="WidgetResult">
+			SELECT
+				<include refid="WidgetColumnNamesFragment"/>
+			FROM
+				widget
+			WHERE
+				<dynamic>
+				  <isParameterPresent>thing_id = #value#</isParameterPresent>
+				  <isNotParameterPresent>thing_id IS NULL</isNotParameterPresent>
+				</dynamic>
+		</select>
+		
+		<!-- Select entities by multiple thingId -->
+		<select id="SelectWidgetByThingIds" parameterClass="list" listClass="WidgetList" resultMap="WidgetResult">
+			SELECT
+				<include refid="WidgetColumnNamesFragment"/>
+			FROM
+				widget
+			WHERE
+				thing_id IN
+				<iterate open="(" close=")" conjunction=", ">
+				  #[]#
+				</iterate>
+		</select>
+
+
+
+		<!-- Delete entities by thingId -->
+		<delete id="DeleteWidgetByThingId" parameterClass="int">
+			DELETE
+			FROM
+				widget
+			WHERE
+				<dynamic>
+				  <isParameterPresent>thing_id = #value#</isParameterPresent>
+				  <isNotParameterPresent>thing_id IS NULL</isNotParameterPresent>
+				</dynamic>
+		</delete>
+		
+		<!-- Delete entities by multiple thingId -->
+		<delete id="DeleteWidgetByThingIds" parameterClass="list">
+			DELETE
+			FROM
+				widget
+			WHERE
+				thing_id IN
+				<iterate open="(" close=")" conjunction=", ">
+				  #[]#
+				</iterate>
+		</delete>
+		
+
+		<!-- Does entity exist? -->
+		<select id="DoesWidgetExist" parameterClass="int" resultClass="bool">
+			SELECT
+				1
+			FROM
+				widget
+			WHERE
+				id = #value#
+		</select>
+
+		<insert id="InsertWidget" parameterClass="Widget">
+			INSERT INTO
+				widget
+				(
+					thing_id,
+					description
+				)
+			VALUES
+				(
+					#DbThingId#,
+					#DbDescription#
+				)
+			<selectKey resultClass="int" type="post" property="DbId">
+				SELECT @@IDENTITY as value
+			</selectKey>
+		</insert>
+		
+		<update id="UpdateWidget" parameterClass="Widget">
+			UPDATE
+				widget
+			SET
+				thing_id=#DbThingId#,
+				description=#DbDescription#
+			WHERE
+				id=#DbId#
+		</update>
+	
+
+		<delete id="DeleteWidget" parameterClass="int">
+			DELETE FROM
+				widget
+			WHERE
+				id = #value#
+		</delete>
+				
+
+		<!-- Delete ALL -->
+		<delete id="DeleteAllWidget">
+			DELETE FROM widget 
+		</delete>
+
+	</statements>
+
+</sqlMap>

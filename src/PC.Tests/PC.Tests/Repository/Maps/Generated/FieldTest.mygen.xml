@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="FieldTest" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<alias>
+		<typeAlias alias="FieldTest" type="PebbleCode.Tests.Entities.FieldTest, PC.Tests" />
+		<typeAlias alias="FieldTestList" type="PebbleCode.Tests.Entities.FieldTestList, PC.Tests" />
+	</alias>
+			
+	<resultMaps>
+		<resultMap id="FieldTestResult" class="FieldTest">
+			<result property="DbId" column="id" type="int" dbType="Int"/>
+			<result property="DbIntField" column="int_field" type="int" dbType="Int"/>
+			<result property="DbIntFieldNullable" column="int_field_nullable" type="int" dbType="Int"/>
+			<result property="DbDecimalField" column="decimal_field" type="decimal" dbType="decimal"/>
+			<result property="DbDecimalFieldNullable" column="decimal_field_nullable" type="decimal" dbType="decimal"/>
+			<result property="DbStringField" column="string_field" type="string" dbType="varchar"/>
+			<result property="DbStringFieldNullable" column="string_field_nullable" type="string" dbType="varchar"/>
+			<result property="DbTextField" column="text_field" type="string" dbType="varchar"/>
+			<result property="DbTextFieldNullable" column="text_field_nullable" type="string" dbType="varchar"/>
+			<result property="DbDatetimeField" column="datetime_field" type="DateTime" dbType="DateTime"/>
+			<result property="DbDatetimeFieldNullable" column="datetime_field_nullable" type="DateTime" dbType="DateTime"/>
+			<result property="DbTinyintField" column="tinyint_field" type="bool" dbType="bool"/>
+			<result property="DbTinyintFieldNullable" column="tinyint_field_nullable" type="bool" dbType="bool"/>
+			<result property="DbTimestampField" column="timestamp_field" type="DateTime" dbType="DateTime"/>
+			<result property="DbTimestampFieldNullable" column="timestamp_field_nullable" type="DateTime" dbType="DateTime"/>
+			<result property="DbEnumField" column="enum_field" type="int" dbType="Int"/>
+			<result property="DbEnumFieldNullable" column="enum_field_nullable" type="int" dbType="Int"/>
+			<result property="DbObjectField" column="object_field"/>
+			<result property="DbObjectFieldNullable" column="object_field_nullable"/>
+			<result property="DbForeignKeyField" column="foreign_key_field" type="int" dbType="Int"/>
+			<result property="DbForeignKeyFieldNullable" column="foreign_key_field_nullable" type="int" dbType="Int"/>
+			<result property="DbIntDateField" column="int_date_field" type="int" dbType="Int"/>
+			<result property="DbIntDateFieldNullable" column="int_date_field_nullable" type="int" dbType="Int"/>
+			<result property="DbIndexedField" column="indexed_field" type="int" dbType="Int"/>
+			<result property="DbIndexedFieldNullable" column="indexed_field_nullable" type="int" dbType="Int"/>
+			<result property="DbNodeIdField" column="node_id_field" type="string" dbType="varchar"/>
+			<result property="DbNodeIdFieldNullable" column="node_id_field_nullable" type="string" dbType="varchar"/>
+			<result property="DbDefaultValueIsTwo" column="default_value_is_two" type="int" dbType="Int"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		
+		<!-- Reusable fragment for select all columns in the table -->
+		<sql id="FieldTestColumnNamesFragment">
+			field_test.id,
+			field_test.int_field,
+			field_test.int_field_nullable,
+			field_test.decimal_field,
+			field_test.decimal_field_nullable,
+			field_test.string_field,
+			field_test.string_field_nullable,
+			field_test.text_field,
+			field_test.text_field_nullable,
+			field_test.datetime_field,
+			field_test.datetime_field_nullable,
+			field_test.tinyint_field,
+			field_test.tinyint_field_nullable,
+			field_test.timestamp_field,
+			field_test.timestamp_field_nullable,
+			field_test.enum_field,
+			field_test.enum_field_nullable,
+			field_test.object_field,
+			field_test.object_field_nullable,
+			field_test.foreign_key_field,
+			field_test.foreign_key_field_nullable,
+			field_test.int_date_field,
+			field_test.int_date_field_nullable,
+			field_test.indexed_field,
+			field_test.indexed_field_nullable,
+			field_test.node_id_field,
+			field_test.node_id_field_nullable,
+			field_test.default_value_is_two
+		</sql>
+	
+		<!-- Select entity by primary key -->
+		<select id="SelectFieldTest" parameterClass="int" listClass="FieldTestList" resultMap="FieldTestResult">
+			SELECT
+				<include refid="FieldTestColumnNamesFragment"/>
+			FROM
+				field_test
+			<dynamic prepend="WHERE">
+				<isParameterPresent>id = #value#</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<!-- Select entities by primary key -->
+		<select id="SelectFieldTests" parameterClass="list" listClass="FieldTestList" resultMap="FieldTestResult">
+			SELECT
+				<include refid="FieldTestColumnNamesFragment"/>
+			FROM
+				field_test
+			WHERE
+				id IN
+				<iterate open="(" close=")" conjunction=", ">
+				  #[]#
+				</iterate>
+		</select>
+
+		<!-- Select entities by foreignKeyField -->
+		<select id="SelectFieldTestByForeignKeyField" parameterClass="int" listClass="FieldTestList" resultMap="FieldTestResult">
+			SELECT
+				<include refid="FieldTestColumnNamesFragment"/>
+			FROM
+				field_test
+			WHERE
+				<dynamic>
+				  <isParameterPresent>foreign_key_field = #value#</isParameterPresent>
+				  <isNotParameterPresent>foreign_key_field IS NULL</isNotParameterPresent>
+				</dynamic>
+		</select>
+		
+		<!-- Select entities by multiple foreignKeyField -->
+		<select id="SelectFieldTestByForeignKeyFields" parameterClass="list" listClass="FieldTestList" resultMap="FieldTestResult">
+			SELECT
+				<include refid="FieldTestColumnNamesFragment"/>
+			FROM
+				field_test
+			WHERE
+				foreign_key_field IN
+				<iterate open="(" close=")" conjunction=", ">
+				  #[]#
+				</iterate>
+		</select>
+
+
+
+		<!-- Delete entities by foreignKeyField -->
+		<delete id="DeleteFieldTestByForeignKeyField" parameterClass="int">
+			DELETE
+			FROM
+				field_test
+			WHERE
+				<dynamic>
+				  <isParameterPresent>foreign_key_field = #value#</isParameterPresent>
+				  <isNotParameterPresent>foreign_key_field IS NULL</isNotParameterPresent>
+				</dynamic>
+		</delete>
+		
+		<!-- Delete entities by multiple foreignKeyField -->
+		<delete id="DeleteFieldTestByForeignKeyFields" parameterClass="list">
+			DELETE
+			FROM
+				field_test
+			WHERE
+				foreign_key_field IN
+				<iterate open="(" close=")" conjunction=", ">
+				  #[]#
+				</iterate>
+		</delete>
+		
+		<!-- Select entities by foreignKeyFieldNullable -->
+		<select id="SelectFieldTestByForeignKeyFieldNullable" parameterClass="int?" listClass="FieldTestList" resultMap="FieldTestResult">
+			SELECT
+				<include refid="FieldTestColumnNamesFragment"/>
+			FROM
+				field_test
+			WHERE
+				<dynamic>
+				  <isParameterPresent>foreign_key_field_nullable = #value#</isParameterPresent>
+				  <isNotParameterPresent>foreign_key_field_nullable IS NULL</isNotParameterPresent>
+				</dynamic>
+		</select>
+		
+		<!-- Select entities by multiple foreignKeyFieldNullable -->
+		<select id="SelectFieldTestByForeignKeyFieldNullables" parameterClass="list" listClass="FieldTestList" resultMap="FieldTestResult">
+			SELECT
+				<include refid="FieldTestColumnNamesFragment"/>
+			FROM
+				field_test
+			WHERE
+				foreign_key_field_nullable IN
+				<iterate open="(" close=")" conjunction=", ">
+				  #[]#
+				</iterate>
+		</select>
+
+
+
+		<!-- Delete entities by foreignKeyFieldNullable -->
+		<delete id="DeleteFieldTestByForeignKeyFieldNullable" parameterClass="int?">
+			DELETE
+			FROM
+				field_test
+			WHERE
+				<dynamic>
+				  <isParameterPresent>foreign_key_field_nullable = #value#</isParameterPresent>
+				  <isNotParameterPresent>foreign_key_field_nullable IS NULL</isNotParameterPresent>
+				</dynamic>
+		</delete>
+		
+		<!-- Delete entities by multiple foreignKeyFieldNullable -->
+		<delete id="DeleteFieldTestByForeignKeyFieldNullables" parameterClass="list">
+			DELETE
+			FROM
+				field_test
+			WHERE
+				foreign_key_field_nullable IN
+				<iterate open="(" close=")" conjunction=", ">
+				  #[]#
+				</iterate>
+		</delete>
+		
+
+		<!-- Does entity exist? -->
+		<select id="DoesFieldTestExist" parameterClass="int" resultClass="bool">
+			SELECT
+				1
+			FROM
+				field_test
+			WHERE
+				id = #value#
+		</select>
+
+		<insert id="InsertFieldTest" parameterClass="FieldTest">
+			INSERT INTO
+				field_test
+				(
+					int_field,
+					int_field_nullable,
+					decimal_field,
+					decimal_field_nullable,
+					string_field,
+					string_field_nullable,
+					text_field,
+					text_field_nullable,
+					datetime_field,
+					datetime_field_nullable,
+					tinyint_field,
+					tinyint_field_nullable,
+					timestamp_field,
+					timestamp_field_nullable,
+					enum_field,
+					enum_field_nullable,
+					object_field,
+					object_field_nullable,
+					foreign_key_field,
+					foreign_key_field_nullable,
+					int_date_field,
+					int_date_field_nullable,
+					indexed_field,
+					indexed_field_nullable,
+					node_id_field,
+					node_id_field_nullable,
+					default_value_is_two
+				)
+			VALUES
+				(
+					#DbIntField#,
+					#DbIntFieldNullable#,
+					#DbDecimalField#,
+					#DbDecimalFieldNullable#,
+					#DbStringField#,
+					#DbStringFieldNullable#,
+					#DbTextField#,
+					#DbTextFieldNullable#,
+					#DbDatetimeField:DateTime:1/1/0001 12:00:00 AM#,
+					#DbDatetimeFieldNullable:DateTime:1/1/0001 12:00:00 AM#,
+					#DbTinyintField#,
+					#DbTinyintFieldNullable#,
+					#DbTimestampField:DateTime:1/1/0001 12:00:00 AM#,
+					#DbTimestampFieldNullable:DateTime:1/1/0001 12:00:00 AM#,
+					#DbEnumField#,
+					#DbEnumFieldNullable#,
+					#DbObjectField#,
+					#DbObjectFieldNullable#,
+					#DbForeignKeyField#,
+					#DbForeignKeyFieldNullable#,
+					#DbIntDateField#,
+					#DbIntDateFieldNullable#,
+					#DbIndexedField#,
+					#DbIndexedFieldNullable#,
+					#DbNodeIdField#,
+					#DbNodeIdFieldNullable#,
+					#DbDefaultValueIsTwo#
+				)
+			<selectKey resultClass="int" type="post" property="DbId">
+				SELECT @@IDENTITY as value
+			</selectKey>
+		</insert>
+		
+		<update id="UpdateFieldTest" parameterClass="FieldTest">
+			UPDATE
+				field_test
+			SET
+				int_field=#DbIntField#,
+				int_field_nullable=#DbIntFieldNullable#,
+				decimal_field=#DbDecimalField#,
+				decimal_field_nullable=#DbDecimalFieldNullable#,
+				string_field=#DbStringField#,
+				string_field_nullable=#DbStringFieldNullable#,
+				text_field=#DbTextField#,
+				text_field_nullable=#DbTextFieldNullable#,
+				datetime_field=#DbDatetimeField#,
+				datetime_field_nullable=#DbDatetimeFieldNullable#,
+				tinyint_field=#DbTinyintField#,
+				tinyint_field_nullable=#DbTinyintFieldNullable#,
+				timestamp_field=#DbTimestampField#,
+				timestamp_field_nullable=#DbTimestampFieldNullable#,
+				enum_field=#DbEnumField#,
+				enum_field_nullable=#DbEnumFieldNullable#,
+				object_field=#DbObjectField#,
+				object_field_nullable=#DbObjectFieldNullable#,
+				foreign_key_field=#DbForeignKeyField#,
+				foreign_key_field_nullable=#DbForeignKeyFieldNullable#,
+				int_date_field=#DbIntDateField#,
+				int_date_field_nullable=#DbIntDateFieldNullable#,
+				indexed_field=#DbIndexedField#,
+				indexed_field_nullable=#DbIndexedFieldNullable#,
+				node_id_field=#DbNodeIdField#,
+				node_id_field_nullable=#DbNodeIdFieldNullable#,
+				default_value_is_two=#DbDefaultValueIsTwo#
+			WHERE
+				id=#DbId#
+		</update>
+	
+
+		<delete id="DeleteFieldTest" parameterClass="int">
+			DELETE FROM
+				field_test
+			WHERE
+				id = #value#
+		</delete>
+				
+
+		<!-- Delete ALL -->
+		<delete id="DeleteAllFieldTest">
+			DELETE FROM field_test 
+		</delete>
+
+	</statements>
+
+</sqlMap>
