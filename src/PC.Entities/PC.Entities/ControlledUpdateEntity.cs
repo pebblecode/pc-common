@@ -35,7 +35,7 @@ namespace PebbleCode.Entities
         /// Database accessor for _propertyAuthorization. Only used by IBatis.
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal string DbPropertyAuthorization
+        public string DbPropertyAuthorization
         {
             get { return SerialisationUtils.ToXml(_propertyAuthorization); }
             set

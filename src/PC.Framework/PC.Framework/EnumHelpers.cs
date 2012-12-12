@@ -21,7 +21,7 @@ namespace PebbleCode.Framework
             return readableName ?? ToReadableName(value.ToString());
         }
 
-        internal static string ToReadableName(string pascalCasedString)
+        public static string ToReadableName(string pascalCasedString)
         {
             return Regex.Replace(
                 Regex.Replace(

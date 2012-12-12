@@ -69,7 +69,7 @@ namespace PebbleCode.Framework.Logging
     /// <summary>
     /// Log objects based on properties that have ObjectLoggerAttribute attribute
     /// </summary>
-    internal class DataContractLogHelper
+    public class DataContractLogHelper
     {
         private Dictionary<string, DataContractLogHelper> _nestedHelpers = new Dictionary<string, DataContractLogHelper>();
         private IEnumerable<PropertyInfo> _propertys;
