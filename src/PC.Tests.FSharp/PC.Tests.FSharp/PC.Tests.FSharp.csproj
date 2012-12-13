@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D224BEF9-3586-4682-AC69-A41796F51876}</ProjectGuid>
+    <ProjectGuid>{A4CFB02D-4A79-419A-8626-1BD31B3B6245}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PC.FSharp.Tests</RootNamespace>
-    <AssemblyName>PC.FSharp.Tests</AssemblyName>
+    <RootNamespace>PC.Tests.FSharp</RootNamespace>
+    <AssemblyName>PC.Tests.FSharp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,27 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="IBatisNet.DataMapper">
-      <HintPath>..\..\PC.Entities\lib\IBatisNet.DataMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="PC.Entities">
-      <HintPath>..\..\PC.Entities\PC.Entities\bin\Debug\PC.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="PC.Framework">
-      <HintPath>..\..\PC.Framework\PC.Framework\bin\Debug\PC.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="PC.Logging">
-      <HintPath>..\..\PC.Logging\PC.Logging\bin\Debug\PC.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="PC.Repository">
-      <HintPath>..\..\PC.Entities\PC.Repository\bin\Debug\PC.Repository.dll</HintPath>
-    </Reference>
-    <Reference Include="PC.Tests">
-      <HintPath>..\..\PC.Tests\PC.Tests\bin\Debug\PC.Tests.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -70,20 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="NodeBuilderTest.mygen.cs" />
-    <Compile Include="NodeBuilderTestComparer.mygen.cs" />
-    <Compile Include="NodeBuilderTestList.mygen.cs" />
-    <Compile Include="NodeBuilderTestRepository.mygen.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PC.ExpressionTree\PC.ExpressionTree.fsproj">
-      <Project>{fabf3870-0d70-4a30-bd3a-8d576bd0bc2f}</Project>
-      <Name>PC.ExpressionTree</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
