@@ -130,23 +130,27 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Repository\Maps\Config\providers.config" />
-    <None Include="Repository\Maps\Config\sqlMap.config" />
+    <EmbeddedResource Include="Repository\Maps\Config\providers.config" />
+    <EmbeddedResource Include="Repository\Maps\Config\sqlMap.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Repository\Maps\Config\sqlMapList.mygen.xml" />
-    <Content Include="Repository\Maps\Generated\ControlledUpdateThing.mygen.xml" />
-    <Content Include="Repository\Maps\Generated\FieldTest.mygen.xml" />
-    <Content Include="Repository\Maps\Generated\NodeBuilderTest.mygen.xml" />
-    <Content Include="Repository\Maps\Generated\Thing.mygen.xml" />
-    <Content Include="Repository\Maps\Generated\VersionedThing.mygen.xml" />
-    <Content Include="Repository\Maps\Generated\Widget.mygen.xml" />
-    <Content Include="Repository\Maps\Handmade\ControlledUpdateThing.xml" />
-    <Content Include="Repository\Maps\Handmade\FieldTest.xml" />
-    <Content Include="Repository\Maps\Handmade\NodeBuilderTest.xml" />
-    <Content Include="Repository\Maps\Handmade\Thing.xml" />
-    <Content Include="Repository\Maps\Handmade\VersionedThing.xml" />
-    <Content Include="Repository\Maps\Handmade\Widget.xml" />
+    <EmbeddedResource Include="Repository\Maps\Config\sqlMapList.mygen.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repository\Maps\Generated\ControlledUpdateThing.mygen.xml" />
+    <EmbeddedResource Include="Repository\Maps\Generated\FieldTest.mygen.xml" />
+    <EmbeddedResource Include="Repository\Maps\Generated\NodeBuilderTest.mygen.xml" />
+    <EmbeddedResource Include="Repository\Maps\Generated\Thing.mygen.xml" />
+    <EmbeddedResource Include="Repository\Maps\Generated\VersionedThing.mygen.xml" />
+    <EmbeddedResource Include="Repository\Maps\Generated\Widget.mygen.xml" />
+    <EmbeddedResource Include="Repository\Maps\Handmade\ControlledUpdateThing.xml" />
+    <EmbeddedResource Include="Repository\Maps\Handmade\FieldTest.xml" />
+    <EmbeddedResource Include="Repository\Maps\Handmade\NodeBuilderTest.xml" />
+    <EmbeddedResource Include="Repository\Maps\Handmade\Thing.xml" />
+    <EmbeddedResource Include="Repository\Maps\Handmade\VersionedThing.xml" />
+    <EmbeddedResource Include="Repository\Maps\Handmade\Widget.xml" />
     <Content Include="Triggers\db_upd_triggers_controlled_update_thing.mygen.sql" />
     <Content Include="Triggers\db_upd_triggers_field_test.mygen.sql" />
     <Content Include="Triggers\db_upd_triggers_node_builder_test.mygen.sql" />

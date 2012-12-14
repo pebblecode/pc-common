@@ -49,7 +49,7 @@ namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
         }
 
         [TestMethod]
-        public void ControlledUpdate_EntityWithLowerAuthorization_AllowPropertyToBeSet()
+        public void ControlledUpdate_EntityWithLowerAuthorization_DontAllowPropertyToBeSet()
         {
             //ARRANGE
             const string higherContext = "HigherUser";

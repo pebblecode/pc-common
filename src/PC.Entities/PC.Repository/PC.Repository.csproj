@@ -69,10 +69,15 @@
     <Compile Include="TransactionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Maps\Entity.xml" />
+    <EmbeddedResource Include="Maps\Entity.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Maps\Config\example.providers.config" />
+    <None Include="Maps\Config\example.providers.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Maps\Config\Test\sqlMap.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

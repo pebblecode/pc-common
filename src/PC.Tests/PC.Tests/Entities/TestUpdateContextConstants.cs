@@ -7,9 +7,9 @@ namespace PebbleCode.Tests.Entities
 {
     public class TestUpdateContextConstants
     {
-        public const int System = 100;
-        public const int Admin = 50;
-        public const int User = 50;
-        public const int Migration = -1;
+        internal const int PebbleAdmin = 50;
+        internal const int HigherUser = 50;
+        internal const int LowerUser = 40;
+        internal const int Migration = -1;
     }
 }
