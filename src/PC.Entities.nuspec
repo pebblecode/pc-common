@@ -9,6 +9,6 @@
   </metadata>
   <files>
 	  <file src="src\PC.Entities\PC.Entities\bin\Release\PC.Entities.dll" target="lib\net40" /> 
-	  <file src="src\PC.Repository\PC.Repository\bin\Release\PC.Repository.dll" target="lib\net40" /> 	  
+	  <file src="src\PC.Entities\PC.Repository\bin\Release\PC.Repository.dll" target="lib\net40" /> 	  
   </files>
 </package>
