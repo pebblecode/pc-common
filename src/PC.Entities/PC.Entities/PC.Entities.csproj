@@ -32,11 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="PC.Framework">
-      <HintPath>..\..\PC.Framework\PC.Framework\bin\Debug\PC.Framework.dll</HintPath>
+    <Reference Include="PC.Framework, Version=6.0.0.22, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Framework.6.0.0.22\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Logging">
-      <HintPath>..\..\PC.Logging\PC.Logging\bin\Debug\PC.Logging.dll</HintPath>
+    <Reference Include="PC.Logging, Version=6.0.0.22, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Logging.6.0.0.22\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,6 +65,9 @@
     <Compile Include="UpdateContext.cs" />
     <Compile Include="VersionedEntity.cs" />
     <Compile Include="VersionedEntityInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

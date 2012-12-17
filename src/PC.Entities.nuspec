@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>PC.Entities</id>
+    <version>0.0.0.0</version>
+    <authors>Tom Squires</authors>
+    <owners>Pebble Code Ltd</owners>
+    <description>Pebble Code entity and repository libraries</description>
+  </metadata>
+  <files>
+	  <file src="src\PC.Entities\PC.Entities\bin\Release\PC.Entities.dll" target="lib\net40" /> 
+	  <file src="src\PC.Repository\PC.Repository\bin\Release\PC.Repository.dll" target="lib\net40" /> 	  
+  </files>
+</package>
