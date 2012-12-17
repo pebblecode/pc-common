@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>PC.Framework</id>
+    <version>0.0.0.0</version>
+    <authors>Tom Squires</authors>
+    <owners>Pebble Code Ltd</owners>
+    <description>Pebble Code Framework</description>
+  </metadata>
+  <files>
+	  <file src="src\PC.Framework\PC.Framework\bin\Release\PC.Framework.dll" target="lib\net40" /> 
+  </files>
+</package>
