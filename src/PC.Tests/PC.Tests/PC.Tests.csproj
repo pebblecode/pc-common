@@ -50,17 +50,21 @@
     <Reference Include="Ninject.MockingKernel.Moq">
       <HintPath>..\packages\Ninject.MockingKernel.Moq.3.0.0.5\lib\net45-full\Ninject.MockingKernel.Moq.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Entities">
-      <HintPath>..\..\PC.Entities\PC.Entities\bin\Release\PC.Entities.dll</HintPath>
+    <Reference Include="PC.Entities, Version=6.0.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Entities.6.0.0.26\lib\net40\PC.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Framework">
-      <HintPath>..\..\PC.Framework\PC.Framework\bin\Debug\PC.Framework.dll</HintPath>
+    <Reference Include="PC.Framework, Version=6.0.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Framework.6.0.0.26\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Logging">
-      <HintPath>..\..\PC.Logging\PC.Logging\bin\Debug\PC.Logging.dll</HintPath>
+    <Reference Include="PC.Logging, Version=6.0.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Logging.6.0.0.26\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Repository">
-      <HintPath>..\..\PC.Entities\PC.Repository\bin\Debug\PC.Repository.dll</HintPath>
+    <Reference Include="PC.Repository, Version=6.0.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Entities.6.0.0.26\lib\net40\PC.Repository.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
