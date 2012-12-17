@@ -10,4 +10,7 @@
   <files>
 	  <file src="src\PC.Logging\PC.Logging\bin\Release\PC.Logging.dll" target="lib\net40" /> 
   </files>
+  <dependencies>
+    <dependency id="EnterpriseLibrary.Logging" version="5.0.505" />
+  </dependencies>
 </package>
