@@ -6,6 +6,9 @@
     <authors>Tom Squires</authors>
     <owners>Pebble Code Ltd</owners>
     <description>Pebble Code entity and repository libraries</description>
+	<dependencies>
+		<dependency id="MySql.Data" version="6.0" />
+   </dependencies>
   </metadata>
   <files>
 	  <file src="src\PC.Entities\PC.Entities\bin\Release\PC.Entities.dll" target="lib\net40" /> 
