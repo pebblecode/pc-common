@@ -47,10 +47,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PC.Framework.6.0.0.26\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Logging, Version=6.0.0.26, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Logging.6.0.0.26\lib\net40\PC.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="PC.Repository, Version=6.0.0.26, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PC.Entities.6.0.0.26\lib\net40\PC.Repository.dll</HintPath>
