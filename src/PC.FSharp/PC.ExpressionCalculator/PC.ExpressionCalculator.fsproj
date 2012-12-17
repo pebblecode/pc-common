@@ -31,21 +31,10 @@
     <WarningLevel>3</WarningLevel>
     <DocumentationFile>bin\Release\PC.ExpressionCalculator.XML</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PC.Entities">
-      <HintPath>..\..\PC.Entities\PC.Entities\bin\Debug\PC.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="PC.Framework">
-      <HintPath>..\..\PC.Framework\PC.Framework\bin\Debug\PC.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-  </ItemGroup>
+  <PropertyGroup>
+    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="NodeRoundingRule.fs" />
@@ -53,8 +42,28 @@
     <Compile Include="AmendmentMap.fs" />
     <Compile Include="Calculation.fs" />
     <Compile Include="Calculator.fs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PC.Entities">
+      <HintPath>..\packages\PC.Entities.6.0.0.28\lib\net40\PC.Entities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PC.Framework">
+      <HintPath>..\packages\PC.Framework.6.0.0.28\lib\net40\PC.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PC.Repository">
+      <HintPath>..\packages\PC.Entities.6.0.0.28\lib\net40\PC.Repository.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <ProjectReference Include="..\PC.ExpressionTree\PC.ExpressionTree.fsproj">
       <Name>PC.ExpressionTree</Name>
       <Project>{fabf3870-0d70-4a30-bd3a-8d576bd0bc2f}</Project>
@@ -66,10 +75,6 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <PropertyGroup>
-    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
-  </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

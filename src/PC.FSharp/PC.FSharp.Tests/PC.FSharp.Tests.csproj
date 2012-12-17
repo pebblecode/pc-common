@@ -39,20 +39,31 @@
     <Reference Include="IBatisNet.DataMapper">
       <HintPath>..\..\PC.Entities\lib\IBatisNet.DataMapper.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Entities">
-      <HintPath>..\..\PC.Entities\PC.Entities\bin\Debug\PC.Entities.dll</HintPath>
+    <Reference Include="PC.Entities, Version=6.0.0.28, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Entities.6.0.0.28\lib\net40\PC.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Framework">
-      <HintPath>..\..\PC.Framework\PC.Framework\bin\Debug\PC.Framework.dll</HintPath>
+    <Reference Include="PC.Framework, Version=6.0.0.28, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Framework.6.0.0.28\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Logging">
-      <HintPath>..\..\PC.Logging\PC.Logging\bin\Debug\PC.Logging.dll</HintPath>
+    <Reference Include="PC.Logging, Version=6.0.0.28, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Logging.6.0.0.28\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Repository">
-      <HintPath>..\..\PC.Entities\PC.Repository\bin\Debug\PC.Repository.dll</HintPath>
+    <Reference Include="PC.Repository, Version=6.0.0.28, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Entities.6.0.0.28\lib\net40\PC.Repository.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Tests">
-      <HintPath>..\..\PC.Tests\PC.Tests\bin\Debug\PC.Tests.dll</HintPath>
+    <Reference Include="PC.Tests, Version=6.0.0.28, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Tests.6.0.0.28\lib\net40\PC.Tests.dll</HintPath>
+    </Reference>
+    <Reference Include="PC.Tests.Integration">
+      <HintPath>..\packages\PC.Tests.6.0.0.28\lib\net40\PC.Tests.Integration.dll</HintPath>
+    </Reference>
+    <Reference Include="PC.Tests.Unit">
+      <HintPath>..\packages\PC.Tests.6.0.0.28\lib\net40\PC.Tests.Unit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
