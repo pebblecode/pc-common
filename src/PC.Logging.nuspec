@@ -8,6 +8,6 @@
     <description>Pebble Code Logging Framework</description>
   </metadata>
   <files>
-	  <file src="PC.Logging\PC.Logging\bin\Release\PC.Logging.dll" target="lib\net40" /> 
+	  <file src="src\PC.Logging\PC.Logging\bin\Release\PC.Logging.dll" target="lib\net40" /> 
   </files>
 </package>
