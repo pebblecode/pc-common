@@ -11,6 +11,6 @@
 	  <file src="src\PC.FSharp\PC.FSharp.Tests\bin\Release\PC.FSharp.Tests.dll" target="lib\net40" /> 
 	  <file src="src\PC.FSharp\PC.ExpressionCalculator\bin\Release\PC.ExpressionCalculator.dll" target="lib\net40" /> 	  
 	  <file src="src\PC.FSharp\PC.ExpressionTree\bin\Release\PC.ExpressionTree.dll" target="lib\net40" /> 
-	  <file src="src\PC.FSharp\PC.FSsharpExtensions\bin\Release\PC.FSsharpExtensions.dll" target="lib\net40" />  	  
+	  <file src="src\PC.FSharp\PC.FSsharpExtensions\bin\Release\PC.FSharpExtensions.dll" target="lib\net40" />  	  
  </files>
 </package>
