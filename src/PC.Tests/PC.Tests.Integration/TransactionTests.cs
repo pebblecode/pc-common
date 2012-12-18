@@ -21,6 +21,7 @@ namespace SGP.Tests.Integration.RepositoryTests
         [TestInitialize]
         public override void TestInitialise()
         {
+            base.TestInitialise();
             //Get bloody ms test to include the dll in test output
             MySql.Data.MySqlClient.MySqlCommand command = new MySql.Data.MySqlClient.MySqlCommand();
 
