@@ -21,12 +21,10 @@ namespace SGP.Tests.Integration.RepositoryTests
         [TestInitialize]
         public override void TestInitialise()
         {
-            base.TestInitialise();
-            string codeBase = this.GetType().Assembly.CodeBase;
-            string location = this.GetType().Assembly.Location;
+            //Get bloody ms test to include the dll in test output
+            MySql.Data.MySqlClient.MySqlCommand command = new MySql.Data.MySqlClient.MySqlCommand();
 
-            throw new ApplicationException("error " + codeBase + "location " + location);
-            // Delete all things
+               // Delete all things
             ThingRepo.DeleteAll();
 
             // Should be no things. Check now
