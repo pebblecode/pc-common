@@ -22,7 +22,10 @@ namespace SGP.Tests.Integration.RepositoryTests
         public override void TestInitialise()
         {
             base.TestInitialise();
+            string codeBase = this.GetType().Assembly.CodeBase;
+            string location = this.GetType().Assembly.Location;
 
+            throw new ApplicationException("error " + codeBase + "location " + location);
             // Delete all things
             ThingRepo.DeleteAll();
 
