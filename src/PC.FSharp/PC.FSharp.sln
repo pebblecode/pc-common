@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PC.ExpressionCalculator", "PC.ExpressionCalculator\PC.ExpressionCalculator.fsproj", "{D2851C80-FB66-420A-B542-B7F6CFDE35F3}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PC.FSharp.ExpressionCalculator", "PC.ExpressionCalculator\PC.FSharp.ExpressionCalculator.fsproj", "{D2851C80-FB66-420A-B542-B7F6CFDE35F3}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PC.ExpressionTree", "PC.ExpressionTree\PC.ExpressionTree.fsproj", "{FABF3870-0D70-4A30-BD3A-8D576BD0BC2F}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PC.FSharp.ExpressionTree", "PC.ExpressionTree\PC.FSharp.ExpressionTree.fsproj", "{FABF3870-0D70-4A30-BD3A-8D576BD0BC2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PC.FsharpExtensions", "PC.FsharpExtensions\PC.FsharpExtensions.csproj", "{31465FE1-47B3-4A86-9560-F029469A9E79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PC.Fsharp.Extensions", "PC.FsharpExtensions\PC.Fsharp.Extensions.csproj", "{31465FE1-47B3-4A86-9560-F029469A9E79}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6D9264EE-8343-4806-A738-9E9FED5D99C2}"
 	ProjectSection(SolutionItems) = preProject
