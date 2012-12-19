@@ -19,6 +19,8 @@ namespace PebbleCode.Tests.Repository
     /// <summary>
     /// Sets up Ninject bindings for mocking out all database repositories
     /// </summary>
+    /// 
+    /*
   public class RepositoryNinjectModule : BaseNinjectModule
     {
       public override void Load()
@@ -29,5 +31,5 @@ namespace PebbleCode.Tests.Repository
                 .Where(type => typeof (EntityRepository).IsAssignableFrom(type) && !type.IsAbstract)
                 .ForEach(repoType => Bind(repoType).ToMockSingleton());
         }
-    }
+    }*/
 }

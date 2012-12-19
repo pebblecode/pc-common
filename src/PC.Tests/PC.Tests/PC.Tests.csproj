@@ -68,21 +68,21 @@
     <Reference Include="Ninject.MockingKernel.Moq">
       <HintPath>..\packages\Ninject.MockingKernel.Moq.3.0.0.5\lib\net45-full\Ninject.MockingKernel.Moq.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Entities, Version=6.0.0.35, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PC.Entities, Version=6.0.0.39, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Entities.6.0.0.35\lib\net40\PC.Entities.dll</HintPath>
+      <HintPath>..\packages\PC.Entities.6.0.0.39\lib\net40\PC.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Framework, Version=6.0.0.35, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PC.Framework, Version=6.0.0.39, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Framework.6.0.0.35\lib\net40\PC.Framework.dll</HintPath>
+      <HintPath>..\packages\PC.Framework.6.0.0.39\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Logging, Version=6.0.0.35, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PC.Logging, Version=6.0.0.39, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Logging.6.0.0.35\lib\net40\PC.Logging.dll</HintPath>
+      <HintPath>..\packages\PC.Logging.6.0.0.39\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Repository, Version=6.0.0.35, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PC.Repository, Version=6.0.0.39, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Entities.6.0.0.35\lib\net40\PC.Repository.dll</HintPath>
+      <HintPath>..\packages\PC.Entities.6.0.0.39\lib\net40\PC.Repository.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
