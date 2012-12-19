@@ -6,11 +6,6 @@
     <authors>Tom Squires</authors>
     <owners>Pebble Code Ltd</owners>
     <description>Pebble Code Framework</description>
-	<dependencies>
-		<dependency id="Ninject" version="3.0" />
-		<dependency id="Ninject.MockingKernel" version="3.0" />
-		<dependency id="PC.Logging" version="0.0.0.0" />
-   </dependencies>
   </metadata>
   <files>
 	  <file src="src\PC.Framework\PC.Framework\bin\Release\PC.Framework.dll" target="lib\net40" /> 
