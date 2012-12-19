@@ -132,6 +132,7 @@
     <Compile Include="Entities\TestUpdateContextConstants.cs" />
     <Compile Include="Entities\TestUpdateContexts.cs" />
     <Compile Include="Fakes\FakeEmailer.cs" />
+    <Compile Include="NinjectMoqExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DatabaseUpdateMonitor.cs" />
     <Compile Include="Repository\Generated\ControlledUpdateThingRepository.mygen.cs" />

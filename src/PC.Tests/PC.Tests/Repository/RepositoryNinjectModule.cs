@@ -19,9 +19,9 @@ namespace PebbleCode.Tests.Repository
     /// <summary>
     /// Sets up Ninject bindings for mocking out all database repositories
     /// </summary>
-    public class RepositoryNinjectModule : BaseNinjectModule
+  public class RepositoryNinjectModule : BaseNinjectModule
     {
-        public override void Load()
+      public override void Load()
         {
             //Mock each of the repositories
             Assembly repos = Assembly.Load("PC.Tests");

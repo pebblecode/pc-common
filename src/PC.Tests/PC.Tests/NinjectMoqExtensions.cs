@@ -8,7 +8,7 @@ using Ninject.Syntax;
 
 namespace PebbleCode.Framework.IoC
 {
-    public static class NinjectMoqExtensions
+  /*  public static class NinjectMoqExtensions
     {
         public static IBindingWhenInNamedWithOrOnSyntax<T> ToMock<T>(this IBindingToSyntax<T> binding)
         {
@@ -27,5 +27,5 @@ namespace PebbleCode.Framework.IoC
         {
             return binding.ToMock().InSingletonScope();
         }
-    }
+    }*/
 }
