@@ -9,6 +9,7 @@
 	<dependencies>
 		<dependency id="Ninject" version="3.0" />
 		<dependency id="Ninject.MockingKernel" version="3.0" />
+		<dependency id="PC.Logging" version="0.0.0.0" />
    </dependencies>
   </metadata>
   <files>
