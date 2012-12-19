@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>PC.FSharp</id>
+    <version>0.0.0.0</version>
+    <authors>Tom Squires</authors>
+    <owners>Pebble Code Ltd</owners>
+    <description>Pebble Code FSharp libraries</description>
+	<dependencies>
+		<dependency id="PC.Logging" version="0.0.0.0" />
+		<dependency id="PC.Framework" version="0.0.0.0" />
+		<dependency id="PC.Entities" version="0.0.0.0" />
+   </dependencies>
+  </metadata>
+  <files>
+	  <file src="src\PC.FSharp\PC.FSharp.Tests\bin\Release\PC.FSharp.Tests.dll" target="lib\net40" /> 
+	  <file src="src\PC.FSharp\PC.ExpressionCalculator\bin\Release\PC.ExpressionCalculator.dll" target="lib\net40" /> 	  
+	  <file src="src\PC.FSharp\PC.ExpressionTree\bin\Release\PC.ExpressionTree.dll" target="lib\net40" /> 
+	  <file src="src\PC.FSharp\PC.FSharpExtensions\bin\Release\PC.FSharpExtensions.dll" target="lib\net40" />  	  
+ </files>
+</package>

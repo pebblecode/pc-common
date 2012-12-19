@@ -1,5 +1,4 @@
-﻿using PebbleCode.Framework.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +10,8 @@ namespace PebbleCode.Framework.Threading
     /// </summary>
     public abstract class DailyRepeatingTask : RepeatingTask
     {
-        public DailyRepeatingTask(TimeSpan timeToRun, ILogger logger)
-            : base(TimeSpan.FromHours(24), logger)
+        public DailyRepeatingTask(TimeSpan timeToRun)
+            : base(TimeSpan.FromHours(24))
         {
             Start(timeToRun);
         }

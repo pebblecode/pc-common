@@ -8,9 +8,9 @@ using Ninject.Syntax;
 
 namespace PebbleCode.Framework.IoC
 {
-    public static class NinjectMoqExtensions
+   public static class NinjectMoqExtensions
     {
-        public static IBindingWhenInNamedWithOrOnSyntax<T> ToMock<T>(this IBindingToSyntax<T> binding)
+       public static IBindingWhenInNamedWithOrOnSyntax<T> ToMock<T>(this IBindingToSyntax<T> binding)
         {
             return binding.ToMethod(CreateMockObject<T>);
         }

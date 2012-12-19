@@ -1,9 +1,9 @@
-﻿using System;
+﻿using PebbleCode.Framework.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using PebbleCode.Framework.Logging;
 
 namespace PebbleCode.Framework.Threading
 {
@@ -15,13 +15,12 @@ namespace PebbleCode.Framework.Threading
         private readonly TimeSpan _callbackInterval;
         private Timer _timer;
         private readonly object[] _timerLock = new object[0];
-        private readonly ILogger _logger;
         public DateTime NextRunTime { get; private set; }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public RepeatingTask(TimeSpan callbackInterval, ILogger logger)
+        public RepeatingTask(TimeSpan callbackInterval)
         {
             _callbackInterval = callbackInterval;
         }
@@ -111,7 +110,7 @@ namespace PebbleCode.Framework.Threading
             }
             catch(Exception ex)
             {
-                _logger.WriteUnexpectedException(ex, "Error in RepeatingTask.PerformTask", Category.General);
+                Logger.WriteUnexpectedException(ex, "Error in RepeatingTask.PerformTask", Category.General);
             }
 
             // Reset the timer

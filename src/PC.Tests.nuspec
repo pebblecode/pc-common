@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>PC.Tests</id>
+    <version>0.0.0.0</version>
+    <authors>Tom Squires</authors>
+    <owners>Pebble Code Ltd</owners>
+    <description>Pebble Code test libraries</description>
+	<dependencies>
+		<dependency id="PC.Logging" version="0.0.0.0" />
+		<dependency id="PC.Framework" version="0.0.0.0" />
+		<dependency id="PC.Entities" version="0.0.0.0" />
+   </dependencies>
+  </metadata>
+  <files>
+	  <file src="src\PC.Tests\PC.Tests\bin\Release\PC.Tests.dll" target="lib\net40" /> 
+	  <file src="src\PC.Tests\PC.Tests.Integration\bin\Release\PC.Tests.Integration.dll" target="lib\net40" /> 	  
+	  <file src="src\PC.Tests\PC.Tests.Unit\bin\Release\PC.Tests.Unit.dll" target="lib\net40" /> 	
+  </files>
+</package>

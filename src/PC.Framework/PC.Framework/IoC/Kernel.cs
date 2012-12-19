@@ -13,6 +13,7 @@ namespace PebbleCode.Framework.IoC
 {
     /// <summary>
     /// A container for the dependency injection container... META
+    /// 
     /// </summary>
     public static class Kernel
     {
