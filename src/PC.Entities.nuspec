@@ -8,6 +8,8 @@
     <description>Pebble Code entity and repository libraries</description>
 	<dependencies>
 		<dependency id="MySql.Data" version="6.5.4" />
+		<dependency id="PC.Logging" version="0.0.0.0" />
+		<dependency id="PC.Framework" version="0.0.0.0" />
    </dependencies>
   </metadata>
   <files>
