@@ -59,6 +59,10 @@
       <HintPath>..\packages\PC.Entities.6.0.0.109\lib\net40\PC.Entities.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PC.Framework">
+      <HintPath>..\packages\PC.Framework.6.0.0.113\lib\net40\PC.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PC.Repository">
       <HintPath>..\packages\PC.Entities.6.0.0.109\lib\net40\PC.Repository.dll</HintPath>
       <Private>True</Private>
