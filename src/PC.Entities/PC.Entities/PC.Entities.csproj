@@ -68,6 +68,7 @@
     <Compile Include="IEntity.cs" />
     <Compile Include="IVersionedEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchResults.cs" />
     <Compile Include="UpdateContext.cs" />
     <Compile Include="VersionedEntity.cs" />
     <Compile Include="VersionedEntityInfo.cs" />
