@@ -48,17 +48,21 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Entities">
-      <HintPath>..\packages\PC.Entities.6.0.0.106\lib\net40\PC.Entities.dll</HintPath>
+    <Reference Include="PC.Entities, Version=6.0.0.109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Entities.6.0.0.109\lib\net40\PC.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Framework">
-      <HintPath>..\packages\PC.Framework.6.0.0.106\lib\net40\PC.Framework.dll</HintPath>
+    <Reference Include="PC.Framework, Version=6.0.0.109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Framework.6.0.0.109\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Logging">
-      <HintPath>..\packages\PC.Logging.6.0.0.106\lib\net40\PC.Logging.dll</HintPath>
+    <Reference Include="PC.Logging, Version=6.0.0.109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Logging.6.0.0.109\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Repository">
-      <HintPath>..\packages\PC.Entities.6.0.0.106\lib\net40\PC.Repository.dll</HintPath>
+    <Reference Include="PC.Repository, Version=6.0.0.109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Entities.6.0.0.109\lib\net40\PC.Repository.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
