@@ -6,6 +6,10 @@
     <authors>Tom Squires</authors>
     <owners>Pebble Code Ltd</owners>
     <description>Pebble Code Logging Framework</description>
+	<dependencies>
+		<dependency id="EnterpriseLibrary.Common" version="5.0" />
+		<dependency id="EnterpriseLibrary.Logging" version="5.0" />
+  </dependencies>
   </metadata>
   <files>
 	  <file src="src\PC.Logging\PC.Logging\bin\Release\PC.Logging.dll" target="lib\net40" /> 

@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PC.Tests.Unit</RootNamespace>
     <AssemblyName>PC.Tests.Unit</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -18,6 +18,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,27 +67,23 @@
       <HintPath>..\packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject.MockingKernel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+    <Reference Include="PC.Entities, Version=6.0.0.109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ninject.MockingKernel.3.0.0.5\lib\net45-full\Ninject.MockingKernel.dll</HintPath>
+      <HintPath>..\packages\PC.Entities.6.0.0.109\lib\net40\PC.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Entities, Version=6.0.0.39, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PC.Framework, Version=6.0.0.109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Entities.6.0.0.39\lib\net40\PC.Entities.dll</HintPath>
+      <HintPath>..\packages\PC.Framework.6.0.0.109\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Framework, Version=6.0.0.97, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PC.Logging, Version=6.0.0.109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Framework.6.0.0.97\lib\net40\PC.Framework.dll</HintPath>
+      <HintPath>..\packages\PC.Logging.6.0.0.109\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Logging, Version=6.0.0.97, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PC.Repository, Version=6.0.0.109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Logging.6.0.0.97\lib\net40\PC.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="PC.Repository, Version=6.0.0.39, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Entities.6.0.0.39\lib\net40\PC.Repository.dll</HintPath>
+      <HintPath>..\packages\PC.Entities.6.0.0.109\lib\net40\PC.Repository.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>

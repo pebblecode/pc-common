@@ -9,10 +9,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>PC.ExpressionCalculator</RootNamespace>
     <AssemblyName>PC.ExpressionCalculator</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <Name>PC.FSharp.ExpressionCalculator</Name>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,15 +58,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PC.Entities">
-      <HintPath>..\packages\PC.Entities.6.0.0.28\lib\net40\PC.Entities.dll</HintPath>
+      <HintPath>..\packages\PC.Entities.6.0.0.109\lib\net40\PC.Entities.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PC.Framework">
-      <HintPath>..\packages\PC.Framework.6.0.0.28\lib\net40\PC.Framework.dll</HintPath>
+      <HintPath>..\packages\PC.Framework.6.0.0.113\lib\net40\PC.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PC.Repository">
-      <HintPath>..\packages\PC.Entities.6.0.0.28\lib\net40\PC.Repository.dll</HintPath>
+      <HintPath>..\packages\PC.Entities.6.0.0.109\lib\net40\PC.Repository.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
