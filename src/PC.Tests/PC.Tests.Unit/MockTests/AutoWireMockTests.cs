@@ -1,20 +1,16 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using NUnit.Framework;
 using PebbleCode.Framework.IoC;
-using PebbleCode.Tests;
 using PebbleCode.Tests.Entities;
 using PebbleCode.Repository;
 
 namespace PebbleCode.Tests.Unit.MockTests
 {
-    [TestClass]
+    [TestFixture]
     public class AutoWireMockTests : BaseUnitTest<TestHelper>
     {
-        [TestMethod]
+        [Test]
         public void check_that_get_by_id_returns_null_for_non_mocked_id()
         {
             const int MOCK_ID = 10000000;
@@ -31,7 +27,7 @@ namespace PebbleCode.Tests.Unit.MockTests
             Assert.IsNull(widget, "widget returned incorrectly");
         }
 
-        [TestMethod]
+        [Test]
         public void check_that_get_NOT_by_id_returns_null_for_non_mocked_values()
         {
             const int MOCK_ID = 10000000;
@@ -49,7 +45,7 @@ namespace PebbleCode.Tests.Unit.MockTests
             Assert.IsNull(widgets, "widget returned incorrectly");
         }
 
-        [TestMethod]
+        [Test]
         public void check_that_get_by_id_returns_mocked_item()
         {
             const int MOCK_ID = 10000000;
@@ -66,7 +62,7 @@ namespace PebbleCode.Tests.Unit.MockTests
             Assert.AreEqual(expectedWidget.Description, widget.Description, "incorrect widget returned");
         }
 
-        [TestMethod]
+        [Test]
         public void check_that_get_by_id_returns_mocked_item_for_two_different_ids()
         {
             const int MOCK_ID_1 = 10000000;
@@ -92,7 +88,7 @@ namespace PebbleCode.Tests.Unit.MockTests
             Assert.AreEqual(expectedWidget2.Description, widget.Description, "incorrect widget returned");
         }
 
-        [TestMethod]
+        [Test]
         public void AutoWireUpMockRepositorySave_SaveParamArray()
         {
             IEnumerable<Widget> savedItems = null;
@@ -113,7 +109,7 @@ namespace PebbleCode.Tests.Unit.MockTests
             Assert.AreEqual(2, savedItems.Count());
         }
 
-        [TestMethod]
+        [Test]
         public void AutoWireUpMockRepositorySave_SaveWidgetList()
         {
             IEnumerable<Widget> savedItems = null;
@@ -135,7 +131,7 @@ namespace PebbleCode.Tests.Unit.MockTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void AutoWireUpMockRepositorySave_SaveParamArray_WithFlags()
         {
             IEnumerable<Widget> savedItems = null;
@@ -156,7 +152,7 @@ namespace PebbleCode.Tests.Unit.MockTests
             Assert.AreEqual(2, savedItems.Count());
         }
 
-        [TestMethod]
+        [Test]
         public void AutoWireUpMockRepositorySave_SaveWidgetList_WithFlags()
         {
             IEnumerable<Widget> savedItems = null;

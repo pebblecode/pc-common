@@ -3,29 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using Ninject;
-using Ninject.MockingKernel;
 using Ninject.MockingKernel.Moq;
 
 using PebbleCode.Entities;
 using PebbleCode.Framework;
-using PebbleCode.Framework.Configuration;
 using PebbleCode.Framework.IoC;
 using PebbleCode.Framework.Logging;
-using PebbleCode.Repository;
 using Ninject.Modules;
 using PebbleCode.Framework.Collections;
-using PebbleCode.Tests.Fakes;
 
 namespace PebbleCode.Tests
 {
     /// <summary>
     /// A base class for unit tests - mocks out all database access in singleton scope
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public abstract class BaseUnitTest<THelper> : BaseTest<FakeLogManager, THelper>
         where THelper : TestHelper, new()
     {
@@ -41,7 +36,7 @@ namespace PebbleCode.Tests
         /// <summary>
         /// Initialiser for unit tests
         /// </summary>
-        [TestInitialize]
+        [SetUp]
         public override void TestInitialise()
         {
             // Execute base initialisation
@@ -95,7 +90,7 @@ namespace PebbleCode.Tests
         /// <summary>
         /// CleanUp for unit tests
         /// </summary>
-        [TestCleanup]
+        [TearDown]
         public override void TestCleanup()
         {
             // Deactivate any mocked objects

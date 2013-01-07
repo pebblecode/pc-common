@@ -1,17 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PebbleCode.Entities;
+﻿using NUnit.Framework;
 using PebbleCode.Framework.Collections;
 
 namespace PebbleCode.Tests.Unit.EntityFlagTests
 {
-    [TestClass]
+    [TestFixture]
     public class BasicTests : BaseUnitTest<TestHelper>
     {
-        [TestMethod]
+        [Test]
         public void None()
         {
             Flags flags = Flags.None;
@@ -22,7 +17,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(0, flags.Values.Length, "values should be empty");
         }
 
-        [TestMethod]
+        [Test]
         public void Single()
         {
             Flags flags = new Flags(99);
@@ -36,7 +31,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(99, flags.Values[0], "values should contain only 99");
         }
 
-        [TestMethod]
+        [Test]
         public void Multiple()
         {
             Flags flags = new Flags(1,10,5);
@@ -61,7 +56,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(5, flags.Values[2]);
         }
 
-        [TestMethod]
+        [Test]
         public void Repeat()
         {
             Flags flags = new Flags(1, 1);

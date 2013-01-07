@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq.Expressions;
 using System.Reflection;
+using NUnit.Framework;
 using PebbleCode.Tests.Entities;
 using PebbleCode.Framework.Collections;
 
 namespace PebbleCode.Tests.Unit.CodeGenTests
 {
-    [TestClass]
+    [TestFixture]
     public class FieldTests
     {
-
-        [TestMethod]
+        [Test]
         public void CheckFieldTypes()
         {
             Type fieldTestType = typeof(FieldTests);

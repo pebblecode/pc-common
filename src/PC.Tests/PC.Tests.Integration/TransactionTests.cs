@@ -1,24 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using NUnit.Framework;
 using PebbleCode.Repository;
 using PebbleCode.Tests;
 using PebbleCode.Tests.Entities;
 
 namespace SGP.Tests.Integration.RepositoryTests
 {
-    [TestClass]
+    [TestFixture]
     public class TransactionTests : BaseIntegrationTest<TestHelper>
     {
         /// <summary>
         /// Initialiser for unit tests
         /// </summary>
-        [TestInitialize]
+        [SetUp]
         public override void TestInitialise()
         {
             base.TestInitialise();
@@ -33,7 +28,7 @@ namespace SGP.Tests.Integration.RepositoryTests
             Assert.AreEqual(0, things.Count, "Should be no things");
         }
 
-        [TestMethod]
+        [Test]
         public void RollbackTest()
         {
             // Add a new thing, but rollback xn.
@@ -47,7 +42,7 @@ namespace SGP.Tests.Integration.RepositoryTests
             Assert.AreEqual(0, ThingRepo.GetAll().Count, "Thing should not be saved");
         }
 
-        [TestMethod]
+        [Test]
         public void CommitTest()
         {
             // Add a new thing, manually commit.
@@ -61,7 +56,7 @@ namespace SGP.Tests.Integration.RepositoryTests
             Assert.AreEqual(1, ThingRepo.GetAll().Count, "Thing should be saved");
         }
 
-        [TestMethod]
+        [Test]
         public void MultitpleTransactionTest()
         {
             // Add a new thing, manually commit.
@@ -95,7 +90,7 @@ namespace SGP.Tests.Integration.RepositoryTests
             Assert.AreEqual(2, ThingRepo.GetAll().Count, "Thing should be saved");
         }
 
-        [TestMethod]
+        [Test]
         public void ExceptionRollbackTest()
         {
             try
@@ -116,7 +111,7 @@ namespace SGP.Tests.Integration.RepositoryTests
             Assert.AreEqual(0, ThingRepo.GetAll().Count, "Thing save should have been rolled back");
         }
 
-        [TestMethod]
+        [Test]
         public void ExceptionCommitTest()
         {
             try
@@ -138,7 +133,7 @@ namespace SGP.Tests.Integration.RepositoryTests
             Assert.AreEqual(1, ThingRepo.GetAll().Count, "Thing have been saved");
         }
 
-        [TestMethod]
+        [Test]
         public void ThreadSafetyTest()
         {
             // Run first thread, start a transaction, add a new entity, but do not commit. Pause thread.

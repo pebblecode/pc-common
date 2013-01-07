@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using PebbleCode.Framework;
 
 namespace PebbleCode.Tests.Unit.PC.Framework
 {
-    [TestClass]
+    [TestFixture]
     public class EnumHelpers_ReadableNameTests
     {
-        [TestMethod]
+        [Test]
         public void ReadableName_OnNotAttributedEnum_ReturnReadableNamesAsExpected()
         {
             //ARRANGE
@@ -22,7 +22,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual("Second Value", secondReadableName);
         }
 
-        [TestMethod]
+        [Test]
         public void ReadableName_OnPartiallyAttributedEnum_ReturnReadableNamesAsExpected()
         {
             //ARRANGE
@@ -38,7 +38,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual("Second Value From Attribute", secondReadableName);
         }
 
-        [TestMethod]
+        [Test]
         public void ReadableName_OnFullyAttributedEnum_ReturnReadableNamesAsExpected()
         {
             //ARRANGE

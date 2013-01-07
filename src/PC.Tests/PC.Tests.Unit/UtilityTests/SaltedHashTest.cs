@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using PC.Framework.Utilities;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Security.Cryptography;
 
 namespace PebbleCode.Tests.Unit.UtilityTests
 {
-    [TestClass]
+    [TestFixture]
     public class SaltedHashTest
     {
-        [TestMethod]
+        [Test]
         public void CheckSaltLength()
         {
             CheckSaltLength(1, 1);
@@ -50,7 +47,7 @@ namespace PebbleCode.Tests.Unit.UtilityTests
             Assert.AreEqual(saltLength, strSaltAsBin.Length, "String salt is wrong length");
         }
 
-        [TestMethod]
+        [Test]
         public void HashAndVerifyData()
         {
             HashAndVerify(1, 0);
@@ -87,7 +84,7 @@ namespace PebbleCode.Tests.Unit.UtilityTests
             Assert.IsTrue(sh.VerifyHash(strData, strHash, strSalt), "Verfiy failed");
         }
 
-        [TestMethod]
+        [Test]
         public void MakeFail()
         {
             int[] saltLengths = new int[] { 1, 4, 10, 30 };

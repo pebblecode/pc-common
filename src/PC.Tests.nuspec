@@ -8,8 +8,6 @@
     <description>Pebble Code test libraries</description>
   </metadata>
   <files>
-	  <file src="src\PC.Tests\PC.Tests\bin\Release\PC.Tests.dll" target="lib\net40" /> 
-	  <file src="src\PC.Tests\PC.Tests.Integration\bin\Release\PC.Tests.Integration.dll" target="lib\net40" /> 	  
-	  <file src="src\PC.Tests\PC.Tests.Unit\bin\Release\PC.Tests.Unit.dll" target="lib\net40" /> 	
+	  <file src="src\PC.Tests\PC.Tests\bin\Release\PC.Tests.dll" target="lib\net40" /> 	
   </files>
 </package>

@@ -1,17 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using PebbleCode.Framework;
 using System.IO;
 
 namespace PebbleCode.Tests.Unit.PC.Framework
 {
-    [TestClass]
+    [TestFixture]
     public partial class ExtensionsTests
     {
-        [TestMethod]
+        [Test]
         public void ToTempFile_Unreadable_Exception()
         {
             try
@@ -25,7 +21,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToTempFile_AfterWrite_PositionReset()
         {
             MemoryStream s = new MemoryStream();
@@ -36,7 +32,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(1, read);
         }
 
-        [TestMethod]
+        [Test]
         public void ToTempFile_StreamHasData_ContentsIdentical()
         {
             MemoryStream s = new MemoryStream();
@@ -47,7 +43,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(10, buffer[0]);
         }
 
-        [TestMethod]
+        [Test]
         public void ToTempFile_StreamNoData_ZeroByteFile()
         {
             MemoryStream s = new MemoryStream();

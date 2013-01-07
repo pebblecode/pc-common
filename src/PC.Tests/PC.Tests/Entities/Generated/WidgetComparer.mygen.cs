@@ -10,15 +10,7 @@
 /***                                                                       ***/
 /*****************************************************************************/
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using PebbleCode.Framework.Dates;
-using PebbleCode.Tests.EntityComparers;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PebbleCode.Tests.Entities;
 
 namespace PebbleCode.Tests.EntityComparers

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PebbleCode.Framework.Dates;
 
 namespace PebbleCode.Tests.Unit.PC.Framework
 {
-    [TestClass]
+    [TestFixture]
     public class DateTimeConverterTestsTests 
     {
-        [TestMethod]
+        [Test]
         public void ParseDateWithSeconds_ValidDateString_ReturnsSameDateAndTime()
         {
             DateTime? date = DateTimeConverter.ParseDateWithSeconds("20120418083058");
@@ -19,7 +16,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(expectedDate, date.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void ParseDate_ValidDateString_ReturnsSameDate()
         {
             DateTime? date = DateTimeConverter.ParseDate("20120418");

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PebbleCode.Entities;
+﻿using NUnit.Framework;
 using PebbleCode.Framework.Collections;
 
 namespace PebbleCode.Tests.Unit.EntityFlagTests
 {
-    [TestClass]
+    [TestFixture]
     public class EqualsTests : BaseUnitTest<TestHelper>
     {
-        [TestMethod]
+        [Test]
         public void Equals_None()
         {
             Assert.AreEqual(Flags.None, new Flags());
@@ -20,7 +15,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreNotEqual(Flags.None, new Flags(-1));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_Single()
         {
             Assert.AreEqual(new Flags(1), new Flags(1));
@@ -28,7 +23,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreNotEqual(new Flags(-1), new Flags(1));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_Multiple()
         {
             Assert.AreEqual(new Flags(1,2), new Flags(1,2));
@@ -41,7 +36,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreNotEqual(new Flags(1, 2, 3), new Flags(4, 5, 6));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_Repeat()
         {
             Assert.AreEqual(new Flags(1, 2), new Flags(1, 2, 2));
@@ -55,7 +50,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void Equals_Operators()
         {
             Assert.IsTrue(new Flags(1, 2) == new Flags(1, 2));

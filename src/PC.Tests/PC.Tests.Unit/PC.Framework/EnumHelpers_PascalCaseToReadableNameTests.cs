@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using PebbleCode.Framework;
 
 namespace PebbleCode.Tests.Unit.PC.Framework
 {
-    [TestClass]
+    [TestFixture]
     public class EnumHelpers_PascalCaseToReadableNameTests
     {
-        [TestMethod]
+        [Test]
         public void ToStringEmptyString()
         {
             var pascalCased = string.Empty;
@@ -19,7 +15,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringSingleCharacter()
         {
             var pascalCased = "A";
@@ -28,7 +24,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringSingleWord()
         {
             var pascalCased = "Word";
@@ -37,7 +33,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringTwoWords()
         {
             var pascalCased = "TwoWords";
@@ -46,7 +42,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringFirstWordAccronym()
         {
             var pascalCased = "TWOWords";
@@ -55,7 +51,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringSecondWordAccronym()
         {
             var pascalCased = "TwoWORDS";
@@ -64,7 +60,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringMiddleWordAccronym()
         {
             var pascalCased = "ThreeDIFFERENTWords";

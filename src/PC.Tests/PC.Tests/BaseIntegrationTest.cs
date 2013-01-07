@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using PebbleCode.Framework.Logging;
 
 namespace PebbleCode.Tests
@@ -6,11 +6,11 @@ namespace PebbleCode.Tests
     /// <summary>
     /// Integration tests touch the database, and therefore it should be reset between tests
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public abstract class BaseIntegrationTest<THelper> : BaseTest<CountableLogManager,THelper>
         where THelper : TestHelper, new()
     {
-        [TestInitialize]
+        [SetUp]
         public override void TestInitialise()
         {
             base.TestInitialise();
@@ -18,7 +18,7 @@ namespace PebbleCode.Tests
             Logger.LoggerInstance = _loggerInstance;
         }
 
-        [TestCleanup]
+        [TearDown]
         public override void TestCleanup()
         {
             base.TestCleanup();

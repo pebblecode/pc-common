@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PebbleCode.Framework.Logging;
-using PebbleCode.Tests.Fakes;
 
 namespace PebbleCode.Tests.Unit.PC.Framework
 {
-    [TestClass]
+    [TestFixture]
     public class CountableLogManagerTests
     {
-        [TestMethod]
+        [Test]
         public void LatestLogs_WhenWriteLogs_CachesLogs()
         {
             //Arrange
@@ -26,7 +25,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(1, latestLogs.Count(entry => entry.Message.Equals("Message2")));
         }
 
-        [TestMethod]
+        [Test]
         public void IsCountChecked_WhenAnyOfWarningOrWarningCountAccessed_SetToFalse()
         {
             //Arrange
@@ -39,7 +38,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.IsFalse(logManager.IsCountChecked);
         }
 
-        [TestMethod]
+        [Test]
         public void IsCountChecked_WhenWarningCountAccessed_SetToTrue()
         {
             //Arrange
@@ -53,7 +52,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.IsTrue(logManager.IsCountChecked);
         }
 
-        [TestMethod]
+        [Test]
         public void IsCountChecked_WhenErrorCountAccessed_SetToTrue()
         {
             //Arrange
@@ -67,7 +66,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.IsTrue(logManager.IsCountChecked);
         }
 
-        [TestMethod]
+        [Test]
         public void ErrorCount_WithErrorMessage_ReturnCountAsExpected()
         {
             //Arrange
@@ -84,7 +83,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
         }
 
 
-        [TestMethod]
+        [Test]
         public void WarningCount_WithWarningMessage_ReturnCountAsExpected()
         {
             //Arrange

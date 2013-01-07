@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PebbleCode.Framework.Utilities;
 using PebbleCode.Tests.Entities;
-using PebbleCode.Framework;
+
 namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
 {
-    [TestClass]
+    [TestFixture]
     public class PropertyOverrideTests : BaseUnitTest<TestHelper> 
     {
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(Exception))]
         public void ControlledUpdate_EntityWithNoUpdateContext_ThrowsException()
         {
@@ -26,7 +26,7 @@ namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
             thing.Name = newName;
         }
 
-        [TestMethod]
+        [Test]
         public void ControlledUpdate_EntityWithNoPrviousAuthorization_AllowPropertyToBeSet()
         {
             //ARRANGE
@@ -48,7 +48,7 @@ namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
             Assert.AreEqual(newName, thing.Name);
         }
 
-        [TestMethod]
+        [Test]
         public void ControlledUpdate_EntityWithLowerAuthorization_DontAllowPropertyToBeSet()
         {
             //ARRANGE
@@ -73,7 +73,7 @@ namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
             Assert.AreNotEqual(newName, thing.Name);
         }
 
-        [TestMethod]
+        [Test]
         public void ControlledUpdate_EntityWithMigrationLevelAuthorization_OverrideAnyLevel()
         {
             //ARRANGE
@@ -98,7 +98,7 @@ namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
             Assert.AreEqual(newName, thing.Name);
         }
 
-        [TestMethod]
+        [Test]
         public void ControlledUpdate_EntityWithMigrationLevelAuthorization_KeepUpdateLevelUnchanged()
         {
             //ARRANGE

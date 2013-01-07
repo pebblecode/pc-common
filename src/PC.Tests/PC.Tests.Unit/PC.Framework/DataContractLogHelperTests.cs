@@ -1,16 +1,14 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PebbleCode.Framework.Logging;
 
 namespace PebbleCode.Tests.Unit.PC.Framework
 {
-    [TestClass]
+    [TestFixture]
     public class DataContractLogHelperTests
     {
-        [TestMethod]
+        [Test]
         public void Log_WithEnumerablePropertyContainsItems_LogAllItemsOfEnumerableProperty()
         {
             //Arrange
@@ -29,7 +27,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Log_WithEnumerablePropertyWithNullValue_LogEnumerableProperty()
         {
             //Arrange

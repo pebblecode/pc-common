@@ -1,16 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using PebbleCode.Framework;
 
 namespace PebbleCode.Tests.Unit.PC.Framework
 {
-    [TestClass]
+    [TestFixture]
     public class PageInfoTests
     {
-        [TestMethod]
+        [Test]
         public void less_than_one_page_of_data()
         {
             PageInfo pageInfo = new PageInfo(pageNumber: 1, pageSize: 50, totalItems: 49);
@@ -19,7 +15,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(50, pageInfo.PageSize);
         }
 
-        [TestMethod]
+        [Test]
         public void more_than_one_page_of_data()
         {
             PageInfo pageInfo = new PageInfo(pageNumber: 1, pageSize: 50, totalItems: 51);
@@ -28,7 +24,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(50, pageInfo.PageSize);
         }
 
-        [TestMethod]
+        [Test]
         public void exactly_one_page_of_data()
         {
             PageInfo pageInfo = new PageInfo(pageNumber: 1, pageSize: 50, totalItems: 50);
@@ -37,7 +33,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(50, pageInfo.PageSize);
         }
 
-        [TestMethod]
+        [Test]
         public void exactly_two_pages_of_data()
         {
             PageInfo pageInfo = new PageInfo(pageNumber: 1, pageSize: 25, totalItems: 50);
@@ -46,7 +42,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(25, pageInfo.PageSize);
         }
 
-        [TestMethod]
+        [Test]
         public void no_data()
         {
             PageInfo pageInfo = new PageInfo(pageNumber: 1, pageSize: 25, totalItems: 0);
@@ -55,7 +51,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(25, pageInfo.PageSize);
         }
 
-        [TestMethod]
+        [Test]
         public void invalid_page_number_first_returned()
         {
             PageInfo pageInfo = new PageInfo(pageNumber: 0, pageSize: 25, totalItems: 50);
@@ -64,7 +60,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(25, pageInfo.PageSize);
         }
 
-        [TestMethod]
+        [Test]
         public void invalid_page_size_non_zero_used()
         {
             PageInfo pageInfo = new PageInfo(pageNumber: 1, pageSize: 0, totalItems: 50);

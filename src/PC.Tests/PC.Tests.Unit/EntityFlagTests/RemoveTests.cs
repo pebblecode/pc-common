@@ -1,17 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PebbleCode.Entities;
+﻿using NUnit.Framework;
 using PebbleCode.Framework.Collections;
 
 namespace PebbleCode.Tests.Unit.EntityFlagTests
 {
-    [TestClass]
+    [TestFixture]
     public class RemoveTests : BaseUnitTest<TestHelper>
     {
-        [TestMethod]
+        [Test]
         public void Remove_SingleWithEmpty()
         {
             Flags flags = new Flags(1).Remove(Flags.None);
@@ -25,7 +20,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(1, flags.Values.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_1With2()
         {
             Flags flags = new Flags(1).Remove(new Flags(2));
@@ -38,7 +33,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(1, flags.Values.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_1With1()
         {
             Flags flags = new Flags(1).Remove(new Flags(1));
@@ -50,7 +45,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(0, flags.Values.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_SeveralValues()
         {
             Flags flags = new Flags(1, -10).Remove(new Flags(1, -10, int.MaxValue));
@@ -64,7 +59,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(0, flags.Values.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_MultiInitialiser()
         {
             Flags flags = new Flags(1, 2).Remove(new Flags(2));
@@ -84,7 +79,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(1, flags.Values[0]);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_Overlap()
         {
             Flags flags = new Flags(1, 2, 3, 4, 5).Remove( new Flags(3, 4, 5, 6, 7));

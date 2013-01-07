@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using PebbleCode.Framework;
 using System.IO;
 
@@ -14,7 +10,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
 @"alex,is,32
 james,is,21";
 
-        [TestMethod]
+        [Test]
         public void ReadCsv_ValidMultiLineData_TokensRead()
         {
             MemoryStream stream = new MemoryStream(
@@ -22,7 +18,7 @@ james,is,21";
             AssertRowsCols(stream, 2, 3);
         }
 
-        [TestMethod]
+        [Test]
         public void ReadCsv_ValidMultiLineDataExtraComma_TokensRead()
         {
             MemoryStream stream = new MemoryStream(
@@ -30,7 +26,7 @@ james,is,21";
             AssertRowsCols(stream, 2, null);
         }
 
-        [TestMethod]
+        [Test]
         public void ReadCsv_ValidMultiLineDataExtraLineFeed_TokensRead()
         {
             MemoryStream stream = new MemoryStream(

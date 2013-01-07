@@ -1,17 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PebbleCode.Entities;
+﻿using NUnit.Framework;
 using PebbleCode.Framework.Collections;
 
 namespace PebbleCode.Tests.Unit.EntityFlagTests
 {
-    [TestClass]
+    [TestFixture]
     public class BitwiseOrTests : BaseUnitTest<TestHelper>
     {
-        [TestMethod]
+        [Test]
         public void BitwiseOr_SingleWithEmpty()
         {
             Flags flag1 = new Flags(1);
@@ -28,7 +23,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(1, flags.Values[0]);
         }
 
-        [TestMethod]
+        [Test]
         public void BitwiseOr_1With2()
         {
             Flags flag1 = new Flags(1);
@@ -47,7 +42,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(1, flags.Values[0]);
         }
 
-        [TestMethod]
+        [Test]
         public void BitwiseOr_SeveralValues()
         {
             Flags flags = new Flags(1) | new Flags(2) | new Flags(-10) | new Flags(45) | new Flags(int.MaxValue);
@@ -71,7 +66,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(int.MaxValue, flags.Values[4]);
         }
 
-        [TestMethod]
+        [Test]
         public void BitwiseOr_MultiInitialiser()
         {
             Flags flags = new Flags(1, 2) | new Flags(3);
@@ -92,7 +87,7 @@ namespace PebbleCode.Tests.Unit.EntityFlagTests
             Assert.AreEqual(2, flags.Values[1]);
         }
 
-        [TestMethod]
+        [Test]
         public void BitwiseOr_1With1()
         {
             Flags flags = new Flags(1) | new Flags(1);

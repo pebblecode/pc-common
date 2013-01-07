@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PebbleCode.Framework.Dependancy;
 
 namespace PebbleCode.Tests.Unit.PC.Framework
 {
-    [TestClass]
+    [TestFixture]
     public class ResolverTests
     {
-        [TestMethod]
+        [Test]
         public void Resolver_WithCricularReference_ThrowException()
         {
             Dictionary<string, TestGraphNode> nodes = GetTestGraphNodeList();
@@ -31,7 +30,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Resolver_ResolveNoNodes_ResoveEmptyQueue()
         {
             //Arrange
@@ -44,7 +43,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(0, resolved.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void Resolver_ResolveNoNodesHasChildren_ReturnsQueueWithRightLength()
         {
             //Arrange
@@ -58,7 +57,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(nodes.Count, resolved.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void Resolver_ResolveWithSomeNodesHasChildren_ReturnsQueueWithRightLength()
         {
             //Arrange
@@ -74,7 +73,7 @@ namespace PebbleCode.Tests.Unit.PC.Framework
             Assert.AreEqual(nodes.Count, resolved.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void Resolver_ResolveWithChildren_ReturnsQueueAsExctedOrder()
         {
             //Arrange
