@@ -99,16 +99,12 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="CodeGenTests\FieldTests.cs" />
-    <Compile Include="CtrlUpdateEntityTests\ClassTypeTests.cs" />
-    <Compile Include="CtrlUpdateEntityTests\PropertyOverrideTests.cs" />
     <Compile Include="EntityFlagTests\BasicTests.cs" />
     <Compile Include="EntityFlagTests\BitwiseAndTests.cs" />
     <Compile Include="EntityFlagTests\BitwiseOrTests.cs" />
     <Compile Include="EntityFlagTests\BitwiseXorTests.cs" />
     <Compile Include="EntityFlagTests\EqualsTests.cs" />
     <Compile Include="EntityFlagTests\RemoveTests.cs" />
-    <Compile Include="MockTests\AutoWireMockTests.cs" />
     <Compile Include="PC.Framework\CountableLogManagerTests.cs" />
     <Compile Include="PC.Framework\DataContractLogHelperTests.cs" />
     <Compile Include="PC.Framework\DateTimeConverterTestsTests.cs" />
