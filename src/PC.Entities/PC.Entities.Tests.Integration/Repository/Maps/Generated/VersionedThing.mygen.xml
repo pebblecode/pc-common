@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="VersionedThing" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<alias>
+		<typeAlias alias="VersionedThing" type="PC.Entities.Tests.Integration.Entities.VersionedThing, PC.Entities.Tests.Integration" />
+		<typeAlias alias="VersionedThingList" type="PC.Entities.Tests.Integration.Entities.VersionedThingList, PC.Entities.Tests.Integration" />
+	</alias>
+			
+	<resultMaps>
+		<resultMap id="VersionedThingResult" class="VersionedThing">
+			<result property="DbId" column="id" type="int" dbType="Int"/>
+			<result property="DbName" column="name" type="string" dbType="varchar"/>
+			<result property="DbVersionNo" column="version_no" type="int" dbType="Int"/>
+			<result property="DbVersionDate" column="version_date" type="DateTime" dbType="DateTime"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		
+		<!-- Reusable fragment for select all columns in the table -->
+		<sql id="VersionedThingColumnNamesFragment">
+			versioned_thing.id,
+			versioned_thing.name,
+			versioned_thing.version_no,
+			versioned_thing.version_date
+		</sql>
+	
+		<!-- Select entity by primary key -->
+		<select id="SelectVersionedThing" parameterClass="int" listClass="VersionedThingList" resultMap="VersionedThingResult">
+			SELECT
+				<include refid="VersionedThingColumnNamesFragment"/>
+			FROM
+				versioned_thing
+			<dynamic prepend="WHERE">
+				<isParameterPresent>id = #value#</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<!-- Select entities by primary key -->
+		<select id="SelectVersionedThings" parameterClass="list" listClass="VersionedThingList" resultMap="VersionedThingResult">
+			SELECT
+				<include refid="VersionedThingColumnNamesFragment"/>
+			FROM
+				versioned_thing
+			WHERE
+				id IN
+				<iterate open="(" close=")" conjunction=", ">
+				  #[]#
+				</iterate>
+		</select>
+
+
+		<!-- Does entity exist? -->
+		<select id="DoesVersionedThingExist" parameterClass="int" resultClass="bool">
+			SELECT
+				1
+			FROM
+				versioned_thing
+			WHERE
+				id = #value#
+		</select>
+
+		<insert id="InsertVersionedThing" parameterClass="VersionedThing">
+			INSERT INTO
+				versioned_thing
+				(
+					name
+				)
+			VALUES
+				(
+					#DbName#
+				)
+			<selectKey resultClass="int" type="post" property="DbId">
+				SELECT @@IDENTITY as value
+			</selectKey>
+		</insert>
+		
+		<update id="UpdateVersionedThing" parameterClass="VersionedThing">
+			UPDATE
+				versioned_thing
+			SET
+				name=#DbName#,
+				version_no=version_no+1
+			WHERE
+				id=#DbId#
+				AND
+				version_no=#DbVersionNo#
+		</update>
+	
+
+		<!-- Select version info query -->
+		<select id="SelectVersionedThingVersionInfo" parameterClass="int" resultMap="Entity.VersionedEntityInfoResult">
+			SELECT
+				version_no,
+				version_date
+			FROM
+				versioned_thing
+			WHERE
+				id = #value#
+		</select>
+		
+		<!-- Select timestamp query -->
+		<select id="SelectLatestVersionedThingTimestamp">
+			SELECT
+				Max(version_date)
+			FROM
+				versioned_thing
+		</select>
+
+		<!-- Versioned delete -->
+		<delete id="DeleteVersionedThing" parameterClass="VersionedEntity">
+			DELETE FROM
+				versioned_thing
+			WHERE
+				id = #Identity#
+				AND
+				version_no = #DbVersionNo#
+		</delete>
+			
+
+		<!-- Delete ALL -->
+		<delete id="DeleteAllVersionedThing">
+			DELETE FROM versioned_thing 
+		</delete>
+
+	</statements>
+
+</sqlMap>
