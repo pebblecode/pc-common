@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>PC.Monitoring</id>
+    <version>0.0.0.0</version>
+    <authors>Andy Wardle</authors>
+    <owners>Pebble Code Ltd</owners>
+    <description>Pebble Code Monitoring Framework</description>
+	<dependencies>
+	  <dependency id="MySql.Data" version="6.5.4" />
+	  <dependency id="PC.Framework" version="6.0.0.125" />
+	  <dependency id="PC.Logging" version="6.0.0.125" />
+  </dependencies> 
+  </metadata>
+  <files>
+	  <file src="src\PC.Monitoring\PC.Monitoring\bin\Release\PC.Monitoring.dll" target="lib\net40" /> 
+  </files>
+</package>
