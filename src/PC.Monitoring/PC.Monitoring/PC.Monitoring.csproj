@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9767E75B-03AE-480B-9EBA-774E6A695ADB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PC.Monitoring</RootNamespace>
+    <AssemblyName>PC.Monitoring</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.6.4\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="PC.Framework">
+      <HintPath>..\packages\PC.Framework.6.0.0.125\lib\net40\PC.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PC.Logging">
+      <HintPath>..\packages\PC.Logging.6.0.0.125\lib\net40\PC.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AsyncServiceMonitor.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="DatabaseServiceMonitor.cs" />
+    <Compile Include="DummyServiceMonitor.cs" />
+    <Compile Include="GetHealthStatusResponse.cs" />
+    <Compile Include="HealthMonitor.cs" />
+    <Compile Include="MonitoredService.cs" />
+    <Compile Include="MonitoredServiceGroupStatus.cs" />
+    <Compile Include="MonitoredServiceStatus.cs" />
+    <Compile Include="MonitoringConfigSection.csd.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonitoringConfigSection.csd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceMonitor.cs" />
+    <Compile Include="TcpPortMonitor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MonitoringConfigSection.csd">
+      <Generator>CsdFileGenerator</Generator>
+      <LastGenOutput>MonitoringConfigSection.csd.cs</LastGenOutput>
+    </None>
+    <None Include="MonitoringConfigSection.csd.config">
+      <DependentUpon>MonitoringConfigSection.csd</DependentUpon>
+    </None>
+    <None Include="MonitoringConfigSection.csd.diagram">
+      <DependentUpon>MonitoringConfigSection.csd</DependentUpon>
+    </None>
+    <None Include="MonitoringConfigSection.csd.xsd">
+      <DependentUpon>MonitoringConfigSection.csd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
