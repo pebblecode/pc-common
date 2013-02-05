@@ -42,6 +42,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +57,7 @@
     <Compile Include="DummyServiceMonitor.cs" />
     <Compile Include="GetHealthStatusResponse.cs" />
     <Compile Include="HealthMonitor.cs" />
+    <Compile Include="IMonitoringContract.cs" />
     <Compile Include="MonitoredService.cs" />
     <Compile Include="MonitoredServiceGroupStatus.cs" />
     <Compile Include="MonitoredServiceStatus.cs" />
