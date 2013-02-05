@@ -31,7 +31,7 @@ namespace PC.Monitoring
 
         private void CheckMySqlIsAvailable(Database db)
         {
-            db.TryCountDatabases();
+            db.CountDatabases();
         }
 
         protected override void EndServiceCheck(IAsyncResult result)
