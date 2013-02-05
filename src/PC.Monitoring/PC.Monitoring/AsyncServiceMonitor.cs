@@ -1,8 +1,8 @@
-﻿using PebbleCode.Framework.Logging;
-using System;
+﻿using System;
 using System.Threading;
+using PebbleCode.Framework.Logging;
 
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// Async base class for service monitoring providing methods derived classes need to implement to have an asynchronous monitor

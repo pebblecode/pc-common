@@ -1,4 +1,4 @@
-﻿namespace PC.Monitoring
+﻿namespace PebbleCode.Monitoring
 {
     public enum MonitoredServiceStatusCode
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// This class is responsible for getting the response back from all registered service monitors

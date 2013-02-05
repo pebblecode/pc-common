@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// Response back from a call to get a healthcheck of running services

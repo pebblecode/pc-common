@@ -1,4 +1,4 @@
-﻿namespace PC.Monitoring
+﻿namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// A fake service monitor that represents the currently running process.

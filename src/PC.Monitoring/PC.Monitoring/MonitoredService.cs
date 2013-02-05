@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// Data contract containing information about the status of a service

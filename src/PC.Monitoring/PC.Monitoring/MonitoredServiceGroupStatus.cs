@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// Contains all the statuses of services that are being monitored

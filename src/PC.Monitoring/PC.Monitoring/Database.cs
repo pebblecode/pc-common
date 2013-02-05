@@ -2,7 +2,7 @@
 using System.Data;
 using MySql.Data.MySqlClient;
 
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// Class used to count how many databases are currently on a given machine using the supplied connection string

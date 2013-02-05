@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     [ServiceContract(Name = "MonitoringContract", Namespace = "http://bedegaming.com/monitoring")]
     public interface IMonitoringContract

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     
     
@@ -29,11 +29,11 @@ namespace PC.Monitoring
         /// Gets the MonitoringConfiguration instance.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public static global::PC.Monitoring.MonitoringConfiguration Instance
+        public static global::PebbleCode.Monitoring.MonitoringConfiguration Instance
         {
             get
             {
-                return ((global::PC.Monitoring.MonitoringConfiguration)(global::System.Configuration.ConfigurationManager.GetSection(global::PC.Monitoring.MonitoringConfiguration.MonitoringConfigurationSectionName)));
+                return ((global::PebbleCode.Monitoring.MonitoringConfiguration)(global::System.Configuration.ConfigurationManager.GetSection(global::PebbleCode.Monitoring.MonitoringConfiguration.MonitoringConfigurationSectionName)));
             }
         }
         #endregion
@@ -53,12 +53,12 @@ namespace PC.Monitoring
         /// the parser doesn't throw an exception because it encounters the unknown "xmlns" attribute.
         /// </remarks>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::PC.Monitoring.MonitoringConfiguration.XmlnsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::PebbleCode.Monitoring.MonitoringConfiguration.XmlnsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
         public string Xmlns
         {
             get
             {
-                return ((string)(base[global::PC.Monitoring.MonitoringConfiguration.XmlnsPropertyName]));
+                return ((string)(base[global::PebbleCode.Monitoring.MonitoringConfiguration.XmlnsPropertyName]));
             }
         }
         #endregion
@@ -86,22 +86,22 @@ namespace PC.Monitoring
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         [global::System.ComponentModel.DescriptionAttribute("The serviceMonitorGroups.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::PC.Monitoring.MonitoringConfiguration.serviceMonitorGroupsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
-        public global::PC.Monitoring.ServiceMonitorGroups serviceMonitorGroups
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::PebbleCode.Monitoring.MonitoringConfiguration.serviceMonitorGroupsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
+        public global::PebbleCode.Monitoring.ServiceMonitorGroups serviceMonitorGroups
         {
             get
             {
-                return ((global::PC.Monitoring.ServiceMonitorGroups)(base[global::PC.Monitoring.MonitoringConfiguration.serviceMonitorGroupsPropertyName]));
+                return ((global::PebbleCode.Monitoring.ServiceMonitorGroups)(base[global::PebbleCode.Monitoring.MonitoringConfiguration.serviceMonitorGroupsPropertyName]));
             }
             set
             {
-                base[global::PC.Monitoring.MonitoringConfiguration.serviceMonitorGroupsPropertyName] = value;
+                base[global::PebbleCode.Monitoring.MonitoringConfiguration.serviceMonitorGroupsPropertyName] = value;
             }
         }
         #endregion
     }
 }
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     
     
@@ -134,16 +134,16 @@ namespace PC.Monitoring
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         [global::System.ComponentModel.DescriptionAttribute("The Type.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::PC.Monitoring.ServiceMonitorConfiguration.TypePropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::PebbleCode.Monitoring.ServiceMonitorConfiguration.TypePropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
         public string Type
         {
             get
             {
-                return ((string)(base[global::PC.Monitoring.ServiceMonitorConfiguration.TypePropertyName]));
+                return ((string)(base[global::PebbleCode.Monitoring.ServiceMonitorConfiguration.TypePropertyName]));
             }
             set
             {
-                base[global::PC.Monitoring.ServiceMonitorConfiguration.TypePropertyName] = value;
+                base[global::PebbleCode.Monitoring.ServiceMonitorConfiguration.TypePropertyName] = value;
             }
         }
         #endregion
@@ -160,16 +160,16 @@ namespace PC.Monitoring
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         [global::System.ComponentModel.DescriptionAttribute("The Name.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::PC.Monitoring.ServiceMonitorConfiguration.NamePropertyName, IsRequired=true, IsKey=true, IsDefaultCollection=false)]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::PebbleCode.Monitoring.ServiceMonitorConfiguration.NamePropertyName, IsRequired=true, IsKey=true, IsDefaultCollection=false)]
         public string Name
         {
             get
             {
-                return ((string)(base[global::PC.Monitoring.ServiceMonitorConfiguration.NamePropertyName]));
+                return ((string)(base[global::PebbleCode.Monitoring.ServiceMonitorConfiguration.NamePropertyName]));
             }
             set
             {
-                base[global::PC.Monitoring.ServiceMonitorConfiguration.NamePropertyName] = value;
+                base[global::PebbleCode.Monitoring.ServiceMonitorConfiguration.NamePropertyName] = value;
             }
         }
         #endregion
@@ -186,35 +186,35 @@ namespace PC.Monitoring
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         [global::System.ComponentModel.DescriptionAttribute("The Settings.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::PC.Monitoring.ServiceMonitorConfiguration.SettingsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
-        public global::PC.Monitoring.Settings Settings
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::PebbleCode.Monitoring.ServiceMonitorConfiguration.SettingsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
+        public global::PebbleCode.Monitoring.Settings Settings
         {
             get
             {
-                return ((global::PC.Monitoring.Settings)(base[global::PC.Monitoring.ServiceMonitorConfiguration.SettingsPropertyName]));
+                return ((global::PebbleCode.Monitoring.Settings)(base[global::PebbleCode.Monitoring.ServiceMonitorConfiguration.SettingsPropertyName]));
             }
             set
             {
-                base[global::PC.Monitoring.ServiceMonitorConfiguration.SettingsPropertyName] = value;
+                base[global::PebbleCode.Monitoring.ServiceMonitorConfiguration.SettingsPropertyName] = value;
             }
         }
         #endregion
     }
 }
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     
     
     /// <summary>
     /// A collection of ServiceMonitorGroup instances.
     /// </summary>
-    [global::System.Configuration.ConfigurationCollectionAttribute(typeof(global::PC.Monitoring.ServiceMonitorGroup), CollectionType=global::System.Configuration.ConfigurationElementCollectionType.BasicMapAlternate, AddItemName=global::PC.Monitoring.ServiceMonitorGroups.ServiceMonitorGroupPropertyName)]
+    [global::System.Configuration.ConfigurationCollectionAttribute(typeof(global::PebbleCode.Monitoring.ServiceMonitorGroup), CollectionType=global::System.Configuration.ConfigurationElementCollectionType.BasicMapAlternate, AddItemName=global::PebbleCode.Monitoring.ServiceMonitorGroups.ServiceMonitorGroupPropertyName)]
     public partial class ServiceMonitorGroups : global::System.Configuration.ConfigurationElementCollection
     {
         
         #region Constants
         /// <summary>
-        /// The XML name of the individual <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> instances in this collection.
+        /// The XML name of the individual <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> instances in this collection.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         internal const string ServiceMonitorGroupPropertyName = "serviceMonitorGroup";
@@ -242,7 +242,7 @@ namespace PC.Monitoring
         {
             get
             {
-                return global::PC.Monitoring.ServiceMonitorGroups.ServiceMonitorGroupPropertyName;
+                return global::PebbleCode.Monitoring.ServiceMonitorGroups.ServiceMonitorGroupPropertyName;
             }
         }
         
@@ -256,7 +256,7 @@ namespace PC.Monitoring
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         protected override bool IsElementName(string elementName)
         {
-            return (elementName == global::PC.Monitoring.ServiceMonitorGroups.ServiceMonitorGroupPropertyName);
+            return (elementName == global::PebbleCode.Monitoring.ServiceMonitorGroups.ServiceMonitorGroupPropertyName);
         }
         
         /// <summary>
@@ -269,57 +269,57 @@ namespace PC.Monitoring
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         protected override object GetElementKey(global::System.Configuration.ConfigurationElement element)
         {
-            return ((global::PC.Monitoring.ServiceMonitorGroup)(element)).Name;
+            return ((global::PebbleCode.Monitoring.ServiceMonitorGroup)(element)).Name;
         }
         
         /// <summary>
-        /// Creates a new <see cref="global::PC.Monitoring.ServiceMonitorGroup"/>.
+        /// Creates a new <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/>.
         /// </summary>
         /// <returns>
-        /// A new <see cref="global::PC.Monitoring.ServiceMonitorGroup"/>.
+        /// A new <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/>.
         /// </returns>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         protected override global::System.Configuration.ConfigurationElement CreateNewElement()
         {
-            return new global::PC.Monitoring.ServiceMonitorGroup();
+            return new global::PebbleCode.Monitoring.ServiceMonitorGroup();
         }
         #endregion
         
         #region Indexer
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> at the specified index.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> at the specified index.
         /// </summary>
-        /// <param name="index">The index of the <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> to retrieve.</param>
+        /// <param name="index">The index of the <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.ServiceMonitorGroup this[int index]
+        public global::PebbleCode.Monitoring.ServiceMonitorGroup this[int index]
         {
             get
             {
-                return ((global::PC.Monitoring.ServiceMonitorGroup)(base.BaseGet(index)));
+                return ((global::PebbleCode.Monitoring.ServiceMonitorGroup)(base.BaseGet(index)));
             }
         }
         
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> with the specified key.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> with the specified key.
         /// </summary>
-        /// <param name="name">The key of the <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> to retrieve.</param>
+        /// <param name="name">The key of the <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.ServiceMonitorGroup this[object name]
+        public global::PebbleCode.Monitoring.ServiceMonitorGroup this[object name]
         {
             get
             {
-                return ((global::PC.Monitoring.ServiceMonitorGroup)(base.BaseGet(name)));
+                return ((global::PebbleCode.Monitoring.ServiceMonitorGroup)(base.BaseGet(name)));
             }
         }
         #endregion
         
         #region Add
         /// <summary>
-        /// Adds the specified <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> to the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
+        /// Adds the specified <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> to the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
         /// </summary>
-        /// <param name="serviceMonitorGroup">The <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> to add.</param>
+        /// <param name="serviceMonitorGroup">The <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> to add.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public void Add(global::PC.Monitoring.ServiceMonitorGroup serviceMonitorGroup)
+        public void Add(global::PebbleCode.Monitoring.ServiceMonitorGroup serviceMonitorGroup)
         {
             base.BaseAdd(serviceMonitorGroup);
         }
@@ -327,11 +327,11 @@ namespace PC.Monitoring
         
         #region Remove
         /// <summary>
-        /// Removes the specified <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> from the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
+        /// Removes the specified <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> from the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
         /// </summary>
-        /// <param name="serviceMonitorGroup">The <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> to remove.</param>
+        /// <param name="serviceMonitorGroup">The <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> to remove.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public void Remove(global::PC.Monitoring.ServiceMonitorGroup serviceMonitorGroup)
+        public void Remove(global::PebbleCode.Monitoring.ServiceMonitorGroup serviceMonitorGroup)
         {
             base.BaseRemove(this.GetElementKey(serviceMonitorGroup));
         }
@@ -339,23 +339,23 @@ namespace PC.Monitoring
         
         #region GetItem
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> at the specified index.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> at the specified index.
         /// </summary>
-        /// <param name="index">The index of the <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> to retrieve.</param>
+        /// <param name="index">The index of the <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.ServiceMonitorGroup GetItemAt(int index)
+        public global::PebbleCode.Monitoring.ServiceMonitorGroup GetItemAt(int index)
         {
-            return ((global::PC.Monitoring.ServiceMonitorGroup)(base.BaseGet(index)));
+            return ((global::PebbleCode.Monitoring.ServiceMonitorGroup)(base.BaseGet(index)));
         }
         
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> with the specified key.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> with the specified key.
         /// </summary>
-        /// <param name="name">The key of the <see cref="global::PC.Monitoring.ServiceMonitorGroup"/> to retrieve.</param>
+        /// <param name="name">The key of the <see cref="global::PebbleCode.Monitoring.ServiceMonitorGroup"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.ServiceMonitorGroup GetItemByKey(string name)
+        public global::PebbleCode.Monitoring.ServiceMonitorGroup GetItemByKey(string name)
         {
-            return ((global::PC.Monitoring.ServiceMonitorGroup)(base.BaseGet(((object)(name)))));
+            return ((global::PebbleCode.Monitoring.ServiceMonitorGroup)(base.BaseGet(((object)(name)))));
         }
         #endregion
         
@@ -371,20 +371,20 @@ namespace PC.Monitoring
         #endregion
     }
 }
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     
     
     /// <summary>
     /// A collection of Add instances.
     /// </summary>
-    [global::System.Configuration.ConfigurationCollectionAttribute(typeof(global::PC.Monitoring.Add), CollectionType=global::System.Configuration.ConfigurationElementCollectionType.BasicMapAlternate, AddItemName=global::PC.Monitoring.Settings.AddPropertyName)]
+    [global::System.Configuration.ConfigurationCollectionAttribute(typeof(global::PebbleCode.Monitoring.Add), CollectionType=global::System.Configuration.ConfigurationElementCollectionType.BasicMapAlternate, AddItemName=global::PebbleCode.Monitoring.Settings.AddPropertyName)]
     public partial class Settings : global::System.Configuration.ConfigurationElementCollection
     {
         
         #region Constants
         /// <summary>
-        /// The XML name of the individual <see cref="global::PC.Monitoring.Add"/> instances in this collection.
+        /// The XML name of the individual <see cref="global::PebbleCode.Monitoring.Add"/> instances in this collection.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         internal const string AddPropertyName = "add";
@@ -412,7 +412,7 @@ namespace PC.Monitoring
         {
             get
             {
-                return global::PC.Monitoring.Settings.AddPropertyName;
+                return global::PebbleCode.Monitoring.Settings.AddPropertyName;
             }
         }
         
@@ -426,7 +426,7 @@ namespace PC.Monitoring
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         protected override bool IsElementName(string elementName)
         {
-            return (elementName == global::PC.Monitoring.Settings.AddPropertyName);
+            return (elementName == global::PebbleCode.Monitoring.Settings.AddPropertyName);
         }
         
         /// <summary>
@@ -439,57 +439,57 @@ namespace PC.Monitoring
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         protected override object GetElementKey(global::System.Configuration.ConfigurationElement element)
         {
-            return ((global::PC.Monitoring.Add)(element)).Key;
+            return ((global::PebbleCode.Monitoring.Add)(element)).Key;
         }
         
         /// <summary>
-        /// Creates a new <see cref="global::PC.Monitoring.Add"/>.
+        /// Creates a new <see cref="global::PebbleCode.Monitoring.Add"/>.
         /// </summary>
         /// <returns>
-        /// A new <see cref="global::PC.Monitoring.Add"/>.
+        /// A new <see cref="global::PebbleCode.Monitoring.Add"/>.
         /// </returns>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         protected override global::System.Configuration.ConfigurationElement CreateNewElement()
         {
-            return new global::PC.Monitoring.Add();
+            return new global::PebbleCode.Monitoring.Add();
         }
         #endregion
         
         #region Indexer
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.Add"/> at the specified index.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.Add"/> at the specified index.
         /// </summary>
-        /// <param name="index">The index of the <see cref="global::PC.Monitoring.Add"/> to retrieve.</param>
+        /// <param name="index">The index of the <see cref="global::PebbleCode.Monitoring.Add"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.Add this[int index]
+        public global::PebbleCode.Monitoring.Add this[int index]
         {
             get
             {
-                return ((global::PC.Monitoring.Add)(base.BaseGet(index)));
+                return ((global::PebbleCode.Monitoring.Add)(base.BaseGet(index)));
             }
         }
         
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.Add"/> with the specified key.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.Add"/> with the specified key.
         /// </summary>
-        /// <param name="key">The key of the <see cref="global::PC.Monitoring.Add"/> to retrieve.</param>
+        /// <param name="key">The key of the <see cref="global::PebbleCode.Monitoring.Add"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.Add this[object key]
+        public global::PebbleCode.Monitoring.Add this[object key]
         {
             get
             {
-                return ((global::PC.Monitoring.Add)(base.BaseGet(key)));
+                return ((global::PebbleCode.Monitoring.Add)(base.BaseGet(key)));
             }
         }
         #endregion
         
         #region Add
         /// <summary>
-        /// Adds the specified <see cref="global::PC.Monitoring.Add"/> to the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
+        /// Adds the specified <see cref="global::PebbleCode.Monitoring.Add"/> to the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
         /// </summary>
-        /// <param name="add">The <see cref="global::PC.Monitoring.Add"/> to add.</param>
+        /// <param name="add">The <see cref="global::PebbleCode.Monitoring.Add"/> to add.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public void Add(global::PC.Monitoring.Add add)
+        public void Add(global::PebbleCode.Monitoring.Add add)
         {
             base.BaseAdd(add);
         }
@@ -497,11 +497,11 @@ namespace PC.Monitoring
         
         #region Remove
         /// <summary>
-        /// Removes the specified <see cref="global::PC.Monitoring.Add"/> from the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
+        /// Removes the specified <see cref="global::PebbleCode.Monitoring.Add"/> from the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
         /// </summary>
-        /// <param name="add">The <see cref="global::PC.Monitoring.Add"/> to remove.</param>
+        /// <param name="add">The <see cref="global::PebbleCode.Monitoring.Add"/> to remove.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public void Remove(global::PC.Monitoring.Add add)
+        public void Remove(global::PebbleCode.Monitoring.Add add)
         {
             base.BaseRemove(this.GetElementKey(add));
         }
@@ -509,23 +509,23 @@ namespace PC.Monitoring
         
         #region GetItem
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.Add"/> at the specified index.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.Add"/> at the specified index.
         /// </summary>
-        /// <param name="index">The index of the <see cref="global::PC.Monitoring.Add"/> to retrieve.</param>
+        /// <param name="index">The index of the <see cref="global::PebbleCode.Monitoring.Add"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.Add GetItemAt(int index)
+        public global::PebbleCode.Monitoring.Add GetItemAt(int index)
         {
-            return ((global::PC.Monitoring.Add)(base.BaseGet(index)));
+            return ((global::PebbleCode.Monitoring.Add)(base.BaseGet(index)));
         }
         
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.Add"/> with the specified key.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.Add"/> with the specified key.
         /// </summary>
-        /// <param name="key">The key of the <see cref="global::PC.Monitoring.Add"/> to retrieve.</param>
+        /// <param name="key">The key of the <see cref="global::PebbleCode.Monitoring.Add"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.Add GetItemByKey(string key)
+        public global::PebbleCode.Monitoring.Add GetItemByKey(string key)
         {
-            return ((global::PC.Monitoring.Add)(base.BaseGet(((object)(key)))));
+            return ((global::PebbleCode.Monitoring.Add)(base.BaseGet(((object)(key)))));
         }
         #endregion
         
@@ -541,7 +541,7 @@ namespace PC.Monitoring
         #endregion
     }
 }
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     
     
@@ -574,16 +574,16 @@ namespace PC.Monitoring
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         [global::System.ComponentModel.DescriptionAttribute("The Key.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::PC.Monitoring.Add.KeyPropertyName, IsRequired=true, IsKey=true, IsDefaultCollection=false)]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::PebbleCode.Monitoring.Add.KeyPropertyName, IsRequired=true, IsKey=true, IsDefaultCollection=false)]
         public string Key
         {
             get
             {
-                return ((string)(base[global::PC.Monitoring.Add.KeyPropertyName]));
+                return ((string)(base[global::PebbleCode.Monitoring.Add.KeyPropertyName]));
             }
             set
             {
-                base[global::PC.Monitoring.Add.KeyPropertyName] = value;
+                base[global::PebbleCode.Monitoring.Add.KeyPropertyName] = value;
             }
         }
         #endregion
@@ -600,22 +600,22 @@ namespace PC.Monitoring
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         [global::System.ComponentModel.DescriptionAttribute("The Value.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::PC.Monitoring.Add.ValuePropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::PebbleCode.Monitoring.Add.ValuePropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
         public string Value
         {
             get
             {
-                return ((string)(base[global::PC.Monitoring.Add.ValuePropertyName]));
+                return ((string)(base[global::PebbleCode.Monitoring.Add.ValuePropertyName]));
             }
             set
             {
-                base[global::PC.Monitoring.Add.ValuePropertyName] = value;
+                base[global::PebbleCode.Monitoring.Add.ValuePropertyName] = value;
             }
         }
         #endregion
     }
 }
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     
     
@@ -648,16 +648,16 @@ namespace PC.Monitoring
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         [global::System.ComponentModel.DescriptionAttribute("The Name.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::PC.Monitoring.ServiceMonitorGroup.NamePropertyName, IsRequired=true, IsKey=true, IsDefaultCollection=false)]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::PebbleCode.Monitoring.ServiceMonitorGroup.NamePropertyName, IsRequired=true, IsKey=true, IsDefaultCollection=false)]
         public string Name
         {
             get
             {
-                return ((string)(base[global::PC.Monitoring.ServiceMonitorGroup.NamePropertyName]));
+                return ((string)(base[global::PebbleCode.Monitoring.ServiceMonitorGroup.NamePropertyName]));
             }
             set
             {
-                base[global::PC.Monitoring.ServiceMonitorGroup.NamePropertyName] = value;
+                base[global::PebbleCode.Monitoring.ServiceMonitorGroup.NamePropertyName] = value;
             }
         }
         #endregion
@@ -674,35 +674,35 @@ namespace PC.Monitoring
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         [global::System.ComponentModel.DescriptionAttribute("The ServiceMonitors.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::PC.Monitoring.ServiceMonitorGroup.ServiceMonitorsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
-        public global::PC.Monitoring.ServiceMonitors ServiceMonitors
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::PebbleCode.Monitoring.ServiceMonitorGroup.ServiceMonitorsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
+        public global::PebbleCode.Monitoring.ServiceMonitors ServiceMonitors
         {
             get
             {
-                return ((global::PC.Monitoring.ServiceMonitors)(base[global::PC.Monitoring.ServiceMonitorGroup.ServiceMonitorsPropertyName]));
+                return ((global::PebbleCode.Monitoring.ServiceMonitors)(base[global::PebbleCode.Monitoring.ServiceMonitorGroup.ServiceMonitorsPropertyName]));
             }
             set
             {
-                base[global::PC.Monitoring.ServiceMonitorGroup.ServiceMonitorsPropertyName] = value;
+                base[global::PebbleCode.Monitoring.ServiceMonitorGroup.ServiceMonitorsPropertyName] = value;
             }
         }
         #endregion
     }
 }
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     
     
     /// <summary>
     /// A collection of ServiceMonitorConfiguration instances.
     /// </summary>
-    [global::System.Configuration.ConfigurationCollectionAttribute(typeof(global::PC.Monitoring.ServiceMonitorConfiguration), CollectionType=global::System.Configuration.ConfigurationElementCollectionType.BasicMapAlternate, AddItemName=global::PC.Monitoring.ServiceMonitors.ServiceMonitorConfigurationPropertyName)]
+    [global::System.Configuration.ConfigurationCollectionAttribute(typeof(global::PebbleCode.Monitoring.ServiceMonitorConfiguration), CollectionType=global::System.Configuration.ConfigurationElementCollectionType.BasicMapAlternate, AddItemName=global::PebbleCode.Monitoring.ServiceMonitors.ServiceMonitorConfigurationPropertyName)]
     public partial class ServiceMonitors : global::System.Configuration.ConfigurationElementCollection
     {
         
         #region Constants
         /// <summary>
-        /// The XML name of the individual <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> instances in this collection.
+        /// The XML name of the individual <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> instances in this collection.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         internal const string ServiceMonitorConfigurationPropertyName = "serviceMonitorConfiguration";
@@ -730,7 +730,7 @@ namespace PC.Monitoring
         {
             get
             {
-                return global::PC.Monitoring.ServiceMonitors.ServiceMonitorConfigurationPropertyName;
+                return global::PebbleCode.Monitoring.ServiceMonitors.ServiceMonitorConfigurationPropertyName;
             }
         }
         
@@ -744,7 +744,7 @@ namespace PC.Monitoring
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         protected override bool IsElementName(string elementName)
         {
-            return (elementName == global::PC.Monitoring.ServiceMonitors.ServiceMonitorConfigurationPropertyName);
+            return (elementName == global::PebbleCode.Monitoring.ServiceMonitors.ServiceMonitorConfigurationPropertyName);
         }
         
         /// <summary>
@@ -757,57 +757,57 @@ namespace PC.Monitoring
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         protected override object GetElementKey(global::System.Configuration.ConfigurationElement element)
         {
-            return ((global::PC.Monitoring.ServiceMonitorConfiguration)(element)).Name;
+            return ((global::PebbleCode.Monitoring.ServiceMonitorConfiguration)(element)).Name;
         }
         
         /// <summary>
-        /// Creates a new <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/>.
+        /// Creates a new <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/>.
         /// </summary>
         /// <returns>
-        /// A new <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/>.
+        /// A new <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/>.
         /// </returns>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
         protected override global::System.Configuration.ConfigurationElement CreateNewElement()
         {
-            return new global::PC.Monitoring.ServiceMonitorConfiguration();
+            return new global::PebbleCode.Monitoring.ServiceMonitorConfiguration();
         }
         #endregion
         
         #region Indexer
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> at the specified index.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> at the specified index.
         /// </summary>
-        /// <param name="index">The index of the <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> to retrieve.</param>
+        /// <param name="index">The index of the <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.ServiceMonitorConfiguration this[int index]
+        public global::PebbleCode.Monitoring.ServiceMonitorConfiguration this[int index]
         {
             get
             {
-                return ((global::PC.Monitoring.ServiceMonitorConfiguration)(base.BaseGet(index)));
+                return ((global::PebbleCode.Monitoring.ServiceMonitorConfiguration)(base.BaseGet(index)));
             }
         }
         
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> with the specified key.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> with the specified key.
         /// </summary>
-        /// <param name="name">The key of the <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> to retrieve.</param>
+        /// <param name="name">The key of the <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.ServiceMonitorConfiguration this[object name]
+        public global::PebbleCode.Monitoring.ServiceMonitorConfiguration this[object name]
         {
             get
             {
-                return ((global::PC.Monitoring.ServiceMonitorConfiguration)(base.BaseGet(name)));
+                return ((global::PebbleCode.Monitoring.ServiceMonitorConfiguration)(base.BaseGet(name)));
             }
         }
         #endregion
         
         #region Add
         /// <summary>
-        /// Adds the specified <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> to the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
+        /// Adds the specified <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> to the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
         /// </summary>
-        /// <param name="serviceMonitorConfiguration">The <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> to add.</param>
+        /// <param name="serviceMonitorConfiguration">The <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> to add.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public void Add(global::PC.Monitoring.ServiceMonitorConfiguration serviceMonitorConfiguration)
+        public void Add(global::PebbleCode.Monitoring.ServiceMonitorConfiguration serviceMonitorConfiguration)
         {
             base.BaseAdd(serviceMonitorConfiguration);
         }
@@ -815,11 +815,11 @@ namespace PC.Monitoring
         
         #region Remove
         /// <summary>
-        /// Removes the specified <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> from the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
+        /// Removes the specified <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> from the <see cref="global::System.Configuration.ConfigurationElementCollection"/>.
         /// </summary>
-        /// <param name="serviceMonitorConfiguration">The <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> to remove.</param>
+        /// <param name="serviceMonitorConfiguration">The <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> to remove.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public void Remove(global::PC.Monitoring.ServiceMonitorConfiguration serviceMonitorConfiguration)
+        public void Remove(global::PebbleCode.Monitoring.ServiceMonitorConfiguration serviceMonitorConfiguration)
         {
             base.BaseRemove(this.GetElementKey(serviceMonitorConfiguration));
         }
@@ -827,23 +827,23 @@ namespace PC.Monitoring
         
         #region GetItem
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> at the specified index.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> at the specified index.
         /// </summary>
-        /// <param name="index">The index of the <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> to retrieve.</param>
+        /// <param name="index">The index of the <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.ServiceMonitorConfiguration GetItemAt(int index)
+        public global::PebbleCode.Monitoring.ServiceMonitorConfiguration GetItemAt(int index)
         {
-            return ((global::PC.Monitoring.ServiceMonitorConfiguration)(base.BaseGet(index)));
+            return ((global::PebbleCode.Monitoring.ServiceMonitorConfiguration)(base.BaseGet(index)));
         }
         
         /// <summary>
-        /// Gets the <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> with the specified key.
+        /// Gets the <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> with the specified key.
         /// </summary>
-        /// <param name="name">The key of the <see cref="global::PC.Monitoring.ServiceMonitorConfiguration"/> to retrieve.</param>
+        /// <param name="name">The key of the <see cref="global::PebbleCode.Monitoring.ServiceMonitorConfiguration"/> to retrieve.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.0.0")]
-        public global::PC.Monitoring.ServiceMonitorConfiguration GetItemByKey(string name)
+        public global::PebbleCode.Monitoring.ServiceMonitorConfiguration GetItemByKey(string name)
         {
-            return ((global::PC.Monitoring.ServiceMonitorConfiguration)(base.BaseGet(((object)(name)))));
+            return ((global::PebbleCode.Monitoring.ServiceMonitorConfiguration)(base.BaseGet(((object)(name)))));
         }
         #endregion
         

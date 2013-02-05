@@ -1,7 +1,7 @@
 ﻿using System;
 using PebbleCode.Framework.Configuration;
 
-namespace PC.Monitoring
+namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// Asynchronous monitor of a database which tries to count how many databases are on a machine as a healthcheck
