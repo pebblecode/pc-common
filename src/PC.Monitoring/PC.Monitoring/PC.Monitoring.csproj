@@ -33,12 +33,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Data.6.6.4\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="PC.Framework">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PC.Framework.6.0.0.129\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
     <Reference Include="PC.Logging">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PC.Logging.6.0.0.129\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
