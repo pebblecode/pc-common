@@ -4,7 +4,7 @@ This project is used for adding monitoring endpoints into a service. There are c
 
 1. DatabaseServiceMonitor - Used to check the database server is up and running
 2. DummyServiceMonitor - Used for currently running process
-3. TCPPortMonitor - USed to check a specific TCP port is active and accepting connections
+3. TcpPortServiceMonitor - USed to check a specific TCP port is active and accepting connections
 
 
 An example of a config section within the app.config file of the service you want to monitor would look like the following,
