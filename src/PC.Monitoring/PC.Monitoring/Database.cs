@@ -11,36 +11,39 @@ namespace PebbleCode.Monitoring
     {
         public string ConnectionString { get; set; }
 
-        public Exception LastException { get; private set; }
-
         public int CountDatabases()
+        {
+            using (var connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SHOW DATABASES";
+                    command.CommandType = CommandType.Text;
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        int count = 0;
+                        while (reader.Read())
+                            count++;
+
+                        return count;
+                    }
+                }
+            }
+        }
+
+        public void TryCountDatabases()
         {
             try
             {
-                using (var connection = new MySqlConnection(ConnectionString))
-                {
-                    connection.Open();
-                    using (MySqlCommand command = connection.CreateCommand())
-                    {
-                        command.CommandText = "SHOW DATABASES";
-                        command.CommandType = CommandType.Text;
-                        using (MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            int count = 0;
-                            while (reader.Read())
-                                count++;
-
-                            return count;
-                        }
-                    }
-                }
+                CountDatabases();
             }
             catch (Exception ex)
             {
                 LastException = ex;
             }
-
-            return 0;
         }
+
+        public Exception LastException { get; private set; }
     }
 }

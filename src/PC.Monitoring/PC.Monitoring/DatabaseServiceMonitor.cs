@@ -31,7 +31,7 @@ namespace PebbleCode.Monitoring
 
         private void CheckMySqlIsAvailable(Database db)
         {
-            db.CountDatabases();
+            db.TryCountDatabases();
         }
 
         protected override void EndServiceCheck(IAsyncResult result)
