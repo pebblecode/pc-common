@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace PebbleCode.Monitoring
 {
@@ -13,14 +13,14 @@ namespace PebbleCode.Monitoring
 
         public int CountDatabases()
         {
-            using (var connection = new MySqlConnection(ConnectionString))
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                using (MySqlCommand command = connection.CreateCommand())
+                using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "SHOW DATABASES";
+                    command.CommandText = "SELECT database_id FROM sys.databases";
                     command.CommandType = CommandType.Text;
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    using (var reader = command.ExecuteReader())
                     {
                         int count = 0;
                         while (reader.Read())

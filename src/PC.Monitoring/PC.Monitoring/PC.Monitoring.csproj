@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>..\packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="PC.Framework">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PC.Framework.6.0.0.129\lib\net40\PC.Framework.dll</HintPath>
