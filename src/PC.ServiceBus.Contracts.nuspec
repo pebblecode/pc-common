@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>PC.ServiceBus.Contracts</id>
+    <version>0.0.0.0</version>
+    <authors>Andrew Wardle</authors>
+    <owners>Pebble Code Ltd</owners>
+    <description>Pebble Code Framework</description>  
+  </metadata>
+  <files>
+	  <file src="src\PC.ServiceBus.Contracts\PC.ServiceBus.Contracts\bin\Release\PC.ServiceBus.Contracts.dll" target="lib\net45" /> 
+  </files>
+</package>
