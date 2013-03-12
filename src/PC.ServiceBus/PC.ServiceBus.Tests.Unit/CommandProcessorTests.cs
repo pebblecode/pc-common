@@ -1,0 +1,45 @@
+﻿using System;
+using Moq;
+using NUnit.Framework;
+using PC.ServiceBus.Contracts;
+using PC.ServiceBus.Messaging;
+using PC.ServiceBus.Messaging.Handling;
+using PC.ServiceBus.Serialization;
+
+namespace PC.ServiceBus.Tests.Unit
+{
+    [TestFixture]
+    public class CommandProcessorFixture
+    {
+        [Test]
+        public void GivenACommandProcessor_WhenDisposingPorcessor_ThenReceiverDisposedIfDisposable()
+        {
+            var receiver = new Mock<IMessageReceiver>();
+            var disposable = receiver.As<IDisposable>();
+
+            var processor = new CommandProcessor(receiver.Object, Mock.Of<ITextSerializer>());
+
+            processor.Dispose();
+
+            disposable.Verify(x => x.Dispose());
+        }
+
+        [Test]
+        public void GivenACommandProcessor_WhenRegisteringAHandlerThatIsAlreadyRegistered_THenArgumentExceptionThrown()
+        {
+            var processor = new CommandProcessor(Mock.Of<IMessageReceiver>(), Mock.Of<ITextSerializer>());
+            var handler1 = Mock.Of<ICommandHandler<FooCommand>>();
+            var handler2 = Mock.Of<ICommandHandler<FooCommand>>();
+
+            processor.Register(handler1);
+
+            Assert.Throws<ArgumentException>(() => processor.Register(handler2));
+        }
+
+        public class FooCommand : ICommand
+        {
+            public Guid Id { get; set; }
+        }
+
+    }
+}
