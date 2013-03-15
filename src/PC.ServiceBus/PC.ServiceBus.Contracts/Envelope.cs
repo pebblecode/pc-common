@@ -53,10 +53,5 @@ namespace PC.ServiceBus.Contracts
         /// Gets the message id.
         /// </summary>
         public string MessageId { get; set; }
-
-        public static implicit operator Envelope<T>(T body)
-        {
-            return Envelope.Create(body);
-        }
     }
 }

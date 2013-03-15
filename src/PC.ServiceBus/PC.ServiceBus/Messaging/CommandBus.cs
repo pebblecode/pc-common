@@ -1,4 +1,5 @@
-﻿using Microsoft.ServiceBus.Messaging;
+﻿using System.Linq;
+using Microsoft.ServiceBus.Messaging;
 using PC.ServiceBus.Contracts;
 using PC.ServiceBus.Serialization;
 using System;
@@ -24,6 +25,16 @@ namespace PC.ServiceBus.Messaging
             _sender = sender;
             _metadataProvider = metadataProvider;
             _serializer = serializer;
+        }
+
+        public void Send(ICommand command)
+        {
+            Send(new Envelope<ICommand>(command));
+        }
+
+        public void Send(IEnumerable<ICommand> commands)
+        {
+            Send(commands.Select(x => new Envelope<ICommand>(x)));
         }
 
         /// <summary>

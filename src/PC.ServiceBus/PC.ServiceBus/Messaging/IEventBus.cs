@@ -8,6 +8,10 @@ namespace PC.ServiceBus.Messaging
     /// </summary>
     public interface IEventBus
     {
+        void Publish(IEvent @event);
+
+        void Publish(IEnumerable<IEvent> events);
+
         void Publish(Envelope<IEvent> @event);
 
         void Publish(IEnumerable<Envelope<IEvent>> events);

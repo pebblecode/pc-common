@@ -93,9 +93,7 @@
     <Compile Include="DynamicThrottling.cs" />
     <Compile Include="IMetadataProvider.cs" />
     <Compile Include="Messaging\CommandBus.cs" />
-    <Compile Include="Messaging\CommandBusExtensions.cs" />
     <Compile Include="Messaging\EventBus.cs" />
-    <Compile Include="Messaging\EventBusExtensions.cs" />
     <Compile Include="Messaging\Handling\CommandDispatcher.cs" />
     <Compile Include="Messaging\Handling\CommandProcessor.cs" />
     <Compile Include="Messaging\Handling\EventDispatcher.cs" />

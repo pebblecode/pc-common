@@ -8,6 +8,10 @@ namespace PC.ServiceBus.Messaging
     /// </summary>
     public interface ICommandBus
     {
+        void Send(ICommand command);
+
+        void Send(IEnumerable<ICommand> commands);
+
         void Send(Envelope<ICommand> command);
 
         void Send(IEnumerable<Envelope<ICommand>> commands);

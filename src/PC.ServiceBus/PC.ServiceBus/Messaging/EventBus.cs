@@ -1,4 +1,5 @@
-﻿using Microsoft.ServiceBus.Messaging;
+﻿using System.Linq;
+using Microsoft.ServiceBus.Messaging;
 using PC.ServiceBus.Contracts;
 using PC.ServiceBus.Serialization;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace PC.ServiceBus.Messaging
         }
 
         /// <summary>
-        /// Sends the specified event.
+        /// Sends the specified event already wrapped in an Envelope
         /// </summary>
         public void Publish(Envelope<IEvent> @event)
         {
@@ -31,7 +32,7 @@ namespace PC.ServiceBus.Messaging
         }
 
         /// <summary>
-        /// Publishes the specified events.
+        /// Publishes the specified events already wrapped in Envelopes
         /// </summary>
         public void Publish(IEnumerable<Envelope<IEvent>> events)
         {
@@ -39,6 +40,22 @@ namespace PC.ServiceBus.Messaging
             {
                 Publish(@event);
             }
+        }
+
+        /// <summary>
+        /// Sends the specified event.
+        /// </summary>
+        public void Publish(IEvent @event)
+        {
+            Publish(new Envelope<IEvent>(@event));
+        }
+
+        /// <summary>
+        /// Publishes the specified events.
+        /// </summary>
+        public void Publish(IEnumerable<IEvent> events)
+        {
+            Publish(events.Select(x => new Envelope<IEvent>(x)));
         }
 
         private BrokeredMessage BuildMessage(Envelope<IEvent> envelope)
