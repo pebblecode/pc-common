@@ -1,4 +1,5 @@
 ﻿using Microsoft.ServiceBus.Messaging;
+using PebbleCode.Framework.Logging;
 
 namespace PC.ServiceBus.Utils
 {
@@ -54,6 +55,11 @@ namespace PC.ServiceBus.Utils
             {
                 message.DeadLetter(deadLetterReason, deadLetterErrorDescription);
 
+                Logger.WriteWarning(string.Format("Dead lettering message {0}. Reason : {1} Error description : {2}",
+                    message.MessageId,
+                    deadLetterReason,
+                    deadLetterErrorDescription),
+                    "ServiceBus");
                 return true;
             }
             catch (MessageLockLostException)
