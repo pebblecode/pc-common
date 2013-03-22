@@ -26,17 +26,44 @@ namespace PC.ServiceBus.Messaging
         private CancellationTokenSource _cancellationSource;
         private readonly SubscriptionClient client;
 
+        /// <summary>
+        /// This will create a new Receiver for the specified topic / subscription. This WONT create the subscription if it doesn't exist
+        /// </summary>
+        /// <param name="topic">The name of the topic</param>
+        /// <param name="subscription">The name of the subscription</param>
+        /// <param name="processInParallel">Whether to kick off a new Task to start receiving messages whilst processing the current message</param>
         public SubscriptionReceiver(string topic, string subscription, bool processInParallel = false)
             : this(
                 topic,
                 subscription,
+                false,
                 processInParallel,
+                null,
+                new ExponentialBackoff(10, TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(1)),
+                new AzureConfigurationManager())
+        {
+        }
+        
+        /// <summary>
+        /// This will create a new Receiver for the specific topic / subscription. This WILL create the subscription if it doesn't exist
+        /// </summary>
+        /// <param name="topic">The name of the topic</param>
+        /// <param name="subscription">The name of the subscription</param>
+        /// <param name="filter">The Filter to apply to the subscription</param>
+        /// <param name="processInParallel">Whether to kick off a new Task to start receiving messages whilst processing the current message</param>
+        public SubscriptionReceiver(string topic, string subscription, Filter filter, bool processInParallel = false)
+            : this(
+                topic,
+                subscription,
+                true,
+                processInParallel,
+                filter,
                 new ExponentialBackoff(10, TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(1)),
                 new AzureConfigurationManager())
         {
         }
 
-        protected SubscriptionReceiver(string topic, string subscription, bool processInParallel, RetryStrategy backgroundRetryStrategy, AzureConfigurationManager configurationManager)
+        protected SubscriptionReceiver(string topic, string subscription, bool createIfNotExists, bool processInParallel, Filter filter, RetryStrategy backgroundRetryStrategy, AzureConfigurationManager configurationManager)
         {
             _subscription = subscription;
             _processInParallel = processInParallel;
@@ -63,6 +90,11 @@ namespace PC.ServiceBus.Messaging
                     e.CurrentRetryCount,
                     _subscription), "ServiceBus"); 
             };
+
+            if (createIfNotExists && !configurationManager.NamespaceManager.SubscriptionExists(topic, subscription))
+            {
+                configurationManager.NamespaceManager.CreateSubscription(topic, subscription, filter);
+            }
         }
 
         /// <summary>
