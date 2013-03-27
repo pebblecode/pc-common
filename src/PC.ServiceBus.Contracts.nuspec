@@ -8,6 +8,6 @@
     <description>Pebble Code Framework</description>  
   </metadata>
   <files>
-	  <file src="src\PC.ServiceBus\PC.ServiceBus.Contracts\bin\Release\PC.ServiceBus.Contracts.dll" target="lib\net45" /> 
+	  <file src="src\PC.ServiceBus\PC.ServiceBus.Contracts\bin\Release\PC.ServiceBus.Contracts.dll" target="lib\net40" /> 
   </files>
 </package>
