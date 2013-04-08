@@ -78,6 +78,11 @@ namespace PC.ServiceBus.Messaging
                     message.CorrelationId = command.CorrelationId;
                 }
 
+                if (!string.IsNullOrWhiteSpace(command.ContentType))
+                {
+                    message.ContentType = command.ContentType;
+                }
+
                 var metadata = _metadataProvider.GetMetadata(command.Body);
                 if (metadata != null)
                 {
