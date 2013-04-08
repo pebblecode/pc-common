@@ -53,5 +53,10 @@ namespace PC.ServiceBus.Contracts
         /// Gets the message id.
         /// </summary>
         public string MessageId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the content type.
+        /// </summary>
+        public string ContentType { get; set; }
     }
 }
