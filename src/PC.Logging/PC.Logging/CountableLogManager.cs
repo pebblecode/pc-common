@@ -14,7 +14,7 @@ namespace PebbleCode.Framework.Logging
             _logManager = logManager;
         }
 
-        public bool IsCountChecked { get; private set; }
+        public bool IsCountChecked { get; set; }
 
         private int _errorCount;
         public int ErrorCount
