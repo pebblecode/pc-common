@@ -81,6 +81,11 @@ namespace PC.ServiceBus.Messaging
                     message.CorrelationId = envelope.CorrelationId;
                 }
 
+                if (!string.IsNullOrWhiteSpace(envelope.ContentType))
+                {
+                    message.ContentType = envelope.ContentType;
+                }
+
                 var metadata = _metadataProvider.GetMetadata(@event);
                 if (metadata != null)
                 {
