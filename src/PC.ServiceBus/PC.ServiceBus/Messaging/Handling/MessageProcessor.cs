@@ -12,7 +12,7 @@ namespace PC.ServiceBus.Messaging.Handling
     /// Provides basic common processing code for components that handle 
     /// incoming messages from a receiver.
     /// </summary>
-    public abstract class MessageProcessor : IProcessor, IDisposable
+    public abstract class MessageProcessor : IDisposable
     {
         private const int MAX_PROCESSING_RETRIES = 5;
         private bool _disposed;
