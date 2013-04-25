@@ -7,7 +7,7 @@ namespace PC.ServiceBus.Messaging.Handling
     /// Processes incoming commands from the bus and routes them to the appropriate 
     /// handlers.
     /// </summary>
-    public class CommandProcessor : MessageProcessor, ICommandHandlerRegistry
+    public class CommandProcessor : MessageProcessor, ICommandProcessor
     {
         private readonly CommandDispatcher _commandDispatcher;
 
