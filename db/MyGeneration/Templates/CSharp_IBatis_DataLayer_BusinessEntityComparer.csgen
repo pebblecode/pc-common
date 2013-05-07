@@ -70,10 +70,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PebbleCode.Framework.Dates;
-using PebbleCode.Tests.EntityComparers;
+using NUnit.Framework;
+using PC.Tests;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using <%= _entityNamespace %>;
 
 namespace <%= _rootNamespace %>.Tests.EntityComparers
