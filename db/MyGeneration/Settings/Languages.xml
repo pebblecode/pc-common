@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Languages>
+  <Language From="MYSQL2" To="MySQL Connector/Net (C#)">
+    <Type From="BIT" To="bool" />
+    <Type From="BIGINT" To="long" />
+    <Type From="INT" To="int" />
+    <Type From="MEDIUMINT" To="int" />
+    <Type From="SMALLINT" To="short" />
+    <Type From="TINYINT" To="bool" />
+    <Type From="BIGINT UNSIGNED" To="long" />
+    <Type From="INT UNSIGNED" To="int" />
+    <Type From="MEDIUMINT UNSIGNED" To="int" />
+    <Type From="SMALLINT UNSIGNED" To="short" />
+    <Type From="TINYINT UNSIGNED" To="byte" />
+    <Type From="FLOAT" To="float" />
+    <Type From="FLOAT UNSIGNED" To="float" />
+    <Type From="DECIMAL" To="decimal" />
+    <Type From="DECIMAL UNSIGNED" To="decimal" />
+    <Type From="NUMERIC" To="decimal" />
+    <Type From="NUMERIC UNSIGNED" To="decimal" />
+    <Type From="DOUBLE UNSIGNED" To="double" />
+    <Type From="DOUBLE" To="double" />
+    <Type From="REAL" To="double" />
+    <Type From="REAL UNSIGNED" To="double" />
+    <Type From="VARCHAR" To="string" />
+    <Type From="CHAR" To="string" />
+    <Type From="TIMESTAMP" To="DateTime" />
+    <Type From="DATE" To="DateTime" />
+    <Type From="DATETIME" To="DateTime" />
+    <Type From="BLOB" To="byte[]" />
+    <Type From="LONGBLOB" To="byte[]" />
+    <Type From="TINYBLOB" To="byte[]" />
+    <Type From="MEDIUMBLOB" To="byte[]" />
+    <Type From="TEXT" To="string" />
+    <Type From="TIME" To="TimeSpan" />
+    <Type From="LONGTEXT" To="string" />
+    <Type From="MEDIUMTEXT" To="string" />
+    <Type From="TINYTEXT" To="string" />
+    <Type From="ENUM" To="string" />
+  </Language>
+  <Language From="MYSQL2" To="C#">
+    <Type From="BIT" To="bool" />
+    <Type From="BIGINT" To="long" />
+    <Type From="INT" To="int" />
+    <Type From="MEDIUMINT" To="int" />
+    <Type From="SMALLINT" To="short" />
+    <Type From="TINYINT" To="bool" />
+    <Type From="BIGINT UNSIGNED" To="long" />
+    <Type From="INT UNSIGNED" To="int" />
+    <Type From="MEDIUMINT UNSIGNED" To="int" />
+    <Type From="SMALLINT UNSIGNED" To="short" />
+    <Type From="TINYINT UNSIGNED" To="byte" />
+    <Type From="FLOAT" To="float" />
+    <Type From="FLOAT UNSIGNED" To="float" />
+    <Type From="DECIMAL" To="decimal" />
+    <Type From="DECIMAL UNSIGNED" To="decimal" />
+    <Type From="NUMERIC" To="decimal" />
+    <Type From="NUMERIC UNSIGNED" To="decimal" />
+    <Type From="DOUBLE UNSIGNED" To="double" />
+    <Type From="DOUBLE" To="double" />
+    <Type From="REAL" To="double" />
+    <Type From="REAL UNSIGNED" To="double" />
+    <Type From="VARCHAR" To="string" />
+    <Type From="CHAR" To="string" />
+    <Type From="TIMESTAMP" To="DateTime" />
+    <Type From="DATE" To="DateTime" />
+    <Type From="DATETIME" To="DateTime" />
+    <Type From="BLOB" To="byte[]" />
+    <Type From="LONGBLOB" To="byte[]" />
+    <Type From="TINYBLOB" To="byte[]" />
+    <Type From="MEDIUMBLOB" To="byte[]" />
+    <Type From="TEXT" To="string" />
+    <Type From="TIME" To="TimeSpan" />
+    <Type From="LONGTEXT" To="string" />
+    <Type From="MEDIUMTEXT" To="string" />
+    <Type From="TINYTEXT" To="string" />
+    <Type From="ENUM" To="string" />
+  </Language>
+  <Language From="REDSKYMYSQL" To="MySQL Connector/Net (C#)">
+    <Type From="BIT" To="sbyte" />
+    <Type From="BIGINT" To="long" />
+    <Type From="INT" To="int" />
+    <Type From="MEDIUMINT" To="int" />
+    <Type From="SMALLINT" To="short" />
+    <Type From="TINYINT" To="sbyte" />
+    <Type From="BIGINT UNSIGNED" To="ulong" />
+    <Type From="INT UNSIGNED" To="uint" />
+    <Type From="MEDIUMINT UNSIGNED" To="uint" />
+    <Type From="SMALLINT UNSIGNED" To="ushort" />
+    <Type From="TINYINT UNSIGNED" To="byte" />
+    <Type From="FLOAT" To="float" />
+    <Type From="FLOAT UNSIGNED" To="float" />
+    <Type From="DECIMAL" To="decimal" />
+    <Type From="DECIMAL UNSIGNED" To="decimal" />
+    <Type From="NUMERIC" To="decimal" />
+    <Type From="NUMERIC UNSIGNED" To="decimal" />
+    <Type From="DOUBLE UNSIGNED" To="double" />
+    <Type From="DOUBLE" To="double" />
+    <Type From="REAL" To="double" />
+    <Type From="REAL UNSIGNED" To="double" />
+    <Type From="VARCHAR" To="string" />
+    <Type From="CHAR" To="string" />
+    <Type From="TIMESTAMP" To="DateTime" />
+    <Type From="DATE" To="DateTime" />
+    <Type From="DATETIME" To="DateTime" />
+    <Type From="BLOB" To="byte[]" />
+    <Type From="LONGBLOB" To="byte[]" />
+    <Type From="TINYBLOB" To="byte[]" />
+    <Type From="MEDIUMBLOB" To="byte[]" />
+    <Type From="TEXT" To="string" />
+    <Type From="TIME" To="TimeSpan" />
+    <Type From="LONGTEXT" To="string" />
+    <Type From="MEDIUMTEXT" To="string" />
+    <Type From="TINYTEXT" To="string" />
+    <Type From="ENUM" To="string" />
+    <Type From="BOOLEAN" To="bool" />
+  </Language>
+  <Language From="REDSKYMYSQL" To="C#">
+    <Type From="BIT" To="sbyte" />
+    <Type From="BIGINT" To="long" />
+    <Type From="INT" To="int" />
+    <Type From="MEDIUMINT" To="int" />
+    <Type From="SMALLINT" To="short" />
+    <Type From="TINYINT" To="sbyte" />
+    <Type From="BIGINT UNSIGNED" To="ulong" />
+    <Type From="INT UNSIGNED" To="uint" />
+    <Type From="MEDIUMINT UNSIGNED" To="uint" />
+    <Type From="SMALLINT UNSIGNED" To="ushort" />
+    <Type From="TINYINT UNSIGNED" To="byte" />
+    <Type From="FLOAT" To="double" />
+    <Type From="FLOAT UNSIGNED" To="double" />
+    <Type From="DECIMAL" To="decimal" />
+    <Type From="DECIMAL UNSIGNED" To="decimal" />
+    <Type From="NUMERIC" To="decimal" />
+    <Type From="NUMERIC UNSIGNED" To="decimal" />
+    <Type From="DOUBLE UNSIGNED" To="double" />
+    <Type From="DOUBLE" To="double" />
+    <Type From="REAL" To="double" />
+    <Type From="REAL UNSIGNED" To="double" />
+    <Type From="VARCHAR" To="string" />
+    <Type From="CHAR" To="string" />
+    <Type From="TIMESTAMP" To="DateTime" />
+    <Type From="DATE" To="DateTime" />
+    <Type From="DATETIME" To="DateTime" />
+    <Type From="BLOB" To="byte[]" />
+    <Type From="LONGBLOB" To="byte[]" />
+    <Type From="TINYBLOB" To="byte[]" />
+    <Type From="MEDIUMBLOB" To="byte[]" />
+    <Type From="TEXT" To="string" />
+    <Type From="TIME" To="TimeSpan" />
+    <Type From="LONGTEXT" To="string" />
+    <Type From="MEDIUMTEXT" To="string" />
+    <Type From="TINYTEXT" To="string" />
+    <Type From="ENUM" To="string" />
+    <Type From="BOOLEAN" To="bool" />
+  </Language>
+</Languages>

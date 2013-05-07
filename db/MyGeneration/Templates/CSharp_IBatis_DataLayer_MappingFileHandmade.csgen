@@ -1,0 +1,73 @@
+﻿##|TYPE Template
+##|UNIQUEID 6bc518e6-be09-4e59-8d5d-b5b852b4f184
+##|TITLE MappingFileHandmade
+##|NAMESPACE IBatis.DataLayer
+##|SOURCE_TYPE Source
+##|OUTPUT_LANGUAGE None
+##|GUI_ENGINE .Net Script
+##|GUI_LANGUAGE C#
+##|GUI_BEGIN
+
+public class GeneratedGui : DotNetScriptGui
+{
+	public GeneratedGui(ZeusContext context) : base(context) {}
+
+	//-----------------------------------------
+	// The User Interface Entry Point
+	//-----------------------------------------
+	public override void Setup()
+	{
+		// ** UNCOMMENT CODE BELOW TO SEE UI **
+
+		//ui.Width  = 100;
+		//ui.Height = 100;
+		//GuiLabel lblDemo = ui.AddLabel("lblDemo", "Demo", "Demo Tooltip");
+		//ui.ShowGui = true;
+	}
+
+}
+##|GUI_END
+##|BODY_MODE Markup
+##|BODY_ENGINE .Net Script
+##|BODY_LANGUAGE C#
+##|BODY_TAG_START <%
+##|BODY_TAG_END %>
+##|BODY_BEGIN
+<%#NAMESPACE System.IO, System.Text, System.Text.RegularExpressions, System.Globalization, System.Collections.Generic%><%
+// $Id: IBatis_Boardbooks_MappingFile.csgen,v 1.3 2007/05/10 23:57:34 morciuch Exp $
+public class GeneratedTemplate : DotNetScriptTemplate
+{
+	%><%#FILE CSharp_IBatis_DataLayer_Common.cs%><%
+	
+	// Constructor
+	public GeneratedTemplate(ZeusContext context) : base(context) {}
+
+	//---------------------------------------------------
+	// Render() is where you want to write your logic    
+	//---------------------------------------------------
+	public override void Render()
+	{
+		bool isFirst;
+		
+		// Call a method defined in IBatis_Boardbooks_Common.cs
+		AssignMemberVariables();
+
+		// No columns, no output
+		if( _columns.Count == 0 )
+			return;
+			
+		// Write out the file content
+
+%><?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="<%= _className %>" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<statements>
+
+	</statements>
+
+</sqlMap>
+<%
+	}
+}
+%>
+##|BODY_END

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DbTargets>
+	<DbTarget From="MYSQL2" To="MySQL Connector/Net">
+		<Type From="BIT" To="MySqlDbType.Byte" />
+		<Type From="BIGINT" To="MySqlDbType.Int64" />
+		<Type From="INT" To="MySqlDbType.Int32" />
+		<Type From="MEDIUMINT" To="MySqlDbType.Int24" />
+		<Type From="SMALLINT" To="MySqlDbType.Int16" />
+		<Type From="TINYINT" To="MySqlDbType.Byte" />
+		<Type From="BIGINT UNSIGNED" To="MySqlDbType.Int64" />
+		<Type From="INT UNSIGNED" To="MySqlDbType.Int32" />
+		<Type From="MEDIUMINT UNSIGNED" To="MySqlDbType.Int24" />
+		<Type From="SMALLINT UNSIGNED" To="MySqlDbType.Int16" />
+		<Type From="TINYINT UNSIGNED" To="MySqlDbType.Byte" />
+		<Type From="FLOAT" To="MySqlDbType.Float" />
+		<Type From="FLOAT UNSIGNED" To="MySqlDbType.Float" />
+		<Type From="DECIMAL" To="MySqlDbType.Decimal" />
+		<Type From="DECIMAL UNSIGNED" To="MySqlDbType.Decimal" />
+		<Type From="NUMERIC" To="MySqlDbType.Decimal" />
+		<Type From="NUMERIC UNSIGNED" To="MySqlDbType.Decimal" />
+		<Type From="DOUBLE UNSIGNED" To="MySqlDbType.Double" />
+		<Type From="DOUBLE" To="MySqlDbType.Double" />
+		<Type From="REAL" To="MySqlDbType.Double" />
+		<Type From="REAL UNSIGNED" To="MySqlDbType.Double" />
+		<Type From="VARCHAR" To="MySqlDbType.VarChar" />
+		<Type From="CHAR" To="MySqlDbType.String" />
+		<Type From="TIMESTAMP" To="MySqlDbType.Timestamp" />
+		<Type From="DATETIME" To="MySqlDbType.Datetime" />
+		<Type From="DATE" To="MySqlDbType.Date" />
+		<Type From="BLOB" To="MySqlDbType.Blob" />
+		<Type From="LONGBLOB" To="MySqlDbType.Blob" />
+		<Type From="TINYBLOB" To="MySqlDbType.Blob" />
+		<Type From="MEDIUMBLOB" To="MySqlDbType.Blob" />
+		<Type From="TEXT" To="MySqlDbType.Blob" />
+		<Type From="TIME" To="MySqlDbType.Time" />
+		<Type From="LONGTEXT" To="MySqlDbType.Blob" />
+		<Type From="MEDIUMTEXT" To="MySqlDbType.MediumBlob" />
+		<Type From="TINYTEXT" To="MySqlDbType.TinyBlob" />
+		<Type From="SET" To="MySqlDbType.Set" />
+		<Type From="ENUM" To="MySqlDbType.Enum" />
+	</DbTarget>
+  <DbTarget From="REDSKYMYSQL" To="MySQL Connector/Net">
+    <Type From="BIT" To="MySqlDbType.Byte" />
+    <Type From="BIGINT" To="MySqlDbType.Int64" />
+    <Type From="INT" To="MySqlDbType.Int32" />
+    <Type From="MEDIUMINT" To="MySqlDbType.Int24" />
+    <Type From="SMALLINT" To="MySqlDbType.Int16" />
+    <Type From="TINYINT" To="MySqlDbType.Byte" />
+    <Type From="BIGINT UNSIGNED" To="MySqlDbType.Int64" />
+    <Type From="INT UNSIGNED" To="MySqlDbType.Int32" />
+    <Type From="MEDIUMINT UNSIGNED" To="MySqlDbType.Int24" />
+    <Type From="SMALLINT UNSIGNED" To="MySqlDbType.Int16" />
+    <Type From="TINYINT UNSIGNED" To="MySqlDbType.Byte" />
+    <Type From="FLOAT" To="MySqlDbType.Float" />
+    <Type From="FLOAT UNSIGNED" To="MySqlDbType.Float" />
+    <Type From="DECIMAL" To="MySqlDbType.Decimal" />
+    <Type From="DECIMAL UNSIGNED" To="MySqlDbType.Decimal" />
+    <Type From="NUMERIC" To="MySqlDbType.Decimal" />
+    <Type From="NUMERIC UNSIGNED" To="MySqlDbType.Decimal" />
+    <Type From="DOUBLE UNSIGNED" To="MySqlDbType.Double" />
+    <Type From="DOUBLE" To="MySqlDbType.Double" />
+    <Type From="REAL" To="MySqlDbType.Double" />
+    <Type From="REAL UNSIGNED" To="MySqlDbType.Double" />
+    <Type From="VARCHAR" To="MySqlDbType.VarChar" />
+    <Type From="CHAR" To="MySqlDbType.String" />
+    <Type From="TIMESTAMP" To="MySqlDbType.Timestamp" />
+    <Type From="DATETIME" To="MySqlDbType.DateTime" />
+    <Type From="DATE" To="MySqlDbType.Date" />
+    <Type From="BLOB" To="MySqlDbType.Blob" />
+    <Type From="LONGBLOB" To="MySqlDbType.Blob" />
+    <Type From="TINYBLOB" To="MySqlDbType.Blob" />
+    <Type From="MEDIUMBLOB" To="MySqlDbType.Blob" />
+    <Type From="TEXT" To="MySqlDbType.Blob" />
+    <Type From="TIME" To="MySqlDbType.Time" />
+    <Type From="LONGTEXT" To="MySqlDbType.Blob" />
+    <Type From="MEDIUMTEXT" To="MySqlDbType.MediumBlob" />
+    <Type From="TINYTEXT" To="MySqlDbType.TinyBlob" />
+    <Type From="SET" To="MySqlDbType.Set" />
+    <Type From="ENUM" To="MySqlDbType.Enum" />
+    <Type From="BOOLEAN" To="MySqlDbType.Byte" />
+  </DbTarget>	
+</DbTargets>
