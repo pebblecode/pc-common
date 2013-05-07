@@ -3,33 +3,33 @@
   <items>
     <item name="__dbConnectionString" type="System.String" val="Database=pc_test;Data Source=localhost;port=3400;User Id=pctest;Password=pctest" />
     <item name="__dbDriver" type="System.String" val="MYSQL2" />
-    <item name="__dbLanguageMappingFileName" type="System.String" val="@base.dir@\db\MyGeneration\Settings\Languages.xml" />
-    <item name="__dbTargetMappingFileName" type="System.String" val="@base.dir@\db\MyGeneration\Settings\DbTargets.xml" />
+    <item name="__dbLanguageMappingFileName" type="System.String" val="P:\db\MyGeneration\Settings\Languages.xml" />
+    <item name="__dbTargetMappingFileName" type="System.String" val="P:\db\MyGeneration\Settings\DbTargets.xml" />
     <item name="__defaultOutputPath" type="System.String" val="C:\Program Files\MyGeneration13\GeneratedCode\" />
-    <item name="__defaultTemplatePath" type="System.String" val="@base.dir@\db\MyGeneration\Templates" />
+    <item name="__defaultTemplatePath" type="System.String" val="P:\db\MyGeneration\Templates" />
     <item name="__domainOverride" type="System.Boolean" val="True" />
-    <item name="__userMetaDataFileName" type="System.String" val="@base.dir@\db\MyGeneration\Settings\UserMetaData.xml" />
+    <item name="__userMetaDataFileName" type="System.String" val="P:\db\MyGeneration\Settings\UserMetaData.xml" />
     <item name="__version" type="System.String" val="1.3.0.3" />
     <item name="dbConnectionString" type="System.Boolean" val="True" />
     <item name="dbDriver" type="System.String" val="MYSQL2" />
     <item name="defaultOutputPath" type="System.String" val="C:\Program Files\MyGeneration13\GeneratedCode\" />
-    <item name="defaultTemplatePath" type="System.String" val="@base.dir@\db\MyGeneration\Templates" />
+    <item name="defaultTemplatePath" type="System.String" val="P:\db\MyGeneration\Templates" />
   </items>
   <objects>
-    <obj name="iBatis Data Layer" uid="2c123699-d50c-41a9-99fe-c45fb60b123e" path="@base.dir@\db\MyGeneration\Templates\CSharp_IBatis_DataLayer.csgen">
+    <obj name="iBatis Data Layer" uid="2c123699-d50c-41a9-99fe-c45fb60b123e" path="P:\db\MyGeneration\Templates\CSharp_IBatis_DataLayer.csgen">
       <items>
         <item name="__dbConnectionString" type="System.String" val="Database=pc_test;Data Source=localhost;port=3400;User Id=pctest;Password=pctest" />
         <item name="__dbDriver" type="System.String" val="MYSQL2" />
-        <item name="__dbLanguageMappingFileName" type="System.String" val="@base.dir@\db\MyGeneration\Settings\Languages.xml" />
+        <item name="__dbLanguageMappingFileName" type="System.String" val="P:\db\MyGeneration\Settings\Languages.xml" />
         <item name="__dbTarget" type="System.String" val="MySQL Connector/Net" />
-        <item name="__dbTargetMappingFileName" type="System.String" val="@base.dir@\db\MyGeneration\Settings\DbTargets.xml" />
+        <item name="__dbTargetMappingFileName" type="System.String" val="P:\db\MyGeneration\Settings\DbTargets.xml" />
         <item name="__defaultOutputPath" type="System.String" val="C:\Program Files\MyGeneration13\GeneratedCode\" />
-        <item name="__defaultTemplatePath" type="System.String" val="@base.dir@\db\MyGeneration\Templates" />
+        <item name="__defaultTemplatePath" type="System.String" val="P:\db\MyGeneration\Templates" />
         <item name="__domainOverride" type="System.Boolean" val="True" />
         <item name="__language" type="System.String" val="C#" />
-        <item name="__userMetaDataFileName" type="System.String" val="@base.dir@\db\MyGeneration\Settings\UserMetaData.xml" />
+        <item name="__userMetaDataFileName" type="System.String" val="P:\db\MyGeneration\Settings\UserMetaData.xml" />
         <item name="__version" type="System.String" val="1.3.0.3" />
-        <item name="assemblyName" type="System.String" val="PC.Tests" />
+        <item name="assemblyName" type="System.String" val="PC.Entities.Tests.Integration" />
         <item name="chkClass" type="System.Boolean" val="True" />
         <item name="chkLists" type="System.Boolean" val="True" />
         <item name="chkMapping" type="System.Boolean" val="True" />
@@ -39,18 +39,18 @@
         <item name="chooseDatabase" type="System.String" val="pc_test" />
         <item name="chooseTables" type="System.Collections.ArrayList" val="System.String|H|controlled_update_thing;System.String|H|field_test;System.String|H|node_builder_test;System.String|H|thing;System.String|H|versioned_thing;System.String|H|widget;" />
         <item name="chooseViews" type="System.Collections.ArrayList" val="" />
-        <item name="classNamespace" type="System.String" val="PebbleCode.Tests.Entities" />
+        <item name="classNamespace" type="System.String" val="PC.Entities.Tests.Integration.Entities" />
         <item name="dbConnectionString" type="System.Boolean" val="True" />
         <item name="dbDriver" type="System.String" val="MYSQL2" />
         <item name="defaultOutputPath" type="System.String" val="C:\Program Files\MyGeneration13\GeneratedCode\" />
-        <item name="defaultTemplatePath" type="System.String" val="@base.dir@\db\MyGeneration\Templates" />
-        <item name="outputPath_cls" type="System.String" val="@base.dir@\src\PC.Tests\Entities\Generated" />
-        <item name="outputPath_cmp" type="System.String" val="@base.dir@\src\PC.Tests\Entities\Generated" />
-        <item name="outputPath_int" type="System.String" val="@base.dir@\src\PC.Tests\Repository\Generated" />
-        <item name="outputPath_lst" type="System.String" val="@base.dir@\src\PC.Tests\Entities\Generated" />
-        <item name="outputPath_rep" type="System.String" val="@base.dir@\src\PC.Tests\Repository\Generated" />
-        <item name="outputPath_trg" type="System.String" val="@base.dir@\src\PC.Tests\Triggers" />
-        <item name="outputPath_xml" type="System.String" val="@base.dir@\src\PC.Tests\Repository\Maps\Generated" />
+        <item name="defaultTemplatePath" type="System.String" val="P:\db\MyGeneration\Templates" />
+        <item name="outputPath_cls" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Entities\Generated" />
+        <item name="outputPath_cmp" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Entities\Generated" />
+        <item name="outputPath_int" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Repository\Generated" />
+        <item name="outputPath_lst" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Entities\Generated" />
+        <item name="outputPath_rep" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Repository\Generated" />
+        <item name="outputPath_trg" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Triggers" />
+        <item name="outputPath_xml" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Repository\Maps\Generated" />
         <item name="rootNamespace" type="System.String" val="PebbleCode" />
         <item name="selectPath_cls" type="System.String" val="" />
         <item name="selectPath_cmp" type="System.String" val="" />
