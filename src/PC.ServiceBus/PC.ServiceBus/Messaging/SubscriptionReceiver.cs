@@ -27,7 +27,7 @@ namespace PC.ServiceBus.Messaging
         private readonly SubscriptionClient client;
 
         /// <summary>
-        /// This will create a new Receiver for the specified topic / subscription. This WONT create the subscription if it doesn't exist
+        /// This will create a new Receiver for the specified topic / subscription. 
         /// </summary>
         /// <param name="topic">The name of the topic</param>
         /// <param name="subscription">The name of the subscription</param>
@@ -36,7 +36,7 @@ namespace PC.ServiceBus.Messaging
             : this(
                 topic,
                 subscription,
-                false,
+                true,
                 processInParallel,
                 null,
                 new ExponentialBackoff(10, TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(1)),
@@ -45,7 +45,7 @@ namespace PC.ServiceBus.Messaging
         }
         
         /// <summary>
-        /// This will create a new Receiver for the specific topic / subscription. This WILL create the subscription if it doesn't exist
+        /// This will create a new Receiver for the specific topic / subscription. 
         /// </summary>
         /// <param name="topic">The name of the topic</param>
         /// <param name="subscription">The name of the subscription</param>
