@@ -93,7 +93,10 @@ namespace PC.ServiceBus.Messaging
 
             if (createIfNotExists && !configurationManager.NamespaceManager.SubscriptionExists(topic, subscription))
             {
-                configurationManager.NamespaceManager.CreateSubscription(topic, subscription, filter);
+                if (filter != null)
+                    configurationManager.NamespaceManager.CreateSubscription(topic, subscription, filter);
+                else
+                    configurationManager.NamespaceManager.CreateSubscription(topic, subscription);
             }
         }
 
