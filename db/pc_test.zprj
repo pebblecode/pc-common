@@ -51,7 +51,7 @@
         <item name="outputPath_rep" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Repository\Generated" />
         <item name="outputPath_trg" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Triggers" />
         <item name="outputPath_xml" type="System.String" val="P:\src\PC.Entities\PC.Entities.Tests.Integration\Repository\Maps\Generated" />
-        <item name="rootNamespace" type="System.String" val="PebbleCode" />
+        <item name="rootNamespace" type="System.String" val="PC.Entities.Tests.Integration" />
         <item name="selectPath_cls" type="System.String" val="" />
         <item name="selectPath_cmp" type="System.String" val="" />
         <item name="selectPath_int" type="System.String" val="" />

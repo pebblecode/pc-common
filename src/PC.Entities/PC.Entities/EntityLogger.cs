@@ -10,7 +10,8 @@ namespace PebbleCode.Entities
     /// <summary>
     /// Static decorator class for the Logger framework, which formats entity messages to add context.
     /// </summary>
-    public class EntityLogger
+    public class EntityLogger<TPrimaryKey>
+        where TPrimaryKey : IComparable
     {
         /// <summary>
         /// Writes to the debug log is so configured
@@ -18,7 +19,7 @@ namespace PebbleCode.Entities
         /// <param name="message"></param>
         /// <param name="category"></param>
         /// <param name="entities"></param>
-        public static void WriteDebug(string message, string category, params Entity[] entities)
+        public static void WriteDebug(string message, string category, params Entity<TPrimaryKey>[] entities)
         {
             Logger.WriteDebug(FormatEntityMessage(message, entities), category, null);
         }
@@ -30,7 +31,7 @@ namespace PebbleCode.Entities
         /// <param name="category"></param>
         /// <param name="args">Arguments for the message format string - pass null if not required</param>
         /// <param name="entities"></param>
-        public static void WriteInfo(string message, string category, params Entity[] entities)
+        public static void WriteInfo(string message, string category, params Entity<TPrimaryKey>[] entities)
         {
             Logger.WriteInfo(FormatEntityMessage(message, entities), category, null);
         }
@@ -41,7 +42,7 @@ namespace PebbleCode.Entities
         /// <param name="message"></param>
         /// <param name="category"></param>
         /// <param name="entities"></param>
-        public static void WriteWarning(string message, string category, params Entity[] entities)
+        public static void WriteWarning(string message, string category, params Entity<TPrimaryKey>[] entities)
         {
             Logger.WriteWarning(FormatEntityMessage(message, entities), category, null);
         }
@@ -52,7 +53,7 @@ namespace PebbleCode.Entities
         /// <param name="message"></param>
         /// <param name="category"></param>
         /// <param name="entities"></param>
-        public static Exception WriteError(string message, string category, params Entity[] entities)
+        public static Exception WriteError(string message, string category, params Entity<TPrimaryKey>[] entities)
         {
             return Logger.WriteError(FormatEntityMessage(message, entities), category, null);
         }
@@ -65,7 +66,7 @@ namespace PebbleCode.Entities
         /// <param name="category"></param>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public static Exception WriteUnexpectedException(Exception exception, string additionalMessage, string category, params Entity[] entities)
+        public static Exception WriteUnexpectedException(Exception exception, string additionalMessage, string category, params Entity<TPrimaryKey>[] entities)
         {
             return Logger.WriteUnexpectedException(exception, FormatEntityMessage(additionalMessage, entities), category);
         }
@@ -76,12 +77,12 @@ namespace PebbleCode.Entities
         /// <param name="message"></param>
         /// <param name="entities"></param>
         /// <returns></returns>
-        private static string FormatEntityMessage(string message, Entity[] entities)
+        private static string FormatEntityMessage(string message, Entity<TPrimaryKey>[] entities)
         {
             List<string> entityMessages = new List<string>();
             if (entities != null && entities.Length > 0)
             {
-                foreach (Entity e in entities)
+                foreach (Entity<TPrimaryKey> e in entities)
                 {
                     entityMessages.Add(e.ToLogString());
                 }

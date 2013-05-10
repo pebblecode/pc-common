@@ -90,9 +90,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PC.Logging.6.0.0.123\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Tests, Version=6.0.0.123, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Tests.6.0.0.123\lib\net40\PC.Tests.dll</HintPath>
+    <Reference Include="PC.Tests">
+      <HintPath>..\..\PC.Tests\PC.Tests\bin\Debug\PC.Tests.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

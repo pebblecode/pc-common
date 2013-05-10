@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using PebbleCode.Entities;
 
-namespace PebbleCode.Tests.Entities
+namespace PC.Entities.Tests.Integration.Entities
 {
-    public abstract class ConcreteControlledUpdateEntity : ControlledUpdateEntity<TestUpdateContextConstants>
+    public abstract class ConcreteControlledUpdateEntity<TPrimaryKey> : ControlledUpdateEntity<TestUpdateContextConstants, int>
     {
     }
 }

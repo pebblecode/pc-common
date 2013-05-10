@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using NUnit.Framework;
 using PC.Entities.Tests.Integration.Entities;
-using PebbleCode.Tests.Entities;
 using PebbleCode.Framework.Collections;
 
 namespace PebbleCode.Tests.Unit.CodeGenTests

@@ -17,14 +17,15 @@ namespace PebbleCode.Entities
     /// Base class for all Business Entities
     /// </summary>
     [Serializable]
-    public abstract class Entity : ICloneable, IEntity, INotifyPropertyChanged
+    public abstract class Entity<TPrimaryKey> : ICloneable, IEntity<TPrimaryKey>, INotifyPropertyChanged
+        where TPrimaryKey : IComparable
     {
         /// <summary>
         /// Create a new Entity loosely based on the supplied template
         /// Entity.
         /// </summary>
         /// <param name="template">Existing Entity to use as a template</param>
-        protected Entity(Entity template)
+        protected Entity(Entity<TPrimaryKey> template)
         {
             if (template == null)
                 throw new ArgumentNullException("template");
@@ -50,7 +51,7 @@ namespace PebbleCode.Entities
         /// entity usually maps to this field. Derived classes must implement the 
         /// GetIdentity method to allow the base class to manage IsNew?
         /// </summary>
-        public abstract int Identity { get; }
+        public abstract TPrimaryKey Identity { get; }
 
         /// <summary>
         /// IsNew generally just looks at the Identity to see if it has been set or
@@ -66,7 +67,7 @@ namespace PebbleCode.Entities
         /// </summary>
         public virtual bool IsNew
         {
-            get { return (Identity <= 0 || _isNew); }
+            get { return (Convert.ToInt64(Identity) <= 0 || _isNew); }
         }
 
         /// <summary>
@@ -189,7 +190,7 @@ namespace PebbleCode.Entities
         /// Maybe overridden by child classes where instances of collections etc need to be cloned
         /// </summary>
         /// <param name="clone">The new clone</param>
-        protected virtual void OnClone(Entity clone)
+        protected virtual void OnClone(Entity<TPrimaryKey> clone)
         {
             if (clone == null)
                 throw new ArgumentNullException("clone");
@@ -238,7 +239,7 @@ namespace PebbleCode.Entities
             {
                 propertyNames.Add("Identity");
             }
-            if (this is VersionedEntity)
+            if (this is VersionedEntity<TPrimaryKey>)
             {
                 if (!propertyNames.Contains("VersionNo"))
                     propertyNames.Add("VersionNo");
@@ -287,7 +288,7 @@ namespace PebbleCode.Entities
             if (obj == null) return false;
             if (obj.GetType() != this.GetType())
                 return false;
-            return this.Identity == ((Entity)obj).Identity;
+            return this.Identity.Equals(((Entity<TPrimaryKey>)obj).Identity);
         }
 
         /// <summary>

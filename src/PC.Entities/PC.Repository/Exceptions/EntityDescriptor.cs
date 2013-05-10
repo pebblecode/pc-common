@@ -8,7 +8,8 @@ namespace PebbleCode.Repository.Exceptions
     /// Represents a collection of keys and BusinessEntityVersionCollection.
     /// </summary>
     [Serializable]
-    public class EntityDescriptor
+    public class EntityDescriptor<TPrimaryKey>        
+        where TPrimaryKey : IComparable
     {
         /// <summary>
         /// The BusinessEntity type
@@ -18,7 +19,7 @@ namespace PebbleCode.Repository.Exceptions
         /// <summary>
         /// The BusinessEntity Id
         /// </summary>
-        private int _entityId;
+        private TPrimaryKey _entityId;
 
         /// <summary>
         /// The description
@@ -30,7 +31,7 @@ namespace PebbleCode.Repository.Exceptions
         /// </summary>
         /// <param name="entityId">The Id of the BusinessEntity</param>
         /// <param name="entityType">A type derived from BusinessEntity</param>
-        public EntityDescriptor(int entityId, Type entityType) 
+        public EntityDescriptor(TPrimaryKey entityId, Type entityType) 
             : this (entityId, entityType, String.Empty) 
         { }
 
@@ -40,7 +41,7 @@ namespace PebbleCode.Repository.Exceptions
         /// <param name="entityId">The Id of the BusinessEntity</param>
         /// <param name="entityType">A type derived from BusinessEntity</param>
         /// <param name="message">The description of this BusinessEntity</param>
-        public EntityDescriptor(int entityId, Type entityType, string message)
+        public EntityDescriptor(TPrimaryKey entityId, Type entityType, string message)
         {
             _entityId = entityId;
             _entityType = entityType;
@@ -50,7 +51,7 @@ namespace PebbleCode.Repository.Exceptions
         /// <summary>
         /// The Business Entity's Id
         /// </summary>
-        public int EntityId
+        public TPrimaryKey EntityId
         {
             get
             {

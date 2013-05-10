@@ -13,22 +13,26 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using PC.Entities.Tests.Integration.Entities;
-using PC.Entities.Tests.Integration.Repository;
+
+using IBatisNet.DataMapper;
+
 using PebbleCode.Entities;
+using PebbleCode.Framework;
 using PebbleCode.Framework.Collections;
+using PebbleCode.Framework.Dates;
 using PebbleCode.Framework.IoC;
 using PebbleCode.Framework.Logging;
+using PebbleCode.Repository;
 using PebbleCode.Repository.Exceptions;
 
-using PebbleCode.Tests.Entities;
+using PC.Entities.Tests.Integration.Entities;
 
-namespace PebbleCode.Repository
+namespace PC.Entities.Tests.Integration.Repository
 {
 	/// <summary>
 	/// Add support for this repo to the global DB context accessor
 	/// </summary>
-    public partial class TestDbContext
+    public partial class DbContext
     {
         [Inject]
         public ControlledUpdateThingRepository ControlledUpdateThingRepo { get; set; }
@@ -37,7 +41,7 @@ namespace PebbleCode.Repository
 	/// <summary>
 	/// Provides access to the ControlledUpdateThing Repository
 	/// </summary>
-	public partial class ControlledUpdateThingRepository : EditableEntityRepository<ControlledUpdateThing, ControlledUpdateThingList>
+	public partial class ControlledUpdateThingRepository : EditableEntityRepository<ControlledUpdateThing, ControlledUpdateThingList, int>
 	{
 		/// <summary>
 		/// Get all the instances of ControlledUpdateThing from the store
@@ -120,7 +124,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, ControlledUpdateThing controlledUpdateThing)
 		{
-			Delete(new List<Entity>(), toDelete, new List<ControlledUpdateThing>{ controlledUpdateThing });
+			Delete(new List<Entity<int>>(), toDelete, new List<ControlledUpdateThing>{ controlledUpdateThing });
 		}
 
 		/// <summary>
@@ -130,7 +134,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, IEnumerable<ControlledUpdateThing> controlledUpdateThings)
 		{
-			Delete(new List<Entity>(), toDelete, controlledUpdateThings);
+			Delete(new List<Entity<int>>(), toDelete, controlledUpdateThings);
 		}
 		
 		/// <summary>
@@ -139,7 +143,7 @@ namespace PebbleCode.Repository
         /// <param name="entitiesBeingHandled">Entities already being deleted further up the delete stack</param>
 		/// <param name="controlledUpdateThings">The ControlledUpdateThings to delete</param>
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
-		internal void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, IEnumerable<ControlledUpdateThing> controlledUpdateThings)
+		internal void Delete(List<Entity<int>> entitiesBeingHandled, Flags toDelete, IEnumerable<ControlledUpdateThing> controlledUpdateThings)
 		{
             if (controlledUpdateThings == null)
 				throw new ArgumentNullException("controlledUpdateThings");
@@ -147,7 +151,7 @@ namespace PebbleCode.Repository
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<int>> entitiesNowBeingHandled = new List<Entity<int>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(controlledUpdateThings);
 
 			// Loop over each entity and delete it.
@@ -204,7 +208,7 @@ namespace PebbleCode.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, params ControlledUpdateThing[] controlledUpdateThings)
 		{
-            Save(new List<Entity>(), toSave, controlledUpdateThings);
+            Save(new List<Entity<int>>(), toSave, controlledUpdateThings);
 		}
 
 		/// <summary>
@@ -223,7 +227,7 @@ namespace PebbleCode.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, ControlledUpdateThingList controlledUpdateThingList)
 		{
-            Save(new List<Entity>(), toSave, controlledUpdateThingList.ToArray());
+            Save(new List<Entity<int>>(), toSave, controlledUpdateThingList.ToArray());
 		}
 
 		/// <summary>
@@ -232,7 +236,7 @@ namespace PebbleCode.Repository
         /// <param name="entitiesBeingHandled">Entities already being saved further up the save stack</param>
 		/// <param name="controlledUpdateThings">The ControlledUpdateThings to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
-		internal void Save(List<Entity> entitiesBeingHandled, Flags toSave, params ControlledUpdateThing[] controlledUpdateThings)
+		internal void Save(List<Entity<int>> entitiesBeingHandled, Flags toSave, params ControlledUpdateThing[] controlledUpdateThings)
 		{
             if (controlledUpdateThings == null)
 				throw new ArgumentNullException("controlledUpdateThings");
@@ -240,13 +244,13 @@ namespace PebbleCode.Repository
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<int>> entitiesNowBeingHandled = new List<Entity<int>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(controlledUpdateThings);
 			
 			// Loop over each entity and save it.
 			foreach (ControlledUpdateThing controlledUpdateThing in controlledUpdateThings)
 			{
-				using (PebblecodeUpdateContexts.PebbleAdmin(controlledUpdateThing)) {
+				using (PC.Entities.Tests.IntegrationUpdateContexts.PebbleAdmin(controlledUpdateThing)) {
 			
                 // Already being saved higher up the stack?
                 if (entitiesBeingHandled.ContainsEntity(controlledUpdateThing))
@@ -274,7 +278,7 @@ namespace PebbleCode.Repository
 				}
 				catch (Exception ex)
 				{
-					throw EntityLogger.WriteUnexpectedException(
+					throw EntityLogger<int>.WriteUnexpectedException(
 						ex, 
 						"Failed to insert/update Entity",
 						Category.EntityFramework,
@@ -295,7 +299,7 @@ namespace PebbleCode.Repository
 					}
 					catch (Exception ex)
 					{
-						throw EntityLogger.WriteUnexpectedException(
+						throw EntityLogger<int>.WriteUnexpectedException(
 							ex, 
 							"Failed to reset version information",
 							Category.EntityFramework,
@@ -315,7 +319,7 @@ namespace PebbleCode.Repository
 		/// <param name="id">The entity objects Id</param>
 		private void ThrowControlledUpdateThingEntityException(int id)
 		{
-			throw new EntityNotFoundException(new EntityDescriptor(id, typeof(ControlledUpdateThing)));	
+			throw new EntityNotFoundException<int>(new EntityDescriptor<int>(id, typeof(ControlledUpdateThing)));	
 		}		
     		
         /// <summary>
@@ -486,7 +490,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         /// <param name="controlledUpdateThings">The ControlledUpdateThing entities to delete</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, params ControlledUpdateThing[] controlledUpdateThings)
+        internal static void Delete(List<Entity<int>> entitiesBeingHandled, Flags toDelete, params ControlledUpdateThing[] controlledUpdateThings)
         {
             _instance.Delete(entitiesBeingHandled, toDelete, controlledUpdateThings);
         }
@@ -549,7 +553,7 @@ namespace PebbleCode.Repository
 		/// <param name="controlledUpdateThings">The ControlledUpdateThings to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Save(List<Entity> entitiesBeingHandled, Flags toSave, params ControlledUpdateThing[] controlledUpdateThings)
+        internal static void Save(List<Entity<int>> entitiesBeingHandled, Flags toSave, params ControlledUpdateThing[] controlledUpdateThings)
         {
             _instance.Save(entitiesBeingHandled, toSave, controlledUpdateThings);
         }

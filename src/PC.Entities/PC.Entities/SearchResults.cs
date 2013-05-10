@@ -13,9 +13,10 @@ namespace PC.Entities
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TList"></typeparam>
-    public class SearchResults<TEntity, TList>
-        where TEntity : Entity
-        where TList : EntityList<TEntity>, new()
+    public class SearchResults<TEntity, TList, TPrimaryKey>
+        where TEntity : Entity<TPrimaryKey>
+        where TList : EntityList<TEntity, TPrimaryKey>, new()
+        where TPrimaryKey : IComparable
     {
         /// <param name="fragment">A result set fragment</param>
         /// <param name="pageInfo">Information about the page of results represented by this fragment</param>

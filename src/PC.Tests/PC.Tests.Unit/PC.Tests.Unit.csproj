@@ -72,9 +72,8 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Entities, Version=6.0.0.123, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Entities.6.0.0.123\lib\net40\PC.Entities.dll</HintPath>
+    <Reference Include="PC.Entities">
+      <HintPath>..\..\PC.Entities\PC.Entities\bin\Debug\PC.Entities.dll</HintPath>
     </Reference>
     <Reference Include="PC.Framework, Version=6.0.0.123, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

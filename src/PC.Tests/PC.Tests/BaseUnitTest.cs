@@ -170,9 +170,10 @@ namespace PebbleCode.Tests
         /// <typeparam name="EType">BO type of the repository</typeparam>
         /// <param name="entityToReturn">Mock/stub object already configured</param>
         /// <returns>The mock repository wrapper for further configuration</returns>
-        protected Mock<RepositoryType> AutoWireUpMockRepositoryGetById<RepositoryType, EType>(EType entityToReturn)
+        protected Mock<RepositoryType> AutoWireUpMockRepositoryGetById<RepositoryType, EType, TPrimaryKey>(EType entityToReturn)
             where RepositoryType : class
-            where EType : Entity
+            where EType : Entity<TPrimaryKey>
+            where TPrimaryKey : IComparable
         {
             //Use the MockingKernel to get a Mock repository object from the DI container
             Mock<RepositoryType> mockRepo = _mockContainer.GetMock<RepositoryType>();
@@ -198,7 +199,7 @@ namespace PebbleCode.Tests
                         if (pi.Name.ToLower() == "id")
                         {
                             // Nested lambda:  i => i.Equals(idToIntercept)
-                            ParameterExpression i = Expression.Parameter(typeof(int));
+                            ParameterExpression i = Expression.Parameter(typeof(TPrimaryKey));
                             ConstantExpression value = Expression.Constant(entityToReturn.Identity);
                             MethodCallExpression idEqualsBody = Expression.Call(i, "Equals", null, value);
                             
@@ -206,7 +207,7 @@ namespace PebbleCode.Tests
                             //var idEqualsParam = Expression.Lambda<Predicate<int>>(idEqualsBody, i);
 
                             //Newer version of Moq, swap the above for this, more consistent use of Func delegate type in place of deprecated Predicate
-                            var idEqualsParam = Expression.Lambda<Func<int, bool>>(idEqualsBody, i);
+                            var idEqualsParam = Expression.Lambda<Func<TPrimaryKey, bool>>(idEqualsBody, i);
                             
                             arguments.Add(Expression.Call(typeof(It), "Is", new Type[] { pi.ParameterType }, idEqualsParam));
                         }
@@ -226,9 +227,10 @@ namespace PebbleCode.Tests
             return mockRepo;
         }
 
-        protected void AutoWireUpMockRepositorySave<RepositoryType, EType>(Action<IEnumerable<EType>> callback)
+        protected void AutoWireUpMockRepositorySave<RepositoryType, EType, TPrimaryKey>(Action<IEnumerable<EType>> callback)
             where RepositoryType : class
-            where EType : Entity
+            where EType : Entity<TPrimaryKey>
+            where TPrimaryKey : IComparable
         {
             //Use the MockingKernel to get a Mock repository object from the DI container
             Mock<RepositoryType> mockRepo = _mockContainer.GetMock<RepositoryType>();

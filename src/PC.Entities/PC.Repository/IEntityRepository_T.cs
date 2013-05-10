@@ -8,9 +8,10 @@ using PebbleCode.Framework.Collections;
 
 namespace PebbleCode.Repository
 {
-    public interface IEntityRepository<TEntity, TList>
-        where TEntity : Entity
-        where TList : EntityList<TEntity>, new()
+    public interface IEntityRepository<TEntity, TList, TPrimaryKey>
+        where TEntity : Entity<TPrimaryKey>
+        where TList : EntityList<TEntity, TPrimaryKey>, new()
+        where TPrimaryKey : IComparable
     {
         /// <summary>
         /// Get all the instances of entity from the store
@@ -29,28 +30,28 @@ namespace PebbleCode.Repository
         /// </summary>
         /// <param name="ids">The ids of the entities to get</param>
         /// <returns>A collection of the entities with the given ids</returns>
-        TList Get(int[] ids);
+        TList Get(TPrimaryKey[] ids);
 
         /// <summary>
         /// Get several instances of entity from the store
         /// </summary>
         /// <param name="ids">The ids of the entities to get</param>
         /// <returns>A collection of the entities with the given ids</returns>
-        TList Get(int[] ids, Flags toPopulate);
+        TList Get(TPrimaryKey[] ids, Flags toPopulate);
 
         /// <summary>
         /// Get an instance of entity from the store
         /// </summary>
         /// <param name="id">The id of the entity to get</param>
         /// <returns>The entity with the given Id</returns>
-        TEntity Get(int id);
+        TEntity Get(TPrimaryKey id);
 
         /// <summary>
         /// Get an instance of entity from the store
         /// </summary>
         /// <param name="id">The id of the entity to get</param>
         /// <returns>The entity with the given Id</returns>
-        TEntity Get(int id, Flags toPopulate);
+        TEntity Get(TPrimaryKey id, Flags toPopulate);
 
         /// <summary>
         /// Populate the sub entities of a single entity

@@ -2,6 +2,7 @@
 using System.Threading;
 using NUnit.Framework;
 using PC.Entities.Tests.Integration.Entities;
+using PC.Entities.Tests.Integration.Repository;
 using PebbleCode.Repository;
 using PebbleCode.Tests;
 

@@ -10,10 +10,18 @@
 /***                                                                       ***/
 /*****************************************************************************/
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 using NUnit.Framework;
 using PC.Tests;
+using PebbleCode.Framework.Dates;
 
-namespace PC.Entities.Tests.Integration.Entities
+using PC.Entities.Tests.Integration.Entities;
+
+namespace PC.Entities.Tests.Integration.Tests.EntityComparers
 {
     public class WidgetComparer : EntityComparerBase
     {

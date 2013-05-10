@@ -1,13 +1,13 @@
 
-			<sqlMap embedded="PebbleCode.Repository.Maps.Generated.ControlledUpdateThing.mygen.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Generated.FieldTest.mygen.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Generated.NodeBuilderTest.mygen.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Generated.Thing.mygen.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Generated.VersionedThing.mygen.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Generated.Widget.mygen.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Handmade.ControlledUpdateThing.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Handmade.FieldTest.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Handmade.NodeBuilderTest.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Handmade.Thing.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Handmade.VersionedThing.xml, PebbleCode.Repository" />
-			<sqlMap embedded="PebbleCode.Repository.Maps.Handmade.Widget.xml, PebbleCode.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Generated.ControlledUpdateThing.mygen.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Generated.FieldTest.mygen.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Generated.NodeBuilderTest.mygen.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Generated.Thing.mygen.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Generated.VersionedThing.mygen.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Generated.Widget.mygen.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Handmade.ControlledUpdateThing.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Handmade.FieldTest.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Handmade.NodeBuilderTest.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Handmade.Thing.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Handmade.VersionedThing.xml, PC.Entities.Tests.Integration.Repository" />
+			<sqlMap embedded="PC.Entities.Tests.Integration.Repository.Maps.Handmade.Widget.xml, PC.Entities.Tests.Integration.Repository" />

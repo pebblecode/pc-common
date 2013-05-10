@@ -14,14 +14,15 @@ namespace PebbleCode.Entities
         /// <param name="sourceList"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static bool ContainsEntity(this IEnumerable<Entity> sourceList, Entity target)
+        public static bool ContainsEntity<TPrimaryKey>(this IEnumerable<Entity<TPrimaryKey>> sourceList, Entity<TPrimaryKey> target)
+            where TPrimaryKey : IComparable
         {
-            foreach (Entity source in sourceList)
+            foreach (Entity<TPrimaryKey> source in sourceList)
             {
-                if (source.Identity == target.Identity                            // Same Id
+                if (source.Identity.Equals(target.Identity)                            // Same Id
                     && source.GetType() == target.GetType()                       // Same type
                     && source.IsNew == target.IsNew                               // Both new or not
-                    && (!source.IsNew || Entity.ReferenceEquals(source, target))) // If new, must be ref equal
+                    && (!source.IsNew || Entity<TPrimaryKey>.ReferenceEquals(source, target))) // If new, must be ref equal
                 {
                     return true;
                 }
@@ -32,9 +33,10 @@ namespace PebbleCode.Entities
         /// <summary>
         /// Get all the identitys as an array
         /// </summary>
-        public static int[] GetIdenties(this IEnumerable<Entity> entities)
+        public static TPrimaryKey[] GetIdenties<TPrimaryKey>(this IEnumerable<Entity<TPrimaryKey>> entities)
+            where TPrimaryKey : IComparable
         {
-            int[] ids = new int[entities.Count()];
+            TPrimaryKey[] ids = new TPrimaryKey[entities.Count()];
             int index = 0;
             foreach (var entity in entities)
             {

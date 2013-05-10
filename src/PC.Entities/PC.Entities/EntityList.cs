@@ -10,8 +10,9 @@ namespace PebbleCode.Entities
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [Serializable]
-    public abstract class EntityList<T> : List<T>, ICloneable
-          where T : Entity
+    public abstract class EntityList<T, TPrimaryKey> : List<T>, ICloneable
+          where T : Entity<TPrimaryKey>
+          where TPrimaryKey : IComparable
     {
         /// <summary>
         /// Constructor
@@ -36,7 +37,7 @@ namespace PebbleCode.Entities
         /// Maybe overridden by child classes where instances of collections etc need to be cloned
         /// </summary>
         /// <param name="clone">The new clone</param>
-        protected virtual void OnClone(EntityList<T> clone)
+        protected virtual void OnClone(EntityList<T, TPrimaryKey> clone)
         {
             if (clone == null)
                 throw new ArgumentNullException("clone");
@@ -49,11 +50,11 @@ namespace PebbleCode.Entities
         /// <summary>
         /// Get all the identitys as an array
         /// </summary>
-        public int[] Identitys
+        public TPrimaryKey[] Identitys
         {
             get
             {
-                int[] ids = new int[this.Count];
+                TPrimaryKey[] ids = new TPrimaryKey[this.Count];
                 for (int index = 0; index < ids.Length; index++)
                     ids[index] = this[index].Identity;
                 return ids;
@@ -66,11 +67,11 @@ namespace PebbleCode.Entities
         /// <typeparam name="TFieldType"></typeparam>
         /// <param name="getKey"></param>
         /// <returns></returns>
-        public Dictionary<int, T> MapById
+        public Dictionary<TPrimaryKey, T> MapById
         {
             get
             {
-                Dictionary<int, T> result = new Dictionary<int, T>();
+                Dictionary<TPrimaryKey, T> result = new Dictionary<TPrimaryKey, T>();
                 foreach (T entity in this)
                     result[entity.Identity] = entity;
                 return result;
@@ -81,18 +82,18 @@ namespace PebbleCode.Entities
         /// Quick way to find an index of an entity by id
         /// </summary>
         /// <param name="id"></param>
-        public int IndexById(int id)
+        public int IndexById(TPrimaryKey id)
         {
-            return this.FindIndex((entity) => entity.Identity == id);
+            return this.FindIndex((entity) => entity.Identity.Equals(id));
         }
 
         /// <summary>
         /// Quick way to find an entity by id
         /// </summary>
         /// <param name="id"></param>
-        public T FindById(int id)
+        public T FindById(TPrimaryKey id)
         {
-            return this.Find((entity) => entity.Identity == id);
+            return this.Find((entity) => entity.Identity.Equals(id));
         }
 
         /// <summary>
