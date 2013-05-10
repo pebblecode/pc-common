@@ -92,7 +92,7 @@ namespace <%= _rootNamespace %>.Repository
 	/// <summary>
 	/// Provides access to the <%= _className %> Repository
 	/// </summary>
-	public partial class <%=_className %>Repository : <%= _workingSource.IsTable ? "Editable" : "" %>EntityRepository<<%=_className %>, <%=_listClassName %>>
+	public partial class <%=_className %>Repository : <%= _workingSource.IsTable ? "Editable" : "" %>EntityRepository<<%=_className %>, <%=_listClassName %>, <%=ColumnToVariableType(_pk) %>>
 	{
 		/// <summary>
 		/// Get all the instances of <%= _className %> from the store
@@ -197,7 +197,7 @@ namespace <%= _rootNamespace %>.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, <%= _className %> <%= ToVariableName(_className) %>)
 		{
-			Delete(new List<Entity>(), toDelete, new List<<%= _className %>>{ <%= ToVariableName(_className) %> });
+			Delete(new List<Entity<<%= ColumnToVariableType(_pk) %>>>(), toDelete, new List<<%= _className %>>{ <%= ToVariableName(_className) %> });
 		}
 
 		/// <summary>
@@ -207,7 +207,7 @@ namespace <%= _rootNamespace %>.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, IEnumerable<<%= _className %>> <%= ToVariableName(_className) %>s)
 		{
-			Delete(new List<Entity>(), toDelete, <%= ToVariableName(_className) %>s);
+			Delete(new List<Entity<<%= ColumnToVariableType(_pk) %>>>(), toDelete, <%= ToVariableName(_className) %>s);
 		}
 		
 		/// <summary>
@@ -216,15 +216,15 @@ namespace <%= _rootNamespace %>.Repository
         /// <param name="entitiesBeingHandled">Entities already being deleted further up the delete stack</param>
 		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to delete</param>
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
-		internal void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, IEnumerable<<%= _className %>> <%= ToVariableName(_className) %>s)
+		internal void Delete(List<Entity<<%= ColumnToVariableType(_pk) %>>> entitiesBeingHandled, Flags toDelete, IEnumerable<<%= _className %>> <%= ToVariableName(_className) %>s)
 		{
             if (<%= ToVariableName(_className) %>s == null)
 				throw new ArgumentNullException("<%= ToVariableName(_className) %>s");
-			Log("Delete", <%= ToVariableName(_className) %>s.Select<<%= _className %>, int>(entity => entity.Identity).ToArray<int>(), EntityType.None);
+			Log("Delete", <%= ToVariableName(_className) %>s.Select<<%= _className %>, <%= ColumnToVariableType(_pk) %>>(entity => entity.Identity).ToArray<<%= ColumnToVariableType(_pk) %>>(), EntityType.None);
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<<%= ColumnToVariableType(_pk) %>>> entitiesNowBeingHandled = new List<Entity<<%= ColumnToVariableType(_pk) %>>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(<%= ToVariableName(_className) %>s);
 
 			// Loop over each entity and delete it.
@@ -301,7 +301,7 @@ namespace <%= _rootNamespace %>.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, params <%= _className %>[] <%= ToVariableName(_className) %>s)
 		{
-            Save(new List<Entity>(), toSave, <%= ToVariableName(_className) %>s);
+            Save(new List<Entity<<%= ColumnToVariableType(_pk) %>>>(), toSave, <%= ToVariableName(_className) %>s);
 		}
 
 		/// <summary>
@@ -320,7 +320,7 @@ namespace <%= _rootNamespace %>.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, <%= _listClassName %> <%= ToVariableName(_listClassName) %>)
 		{
-            Save(new List<Entity>(), toSave, <%= ToVariableName(_listClassName) %>.ToArray());
+            Save(new List<Entity<<%= ColumnToVariableType(_pk) %>>>(), toSave, <%= ToVariableName(_listClassName) %>.ToArray());
 		}
 
 		/// <summary>
@@ -329,21 +329,21 @@ namespace <%= _rootNamespace %>.Repository
         /// <param name="entitiesBeingHandled">Entities already being saved further up the save stack</param>
 		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
-		internal void Save(List<Entity> entitiesBeingHandled, Flags toSave, params <%= _className %>[] <%= ToVariableName(_className) %>s)
+		internal void Save(List<Entity<<%= ColumnToVariableType(_pk) %>>> entitiesBeingHandled, Flags toSave, params <%= _className %>[] <%= ToVariableName(_className) %>s)
 		{
             if (<%= ToVariableName(_className) %>s == null)
 				throw new ArgumentNullException("<%= ToVariableName(_className) %>s");
-			Log("Save", <%= ToVariableName(_className) %>s.Select<<%= _className %>, int>(entity => entity.Identity).ToArray<int>(), EntityType.None);
+			Log("Save", <%= ToVariableName(_className) %>s.Select<<%= _className %>, <%= ColumnToVariableType(_pk) %>>(entity => entity.Identity).ToArray<<%= ColumnToVariableType(_pk) %>>(), EntityType.None);
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<<%= ColumnToVariableType(_pk) %>>> entitiesNowBeingHandled = new List<Entity<<%= ColumnToVariableType(_pk) %>>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(<%= ToVariableName(_className) %>s);
 			
 			// Loop over each entity and save it.
 			foreach (<%= _className %> <%= ToVariableName(_className) %> in <%= ToVariableName(_className) %>s)
 			{
-				<% if (_isControlledUpdate) { %>using (<%= (new CultureInfo("en-GB")).TextInfo.ToTitleCase(_rootNamespace.ToLower()) %>UpdateContexts.PebbleAdmin(<%= ToVariableName(_className) %>)) {<%}%>
+				<% if (_isControlledUpdate) { %>using (<%= _rootNamespace %>UpdateContexts.PebbleAdmin(<%= ToVariableName(_className) %>)) {<%}%>
 			
                 // Already being saved higher up the stack?
                 if (entitiesBeingHandled.ContainsEntity(<%= ToVariableName(_className) %>))
@@ -393,7 +393,7 @@ namespace <%= _rootNamespace %>.Repository
 				}
 				catch (Exception ex)
 				{
-					throw EntityLogger.WriteUnexpectedException(
+					throw EntityLogger<<%= ColumnToVariableType(_pk) %>>.WriteUnexpectedException(
 						ex, 
 						"Failed to insert/update Entity",
 						Category.EntityFramework,
@@ -442,7 +442,7 @@ namespace <%= _rootNamespace %>.Repository
 					}
 					catch (Exception ex)
 					{
-						throw EntityLogger.WriteUnexpectedException(
+						throw EntityLogger<<%= ColumnToVariableType(_pk) %>>.WriteUnexpectedException(
 							ex, 
 							"Failed to reset version information",
 							Category.EntityFramework,
@@ -463,7 +463,7 @@ namespace <%= _rootNamespace %>.Repository
 		/// <param name="<%= ToVariableName(_pk.Name) %>">The entity objects Id</param>
 		private void Throw<%= _className %>EntityException(<%= ColumnToVariableType(_pk) %> <%= ToVariableName(_pk.Name) %>)
 		{
-			throw new EntityNotFoundException(new EntityDescriptor(<%= ToVariableName(_pk.Name) %>, typeof(<%= _className %>)));	
+			throw new EntityNotFoundException<<%= ColumnToVariableType(_pk) %>>(new EntityDescriptor<<%= ColumnToVariableType(_pk) %>>(<%= ToVariableName(_pk.Name) %>, typeof(<%= _className %>)));	
 		}		
 <% 
 		}  // End of... if (!_doingSummary)
@@ -508,7 +508,7 @@ namespace <%= _rootNamespace %>.Repository
 				// And load the sub entities for those ones.
                 <%= fkInfo.ListClassName %> <%= ToVariableName("child" + fkInfo.ListClassName) %> = toBePopulated.Count() > 0
                     ? <%= fkInfo.ClassName %>Repo.GetBy<%= ToPascalCase(fkInfo.ColumnName) %>(
-						toBePopulated.GetIdenties()<% if (fkInfo.ForeignKeyIsNullable) { %>.Select(i => new Nullable<int>(i)).ToArray()<%}%>, 
+						toBePopulated.GetIdenties()<% if (fkInfo.ForeignKeyIsNullable) { %>.Select(i => new Nullable<<%= ColumnToVariableType(_pk) %>>(i)).ToArray()<%}%>, 
 						stillToPopulate)
                     : new <%= fkInfo.ListClassName %>();
                 Dictionary<<%= fkInfo.KeyPropertyType %>, List<<%= fkInfo.ClassName %>>> <%= ToVariableName(fkInfo.ListClassName) %>By<%= ToPascalCase(fkInfo.ColumnName) %> = <%= ToVariableName("child" + fkInfo.ListClassName) %>.MapBy<%= ToPascalCase(fkInfo.ColumnName) %>;
@@ -557,13 +557,13 @@ namespace <%= _rootNamespace %>.Repository
             {
 				// Grab the ids for the ones that actually need populating
 				IEnumerable<<%=_className %>> toBePopulated = <%=ToVariableName(_className) %>s.Where(entity => entity.<%= pkInfo.PropertyName %>RequiresPopulation);
-				int[] idsToLoad = toBePopulated.Select(entity => entity.<%= pkInfo.KeyPropertyNameWithValue %>).ToList().ToArray();
+				<%= ColumnToVariableType(_pk) %>[] idsToLoad = toBePopulated.Select(entity => entity.<%= pkInfo.KeyPropertyNameWithValue %>).ToList().ToArray();
 				
 				// And load the sub entities for those ones.
                 <%= pkInfo.ListClassName %> <%= ToVariableName("parent" + pkInfo.ListClassName) %> = toBePopulated.Count() > 0
                     ? <%= pkInfo.ClassName %>Repo.Get(idsToLoad, stillToPopulate)
                     : new <%= pkInfo.ListClassName %>();
-                Dictionary<int, <%= pkInfo.ClassName %>> <%= ToVariableName(pkInfo.ListClassName) %>ById = <%= ToVariableName("parent" + pkInfo.ListClassName) %>.MapById;
+                Dictionary<<%= ColumnToVariableType(_pk) %>, <%= pkInfo.ClassName %>> <%= ToVariableName(pkInfo.ListClassName) %>ById = <%= ToVariableName("parent" + pkInfo.ListClassName) %>.MapById;
 				
 				// Now go over all the entites. For ones that need popualting, populate entities
 				// directly. For those already populated, make a check on sub entities to ensure
@@ -767,7 +767,7 @@ namespace <%= _rootNamespace %>.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         /// <param name="<%= ToVariableName(_className) %>s">The <%= _className %> entities to delete</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, params <%= _className %>[] <%= ToVariableName(_className) %>s)
+        internal static void Delete(List<Entity<<%= ColumnToVariableType(_pk) %>>> entitiesBeingHandled, Flags toDelete, params <%= _className %>[] <%= ToVariableName(_className) %>s)
         {
             _instance.Delete(entitiesBeingHandled, toDelete, <%= ToVariableName(_className) %>s);
         }
@@ -830,7 +830,7 @@ namespace <%= _rootNamespace %>.Repository
 		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Save(List<Entity> entitiesBeingHandled, Flags toSave, params <%= _className %>[] <%= ToVariableName(_className) %>s)
+        internal static void Save(List<Entity<<%= ColumnToVariableType(_pk) %>>> entitiesBeingHandled, Flags toSave, params <%= _className %>[] <%= ToVariableName(_className) %>s)
         {
             _instance.Save(entitiesBeingHandled, toSave, <%= ToVariableName(_className) %>s);
         }<%

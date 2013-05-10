@@ -39,7 +39,7 @@ namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
             const string newName = "New Thing";
 
             //ACT
-            using (PebblecodeUpdateContexts.LowerUser(thing))
+            using (IntegrationUpdateContexts.LowerUser(thing))
             {
                 thing.Name = newName;
             }
@@ -64,7 +64,7 @@ namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
             const string newName = "New Thing";
 
             //ACT
-            using (PebblecodeUpdateContexts.LowerUser(thing))
+            using (IntegrationUpdateContexts.LowerUser(thing))
             {
                 thing.Name = newName;
             }
@@ -89,7 +89,7 @@ namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
             const string newName = "New Thing";
 
             //ACT
-            using (PebblecodeUpdateContexts.Migration(thing))
+            using (IntegrationUpdateContexts.Migration(thing))
             {
                 thing.Name = newName;
             }
@@ -114,7 +114,7 @@ namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
             const string newName = "New Thing";
 
             //ACT
-            using (PebblecodeUpdateContexts.Migration(thing))
+            using (IntegrationUpdateContexts.Migration(thing))
             {
                 thing.Name = newName;
             }

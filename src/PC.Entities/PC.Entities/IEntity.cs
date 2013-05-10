@@ -7,7 +7,8 @@ namespace PebbleCode.Entities
     /// <summary>
     /// Interface for all Business Entities
     /// </summary>
-    public interface IEntity
+    public interface IEntity<TPrimaryKey>
+        where TPrimaryKey : IComparable
     {
         /// <summary>
         /// Identity is the xxxxID of the business entity as used in the database
@@ -15,7 +16,7 @@ namespace PebbleCode.Entities
         /// entity usually maps to this field. Derived classes must implement the 
         /// GetIdentity method to allow the base class to manage IsNew?
         /// </summary>
-        int Identity { get; }
+        TPrimaryKey Identity { get; }
 
         /// <summary>
         /// Specifies if the Business Entity is new.

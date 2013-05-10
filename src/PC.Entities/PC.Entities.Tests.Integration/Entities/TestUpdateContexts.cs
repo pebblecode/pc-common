@@ -2,35 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using PC.Entities.Tests.Integration.Entities;
 using PebbleCode.Entities;
 
 namespace PebbleCode.Entities.Tests.Integration.Entities
 {
-    public sealed class PebblecodeUpdateContexts : UpdateContext<TestUpdateContextConstants>
+    public sealed class IntegrationUpdateContexts : UpdateContext<TestUpdateContextConstants, int>
     {
-        private PebblecodeUpdateContexts(string name, params ConcreteControlledUpdateEntity[] entities)
+        private IntegrationUpdateContexts(string name, params ConcreteControlledUpdateEntity<int>[] entities)
             : base(name, entities)
         {
         }
 
-        public static PebblecodeUpdateContexts PebbleAdmin(params ConcreteControlledUpdateEntity[] entities)
+        public static IntegrationUpdateContexts PebbleAdmin(params ConcreteControlledUpdateEntity<int>[] entities)
         {
-            return new PebblecodeUpdateContexts("PebbleAdmin", entities);
+            return new IntegrationUpdateContexts("PebbleAdmin", entities);
         }
 
-        public static PebblecodeUpdateContexts HigherUser(params ConcreteControlledUpdateEntity[] entities)
+        public static IntegrationUpdateContexts HigherUser(params ConcreteControlledUpdateEntity<int>[] entities)
         {
-            return new PebblecodeUpdateContexts("HigherUser", entities);
+            return new IntegrationUpdateContexts("HigherUser", entities);
         }
 
-        public static PebblecodeUpdateContexts LowerUser(params ConcreteControlledUpdateEntity[] entities)
+        public static IntegrationUpdateContexts LowerUser(params ConcreteControlledUpdateEntity<int>[] entities)
         {
-            return new PebblecodeUpdateContexts("LowerUser", entities);
+            return new IntegrationUpdateContexts("LowerUser", entities);
         }
 
-        public static PebblecodeUpdateContexts Migration(params ConcreteControlledUpdateEntity[] entities)
+        public static IntegrationUpdateContexts Migration(params ConcreteControlledUpdateEntity<int>[] entities)
         {
-            return new PebblecodeUpdateContexts("Migration", entities);
+            return new IntegrationUpdateContexts("Migration", entities);
         }
     }
 }

@@ -5,8 +5,9 @@ using System.Linq;
 using PebbleCode.Framework;
 using PebbleCode.Framework.Collections;
 using PebbleCode.Entities;
+using PC.Entities.Tests.Integration.Entities;
 
-namespace PebbleCode.Repository
+namespace PC.Entities.Tests.Integration.Repository
 {
 	/// <summary>
 	/// Hand written part of partial class

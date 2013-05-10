@@ -2,10 +2,10 @@
 <sqlMap namespace="Entity" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <alias>
-    <typeAlias alias="Entity" type="PebbleCode.Entities.Entity, PC.Entities" />
-    <typeAlias alias="IEntity" type="PebbleCode.Entities.IEntity, PC.Entities" />
-    <typeAlias alias="VersionedEntity" type="PebbleCode.Entities.VersionedEntity, PC.Entities" />
-    <typeAlias alias="IVersionedEntity" type="PebbleCode.Entities.IVersionedEntity, PC.Entities" />
+    <typeAlias alias="Entity" type="PebbleCode.Entities.Entity`1[[System.IComparable,mscorlib]], PC.Entities" />
+    <typeAlias alias="IEntity" type="PebbleCode.Entities.IEntity`1[[System.IComparable,mscorlib]], PC.Entities" />
+    <typeAlias alias="VersionedEntity" type="PebbleCode.Entities.VersionedEntity`1[[System.IComparable,mscorlib]], PC.Entities" />
+    <typeAlias alias="IVersionedEntity" type="PebbleCode.Entities.IVersionedEntity`1[[System.IComparable,mscorlib]], PC.Entities" />
     <typeAlias alias="VersionedEntityInfo" type="PebbleCode.Entities.VersionedEntityInfo, PC.Entities" />
   </alias>
 

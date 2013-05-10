@@ -14,7 +14,7 @@ namespace PC.Entities.Tests.Integration.CtrlUpdateEntityTests
             ControlledUpdateThing thing = new ControlledUpdateThing();
 
             //ASSERT
-            Assert.IsInstanceOf<ConcreteControlledUpdateEntity>(thing);
+            Assert.IsInstanceOf<ConcreteControlledUpdateEntity<int>>(thing);
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace PC.Entities.Tests.Integration.CtrlUpdateEntityTests
             VersionedThing thing = new VersionedThing();
 
             //ASSERT
-            Assert.IsNotInstanceOf<ConcreteControlledUpdateEntity>(thing);
+            Assert.IsNotInstanceOf<ConcreteControlledUpdateEntity<int>>(thing);
         }
     }
 }

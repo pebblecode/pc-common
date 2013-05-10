@@ -16,7 +16,8 @@ namespace PebbleCode.Entities
     /// </summary>
     /// <typeparam name="UpdateContextConstants"></typeparam>
     [Serializable]
-    public abstract class ControlledUpdateEntity<UpdateContextConstants> : VersionedEntity
+    public abstract class ControlledUpdateEntity<UpdateContextConstants, TPrimaryKey> : VersionedEntity<TPrimaryKey>
+        where TPrimaryKey : IComparable
     {
         private Dictionary<string, string> _propertyAuthorization;
 
@@ -24,8 +25,8 @@ namespace PebbleCode.Entities
         private IAuthorizationController _autorizationAdapter;
 
         [NonSerialized]
-        private UpdateContext<UpdateContextConstants> _updateContext;
-        public UpdateContext<UpdateContextConstants> UpdateContext
+        private UpdateContext<UpdateContextConstants, TPrimaryKey> _updateContext;
+        public UpdateContext<UpdateContextConstants, TPrimaryKey> UpdateContext
         {
             get { return _updateContext; }
             set { _updateContext = value; }

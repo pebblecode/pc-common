@@ -8,9 +8,10 @@ using PebbleCode.Framework.Collections;
 
 namespace PebbleCode.Repository
 {
-    public interface IEditableEntityRepository<TEntity, TList> : IEntityRepository<TEntity, TList>
-        where TEntity : Entity
-        where TList : EntityList<TEntity>, new()
+    public interface IEditableEntityRepository<TEntity, TList, TPrimaryKey> : IEntityRepository<TEntity, TList, TPrimaryKey>
+        where TEntity : Entity<TPrimaryKey>
+        where TList : EntityList<TEntity, TPrimaryKey>, new()
+        where TPrimaryKey : IComparable
     {
         /// <summary>
         /// Delete an entity from the store

@@ -85,7 +85,7 @@
     </Reference>
     <Reference Include="PC.Entities">
       <HintPath>..\packages\PC.Entities.6.0.0.183\lib\net40\PC.Entities.dll</HintPath>
-    </Reference>
+    </Reference>-->
     <Reference Include="PC.Framework">
       <HintPath>..\packages\PC.Framework.6.0.0.183\lib\net40\PC.Framework.dll</HintPath>
     </Reference>

@@ -8,7 +8,8 @@ namespace PebbleCode.Repository.Exceptions
     /// Exception for when business entities are not able to be returned when expected.
     /// </summary>
     [Serializable]
-    public class EntityNotFoundException : EntityCollectionException
+    public class EntityNotFoundException<TPrimaryKey> : EntityCollectionException<TPrimaryKey>
+        where TPrimaryKey : IComparable
     {
         private const string SYSTEM_MESSAGE = "Entity '{0}' with an id of '{1}' can not be found.";
 
@@ -24,7 +25,7 @@ namespace PebbleCode.Repository.Exceptions
         /// </summary>
         /// <param name="entity">An entity descriptor to prime the collection with. Useful when there is only one entity. 
         /// If there is more than one entity then add them via the Entities property</param>
-        public EntityNotFoundException(EntityDescriptor entity)
+        public EntityNotFoundException(EntityDescriptor<TPrimaryKey> entity)
             : this(entity, null)
         { }
 
@@ -34,7 +35,7 @@ namespace PebbleCode.Repository.Exceptions
         /// <param name="entity">An entity descriptor to prime the collection with. Useful when there is only one entity. 
         /// If there is more than one entity then add them via the Entities property</param>
         /// <param name="innerException">The lower level exception</param>
-        public EntityNotFoundException(EntityDescriptor entity, Exception innerException)
+        public EntityNotFoundException(EntityDescriptor<TPrimaryKey> entity, Exception innerException)
             : base(SYSTEM_MESSAGE, entity, innerException)
         { }
 

@@ -10,9 +10,10 @@ namespace PebbleCode.Repository
     /// <summary>
     /// The base class for IBatis data repositories (entities only, not views)
     /// </summary>
-    public abstract class EditableEntityRepository<TEntity, TList> : EntityRepository<TEntity, TList>, IEditableEntityRepository<TEntity, TList>
-        where TEntity : Entity
-        where TList : EntityList<TEntity>, new()
+    public abstract class EditableEntityRepository<TEntity, TList, TPrimaryKey> : EntityRepository<TEntity, TList, TPrimaryKey>, IEditableEntityRepository<TEntity, TList, TPrimaryKey>
+        where TEntity : Entity<TPrimaryKey>
+        where TList : EntityList<TEntity, TPrimaryKey>, new()
+        where TPrimaryKey : IComparable
     {
         /// <summary>
         /// Delete an entity from the store

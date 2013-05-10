@@ -22,11 +22,12 @@ using PebbleCode.Framework.Collections;
 using PebbleCode.Framework.Dates;
 using PebbleCode.Framework.IoC;
 using PebbleCode.Repository;
+using PebbleCode.Repository;
 using PebbleCode.Repository.Exceptions;
 
 using PebbleCode.Entities.Tests.Integration.Entities;
 
-namespace PebbleCode.Repository
+namespace PC.Entities.Tests.Integration.Repository
 {
 	/// <summary>
 	/// Add support for this repo to the global DB context accessor
@@ -40,7 +41,7 @@ namespace PebbleCode.Repository
 	/// <summary>
 	/// Provides access to the FieldTest Repository
 	/// </summary>
-	public partial class FieldTestRepository : EditableEntityRepository<FieldTest, FieldTestList>
+	public partial class FieldTestRepository : EditableEntityRepository<FieldTest, FieldTestList, int>
 	{
 		/// <summary>
 		/// Get all the instances of FieldTest from the store
@@ -281,7 +282,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, FieldTest fieldTest)
 		{
-			Delete(new List<Entity>(), toDelete, new List<FieldTest>{ fieldTest });
+			Delete(new List<Entity<int>>(), toDelete, new List<FieldTest>{ fieldTest });
 		}
 
 		/// <summary>
@@ -291,7 +292,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, IEnumerable<FieldTest> fieldTests)
 		{
-			Delete(new List<Entity>(), toDelete, fieldTests);
+			Delete(new List<Entity<int>>(), toDelete, fieldTests);
 		}
 		
 		/// <summary>
@@ -300,7 +301,7 @@ namespace PebbleCode.Repository
         /// <param name="entitiesBeingHandled">Entities already being deleted further up the delete stack</param>
 		/// <param name="fieldTests">The FieldTests to delete</param>
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
-		internal void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, IEnumerable<FieldTest> fieldTests)
+		internal void Delete(List<Entity<int>> entitiesBeingHandled, Flags toDelete, IEnumerable<FieldTest> fieldTests)
 		{
             if (fieldTests == null)
 				throw new ArgumentNullException("fieldTests");
@@ -308,7 +309,7 @@ namespace PebbleCode.Repository
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<int>> entitiesNowBeingHandled = new List<Entity<int>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(fieldTests);
 
 			// Loop over each entity and delete it.
@@ -365,7 +366,7 @@ namespace PebbleCode.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, params FieldTest[] fieldTests)
 		{
-            Save(new List<Entity>(), toSave, fieldTests);
+            Save(new List<Entity<int>>(), toSave, fieldTests);
 		}
 
 		/// <summary>
@@ -384,7 +385,7 @@ namespace PebbleCode.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, FieldTestList fieldTestList)
 		{
-            Save(new List<Entity>(), toSave, fieldTestList.ToArray());
+            Save(new List<Entity<int>>(), toSave, fieldTestList.ToArray());
 		}
 
 		/// <summary>
@@ -393,7 +394,7 @@ namespace PebbleCode.Repository
         /// <param name="entitiesBeingHandled">Entities already being saved further up the save stack</param>
 		/// <param name="fieldTests">The FieldTests to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
-		internal void Save(List<Entity> entitiesBeingHandled, Flags toSave, params FieldTest[] fieldTests)
+		internal void Save(List<Entity<int>> entitiesBeingHandled, Flags toSave, params FieldTest[] fieldTests)
 		{
             if (fieldTests == null)
 				throw new ArgumentNullException("fieldTests");
@@ -401,7 +402,7 @@ namespace PebbleCode.Repository
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<int>> entitiesNowBeingHandled = new List<Entity<int>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(fieldTests);
 			
 			// Loop over each entity and save it.
@@ -457,7 +458,7 @@ namespace PebbleCode.Repository
 				}
 				catch (Exception ex)
 				{
-					throw EntityLogger.WriteUnexpectedException(
+					throw EntityLogger<int>.WriteUnexpectedException(
 						ex, 
 						"Failed to insert/update Entity",
 						Category.EntityFramework,
@@ -485,7 +486,7 @@ namespace PebbleCode.Repository
 		/// <param name="id">The entity objects Id</param>
 		private void ThrowFieldTestEntityException(int id)
 		{
-			throw new EntityNotFoundException(new EntityDescriptor(id, typeof(FieldTest)));	
+			throw new EntityNotFoundException<int>(new EntityDescriptor<int>(id, typeof(FieldTest)));	
 		}		
     		
         /// <summary>
@@ -871,7 +872,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         /// <param name="fieldTests">The FieldTest entities to delete</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, params FieldTest[] fieldTests)
+        internal static void Delete(List<Entity<int>> entitiesBeingHandled, Flags toDelete, params FieldTest[] fieldTests)
         {
             _instance.Delete(entitiesBeingHandled, toDelete, fieldTests);
         }
@@ -934,7 +935,7 @@ namespace PebbleCode.Repository
 		/// <param name="fieldTests">The FieldTests to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Save(List<Entity> entitiesBeingHandled, Flags toSave, params FieldTest[] fieldTests)
+        internal static void Save(List<Entity<int>> entitiesBeingHandled, Flags toSave, params FieldTest[] fieldTests)
         {
             _instance.Save(entitiesBeingHandled, toSave, fieldTests);
         }

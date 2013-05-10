@@ -22,11 +22,12 @@ using PebbleCode.Framework.Collections;
 using PebbleCode.Framework.Dates;
 using PebbleCode.Framework.IoC;
 using PebbleCode.Repository;
+using PebbleCode.Repository;
 using PebbleCode.Repository.Exceptions;
 
 using PebbleCode.Entities.Tests.Integration.Entities;
 
-namespace PebbleCode.Repository
+namespace PC.Entities.Tests.Integration.Repository
 {
 	/// <summary>
 	/// Add support for this repo to the global DB context accessor
@@ -40,7 +41,7 @@ namespace PebbleCode.Repository
 	/// <summary>
 	/// Provides access to the Widget Repository
 	/// </summary>
-	public partial class WidgetRepository : EditableEntityRepository<Widget, WidgetList>
+	public partial class WidgetRepository : EditableEntityRepository<Widget, WidgetList, int>
 	{
 		/// <summary>
 		/// Get all the instances of Widget from the store
@@ -208,7 +209,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, Widget widget)
 		{
-			Delete(new List<Entity>(), toDelete, new List<Widget>{ widget });
+			Delete(new List<Entity<int>>(), toDelete, new List<Widget>{ widget });
 		}
 
 		/// <summary>
@@ -218,7 +219,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, IEnumerable<Widget> widgets)
 		{
-			Delete(new List<Entity>(), toDelete, widgets);
+			Delete(new List<Entity<int>>(), toDelete, widgets);
 		}
 		
 		/// <summary>
@@ -227,7 +228,7 @@ namespace PebbleCode.Repository
         /// <param name="entitiesBeingHandled">Entities already being deleted further up the delete stack</param>
 		/// <param name="widgets">The Widgets to delete</param>
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
-		internal void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, IEnumerable<Widget> widgets)
+		internal void Delete(List<Entity<int>> entitiesBeingHandled, Flags toDelete, IEnumerable<Widget> widgets)
 		{
             if (widgets == null)
 				throw new ArgumentNullException("widgets");
@@ -235,7 +236,7 @@ namespace PebbleCode.Repository
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<int>> entitiesNowBeingHandled = new List<Entity<int>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(widgets);
 
 			// Loop over each entity and delete it.
@@ -314,7 +315,7 @@ namespace PebbleCode.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, params Widget[] widgets)
 		{
-            Save(new List<Entity>(), toSave, widgets);
+            Save(new List<Entity<int>>(), toSave, widgets);
 		}
 
 		/// <summary>
@@ -333,7 +334,7 @@ namespace PebbleCode.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, WidgetList widgetList)
 		{
-            Save(new List<Entity>(), toSave, widgetList.ToArray());
+            Save(new List<Entity<int>>(), toSave, widgetList.ToArray());
 		}
 
 		/// <summary>
@@ -342,7 +343,7 @@ namespace PebbleCode.Repository
         /// <param name="entitiesBeingHandled">Entities already being saved further up the save stack</param>
 		/// <param name="widgets">The Widgets to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
-		internal void Save(List<Entity> entitiesBeingHandled, Flags toSave, params Widget[] widgets)
+		internal void Save(List<Entity<int>> entitiesBeingHandled, Flags toSave, params Widget[] widgets)
 		{
             if (widgets == null)
 				throw new ArgumentNullException("widgets");
@@ -350,7 +351,7 @@ namespace PebbleCode.Repository
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<int>> entitiesNowBeingHandled = new List<Entity<int>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(widgets);
 			
 			// Loop over each entity and save it.
@@ -395,7 +396,7 @@ namespace PebbleCode.Repository
 				}
 				catch (Exception ex)
 				{
-					throw EntityLogger.WriteUnexpectedException(
+					throw EntityLogger<int>.WriteUnexpectedException(
 						ex, 
 						"Failed to insert/update Entity",
 						Category.EntityFramework,
@@ -457,7 +458,7 @@ namespace PebbleCode.Repository
 		/// <param name="id">The entity objects Id</param>
 		private void ThrowWidgetEntityException(int id)
 		{
-			throw new EntityNotFoundException(new EntityDescriptor(id, typeof(Widget)));	
+			throw new EntityNotFoundException<int>(new EntityDescriptor<int>(id, typeof(Widget)));	
 		}		
     		
         /// <summary>
@@ -829,7 +830,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         /// <param name="widgets">The Widget entities to delete</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, params Widget[] widgets)
+        internal static void Delete(List<Entity<int>> entitiesBeingHandled, Flags toDelete, params Widget[] widgets)
         {
             _instance.Delete(entitiesBeingHandled, toDelete, widgets);
         }
@@ -892,7 +893,7 @@ namespace PebbleCode.Repository
 		/// <param name="widgets">The Widgets to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Save(List<Entity> entitiesBeingHandled, Flags toSave, params Widget[] widgets)
+        internal static void Save(List<Entity<int>> entitiesBeingHandled, Flags toSave, params Widget[] widgets)
         {
             _instance.Save(entitiesBeingHandled, toSave, widgets);
         }

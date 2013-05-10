@@ -10,7 +10,8 @@ namespace PebbleCode.Entities
     /// Base class for all versioned Business Entities
     /// </summary>
     [Serializable]
-    public abstract class VersionedEntity : Entity, IVersionedEntity
+    public abstract class VersionedEntity<TPrimaryKey> : Entity<TPrimaryKey>, IVersionedEntity<TPrimaryKey>
+        where TPrimaryKey : IComparable
     {
         private int _versionNo = 0;                         // Not saved yet
         private DateTime _versionDate = DateTime.MinValue;  // Not saved yet
@@ -19,7 +20,7 @@ namespace PebbleCode.Entities
         /// Create a new Entity loosely based on the supplied template Entity.
         /// </summary>
         /// <param name="template">Existing Entity to use as a template</param>
-        protected VersionedEntity(Entity template)
+        protected VersionedEntity(Entity<TPrimaryKey> template)
             : base(template)
         {
             if (template == null)
@@ -83,12 +84,12 @@ namespace PebbleCode.Entities
         /// clone object. Maybe overridden by child classes where instances of collections etc need to be cloned
         /// </summary>
         /// <param name="clone">The new clone</param>
-        protected override void OnClone(Entity clone)
+        protected override void OnClone(Entity<TPrimaryKey> clone)
         {
             if (clone == null)
                 throw new ArgumentNullException("clone");
 
-            VersionedEntity versionedEntity = clone as VersionedEntity;
+            VersionedEntity<TPrimaryKey> versionedEntity = clone as VersionedEntity<TPrimaryKey>;
             if (versionedEntity == null)
                 throw new ArgumentException("clone is not VersionedEntity", "clone");
 
