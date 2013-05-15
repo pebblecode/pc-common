@@ -24,7 +24,7 @@ namespace PC.ServiceBus.Messaging
         private readonly bool _processInParallel;
         private readonly DynamicThrottling _dynamicThrottling;
         private CancellationTokenSource _cancellationSource;
-        private readonly SubscriptionClient client;
+        private readonly SubscriptionClient _client;
 
         /// <summary>
         /// This will create a new Receiver for the specified topic / subscription. 
@@ -68,8 +68,8 @@ namespace PC.ServiceBus.Messaging
             _subscription = subscription;
             _processInParallel = processInParallel;
 
-            client = configurationManager.MessagingFactory.CreateSubscriptionClient(topic, subscription);
-            client.PrefetchCount = 30;
+            _client = configurationManager.MessagingFactory.CreateSubscriptionClient(topic, subscription);
+            _client.PrefetchCount = 30;
 
             _dynamicThrottling =
                 new DynamicThrottling(
@@ -84,19 +84,24 @@ namespace PC.ServiceBus.Messaging
             _receiveRetryPolicy.Retrying += (s, e) =>
             {
                 _dynamicThrottling.Penalize();
-                Logger.WriteWarning(string.Format(
-                    "An error occurred in attempt number {1} to receive a message from subscription {2}: {0}",
+                Logger.WriteWarning(
+                    "An error occurred in attempt number {1} to receive a message from subscription {2}: {0}", 
+                    "ServiceBus",
                     e.LastException.Message,
                     e.CurrentRetryCount,
-                    _subscription), "ServiceBus"); 
+                    _subscription); 
             };
 
             if (createIfNotExists && !configurationManager.NamespaceManager.SubscriptionExists(topic, subscription))
             {
                 if (filter != null)
+                {
                     configurationManager.NamespaceManager.CreateSubscription(topic, subscription, filter);
+                }
                 else
+                {
                     configurationManager.NamespaceManager.CreateSubscription(topic, subscription);
+                }
             }
         }
 
@@ -114,9 +119,7 @@ namespace PC.ServiceBus.Messaging
             {
                 MessageHandler = messageHandler;
                 _cancellationSource = new CancellationTokenSource();
-                Task.Factory.StartNew(() =>
-                    ReceiveMessages(_cancellationSource.Token),
-                    _cancellationSource.Token);
+                Task.Factory.StartNew(() => ReceiveMessages(_cancellationSource.Token), _cancellationSource.Token);
                 _dynamicThrottling.Start(_cancellationSource.Token);
             }
         }
@@ -185,7 +188,7 @@ namespace PC.ServiceBus.Messaging
             {
                 // Use a retry policy to execute the Receive action in an asynchronous and reliable fashion.
                 _receiveRetryPolicy.ExecuteAsync(() => Task<BrokeredMessage>.Factory
-                        .FromAsync(client.BeginReceive, client.EndReceive, ReceiveLongPollingTimeout, null)
+                        .FromAsync(_client.BeginReceive, _client.EndReceive, ReceiveLongPollingTimeout, null)
                         .ContinueWith(t =>
                         {
                             if (t.Exception == null || t.Exception is TimeoutException)
@@ -214,6 +217,7 @@ namespace PC.ServiceBus.Messaging
                                             {
                                                 try
                                                 {
+                                                    Logger.WriteInfo("Received messages {0} on subscription {1}", "ServiceBus", msg.MessageId, _subscription);
                                                     releaseAction = InvokeMessageHandler(msg);
                                                 }
                                                 finally
