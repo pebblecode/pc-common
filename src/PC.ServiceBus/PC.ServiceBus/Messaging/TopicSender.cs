@@ -2,12 +2,10 @@
 using Microsoft.Practices.TransientFaultHandling;
 using Microsoft.ServiceBus.Messaging;
 using PC.ServiceBus.Configuration;
+using PebbleCode.Framework.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading;
 using System.Threading.Tasks;
-using PebbleCode.Framework.Logging;
 
 namespace PC.ServiceBus.Messaging
 {
@@ -61,9 +59,9 @@ namespace PC.ServiceBus.Messaging
         /// <summary>
         /// Asynchronously sends the specified message.
         /// </summary>
-        public void SendAsync(Func<BrokeredMessage> messageFactory)
+        public Task SendAsync(Func<BrokeredMessage> messageFactory)
         {
-            SendAsync(messageFactory, () => { }, ex => { });
+            return SendAsync(messageFactory, () => { }, ex => { });
         }
 
         public void SendAsync(IEnumerable<Func<BrokeredMessage>> messageFactories)
@@ -74,66 +72,39 @@ namespace PC.ServiceBus.Messaging
             }
         }
 
-        public void SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback)
+        public Task SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback)
         {
-            _retryPolicy.ExecuteAsync(() => Task.Factory.FromAsync(DoBeginSendMessage, DoEndSendMessage, messageFactory(), null))
+            Logger.WriteInfo("Sending message with id {0} to topic: {1}", "ServiceBus", messageFactory().MessageId, _topic);
+
+            return _retryPolicy.ExecuteAsync(() => _topicClient.SendAsync(messageFactory()))
                         .ContinueWith(t =>
-                                          {
-                                              if (t.Exception == null)
-                                              {
-                                                  successCallback();
-                                              }
-                                              else
-                                              {
-                                                  Logger.WriteError("An unrecoverable error occurred while trying to send a message:\r\n" + t.Exception, "ServiceBus");
-                                                  exceptionCallback(t.Exception);
-                                              }
-                                          });
+                        {
+                            if (t.Exception == null)
+                            {
+                                successCallback();
+                            }
+                            else
+                            {
+                                Logger.WriteError(
+                                    "An unrecoverable error occurred while trying to send message {0} to topic {1}:\r\n{2}", 
+                                    "ServiceBus", 
+                                    messageFactory().MessageId, 
+                                    _topic, 
+                                    t.Exception);
+
+                                exceptionCallback(t.Exception);
+                            }
+                        });
         }
 
-        public void Send(Func<BrokeredMessage> messageFactory)
+        public async void Send(Func<BrokeredMessage> messageFactory)
         {
-            var resetEvent = new ManualResetEvent(false);
             Exception exception = null;
+            await SendAsync(messageFactory);
 
-            SendAsync(
-                messageFactory,
-                () => resetEvent.Set(),
-                ex =>
-                {
-                    exception = ex;
-                    resetEvent.Set();
-                });
-
-            resetEvent.WaitOne();
             if (exception != null)
             {
                 throw exception;
-            }
-        }
-
-        protected virtual IAsyncResult DoBeginSendMessage(BrokeredMessage message, AsyncCallback ac, object state)
-        {
-            try
-            {
-                return _topicClient.BeginSend(message, ac, state);
-            }
-            catch
-            {
-                message.Dispose();
-                throw;
-            }
-        }
-
-        protected virtual void DoEndSendMessage(IAsyncResult ar)
-        {
-            try
-            {
-                _topicClient.EndSend(ar);
-            }
-            finally
-            {
-                using (ar.AsyncState as IDisposable) { }
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.ServiceBus.Messaging;
+﻿using System.Threading.Tasks;
+using Microsoft.ServiceBus.Messaging;
 using System;
 
 namespace PC.ServiceBus.Messaging
@@ -16,12 +17,12 @@ namespace PC.ServiceBus.Messaging
         /// <summary>
         /// Sends the specified message asynchronously.
         /// </summary>
-        void SendAsync(Func<BrokeredMessage> messageFactory);
+        Task SendAsync(Func<BrokeredMessage> messageFactory);
 
         /// <summary>
         /// Sends the specified message asynchronously.
         /// </summary>
-        void SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback);
+        Task SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback);
 
         /// <summary>
         /// Notifies that the sender is retrying due to a transient fault.

@@ -21,28 +21,28 @@ namespace PC.ServiceBus.Tests.Unit
             SendSignal.Set();
         }
 
-        void IMessageSender.SendAsync(Func<BrokeredMessage> messageFactory)
+        Task IMessageSender.SendAsync(Func<BrokeredMessage> messageFactory)
         {
             throw new NotImplementedException();
         }
 
-        void IMessageSender.SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback)
+        Task IMessageSender.SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback)
         {
-            Task.Factory.StartNew(
-                () =>
-                {
-                    Sent.Add(messageFactory.Invoke());
-                    SendSignal.Set();
-                    if (!ShouldWaitForCallback)
+            return Task.Factory.StartNew(
+                    () =>
                     {
-                        successCallback();
-                    }
-                    else
-                    {
-                        AsyncSuccessCallbacks.Add(successCallback);
-                    }
-                },
-                TaskCreationOptions.AttachedToParent);
+                        Sent.Add(messageFactory.Invoke());
+                        SendSignal.Set();
+                        if (!ShouldWaitForCallback)
+                        {
+                            successCallback();
+                        }
+                        else
+                        {
+                            AsyncSuccessCallbacks.Add(successCallback);
+                        }
+                    },
+                    TaskCreationOptions.AttachedToParent);
         }
 
         public event EventHandler Retrying;

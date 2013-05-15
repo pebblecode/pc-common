@@ -5,7 +5,6 @@ using PC.ServiceBus.Configuration;
 using PC.ServiceBus.Messaging;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace PC.ServiceBus.Tests.Integration
 {
@@ -63,50 +62,6 @@ namespace PC.ServiceBus.Tests.Integration
             var message = _subscriptionClient.Receive();
             Assert.AreEqual(payload, message.GetBody<string>());
         }
-
-        [Test]
-        public void GivenATopicSender_WhenSendingMessageFailsTransientlyOnce_ThenSenderRetriesSending()
-        {
-            var payload = Guid.NewGuid().ToString();
-
-            var attempt = 0;
-            var signal = new AutoResetEvent(false);
-            var currentDelegate = _sut.DoBeginSendMessageDelegate;
-            _sut.DoBeginSendMessageDelegate =
-                (mf, ac, obj) =>
-                {
-                    if (attempt++ == 0) throw new TimeoutException();
-                    var result = currentDelegate(mf, ac, obj);
-                    signal.Set();
-
-                    return result;
-                };
-
-            _sut.SendAsync(() => new BrokeredMessage(payload));
-
-            var message = _subscriptionClient.Receive(TimeSpan.FromSeconds(5));
-            Assert.True(signal.WaitOne(TimeSpan.FromSeconds(5)), "Test timed out");
-            Assert.AreEqual(payload, message.GetBody<string>());
-            Assert.AreEqual(2, attempt);
-        }
-
-        [Test]
-        public void GivenATopicSender_WhenSendingMessageFailsTransientlyMultipleTimes_ThenSendingMessageFails()
-        {
-            var payload = Guid.NewGuid().ToString();
-
-            var currentDelegate = _sut.DoBeginSendMessageDelegate;
-            _sut.DoBeginSendMessageDelegate =
-                (mf, ac, obj) =>
-                {
-                    throw new TimeoutException();
-                };
-
-            _sut.SendAsync(() => new BrokeredMessage(payload));
-
-            var message = _subscriptionClient.Receive(TimeSpan.FromSeconds(5));
-            Assert.Null(message);
-        }
     }
 
     public class TestableTopicSender : TopicSender
@@ -114,21 +69,9 @@ namespace PC.ServiceBus.Tests.Integration
         public TestableTopicSender(AzureConfigurationManager configurationManager, string topic, RetryStrategy retryStrategy)
             : base(configurationManager, topic, retryStrategy)
         {
-            DoBeginSendMessageDelegate = base.DoBeginSendMessage;
-            DoEndSendMessageDelegate = base.DoEndSendMessage;
         }
 
         public Func<BrokeredMessage, AsyncCallback, object, IAsyncResult> DoBeginSendMessageDelegate;
         public Action<IAsyncResult> DoEndSendMessageDelegate;
-
-        protected override IAsyncResult DoBeginSendMessage(BrokeredMessage messageFactory, AsyncCallback ac, object state)
-        {
-            return DoBeginSendMessageDelegate(messageFactory, ac, state);
-        }
-
-        protected override void DoEndSendMessage(IAsyncResult ar)
-        {
-            DoEndSendMessageDelegate(ar);
-        }
     }
 }
