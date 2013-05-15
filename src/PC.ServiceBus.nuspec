@@ -17,6 +17,6 @@
 	</dependencies>    
   </metadata>
   <files>
-	  <file src="src\PC.ServiceBus\PC.ServiceBus\bin\Release\PC.ServiceBus.dll" target="lib\net45" /> 
+	  <file src="src\PC.ServiceBus\PC.ServiceBus\bin\Release\PC.ServiceBus.dll" target="lib\net40" /> 
   </files>
 </package>

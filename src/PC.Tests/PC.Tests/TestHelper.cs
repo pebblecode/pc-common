@@ -36,9 +36,9 @@ namespace PebbleCode.Tests
         public void AssertLoggerError(CountableLogManager logManager)
         {
             // Ensure correct number of errors have been logged
-            if (!logManager.IsCountChecked)
+            if (logManager.IsCountChecked)
             {
-                Assert.AreEqual(0, logManager.ErrorCount, "Errors written to log. If expected, set ExpectedErrorCount during test");
+                Assert.AreEqual(ExpectedErrorCount, logManager.ErrorCount, "Errors written to log. If expected, set ExpectedErrorCount during test");
             }
         }
 
