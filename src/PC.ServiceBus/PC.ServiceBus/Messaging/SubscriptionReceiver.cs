@@ -217,7 +217,7 @@ namespace PC.ServiceBus.Messaging
                                             {
                                                 try
                                                 {
-                                                    Logger.WriteInfo("Received messages {0} on subscription {1}", "ServiceBus", msg.MessageId, _subscription);
+                                                    Logger.WriteInfo("Received message [{0}:{1}] on subscription {2}", "ServiceBus", msg.Properties[StandardMetadata.FullName], msg.MessageId, _subscription);
                                                     releaseAction = InvokeMessageHandler(msg);
                                                 }
                                                 finally

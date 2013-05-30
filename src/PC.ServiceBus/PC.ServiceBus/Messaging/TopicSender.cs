@@ -74,7 +74,7 @@ namespace PC.ServiceBus.Messaging
 
         public Task SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback)
         {
-            Logger.WriteInfo("Sending message with id {0} to topic: {1}", "ServiceBus", messageFactory().MessageId, _topic);
+            Logger.WriteInfo("Sending message [{0}] with id {1} to topic: {2}", "ServiceBus", messageFactory().Properties[StandardMetadata.FullName], messageFactory().MessageId, _topic);
 
             return _retryPolicy.ExecuteAsync(() => _topicClient.SendAsync(messageFactory()))
                         .ContinueWith(t =>
