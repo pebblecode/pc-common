@@ -55,7 +55,7 @@ namespace PC.ServiceBus.Utils
             {
                 message.DeadLetter(deadLetterReason, deadLetterErrorDescription);
 
-                Logger.WriteWarning(string.Format("Dead lettering message {0}. Reason : {1} Error description : {2}",
+                Logger.WriteError(string.Format("Dead lettering message {0}. Reason : {1} Error description : {2}",
                     message.MessageId,
                     deadLetterReason,
                     deadLetterErrorDescription),
