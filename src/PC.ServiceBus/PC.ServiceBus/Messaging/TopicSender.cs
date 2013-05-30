@@ -97,7 +97,7 @@ namespace PC.ServiceBus.Messaging
                         });
         }
 
-        public async void Send(Func<BrokeredMessage> messageFactory)
+        public async Task Send(Func<BrokeredMessage> messageFactory)
         {
             Exception exception = null;
             await SendAsync(messageFactory);

@@ -15,18 +15,18 @@ namespace PC.ServiceBus.Tests.Unit
 
         public bool ShouldWaitForCallback { get; set; }
 
-        void IMessageSender.Send(Func<BrokeredMessage> messageFactory)
+        async Task IMessageSender.Send(Func<BrokeredMessage> messageFactory)
         {
-            Sent.Add(messageFactory.Invoke());
-            SendSignal.Set();
+            var task = SendAsync(messageFactory, () => { }, exception => { });
+            task.Wait(5000);
         }
 
-        Task IMessageSender.SendAsync(Func<BrokeredMessage> messageFactory)
+        public Task SendAsync(Func<BrokeredMessage> messageFactory)
         {
             throw new NotImplementedException();
         }
 
-        Task IMessageSender.SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback)
+        public Task SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback)
         {
             return Task.Factory.StartNew(
                     () =>

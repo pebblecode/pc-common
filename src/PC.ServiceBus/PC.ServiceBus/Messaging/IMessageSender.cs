@@ -12,7 +12,7 @@ namespace PC.ServiceBus.Messaging
         /// <summary>
         /// Sends the specified message synchronously.
         /// </summary>
-        void Send(Func<BrokeredMessage> messageFactory);
+        Task Send(Func<BrokeredMessage> messageFactory);
 
         /// <summary>
         /// Sends the specified message asynchronously.
