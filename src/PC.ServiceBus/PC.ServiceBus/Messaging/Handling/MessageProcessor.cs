@@ -119,7 +119,7 @@ namespace PC.ServiceBus.Messaging.Handling
                 }
                 catch (SerializationException e)
                 {
-                    Logger.WriteUnexpectedException(e, string.Format("Error trying to deserialise message [{0}]", message.MessageId), "ServiceBus")
+                    Logger.WriteUnexpectedException(e, string.Format("Error trying to deserialise message [{0}]", message.MessageId), "ServiceBus");
                     return MessageReleaseAction.DeadLetterMessage(e.Message, e.ToString());
                 }
             }
