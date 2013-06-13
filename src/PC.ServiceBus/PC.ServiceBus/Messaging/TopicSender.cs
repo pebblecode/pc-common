@@ -74,7 +74,12 @@ namespace PC.ServiceBus.Messaging
 
         public Task SendAsync(Func<BrokeredMessage> messageFactory, Action successCallback, Action<Exception> exceptionCallback)
         {
-            Logger.WriteInfo("Sending message [{0}] with id {1} to topic: {2}", "ServiceBus", messageFactory().Properties[StandardMetadata.FullName], messageFactory().MessageId, _topic);
+            string messageType =
+                messageFactory().Properties.ContainsKey(StandardMetadata.FullName)
+                    ? messageFactory().Properties[StandardMetadata.FullName].ToString()
+                    : "Unknown type, metadata noin message properties";
+
+            Logger.WriteInfo("Sending message [{0}] with id {1} to topic: {2}", "ServiceBus", messageType, messageFactory().MessageId, _topic);
 
             return _retryPolicy.ExecuteAsync(() => _topicClient.SendAsync(messageFactory()))
                         .ContinueWith(t =>

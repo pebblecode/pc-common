@@ -43,7 +43,7 @@ namespace PC.ServiceBus.Messaging
                 new AzureConfigurationManager())
         {
         }
-        
+
         /// <summary>
         /// This will create a new Receiver for the specific topic / subscription. 
         /// </summary>
@@ -85,11 +85,11 @@ namespace PC.ServiceBus.Messaging
             {
                 _dynamicThrottling.Penalize();
                 Logger.WriteWarning(
-                    "An error occurred in attempt number {1} to receive a message from subscription {2}: {0}", 
+                    "An error occurred in attempt number {1} to receive a message from subscription {2}: {0}",
                     "ServiceBus",
                     e.LastException.Message,
                     e.CurrentRetryCount,
-                    _subscription); 
+                    _subscription);
             };
 
             if (createIfNotExists && !configurationManager.NamespaceManager.SubscriptionExists(topic, subscription))
@@ -217,7 +217,14 @@ namespace PC.ServiceBus.Messaging
                                             {
                                                 try
                                                 {
-                                                    Logger.WriteInfo("Received message [{0}:{1}] on subscription {2}", "ServiceBus", msg.Properties[StandardMetadata.FullName], msg.MessageId, _subscription);
+
+                                                    string messageType =
+                                                        msg.Properties.ContainsKey(StandardMetadata.FullName)
+                                                            ? msg.Properties[StandardMetadata.FullName].ToString()
+                                                            : "Unknown type, metadata noin message properties";
+
+                                                    Logger.WriteInfo("Received message [{0}:{1}] on subscription {2}", "ServiceBus", messageType, msg.MessageId, _subscription);
+                                                    
                                                     releaseAction = InvokeMessageHandler(msg);
                                                 }
                                                 finally
@@ -250,14 +257,14 @@ namespace PC.ServiceBus.Messaging
                                         // Continue receiving and processing new messages until told to stop.
                                         receiveNext.Invoke();
                                     }
-                                }                                                            
+                                }
                             }
                             else
                             {
                                 recoverReceive.Invoke(t.Exception);
                             }
                         }));
-            });                        
+            });
 
             // Initialize an action to receive the next message in the queue or end if cancelled.
             receiveNext = () =>
