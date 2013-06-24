@@ -33,11 +33,11 @@ namespace PebbleCode.Monitoring
         protected override IAsyncResult BeginServiceCheck()
         {
             var db = new Database { ConnectionString = _connectionString };
-            Action<Database> serviceCheck = CheckMySqlIsAvailable;
+            Action<Database> serviceCheck = CheckDatabaseIsAvailable;
             return serviceCheck.BeginInvoke(db, null, db);
         }
 
-        private void CheckMySqlIsAvailable(Database db)
+        private void CheckDatabaseIsAvailable(Database db)
         {
             db.TryCountDatabases();
         }
