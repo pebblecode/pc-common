@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 
+using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.SqlAzure;
+
 namespace PebbleCode.Monitoring
 {
     /// <summary>
@@ -16,6 +18,7 @@ namespace PebbleCode.Monitoring
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
+
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = "SELECT database_id FROM sys.databases";
