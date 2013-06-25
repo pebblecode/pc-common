@@ -2,8 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 
-using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.SqlAzure;
-
 namespace PebbleCode.Monitoring
 {
     /// <summary>

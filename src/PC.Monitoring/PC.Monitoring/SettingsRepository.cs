@@ -1,7 +1,4 @@
-﻿using PebbleCode.Framework.Logging;
-using PebbleCode.Framework.Utilities;
-using System;
-using System.Collections.Generic;
+﻿using PebbleCode.Framework.Utilities;
 using System.Configuration;
 
 namespace FB.DataAccess

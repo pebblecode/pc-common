@@ -1,7 +1,5 @@
 ﻿using System;
-
 using FB.DataAccess;
-
 using PebbleCode.Framework.Configuration;
 
 namespace PebbleCode.Monitoring
