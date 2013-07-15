@@ -26,10 +26,8 @@ namespace PebbleCode.Framework.Configuration
                             string.Empty),
                             DatabaseHost,
                             DatabaseName,
-                            DatabasePort,
                             DatabaseUsername,
-                            DatabasePassword,
-                            DatabaseCompression);
+                            DatabasePassword);
                 }
                 return _connectionString;
             }
