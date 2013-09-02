@@ -64,9 +64,11 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Logging, Version=6.0.0.175, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Logging.6.0.0.175\lib\net40\PC.Logging.dll</HintPath>
+    <Reference Include="PC.Framework">
+      <HintPath>..\packages\PC.Framework.6.0.0.183\lib\net40\PC.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PC.Logging">
+      <HintPath>..\packages\PC.Logging.6.0.0.183\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
