@@ -1,18 +1,19 @@
 ﻿using System;
 using FB.DataAccess;
 using PebbleCode.Framework.Configuration;
+using PebbleCode.Framework.Logging;
 
 namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// Asynchronous monitor of a database which tries to count how many databases are on a machine as a healthcheck
     /// </summary>
-    public class DatabaseServiceMonitor : AsyncServiceMonitor
+    public class DatabaseServiceMonitor : ServiceMonitor
     {
         private readonly string _connectionString;
 
         public DatabaseServiceMonitor(ServiceMonitorConfiguration config)
-            : base(config.Name, DatabaseSettings.DatabaseHost, Int32.Parse(config.Settings["timeout"].Value))
+            : base(config.Name, DatabaseSettings.DatabaseHost)
         {
             var connectionString = SettingsRepository.LoadAppSetting("connectionString", "Server={0};Database={1};User Id={2};Password={3};");
             var server = SettingsRepository.LoadAppSetting("db.host", "localhost");
@@ -22,29 +23,20 @@ namespace PebbleCode.Monitoring
             _connectionString = string.Format(connectionString, server, databaseName, user, password);
         }
 
-
-        protected override string ServiceMonitorTypeName
-        {
-            get { return "DatabaseServiceMonitor"; }
-        }
-
-        protected override IAsyncResult BeginServiceCheck()
+        public override MonitoredServiceStatus GetStatus()
         {
             var db = new Database { ConnectionString = _connectionString };
-            Action<Database> serviceCheck = CheckDatabaseIsAvailable;
-            return serviceCheck.BeginInvoke(db, null, db);
-        }
-
-        private void CheckDatabaseIsAvailable(Database db)
-        {
             db.TryCountDatabases();
-        }
 
-        protected override void EndServiceCheck(IAsyncResult result)
-        {
-            var db = (Database)result.AsyncState;
-            if (db.LastException != null)
-                throw db.LastException;
+            if (db.LastException == null)
+            {
+                return MonitoredServiceStatus.CreateStatus(ServiceName);
+            }
+            else
+            {
+                Logger.WriteError("{0} error: {1}", Category.Service, ServiceName, db.LastException);
+                return MonitoredServiceStatus.CreateErrorStatus(ServiceName);
+            }
         }
     }
 }
