@@ -61,6 +61,7 @@ this section is taking out of the host for Core:
               <serviceMonitorConfiguration name="SGP MySql" type="DatabaseServiceMonitor">
                   <settings>
                       <add key="timeout" value="5"/>
+                      <add key="providerName" value="MySqlClient"/>
                   </settings>
               </serviceMonitorConfiguration>
             </serviceMonitors>

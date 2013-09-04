@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// Class used to count how many databases are currently on a given machine using the supplied connection string
     /// </summary>
-    public class Database
+    public abstract class Database
     {
         public string ConnectionString { get; set; }
 
         public int CountDatabases()
         {
-            using (var connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
 
-                using (var command = connection.CreateCommand())
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT database_id FROM sys.databases";
+                    command.CommandText = GetCommandText();
                     command.CommandType = CommandType.Text;
-                    using (var reader = command.ExecuteReader())
+                    using (IDataReader reader = command.ExecuteReader())
                     {
                         int count = 0;
                         while (reader.Read())
@@ -32,6 +31,9 @@ namespace PebbleCode.Monitoring
                 }
             }
         }
+
+        protected abstract IDbConnection CreateConnection();
+        protected abstract string GetCommandText();
 
         public void TryCountDatabases()
         {
