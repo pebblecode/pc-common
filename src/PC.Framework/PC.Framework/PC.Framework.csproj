@@ -59,9 +59,8 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Logging, Version=6.0.0.19, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PC.Logging.6.0.0.19\lib\net40\PC.Logging.dll</HintPath>
+    <Reference Include="PC.Logging">
+      <HintPath>..\packages\PC.Logging.6.0.0.183\lib\net40\PC.Logging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
