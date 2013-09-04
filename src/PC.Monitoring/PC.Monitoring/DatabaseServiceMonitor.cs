@@ -11,6 +11,7 @@ namespace PebbleCode.Monitoring
     public class DatabaseServiceMonitor : ServiceMonitor
     {
         private readonly string _connectionString;
+        private bool _useSqlServer;
 
         public DatabaseServiceMonitor(ServiceMonitorConfiguration config)
             : base(config.Name, DatabaseSettings.DatabaseHost)
@@ -20,12 +21,26 @@ namespace PebbleCode.Monitoring
             var databaseName = SettingsRepository.LoadAppSetting("db.name", "fb_dev");
             var user = SettingsRepository.LoadAppSetting("db.user", "gambler");
             var password = SettingsRepository.LoadAppSetting("db.password", "g@mbl3r");
+            _useSqlServer = UseSqlServer(config);
             _connectionString = string.Format(connectionString, server, databaseName, user, password);
+        }
+
+        private bool UseSqlServer(ServiceMonitorConfiguration config)
+        {
+            Add providerName = config.Settings["providerName"];
+            if (providerName != null && !String.IsNullOrEmpty(providerName.Value))
+            {
+                if (providerName.Value.Equals("MySqlClient", StringComparison.OrdinalIgnoreCase))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public override MonitoredServiceStatus GetStatus()
         {
-            var db = new Database { ConnectionString = _connectionString };
+            Database db = CreateDatabase();
             db.TryCountDatabases();
 
             if (db.LastException == null)
@@ -37,6 +52,15 @@ namespace PebbleCode.Monitoring
                 Logger.WriteError("{0} error: {1}", Category.Service, ServiceName, db.LastException);
                 return MonitoredServiceStatus.CreateErrorStatus(ServiceName);
             }
+        }
+
+        private Database CreateDatabase()
+        {
+            if (_useSqlServer)
+            {
+                return new SqlDatabase { ConnectionString = _connectionString };
+            }
+            return new MySqlDatabase { ConnectionString = _connectionString };
         }
     }
 }
