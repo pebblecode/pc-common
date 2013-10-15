@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bede.Logging.Models;
 
 namespace PebbleCode.Framework.Threading
 {
@@ -10,8 +11,8 @@ namespace PebbleCode.Framework.Threading
     /// </summary>
     public abstract class DailyRepeatingTask : RepeatingTask
     {
-        public DailyRepeatingTask(TimeSpan timeToRun)
-            : base(TimeSpan.FromHours(24))
+        public DailyRepeatingTask(TimeSpan timeToRun, ILoggingService loggingService)
+            : base(TimeSpan.FromHours(24), loggingService)
         {
             Start(timeToRun);
         }
