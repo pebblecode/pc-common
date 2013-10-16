@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using PebbleCode.Framework.Logging;
 
 namespace PebbleCode.Tests
 {
@@ -8,9 +7,8 @@ namespace PebbleCode.Tests
     /// Integration tests touch the database, and therefore it should be reset between tests
     /// </summary>
     [TestFixture]
-    public abstract class BaseTest<TLogManager, THelper>
+    public abstract class BaseTest<THelper>
         where THelper : TestHelper, new()
-        where TLogManager : ILogManager
     {
         /// <summary>
         /// Constructor
@@ -24,7 +22,6 @@ namespace PebbleCode.Tests
         /// Get a handle on the unit test helper
         /// </summary>
         protected virtual THelper Helper { get; private set; }
-        protected abstract TLogManager LoggerInstance { get; }
 
         /// <summary>
         /// Initialise for unit tests

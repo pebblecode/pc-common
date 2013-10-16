@@ -1,7 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using PebbleCode.Framework;
-using PebbleCode.Framework.Logging;
 
 namespace PebbleCode.Tests
 {
@@ -31,15 +30,6 @@ namespace PebbleCode.Tests
         /// </summary>
         internal virtual void TestCleanup()
         {
-        }
-
-        public void AssertLoggerError(CountableLogManager logManager)
-        {
-            // Ensure correct number of errors have been logged
-            if (logManager.IsCountChecked)
-            {
-                Assert.AreEqual(ExpectedErrorCount, logManager.ErrorCount, "Errors written to log. If expected, set ExpectedErrorCount during test");
-            }
         }
 
         /// <summary>

@@ -11,7 +11,6 @@ using Ninject.MockingKernel.Moq;
 using PebbleCode.Entities;
 using PebbleCode.Framework;
 using PebbleCode.Framework.IoC;
-using PebbleCode.Framework.Logging;
 using Ninject.Modules;
 using PebbleCode.Framework.Collections;
 
@@ -21,7 +20,7 @@ namespace PebbleCode.Tests
     /// A base class for unit tests - mocks out all database access in singleton scope
     /// </summary>
     [TestFixture]
-    public abstract class BaseUnitTest<THelper> : BaseTest<FakeLogManager, THelper>
+    public abstract class BaseUnitTest<THelper> : BaseTest<THelper>
         where THelper : TestHelper, new()
     {
         protected MoqMockingKernel _mockContainer = null;
@@ -66,7 +65,7 @@ namespace PebbleCode.Tests
             // Load any that contain modules...
             foreach (Assembly ass in assemblies)
             {
-                if (ass.GetTypes().Where(t => typeof(NinjectModule).IsAssignableFrom(t)).Count() > 0)
+                if (ass.GetTypes().Any(t => typeof(NinjectModule).IsAssignableFrom(t)))
                     _mockContainer.Load(ass);
             }
 
@@ -75,16 +74,6 @@ namespace PebbleCode.Tests
 
             //Make this kernel available to all other libraries
             Kernel.Instance = _mockContainer;
-
-            //Fake logger
-            _loggerInstance = new FakeLogManager();
-            Logger.LoggerInstance = _loggerInstance;
-        }
-
-        private FakeLogManager _loggerInstance;
-        protected override FakeLogManager LoggerInstance
-        {
-            get { return _loggerInstance; }
         }
 
         /// <summary>
