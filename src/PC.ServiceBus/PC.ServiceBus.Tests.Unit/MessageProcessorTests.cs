@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Bede.Logging.Models;
+using Moq;
 using NUnit.Framework;
 using PC.ServiceBus.Messaging;
 using PC.ServiceBus.Messaging.Handling;
@@ -10,12 +11,14 @@ namespace PC.ServiceBus.Tests.Unit
     [TestFixture]
     public class MessageProcessorFixture
     {
+        private readonly ILoggingService _loggingService = new NullLogger();
+
         [Test]
         public void GivenAMessageProcessor_WhenStartCalledTwice_ThenSecondCallIgnored()
         {
             var receiver = new Mock<IMessageReceiver>();
             var serializer = new Mock<ITextSerializer>();
-            var processor = new Mock<MessageProcessor>(receiver.Object, serializer.Object) { CallBase = true }.Object;
+            var processor = new Mock<MessageProcessor>(receiver.Object, serializer.Object, _loggingService) { CallBase = true }.Object;
 
             processor.Start();
 
@@ -27,7 +30,7 @@ namespace PC.ServiceBus.Tests.Unit
         {
             var receiver = new Mock<IMessageReceiver>();
             var serializer = new Mock<ITextSerializer>();
-            var processor = new Mock<MessageProcessor>(receiver.Object, serializer.Object) { CallBase = true }.Object;
+            var processor = new Mock<MessageProcessor>(receiver.Object, serializer.Object, _loggingService) { CallBase = true }.Object;
 
             processor.Start();
             processor.Dispose();
@@ -41,7 +44,7 @@ namespace PC.ServiceBus.Tests.Unit
             var receiver = new Mock<IMessageReceiver>();
             var disposable = receiver.As<IDisposable>();
             var serializer = new Mock<ITextSerializer>();
-            var processor = new Mock<MessageProcessor>(receiver.Object, serializer.Object) { CallBase = true }.Object;
+            var processor = new Mock<MessageProcessor>(receiver.Object, serializer.Object, _loggingService) { CallBase = true }.Object;
 
             processor.Dispose();
 
@@ -53,7 +56,7 @@ namespace PC.ServiceBus.Tests.Unit
         {
             var receiver = new Mock<IMessageReceiver>();
             var serializer = new Mock<ITextSerializer>();
-            var processor = new Mock<MessageProcessor>(receiver.Object, serializer.Object) { CallBase = true }.Object;
+            var processor = new Mock<MessageProcessor>(receiver.Object, serializer.Object, _loggingService) { CallBase = true }.Object;
 
             processor.Stop();
             receiver.Verify(x => x.Stop(), Times.Never());

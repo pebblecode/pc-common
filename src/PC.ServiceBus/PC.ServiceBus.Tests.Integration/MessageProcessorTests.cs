@@ -1,4 +1,5 @@
-﻿using Microsoft.ServiceBus.Messaging;
+﻿using Bede.Logging.Models;
+using Microsoft.ServiceBus.Messaging;
 using Moq;
 using Moq.Protected;
 using NUnit.Framework;
@@ -14,12 +15,14 @@ namespace PC.ServiceBus.Tests.Integration
 {
     public class MessageProcessorTests : BaseIntegrationTest
     {
+        private readonly ILoggingService _loggingService = new NullLogger();
+
         [Test]
         public void GivenAMessageProcessor_WhenMessageReceived_ThenProcessMessageCalled()
         {
             var waiter = new ManualResetEventSlim();
-            var sender = new TopicSender(Topic);
-            var processor = new FakeProcessor(waiter, new SubscriptionReceiver(Topic, Subscription), new JsonTextSerializer());
+            var sender = new TopicSender(Topic, _loggingService);
+            var processor = new FakeProcessor(waiter, new SubscriptionReceiver(Topic, Subscription, _loggingService), new JsonTextSerializer());
 
             processor.Start();
 
@@ -44,9 +47,9 @@ namespace PC.ServiceBus.Tests.Integration
         {
             var failCount = 0;
             var waiter = new ManualResetEventSlim();
-            var sender = new TopicSender(Topic);
+            var sender = new TopicSender(Topic, _loggingService);
             var processor = new Mock<MessageProcessor>(
-                new SubscriptionReceiver(Topic, Subscription), new JsonTextSerializer()) { CallBase = true };
+                new SubscriptionReceiver(Topic, Subscription, _loggingService), new JsonTextSerializer(), _loggingService) { CallBase = true };
 
             processor.Protected()
                 .Setup("ProcessMessage", ItExpr.IsAny<string>(), ItExpr.IsAny<object>(), ItExpr.IsAny<string>(), ItExpr.IsAny<string>())
@@ -84,10 +87,10 @@ namespace PC.ServiceBus.Tests.Integration
         public void GivenAMessageProcessor_WhenMessageFailsToDeserialize_ThenMessageSentToDeadLetter()
         {
             var waiter = new ManualResetEventSlim();
-            var sender = new TopicSender(Topic);
+            var sender = new TopicSender(Topic, _loggingService);
             var processor = new FakeProcessor(
                 waiter,
-                new SubscriptionReceiver(Topic, Subscription),
+                new SubscriptionReceiver(Topic, Subscription, _loggingService),
                 new JsonTextSerializer());
 
             processor.Start();
@@ -118,7 +121,7 @@ namespace PC.ServiceBus.Tests.Integration
         private readonly ManualResetEventSlim waiter;
 
         public FakeProcessor(ManualResetEventSlim waiter, IMessageReceiver receiver, ITextSerializer serializer)
-            : base(receiver, serializer)
+            : base(receiver, serializer, new NullLogger())
         {
             this.waiter = waiter;
         }

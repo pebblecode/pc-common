@@ -1,6 +1,6 @@
-﻿using Microsoft.ServiceBus.Messaging;
+﻿using Bede.Logging.Models;
+using Microsoft.ServiceBus.Messaging;
 using PC.ServiceBus.Serialization;
-using PebbleCode.Framework.Logging;
 using System;
 using System.Globalization;
 using System.IO;
@@ -20,11 +20,13 @@ namespace PC.ServiceBus.Messaging.Handling
         private readonly IMessageReceiver _receiver;
         private readonly ITextSerializer _serializer;
         private readonly object _lockObject = new object();
+        private readonly ILoggingService _loggingService;
 
-        protected MessageProcessor(IMessageReceiver receiver, ITextSerializer serializer)
+        protected MessageProcessor(IMessageReceiver receiver, ITextSerializer serializer, ILoggingService loggingService)
         {
             _receiver = receiver;
             _serializer = serializer;
+            _loggingService = loggingService;
         }
 
         protected ITextSerializer Serializer { get { return _serializer; } }
@@ -119,7 +121,8 @@ namespace PC.ServiceBus.Messaging.Handling
                 }
                 catch (SerializationException e)
                 {
-                    Logger.WriteUnexpectedException(e, string.Format("Error trying to deserialise message [{0}]", message.MessageId), "ServiceBus");
+                    
+                    _loggingService.Error(message, e, "Error trying to deserialise message [{0}]", message.MessageId);
                     return MessageReleaseAction.DeadLetterMessage(e.Message, e.ToString());
                 }
             }
@@ -147,11 +150,11 @@ namespace PC.ServiceBus.Messaging.Handling
         {
             if (message.DeliveryCount > MAX_PROCESSING_RETRIES)
             {
-                Logger.WriteError("An error occurred while processing the message" + traceIdentifier + " and will be dead-lettered:\r\n" + e, "ServiceBus");
+                _loggingService.Error(message, e, "An error occurred while processing the message" + traceIdentifier + " and will be dead-lettered");
                 return MessageReleaseAction.DeadLetterMessage(e.Message, e.ToString());
             }
 
-            Logger.WriteError("An error occurred while processing the message" + traceIdentifier + " and will be abandoned:\r\n" + e, "ServiceBus");
+            _loggingService.Error(message, e, "An error occurred while processing the message" + traceIdentifier + " and will be abandoned");
             return MessageReleaseAction.AbandonMessage;
         }
 
