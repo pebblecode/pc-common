@@ -1,4 +1,5 @@
-﻿using Microsoft.ServiceBus.Messaging;
+﻿using Bede.Logging.Models;
+using Microsoft.ServiceBus.Messaging;
 using Moq;
 using Moq.Protected;
 using NUnit.Framework;
@@ -14,12 +15,13 @@ namespace PC.ServiceBus.Tests.Integration
     public class CommandProcessingTests : BaseIntegrationTest
     {
         private const int TimeoutPeriod = 20000;
+        private readonly ILoggingService _loggingService = new NullLogger();
 
         [Test]
         public void GiveACommandBus_WhenReceivingACommand_ThenHandlerCalled()
         {
-            var processor = new CommandProcessor(new SubscriptionReceiver(Topic, Subscription), new JsonTextSerializer());
-            var bus = new CommandBus(new TopicSender(Topic), new StandardMetadataProvider(), new JsonTextSerializer());
+            var processor = new CommandProcessor(new SubscriptionReceiver(Topic, Subscription, _loggingService), new JsonTextSerializer(), _loggingService);
+            var bus = new CommandBus(new TopicSender(Topic, _loggingService), new StandardMetadataProvider(), new JsonTextSerializer());
 
             var e = new ManualResetEventSlim();
             var handler = new FooCommandHandler(e);
@@ -45,8 +47,8 @@ namespace PC.ServiceBus.Tests.Integration
         [Test]
         public void GiveACommandBus_WhenHandlerhandlesMultipleCommands_ThenHandlerGetsCalledForAllCommands()
         {
-            var processor = new CommandProcessor(new SubscriptionReceiver(Topic, Subscription), new JsonTextSerializer());
-            var bus = new CommandBus(new TopicSender(Topic), new StandardMetadataProvider(), new JsonTextSerializer());
+            var processor = new CommandProcessor(new SubscriptionReceiver(Topic, Subscription, _loggingService), new JsonTextSerializer(), _loggingService);
+            var bus = new CommandBus(new TopicSender(Topic, _loggingService), new StandardMetadataProvider(), new JsonTextSerializer());
 
             var fooWaiter = new ManualResetEventSlim();
             var barWaiter = new ManualResetEventSlim();
@@ -76,9 +78,9 @@ namespace PC.ServiceBus.Tests.Integration
         [Test]
         public void GiveACommandBus_WhenReceivingANotRegisteredCommand_ThenNoHandlerCalled()
         {
-            var receiverMock = new Mock<SubscriptionReceiver>(Topic, Subscription, false);
-            var processor = new CommandProcessor(receiverMock.Object, new JsonTextSerializer());
-            var bus = new CommandBus(new TopicSender(Topic), new StandardMetadataProvider(), new JsonTextSerializer());
+            var receiverMock = new Mock<SubscriptionReceiver>(Topic, Subscription, _loggingService, false);
+            var processor = new CommandProcessor(receiverMock.Object, new JsonTextSerializer(), _loggingService);
+            var bus = new CommandBus(new TopicSender(Topic, _loggingService), new StandardMetadataProvider(), new JsonTextSerializer());
 
             var e = new ManualResetEventSlim();
             var handler = new FooCommandHandler(e);
@@ -108,8 +110,8 @@ namespace PC.ServiceBus.Tests.Integration
         [Test]
         public void GiveACommandBus_WhenSendingMultipleCommands_ThenAllHandlersCalled()
         {
-            var processor = new CommandProcessor(new SubscriptionReceiver(Topic, Subscription), new JsonTextSerializer());
-            var bus = new CommandBus(new TopicSender(Topic), new StandardMetadataProvider(), new JsonTextSerializer());
+            var processor = new CommandProcessor(new SubscriptionReceiver(Topic, Subscription, _loggingService), new JsonTextSerializer(), _loggingService);
+            var bus = new CommandBus(new TopicSender(Topic, _loggingService), new StandardMetadataProvider(), new JsonTextSerializer());
 
             var fooEvent = new ManualResetEventSlim();
             var fooHandler = new FooCommandHandler(fooEvent);

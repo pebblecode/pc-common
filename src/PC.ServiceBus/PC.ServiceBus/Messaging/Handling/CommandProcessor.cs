@@ -1,4 +1,5 @@
-﻿using PC.ServiceBus.Contracts;
+﻿using Bede.Logging.Models;
+using PC.ServiceBus.Contracts;
 using PC.ServiceBus.Serialization;
 
 namespace PC.ServiceBus.Messaging.Handling
@@ -11,8 +12,8 @@ namespace PC.ServiceBus.Messaging.Handling
     {
         private readonly CommandDispatcher _commandDispatcher;
 
-        public CommandProcessor(IMessageReceiver receiver, ITextSerializer serializer)
-            : base(receiver, serializer)
+        public CommandProcessor(IMessageReceiver receiver, ITextSerializer serializer, ILoggingService loggingService)
+            : base(receiver, serializer, loggingService)
         {
             _commandDispatcher = new CommandDispatcher();
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.ServiceBus.Messaging;
+﻿using Bede.Logging.Models;
+using Microsoft.ServiceBus.Messaging;
 using NUnit.Framework;
 using PC.ServiceBus.Messaging;
 using System;
@@ -13,10 +14,11 @@ namespace PC.ServiceBus.Tests.Integration
         [Test]
         public void when_sending_message_then_can_receive_it()
         {
-            var sender = new TopicSender(Topic);
+            var loggingServiceMock = new NullLogger();
+                var sender = new TopicSender(Topic,loggingServiceMock);
             var data = new Data { Id = Guid.NewGuid(), Title = "Foo" };
             Data received = null;
-            using (var receiver = new SubscriptionReceiver(Topic, Subscription))
+            using (var receiver = new SubscriptionReceiver(Topic, Subscription, loggingServiceMock))
             {
                 var signal = new ManualResetEventSlim();
 

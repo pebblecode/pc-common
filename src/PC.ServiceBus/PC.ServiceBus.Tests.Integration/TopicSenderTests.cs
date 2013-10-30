@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.TransientFaultHandling;
+﻿using Bede.Logging.Models;
+using Microsoft.Practices.TransientFaultHandling;
 using Microsoft.ServiceBus.Messaging;
 using NUnit.Framework;
 using PC.ServiceBus.Configuration;
@@ -67,7 +68,7 @@ namespace PC.ServiceBus.Tests.Integration
     public class TestableTopicSender : TopicSender
     {
         public TestableTopicSender(AzureConfigurationManager configurationManager, string topic, RetryStrategy retryStrategy)
-            : base(configurationManager, topic, retryStrategy)
+            : base(configurationManager, topic, retryStrategy, new NullLogger())
         {
         }
 

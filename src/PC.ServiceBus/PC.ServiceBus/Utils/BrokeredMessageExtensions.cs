@@ -1,5 +1,5 @@
-﻿using Microsoft.ServiceBus.Messaging;
-using PebbleCode.Framework.Logging;
+﻿using Bede.Logging.Models;
+using Microsoft.ServiceBus.Messaging;
 
 namespace PC.ServiceBus.Utils
 {
@@ -49,17 +49,16 @@ namespace PC.ServiceBus.Utils
             return false;
         }
 
-        public static bool SafeDeadLetter(this BrokeredMessage message, string deadLetterReason, string deadLetterErrorDescription)
+        public static bool SafeDeadLetter(this BrokeredMessage message, string deadLetterReason, string deadLetterErrorDescription, ILoggingService loggingService)
         {
             try
             {
                 message.DeadLetter(deadLetterReason, deadLetterErrorDescription);
 
-                Logger.WriteError(string.Format("Dead lettering message {0}. Reason : {1} Error description : {2}",
+                loggingService.Error(message, null, "Dead lettering message {0}. Reason : {1} Error description : {2}",
                     message.MessageId,
                     deadLetterReason,
-                    deadLetterErrorDescription),
-                    "ServiceBus");
+                    deadLetterErrorDescription);
                 return true;
             }
             catch (MessageLockLostException)

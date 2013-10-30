@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.ServiceBus;
+﻿using Bede.Logging.Models;
+using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.ServiceBus;
 using Microsoft.Practices.TransientFaultHandling;
 using Microsoft.ServiceBus.Messaging;
 using PC.ServiceBus.Configuration;
@@ -7,7 +8,6 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using PebbleCode.Framework.Logging;
 
 namespace PC.ServiceBus.Messaging
 {
@@ -25,14 +25,16 @@ namespace PC.ServiceBus.Messaging
         private readonly DynamicThrottling _dynamicThrottling;
         private CancellationTokenSource _cancellationSource;
         private readonly SubscriptionClient _client;
+        private readonly ILoggingService _loggingService;
 
         /// <summary>
         /// This will create a new Receiver for the specified topic / subscription. 
         /// </summary>
         /// <param name="topic">The name of the topic</param>
         /// <param name="subscription">The name of the subscription</param>
+        /// <param name="loggingService">The service that will be used to log in the class</param>
         /// <param name="processInParallel">Whether to kick off a new Task to start receiving messages whilst processing the current message</param>
-        public SubscriptionReceiver(string topic, string subscription, bool processInParallel = false)
+        public SubscriptionReceiver(string topic, string subscription, ILoggingService loggingService, bool processInParallel = false)
             : this(
                 topic,
                 subscription,
@@ -40,7 +42,8 @@ namespace PC.ServiceBus.Messaging
                 processInParallel,
                 null,
                 new ExponentialBackoff(10, TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(1)),
-                new AzureConfigurationManager())
+                new AzureConfigurationManager(),
+                loggingService)
         {
         }
 
@@ -51,7 +54,7 @@ namespace PC.ServiceBus.Messaging
         /// <param name="subscription">The name of the subscription</param>
         /// <param name="filter">The Filter to apply to the subscription</param>
         /// <param name="processInParallel">Whether to kick off a new Task to start receiving messages whilst processing the current message</param>
-        public SubscriptionReceiver(string topic, string subscription, Filter filter, bool processInParallel = false)
+        public SubscriptionReceiver(string topic, string subscription, Filter filter, ILoggingService loggingService, bool processInParallel = false)
             : this(
                 topic,
                 subscription,
@@ -59,14 +62,16 @@ namespace PC.ServiceBus.Messaging
                 processInParallel,
                 filter,
                 new ExponentialBackoff(10, TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(1)),
-                new AzureConfigurationManager())
+                new AzureConfigurationManager(),
+                loggingService)
         {
         }
 
-        protected SubscriptionReceiver(string topic, string subscription, bool createIfNotExists, bool processInParallel, Filter filter, RetryStrategy backgroundRetryStrategy, AzureConfigurationManager configurationManager)
+        protected SubscriptionReceiver(string topic, string subscription, bool createIfNotExists, bool processInParallel, Filter filter, RetryStrategy backgroundRetryStrategy, AzureConfigurationManager configurationManager, ILoggingService loggingService)
         {
             _subscription = subscription;
             _processInParallel = processInParallel;
+            _loggingService = loggingService;
 
             _client = configurationManager.MessagingFactory.CreateSubscriptionClient(topic, subscription);
             _client.PrefetchCount = 30;
@@ -84,7 +89,7 @@ namespace PC.ServiceBus.Messaging
             _receiveRetryPolicy.Retrying += (s, e) =>
             {
                 _dynamicThrottling.Penalize();
-                Logger.WriteWarning(
+                _loggingService.Warning(
                     "An error occurred in attempt number {1} to receive a message from subscription {2}: {0}",
                     "ServiceBus",
                     e.LastException.Message,
@@ -223,7 +228,7 @@ namespace PC.ServiceBus.Messaging
                                                             ? msg.Properties[StandardMetadata.FullName].ToString()
                                                             : "Unknown type, metadata noin message properties";
 
-                                                    Logger.WriteInfo("Received message [{0}:{1}] on subscription {2}", "ServiceBus", messageType, msg.MessageId, _subscription);
+                                                    _loggingService.Information("Received message [{0}:{1}] on subscription {2}", "ServiceBus", messageType, msg.MessageId, _subscription);
                                                     
                                                     releaseAction = InvokeMessageHandler(msg);
                                                 }
@@ -282,7 +287,7 @@ namespace PC.ServiceBus.Messaging
             recoverReceive = ex =>
             {
                 // Just log an exception. Do not allow an unhandled exception to terminate the message receive loop abnormally.
-                Logger.WriteError(string.Format("An unrecoverable error occurred while trying to receive a new message from subscription {1}:\r\n{0}", ex, _subscription), "ServiceBus");
+                _loggingService.Error(ex, "An unrecoverable error occurred while trying to receive a new message from subscription {1}:\r\n{0}", ex, _subscription);
                 _dynamicThrottling.NotifyWorkCompletedWithError();
 
                 if (!cancellationToken.IsCancellationRequested)
@@ -309,7 +314,8 @@ namespace PC.ServiceBus.Messaging
                 case MessageReleaseActionKind.DeadLetter:
                     msg.SafeDeadLetter(
                         releaseAction.DeadLetterReason,
-                        releaseAction.DeadLetterDescription);
+                        releaseAction.DeadLetterDescription,
+                        _loggingService);
                     break;
             }
         }

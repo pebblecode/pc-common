@@ -1,4 +1,5 @@
-﻿using Microsoft.ServiceBus.Messaging;
+﻿using Bede.Logging.Models;
+using Microsoft.ServiceBus.Messaging;
 using Moq;
 using Moq.Protected;
 using NUnit.Framework;
@@ -15,12 +16,13 @@ namespace PC.ServiceBus.Tests.Integration
     public class EventProcessingTests : BaseIntegrationTest
     {
         private const int TimeoutPeriod = 20000;
+        private readonly ILoggingService _loggingService = new NullLogger();
 
         [Test]
         public void GivenAnEventBus_WhenReceivingAnEvent_ThenCallsRegisteredEventHandler()
         {
-            var processor = new EventProcessor(new SubscriptionReceiver(Topic, Subscription), new JsonTextSerializer());
-            var bus = new EventBus(new TopicSender(Topic), new StandardMetadataProvider(), new JsonTextSerializer());
+            var processor = new EventProcessor(new SubscriptionReceiver(Topic, Subscription, _loggingService), new JsonTextSerializer(), _loggingService);
+            var bus = new EventBus(new TopicSender(Topic, _loggingService), new StandardMetadataProvider(), new JsonTextSerializer());
 
             var e = new ManualResetEventSlim();
             var handler = new FooEventHandler(e);
@@ -46,8 +48,8 @@ namespace PC.ServiceBus.Tests.Integration
         [Test]
         public void GivenAnEventBus_WhenReceivingAnEvent_ThenCallsRegisteredEventHandlerWithEnvelope()
         {
-            var processor = new EventProcessor(new SubscriptionReceiver(Topic, Subscription), new JsonTextSerializer());
-            var bus = new EventBus(new TopicSender(Topic), new StandardMetadataProvider(), new JsonTextSerializer());
+            var processor = new EventProcessor(new SubscriptionReceiver(Topic, Subscription, _loggingService), new JsonTextSerializer(), _loggingService);
+            var bus = new EventBus(new TopicSender(Topic, _loggingService), new StandardMetadataProvider(), new JsonTextSerializer());
 
             var e = new ManualResetEventSlim();
             var handler = new FooEnvelopedEventHandler(e);
@@ -73,8 +75,8 @@ namespace PC.ServiceBus.Tests.Integration
         [Test]
         public void GivenAnEventBus_WhenReceivingAnEventWithMessageAndCorrelationIds_ThenCallsRegisteredEventHandlerWithEnvelope()
         {
-            var processor = new EventProcessor(new SubscriptionReceiver(Topic, Subscription), new JsonTextSerializer());
-            var bus = new EventBus(new TopicSender(Topic), new StandardMetadataProvider(), new JsonTextSerializer());
+            var processor = new EventProcessor(new SubscriptionReceiver(Topic, Subscription, _loggingService), new JsonTextSerializer(), _loggingService);
+            var bus = new EventBus(new TopicSender(Topic, _loggingService), new StandardMetadataProvider(), new JsonTextSerializer());
 
             var e = new ManualResetEventSlim();
             var handler = new FooEnvelopedEventHandler(e);
@@ -102,9 +104,9 @@ namespace PC.ServiceBus.Tests.Integration
         [Test]
         public void GivenAnEventBus_WhenReceivingAnEventWithNoRegisteredHandlers_ThenNoEventHandlerCalled()
         {
-            var receiverMock = new Mock<SubscriptionReceiver>(Topic, Subscription, false);
-            var processor = new EventProcessor(receiverMock.Object, new JsonTextSerializer());
-            var bus = new EventBus(new TopicSender(Topic), new StandardMetadataProvider(), new JsonTextSerializer());
+            var receiverMock = new Mock<SubscriptionReceiver>(Topic, Subscription, _loggingService, false);
+            var processor = new EventProcessor(receiverMock.Object, new JsonTextSerializer(), _loggingService);
+            var bus = new EventBus(new TopicSender(Topic, _loggingService), new StandardMetadataProvider(), new JsonTextSerializer());
 
             var e = new ManualResetEventSlim();
             var handler = new FooEventHandler(e);
@@ -134,8 +136,8 @@ namespace PC.ServiceBus.Tests.Integration
         [Test]
         public void GivenAnEventBus_WhenSendingMultipleEvents_ThenAllEventHandlersCalled()
         {
-            var processor = new EventProcessor(new SubscriptionReceiver(Topic, Subscription), new JsonTextSerializer());
-            var bus = new EventBus(new TopicSender(Topic), new StandardMetadataProvider(), new JsonTextSerializer());
+            var processor = new EventProcessor(new SubscriptionReceiver(Topic, Subscription, _loggingService), new JsonTextSerializer(), _loggingService);
+            var bus = new EventBus(new TopicSender(Topic, _loggingService), new StandardMetadataProvider(), new JsonTextSerializer());
 
             var fooEvent = new ManualResetEventSlim();
             var fooHandler = new FooEventHandler(fooEvent);

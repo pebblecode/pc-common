@@ -1,8 +1,8 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.ServiceBus;
+﻿using Bede.Logging.Models;
+using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.ServiceBus;
 using Microsoft.Practices.TransientFaultHandling;
 using Microsoft.ServiceBus.Messaging;
 using PC.ServiceBus.Configuration;
-using PebbleCode.Framework.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,13 +17,14 @@ namespace PC.ServiceBus.Messaging
         private readonly string _topic;
         private readonly RetryPolicy _retryPolicy;
         private readonly TopicClient _topicClient;
+        private readonly ILoggingService _loggingService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TopicSender"/> class, 
         /// automatically creating the given topic if it does not exist.
         /// </summary>
-        public TopicSender(string topic)
-            : this(new AzureConfigurationManager(), topic, new ExponentialBackoff(10, TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(1)))
+        public TopicSender(string topic, ILoggingService loggingService)
+            : this(new AzureConfigurationManager(), topic, new ExponentialBackoff(10, TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(1)), loggingService)
         {
         }
 
@@ -31,9 +32,10 @@ namespace PC.ServiceBus.Messaging
         /// Initializes a new instance of the <see cref="TopicSender"/> class, 
         /// automatically creating the given topic if it does not exist.
         /// </summary>
-        protected TopicSender(AzureConfigurationManager configurationManager, string topic, RetryStrategy retryStrategy)
+        protected TopicSender(AzureConfigurationManager configurationManager, string topic, RetryStrategy retryStrategy, ILoggingService loggingService)
         {
             _topic = topic;
+            _loggingService = loggingService;
 
             _retryPolicy = new RetryPolicy<ServiceBusTransientErrorDetectionStrategy>(retryStrategy);
             _retryPolicy.Retrying +=
@@ -45,7 +47,7 @@ namespace PC.ServiceBus.Messaging
                         handler(this, EventArgs.Empty);
                     }
 
-                    Logger.WriteWarning(string.Format("An error occurred in attempt number {1} to send a message: {0}", e.LastException.Message, e.CurrentRetryCount), "ServiceBus");
+                    _loggingService.Warning("An error occurred in attempt number {1} to send a message: {0}", e.LastException.Message, e.CurrentRetryCount);
                 };
 
             _topicClient = configurationManager.MessagingFactory.CreateTopicClient(_topic);
@@ -79,7 +81,7 @@ namespace PC.ServiceBus.Messaging
                     ? messageFactory().Properties[StandardMetadata.FullName].ToString()
                     : "Unknown type, metadata noin message properties";
 
-            Logger.WriteInfo("Sending message [{0}] with id {1} to topic: {2}", "ServiceBus", messageType, messageFactory().MessageId, _topic);
+            _loggingService.Information("Sending message [{0}] with id {1} to topic: {2}", "ServiceBus", messageType, messageFactory().MessageId, _topic);
 
             return _retryPolicy.ExecuteAsync(() => _topicClient.SendAsync(messageFactory()))
                         .ContinueWith(t =>
@@ -90,12 +92,11 @@ namespace PC.ServiceBus.Messaging
                             }
                             else
                             {
-                                Logger.WriteError(
+                                _loggingService.Error(
+                                    t.Exception,
                                     "An unrecoverable error occurred while trying to send message {0} to topic {1}:\r\n{2}", 
-                                    "ServiceBus", 
                                     messageFactory().MessageId, 
-                                    _topic, 
-                                    t.Exception);
+                                    _topic);
 
                                 exceptionCallback(t.Exception);
                             }
