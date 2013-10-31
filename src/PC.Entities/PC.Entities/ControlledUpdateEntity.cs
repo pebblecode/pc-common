@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Bede.Logging.Providers;
 using PebbleCode.Framework;
 using PebbleCode.Framework.Utilities;
-using PebbleCode.Framework.Logging;
 
 namespace PebbleCode.Entities
 {
@@ -19,11 +19,11 @@ namespace PebbleCode.Entities
     public abstract class ControlledUpdateEntity<UpdateContextConstants> : VersionedEntity
     {
         private Dictionary<string, string> _propertyAuthorization;
-        
+
         [NonSerialized]
         private IAuthorizationController _autorizationAdapter;
 
-        [NonSerialized] 
+        [NonSerialized]
         private UpdateContext<UpdateContextConstants> _updateContext;
         public UpdateContext<UpdateContextConstants> UpdateContext
         {
@@ -73,10 +73,9 @@ namespace PebbleCode.Entities
             {
                 FieldInfo field = GetType().GetField(propertyName);
                 object oldValue = field != null ? field.GetValue(this) : null;
-                Logger.WriteWarning(
-                    "{0} property cannot be overriden from {1} to {2} by {3} context".fmt(propertyName, oldValue,
+                EntityLogger.WriteWarning("{0} property cannot be overriden from {1} to {2} by {3} context".fmt(propertyName, oldValue,
                                                                                           newValue, UpdateContext.Name),
-                    "EntityUpdate");
+                    "EntityUpdate", null);
                 return false;
             }
             return true;
@@ -90,7 +89,7 @@ namespace PebbleCode.Entities
         {
             if (UpdateContext == null)
                 throw new Exception("Missing update context");
-                
+
             PropertyAuthorization.IndicateUpdated(e.PropertyName, UpdateContext.Name);
             base.OnPropertyChanged(e);
         }
@@ -103,7 +102,7 @@ namespace PebbleCode.Entities
         /// <returns></returns>
         protected override bool PropertyValueChanging(string propertyName, object newValue)
         {
-            return CanUpdateProperty(propertyName, newValue) && 
+            return CanUpdateProperty(propertyName, newValue) &&
                 base.PropertyValueChanging(propertyName, newValue);
         }
     }
