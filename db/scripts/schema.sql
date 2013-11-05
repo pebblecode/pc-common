@@ -62,7 +62,6 @@ IF NOT EXISTS (SELECT * FROM sys.tables t join sys.schemas s on (t.schema_id = s
   tinyint_field TINYINT NOT NULL ,
   tinyint_field_nullable TINYINT NULL ,
   timestamp_field TIMESTAMP NOT NULL ,
-  timestamp_field_nullable DATETIME NULL ,
   enum_field INT NOT NULL ,
   enum_field_nullable INT NULL ,
   object_field VARBINARY(MAX) NOT NULL ,

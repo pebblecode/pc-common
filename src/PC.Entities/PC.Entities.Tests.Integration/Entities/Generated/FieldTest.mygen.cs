@@ -56,13 +56,11 @@ namespace PebbleCode.Entities.Tests.Integration.Entities
 		[DataMember]
 		private DateTime? _datetimeFieldNullable;
 		[DataMember]
-		private byte _tinyintField;
+		private int _tinyintField;
 		[DataMember]
-		private byte _tinyintFieldNullable;
+		private int? _tinyintFieldNullable;
 		[DataMember]
 		private byte[] _timestampField;
-		[DataMember]
-		private DateTime? _timestampFieldNullable;
 		[DataMember]
 		private TestEnum _enumField;
 		[DataMember]
@@ -400,7 +398,7 @@ namespace PebbleCode.Entities.Tests.Integration.Entities
 		/// <summary>
 		/// Public accessor for _tinyintField
 		/// </summary>		
-		public virtual byte TinyintField
+		public virtual int TinyintField
 		{
 			get { return _tinyintField; }
 			set
@@ -416,7 +414,7 @@ namespace PebbleCode.Entities.Tests.Integration.Entities
 		/// <summary>
 		/// Public accessor for _tinyintFieldNullable
 		/// </summary>		
-		public virtual byte TinyintFieldNullable
+		public virtual int? TinyintFieldNullable
 		{
 			get { return _tinyintFieldNullable; }
 			set
@@ -441,22 +439,6 @@ namespace PebbleCode.Entities.Tests.Integration.Entities
 				{
 					_timestampField = value;
 					PropertyValueChanged("TimestampField");
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Public accessor for _timestampFieldNullable
-		/// </summary>		
-		public virtual DateTime? TimestampFieldNullable
-		{
-			get { return _timestampFieldNullable; }
-			set
-			{
-				if (_timestampFieldNullable != value && PropertyValueChanging("TimestampFieldNullable", value))
-				{
-					_timestampFieldNullable = value;
-					PropertyValueChanged("TimestampFieldNullable");
 				}
 			}
 		}
@@ -797,7 +779,7 @@ namespace PebbleCode.Entities.Tests.Integration.Entities
 		/// Database accessor for _tinyintField. Only used by IBatis.
 		/// </summary>
 		[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-		internal byte DbTinyintField
+		internal int DbTinyintField
 		{
 			get { return _tinyintField;  }
 			set { _tinyintField = value; }
@@ -807,7 +789,7 @@ namespace PebbleCode.Entities.Tests.Integration.Entities
 		/// Database accessor for _tinyintFieldNullable. Only used by IBatis.
 		/// </summary>
 		[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-		internal byte DbTinyintFieldNullable
+		internal int? DbTinyintFieldNullable
 		{
 			get { return _tinyintFieldNullable;  }
 			set { _tinyintFieldNullable = value; }
@@ -821,16 +803,6 @@ namespace PebbleCode.Entities.Tests.Integration.Entities
 		{
 			get { return _timestampField;  }
 			set { _timestampField = value; }
-		}
-
-		/// <summary>
-		/// Database accessor for _timestampFieldNullable. Only used by IBatis.
-		/// </summary>
-		[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-		internal DateTime? DbTimestampFieldNullable
-		{
-			get { return _timestampFieldNullable;  }
-			set { _timestampFieldNullable = value; }
 		}
 
 		/// <summary>

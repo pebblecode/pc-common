@@ -19,10 +19,9 @@
 			<result property="DbTextFieldNullable" column="text_field_nullable" type="string" dbType="varchar"/>
 			<result property="DbDatetimeField" column="datetime_field" type="DateTime" dbType="DateTime"/>
 			<result property="DbDatetimeFieldNullable" column="datetime_field_nullable" type="DateTime" dbType="DateTime"/>
-			<result property="DbTinyintField" column="tinyint_field" type="byte" dbType="byte"/>
-			<result property="DbTinyintFieldNullable" column="tinyint_field_nullable" type="byte" dbType="byte"/>
+			<result property="DbTinyintField" column="tinyint_field" type="int" dbType="Int"/>
+			<result property="DbTinyintFieldNullable" column="tinyint_field_nullable" type="int" dbType="Int"/>
 			<result property="DbTimestampField" column="timestamp_field" type="Byte" dbType="Binary"/>
-			<result property="DbTimestampFieldNullable" column="timestamp_field_nullable" type="DateTime" dbType="DateTime"/>
 			<result property="DbEnumField" column="enum_field" type="int" dbType="Int"/>
 			<result property="DbEnumFieldNullable" column="enum_field_nullable" type="int" dbType="Int"/>
 			<result property="DbObjectField" column="object_field"/>
@@ -57,7 +56,6 @@
 			field_test.tinyint_field,
 			field_test.tinyint_field_nullable,
 			field_test.timestamp_field,
-			field_test.timestamp_field_nullable,
 			field_test.enum_field,
 			field_test.enum_field_nullable,
 			field_test.object_field,
@@ -229,7 +227,6 @@
 					tinyint_field,
 					tinyint_field_nullable,
 					timestamp_field,
-					timestamp_field_nullable,
 					enum_field,
 					enum_field_nullable,
 					object_field,
@@ -259,7 +256,6 @@
 					#DbTinyintField#,
 					#DbTinyintFieldNullable#,
 					#DbTimestampField#,
-					#DbTimestampFieldNullable:DateTime:1/1/0001 12:00:00 AM#,
 					#DbEnumField#,
 					#DbEnumFieldNullable#,
 					#DbObjectField,dbType=VarBinary#,
@@ -296,7 +292,6 @@
 				tinyint_field=#DbTinyintField#,
 				tinyint_field_nullable=#DbTinyintFieldNullable#,
 				timestamp_field=#DbTimestampField#,
-				timestamp_field_nullable=#DbTimestampFieldNullable#,
 				enum_field=#DbEnumField#,
 				enum_field_nullable=#DbEnumFieldNullable#,
 				object_field=#DbObjectField,dbType=VarBinary#,

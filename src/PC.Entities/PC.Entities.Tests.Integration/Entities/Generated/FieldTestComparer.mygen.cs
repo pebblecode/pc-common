@@ -46,7 +46,6 @@ namespace PebbleCode.Tests.EntityComparers
 			Assert.AreEqual(expected.TinyintField, actual.TinyintField, "FieldTest.TinyintField not equal");
 			Assert.AreEqual(expected.TinyintFieldNullable, actual.TinyintFieldNullable, "FieldTest.TinyintFieldNullable not equal");
 			Compare(expected.TimestampField, actual.TimestampField, "FieldTest.TimestampField");
-			Compare(expected.TimestampFieldNullable, actual.TimestampFieldNullable, "FieldTest.TimestampFieldNullable");
 			Assert.AreEqual(expected.EnumField, actual.EnumField, "FieldTest.EnumField not equal");
 			Assert.AreEqual(expected.EnumFieldNullable, actual.EnumFieldNullable, "FieldTest.EnumFieldNullable not equal");
 			Assert.AreEqual(expected.ForeignKeyField, actual.ForeignKeyField, "FieldTest.ForeignKeyField not equal");
