@@ -1,4 +1,4 @@
-namespace PC.Entities.Tests.Integration.Entities
+namespace PebbleCode.Entities.Tests.Integration.Entities
 {
 	/// <summary>
 	/// Hand written part of partial class

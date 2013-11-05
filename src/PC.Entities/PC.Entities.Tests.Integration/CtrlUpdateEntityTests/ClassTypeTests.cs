@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
-using PC.Entities.Tests.Integration.Entities;
+using PebbleCode.Entities.Tests.Integration.Entities;
 using PebbleCode.Tests;
-using PebbleCode.Tests.Entities;
 
 namespace PC.Entities.Tests.Integration.CtrlUpdateEntityTests
 {

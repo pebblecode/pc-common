@@ -1,6 +1,6 @@
-﻿namespace PC.Entities
+﻿namespace PebbleCode.Entities
 {
-    public class LogCategories
+    public class Category
     {
         public const string EntityFramework = "EntityFramework";
     }

@@ -12,8 +12,10 @@
 
 using NUnit.Framework;
 using PC.Tests;
+using PebbleCode.Framework.Dates;
+using PebbleCode.Entities.Tests.Integration.Entities;
 
-namespace PC.Entities.Tests.Integration.Entities
+namespace PebbleCode.Tests.EntityComparers
 {
     public class VersionedThingComparer : EntityComparerBase
     {

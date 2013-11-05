@@ -2,8 +2,8 @@
 <sqlMap namespace="FieldTest" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<alias>
-		<typeAlias alias="FieldTest" type="PC.Entities.Tests.Integration.Entities.FieldTest, PC.Entities.Tests.Integration" />
-		<typeAlias alias="FieldTestList" type="PC.Entities.Tests.Integration.Entities.FieldTestList, PC.Entities.Tests.Integration" />
+		<typeAlias alias="FieldTest" type="PebbleCode.Entities.Tests.Integration.Entities.FieldTest, PC.Tests" />
+		<typeAlias alias="FieldTestList" type="PebbleCode.Entities.Tests.Integration.Entities.FieldTestList, PC.Tests" />
 	</alias>
 			
 	<resultMaps>
@@ -19,9 +19,9 @@
 			<result property="DbTextFieldNullable" column="text_field_nullable" type="string" dbType="varchar"/>
 			<result property="DbDatetimeField" column="datetime_field" type="DateTime" dbType="DateTime"/>
 			<result property="DbDatetimeFieldNullable" column="datetime_field_nullable" type="DateTime" dbType="DateTime"/>
-			<result property="DbTinyintField" column="tinyint_field" type="bool" dbType="bool"/>
-			<result property="DbTinyintFieldNullable" column="tinyint_field_nullable" type="bool" dbType="bool"/>
-			<result property="DbTimestampField" column="timestamp_field" type="DateTime" dbType="DateTime"/>
+			<result property="DbTinyintField" column="tinyint_field" type="byte" dbType="byte"/>
+			<result property="DbTinyintFieldNullable" column="tinyint_field_nullable" type="byte" dbType="byte"/>
+			<result property="DbTimestampField" column="timestamp_field" type="Byte" dbType="Binary"/>
 			<result property="DbTimestampFieldNullable" column="timestamp_field_nullable" type="DateTime" dbType="DateTime"/>
 			<result property="DbEnumField" column="enum_field" type="int" dbType="Int"/>
 			<result property="DbEnumFieldNullable" column="enum_field_nullable" type="int" dbType="Int"/>
@@ -258,12 +258,12 @@
 					#DbDatetimeFieldNullable:DateTime:1/1/0001 12:00:00 AM#,
 					#DbTinyintField#,
 					#DbTinyintFieldNullable#,
-					#DbTimestampField:DateTime:1/1/0001 12:00:00 AM#,
+					#DbTimestampField#,
 					#DbTimestampFieldNullable:DateTime:1/1/0001 12:00:00 AM#,
 					#DbEnumField#,
 					#DbEnumFieldNullable#,
-					#DbObjectField#,
-					#DbObjectFieldNullable#,
+					#DbObjectField,dbType=VarBinary#,
+					#DbObjectFieldNullable,dbType=VarBinary#,
 					#DbForeignKeyField#,
 					#DbForeignKeyFieldNullable#,
 					#DbIntDateField#,
@@ -299,8 +299,8 @@
 				timestamp_field_nullable=#DbTimestampFieldNullable#,
 				enum_field=#DbEnumField#,
 				enum_field_nullable=#DbEnumFieldNullable#,
-				object_field=#DbObjectField#,
-				object_field_nullable=#DbObjectFieldNullable#,
+				object_field=#DbObjectField,dbType=VarBinary#,
+				object_field_nullable=#DbObjectFieldNullable,dbType=VarBinary#,
 				foreign_key_field=#DbForeignKeyField#,
 				foreign_key_field_nullable=#DbForeignKeyFieldNullable#,
 				int_date_field=#DbIntDateField#,

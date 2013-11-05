@@ -1,7 +1,7 @@
 ﻿using Moq;
 using PebbleCode.Repository;
 
-namespace PC.Entities.Tests.Integration.Repository
+namespace PebbleCode.Entities.Tests.Integration.Repository
 {
     public class MockTransactionProvider : TransactionProvider
     {

@@ -1,0 +1,478 @@
+﻿##|TYPE Template
+##|UNIQUEID 2c123699-d50c-41a9-99fe-c45fb60b123e
+##|TITLE IBatis Data Layer
+##|NAMESPACE IBatis
+##|SOURCE_TYPE Source
+##|OUTPUT_LANGUAGE XML
+##|GUI_ENGINE .Net Script
+##|GUI_LANGUAGE C#
+##|GUI_BEGIN
+
+<%#REFERENCE System.Windows.Forms.dll %>
+<%#NAMESPACE System, System.Text, System.Collections, Zeus, Zeus.UserInterface, Zeus.DotNetScript %>
+
+public class GeneratedGui : DotNetScriptGui
+{
+	public GeneratedGui( ZeusGuiContext context ) : base( context ) {}
+
+	public override void Setup()
+	{
+		ui.Title = "IBatis Data Layer - Settings";
+		ui.Width = 650;
+		ui.Height = 550;
+		ui.ShowGui = true;
+
+		// Output Paths tab
+		ui.AddTab("Output Paths");
+
+		CreateOutputPathSelectors();
+		
+		// Settings tab
+		ui.AddTab("Settings");
+		
+		AddTextBox("assemblyName", "Entities.dll", "Entities Assembly", "Provide your entities assembly name for iBatis mapping files.");
+		AddTextBox("rootNamespace", "RedSky", "Root Namespace", "Provide the root namespace to use for all namespaces eg. WeddingBook");
+		AddTextBox("classNamespace", "EntityNamespace", "Entity Namespace", "Provide the entity namespace eg. Sites or Meetings.");
+
+		ui.AddLabel( "outputOptionsLabel", "Output Options:", "" );
+		ui.AddCheckBox( "chkClass", "Create class files.", true, "Create a class file for each table or view selected. ([TBL/VW].mygen.cs)" );
+		ui.AddCheckBox( "chkLists", "Create list class files.", true, "Create a list class file for each table or view selected. ([TBL/VW]s.mygen.cs)" );
+		ui.AddCheckBox( "chkMapping", "Create XML mapping files.", true, "Create an XML file for each table or view selected. ([TBL/VW].mygen.xml)" );
+		ui.AddCheckBox( "chkRepository", "Create Repository classes.", true, "" );
+		ui.AddCheckBox( "chkSummaries", "Create Summary entity versions of all selected file types.", true, "" );
+		ui.AddCheckBox( "chkTriggers", "Create Database Triggers.", true, "" );
+
+		// Targets tab
+		ui.AddTab("Database and tables");
+		
+		// Setup Database selection combobox.
+		ui.AddLabel( "label4", "Select a database:", "Select a database in the dropdown below." );
+		GuiComboBox chooseDatabase = ui.AddComboBox( "chooseDatabase", "Select a database." );
+		
+		// Setup Tables selection multi-select listbox.
+		ui.AddLabel( "label7", "Select tables:", "Select tables from the listbox below." );
+		GuiListBox chooseTables = ui.AddListBox( "chooseTables", "Select tables." );
+		chooseTables.Height = 160;
+
+		// Setup Views selection multi-select listbox.
+		ui.AddLabel( "label8", "Select views:", "Select views from the listbox below." );
+		GuiListBox chooseViews = ui.AddListBox( "chooseViews", "Select views." );
+		chooseViews.Height = 160;
+
+		// Attach the onchange event to the cmbDatabases control.
+		setupDatabaseDropdown( chooseDatabase );
+		chooseDatabase.AttachEvent( "onchange", "chooseDatabase_onchange" );
+	
+	}
+	
+	private void AddTextBox(string valueId, string defaultValue, string labelText, string toolTipText)
+	{
+		GuiLabel label = ui.AddLabel(valueId + "Label", labelText,  toolTipText);
+		GuiTextBox textBox = ui.AddTextBox(valueId, defaultValue, toolTipText);
+		textBox.Top = label.Top + label.Height;
+	}
+	
+	private void CreateOutputPathSelectors()
+	{
+		// Grab default output path
+		string sOutputPath = "";
+		if( input.Contains( "defaultOutputPath" ) ) 
+			sOutputPath = input["defaultOutputPath"].ToString();
+
+		// Setup Folder selection input control.
+		GuiLabel label1 = ui.AddLabel( "label1", "Select the output paths (N.B. THESE MUST BE RELATIVE TO YOUR DEFAULT OUTPUT PATH):", "" );
+		
+		GuiLabel label1a = ui.AddLabel("label1a", "Class Files:", "");
+		GuiTextBox textBox1a = ui.AddTextBox( "outputPath_cls", sOutputPath, "Select the Output Path for class files." );
+		GuiFilePicker filePicker1a = ui.AddFilePicker( "selectPath_cls", "...", "Select the Output Path for class files.", "outputPath_cls", true );
+		
+		GuiLabel label1b = ui.AddLabel("label1b", "List Files:", "");
+		GuiTextBox textBox1b = ui.AddTextBox( "outputPath_lst", sOutputPath, "Select the Output Path for list class files." );
+		GuiFilePicker filePicker1b = ui.AddFilePicker( "selectPath_lst", "...", "Select the Output Path for list class files.", "outputPath_lst", true );
+		
+		GuiLabel label1c = ui.AddLabel( "label1c", "Map Files", "Select the output path in the field below." );
+		GuiTextBox textBox1c = ui.AddTextBox( "outputPath_xml", sOutputPath, "Select the Output Path for xml map files." );
+		GuiFilePicker filePicker1c = ui.AddFilePicker( "selectPath_xml", "...", "Select the Output Path for xml map files.", "outputPath_xml", true );
+
+		GuiLabel label1d = ui.AddLabel( "label1d", "Repository Files", "Select the output path in the field below." );
+		GuiTextBox textBox1d = ui.AddTextBox( "outputPath_rep", sOutputPath, "Select the Output Path for Repository files." );
+		GuiFilePicker filePicker1d = ui.AddFilePicker( "selectPath_rep", "...", "Select the Output Path for Repository files.", "outputPath_rep", true );
+		
+		GuiLabel label1e = ui.AddLabel( "label1e", "Interface Files", "Select the output path in the field below." );
+		GuiTextBox textBox1e = ui.AddTextBox( "outputPath_int", sOutputPath, "Select the Output Path for Inteface files." );
+		GuiFilePicker filePicker1e = ui.AddFilePicker( "selectPath_int", "...", "Select the Output Path for Interface files.", "outputPath_int", true );
+
+		GuiLabel label1f = ui.AddLabel( "label1f", "Trigger Files", "Select the output path in the field below." );
+		GuiTextBox textBox1f = ui.AddTextBox( "outputPath_trg", sOutputPath, "Select the Output Path for Trigger files." );
+		GuiFilePicker filePicker1f = ui.AddFilePicker( "selectPath_trg", "...", "Select the Output Path for Trigger files.", "outputPath_trg", true );
+
+		GuiLabel label1g = ui.AddLabel( "label1g", "Comparer Files", "Select the output path in the field below." );
+		GuiTextBox textBox1g = ui.AddTextBox( "outputPath_cmp", sOutputPath, "Select the Output Path for Comparer files." );
+		GuiFilePicker filePicker1g = ui.AddFilePicker( "selectPath_cmp", "...", "Select the Output Path for Comparer files.", "outputPath_cmp", true );
+
+		// Make it all look tidy!
+		int gap = 8;
+		
+		label1a.Width = 100;
+		label1b.Width = label1a.Width;
+		label1c.Width = label1a.Width;
+		label1d.Width = label1a.Width;
+		label1e.Width = label1a.Width;
+		label1f.Width = label1a.Width;
+		label1g.Width = label1a.Width;
+
+		textBox1a.Width = 450;
+		textBox1b.Width = textBox1a.Width;
+		textBox1c.Width = textBox1a.Width;
+		textBox1d.Width = textBox1a.Width;
+		textBox1e.Width = textBox1a.Width;
+		textBox1f.Width = textBox1a.Width;
+		textBox1g.Width = textBox1a.Width;
+
+		filePicker1a.Width = 30;
+		filePicker1b.Width = filePicker1a.Width;
+		filePicker1c.Width = filePicker1a.Width;
+		filePicker1d.Width = filePicker1a.Width;
+		filePicker1e.Width = filePicker1a.Width;
+		filePicker1f.Width = filePicker1a.Width;
+		filePicker1g.Width = filePicker1a.Width;
+
+		filePicker1a.Height = textBox1a.Height;
+		filePicker1b.Height = filePicker1a.Height;
+		filePicker1c.Height = filePicker1a.Height;
+		filePicker1d.Height = filePicker1a.Height;
+		filePicker1e.Height = filePicker1a.Height;
+		filePicker1f.Height = filePicker1a.Height;
+		filePicker1g.Height = filePicker1a.Height;
+
+		label1a.Top = label1.Top + label1.Height + gap;
+		label1b.Top = label1a.Top + label1a.Height + gap;
+		label1c.Top = label1b.Top + label1b.Height + gap;
+		label1d.Top = label1c.Top + label1c.Height + gap;
+		label1e.Top = label1d.Top + label1d.Height + gap;
+		label1f.Top = label1e.Top + label1e.Height + gap;
+		label1g.Top = label1f.Top + label1f.Height + gap;
+		
+		textBox1a.Top = label1a.Top;
+		textBox1b.Top = label1b.Top;
+		textBox1c.Top = label1c.Top;
+		textBox1d.Top = label1d.Top;
+		textBox1e.Top = label1e.Top;
+		textBox1f.Top = label1f.Top;
+		textBox1g.Top = label1g.Top;
+
+		filePicker1a.Top = label1a.Top;
+		filePicker1b.Top = label1b.Top;
+		filePicker1c.Top = label1c.Top;
+		filePicker1d.Top = label1d.Top;
+		filePicker1e.Top = label1e.Top;
+		filePicker1f.Top = label1f.Top;
+		filePicker1g.Top = label1g.Top;
+
+		textBox1a.Left = label1a.Left + label1a.Width + gap;
+		textBox1b.Left = textBox1a.Left;
+		textBox1c.Left = textBox1a.Left;
+		textBox1d.Left = textBox1a.Left;
+		textBox1e.Left = textBox1a.Left;
+		textBox1f.Left = textBox1a.Left;
+		textBox1g.Left = textBox1a.Left;
+
+		filePicker1a.Left = textBox1a.Left + textBox1a.Width + gap;
+		filePicker1b.Left = filePicker1a.Left;
+		filePicker1c.Left = filePicker1a.Left;
+		filePicker1d.Left = filePicker1a.Left;
+		filePicker1e.Left = filePicker1a.Left;
+		filePicker1f.Left = filePicker1a.Left;
+		filePicker1g.Left = filePicker1a.Left;
+	}
+	
+	public void setupDatabaseDropdown( GuiComboBox Databases )
+	{
+		try 
+		{	
+			if( MyMeta.IsConnected )
+			{
+				Databases.BindData( MyMeta.Databases );
+				if( MyMeta.DefaultDatabase != null ) 
+				{
+					Databases.SelectedValue = MyMeta.DefaultDatabase.Alias;
+					bindTables( Databases.SelectedValue );
+					bindViews( Databases.SelectedValue );
+				}
+			}
+		}
+		catch
+		{
+		}
+	}
+	
+	public void bindTables( string sDatabase )
+	{
+		int count = 0;
+	
+		GuiListBox lstTables = ui["chooseTables"] as GuiListBox;
+		
+		try 
+		{	
+			IDatabase db = MyMeta.Databases[sDatabase];
+			lstTables.BindData( db.Tables );
+		}
+		catch
+		{
+		}
+	}
+	
+	public void bindViews( string sDatabase )
+	{
+		int count = 0;
+	
+		GuiListBox lstViews = ui["chooseViews"] as GuiListBox;
+		
+		try 
+		{	
+			IDatabase db = MyMeta.Databases[sDatabase];
+			lstViews.BindData( db.Views );
+		}
+		catch
+		{
+		}
+	}
+	
+	public void chooseDatabase_onchange( GuiComboBox control )
+	{
+		int count = 0;
+
+		GuiComboBox cmbDatabases = ui["chooseDatabase"] as GuiComboBox;
+	
+		bindTables( cmbDatabases.SelectedText );
+		bindViews( cmbDatabases.SelectedText );
+	}
+	
+}
+##|GUI_END
+##|BODY_MODE Markup
+##|BODY_ENGINE .Net Script
+##|BODY_LANGUAGE C#
+##|BODY_TAG_START <%
+##|BODY_TAG_END %>
+##|BODY_BEGIN
+<%#NAMESPACE System.IO, System.Text, System.Text.RegularExpressions, System.Globalization, System.Collections.Generic %><%
+// $Id: CSharp_IBatis_BusinessObject.csgen,v 1.3 2005/12/15 23:57:34 morciuch Exp $
+public class GeneratedTemplate : DotNetScriptTemplate
+{
+	%><%#FILE CSharp_IBatis_DataLayer_Common.cs%><% 
+	
+	private bool _createListClassFiles;
+    private bool _createClassFiles;
+    private bool _createXmlFiles;
+    private bool _createRepositories;
+    private bool _createSummaries;
+    private bool _createTriggers;
+    private bool _createEntityComparers = true;
+
+	private string _exportPath_cls;
+    private string _exportPath_lst;
+    private string _exportPath_xml;
+    private string _exportPath_rep;
+    private string _exportPath_trg;
+    private string _exportPath_cmp;
+
+	private List<string> _mappingClassnames = new List<string>();
+	
+	private ArrayList _skipHistoryTriggers = new ArrayList();
+	private const string ExcludeTablePattern = "^_";	
+
+	// Constructor
+	public GeneratedTemplate( ZeusContext context ) : base( context ) 
+	{
+		_skipHistoryTriggers.Add("database_versions");
+		_skipHistoryTriggers.Add("database_updates");
+	}
+
+	public override void Render()
+	{
+		//Set MyMeta options in order to make sure the correct language and data type
+        //generator are used.
+        MyMeta.Language = "C#";
+        MyMeta.DbTarget = "DbType";
+
+		// Grab output paths from input screen
+        _exportPath_cls = input["outputPath_cls"].ToString();
+        _exportPath_lst = input["outputPath_lst"].ToString();
+        _exportPath_xml = input["outputPath_xml"].ToString();
+        _exportPath_rep = input["outputPath_rep"].ToString();
+        _exportPath_trg = input["outputPath_trg"].ToString();
+        _exportPath_cmp = input["outputPath_cmp"].ToString();
+
+		// Grab options
+        _createClassFiles = (bool)input["chkClass"];
+        _createListClassFiles = (bool)input["chkLists"];
+        _createXmlFiles = (bool)input["chkMapping"];
+        _createRepositories = (bool)input["chkRepository"];
+        _createSummaries = (bool)input["chkSummaries"];
+		_createTriggers = (bool)input["chkTriggers"];
+
+		// Grab the database, tables and views to use
+		string dbName = input["chooseDatabase"].ToString();
+		ArrayList tables = input["chooseTables"] as ArrayList;
+		ArrayList views = input["chooseViews"] as ArrayList;
+		
+		// Process Tables
+		foreach (string table in tables)
+		{
+			// Skip stuff we never want
+			if (Regex.IsMatch(table, ExcludeTablePattern))
+				continue;
+				
+			ITable iTable = MyMeta.Databases[dbName].Tables[table];
+			input["currentSource"] = iTable;
+			ProcessCurrentTable();
+		}
+		
+		// Process Views
+		foreach (string view in views)
+		{
+			// Skip stuff we never want
+			if (!view.StartsWith("vw_") || Regex.IsMatch(view, ExcludeTablePattern))
+				continue;
+		
+			IView iView = MyMeta.Databases[dbName].Views[view];
+			input["currentSource"] = iView;
+			ProcessCurrentView();
+		}
+		
+		// Finally add a sql map output to the output pane
+		if (_createXmlFiles)
+		{
+			output.clear();
+			foreach( string filename in _mappingClassnames)
+			{%>
+			<sqlMap embedded="<%= _rootNamespace %>.Repository.Maps.Generated.<%= filename %>.mygen.xml, <%= _rootNamespace %>.Repository" /><%
+			}
+			foreach( string filename in _mappingClassnames)
+			{%>
+			<sqlMap embedded="<%= _rootNamespace %>.Repository.Maps.Handmade.<%= filename %>.xml, <%= _rootNamespace %>.Repository" /><%
+			}
+			output.save( Path.Combine( Path.Combine( _exportPath_xml, @"..\Config"), "sqlMapList.mygen.xml" ), false );
+		}
+	}
+	
+	private void ProcessCurrentTable()
+	{
+		AssignMemberVariables();
+	
+		if ( _createClassFiles )     		{ GenerateClassFile();				  }
+		if ( _createListClassFiles )		{ GenerateListClassFile();			  }
+		if ( _createXmlFiles )       		{ GenerateMappingFile();			  }
+		if ( _createRepositories )   		{ GenerateRepositoryFiles();		  }
+		if ( _createEntityComparers )  		{ GenerateEntityComparerFiles();      }
+		if (_createTriggers)				{ GenerateHistoryTriggerFile();		  }
+		
+		// Now do the summary version...
+		if (_createSummaries && _hasSummaryFields)
+		{
+			input["doingSummary"] = true;
+			
+			if ( _createClassFiles )     		{ GenerateClassFile();				  }
+			if ( _createListClassFiles )		{ GenerateListClassFile();			  }
+			if ( _createXmlFiles )       		{ GenerateMappingFile();			  }
+			if ( _createRepositories )   		{ GenerateRepositoryFiles();		  }
+			if ( _createEntityComparers )  		{ GenerateEntityComparerFiles();      }
+		
+			input["doingSummary"] = false;
+		}
+	}
+	
+	private void ProcessCurrentView()
+	{
+		AssignMemberVariables();
+	
+		if ( _createClassFiles )     		{ GenerateClassFile();				  }
+		if ( _createListClassFiles )		{ GenerateListClassFile();			  }
+		if ( _createXmlFiles )       		{ GenerateMappingFile();			  }
+		if ( _createRepositories )   		{ GenerateRepositoryFiles();		  }
+		if ( _createEntityComparers )  		{ GenerateEntityComparerFiles();      }
+		
+		// Now do the summary version...
+		if (_createSummaries && _hasSummaryFields)
+		{
+			input["doingSummary"] = true;
+			
+			if ( _createClassFiles )     		{ GenerateClassFile();				  }
+			if ( _createListClassFiles )		{ GenerateListClassFile();			  }
+			if ( _createXmlFiles )       		{ GenerateMappingFile();			  }
+			if ( _createRepositories )   		{ GenerateRepositoryFiles();		  }
+			if ( _createEntityComparers )  		{ GenerateEntityComparerFiles();      }
+		
+			input["doingSummary"] = false;
+		}
+	}
+	
+	private void GenerateClassFile()
+	{
+		GenerateFile("BusinessEntity", _exportPath_cls, _className, "cs", true);
+	}
+	
+	private void GenerateEntityComparerFiles()
+	{
+		GenerateFile("BusinessEntityComparer", _exportPath_cmp, _className + "Comparer", "cs", false);
+	}
+	
+	private void GenerateListClassFile()
+	{
+		GenerateFile("BusinessEntityCollection", _exportPath_lst, GetListClassName(_className), "cs", true);
+	}
+	
+	private void GenerateMappingFile()
+	{
+		GenerateFile("MappingFile", _exportPath_xml, _className, "xml", true);
+		_mappingClassnames.Add(_className);
+	}
+
+	private void GenerateHistoryTriggerFile()
+	{
+		if (_skipHistoryTriggers.Contains(_tableName))
+			return;
+		GenerateFile("HistoryTrigger", _exportPath_trg, "db_upd_triggers_" + _tableName, "sql", false);
+	}
+
+	private void GenerateRepositoryFiles()
+	{
+		GenerateFile("RepositoryClass", _exportPath_rep, _className + "Repository", "cs", true);
+	}
+
+	private void GenerateIncompleteClassFiles()
+	{
+		GenerateFile("IncompleteBusinessEntity", _exportPath_cls, "Incomplete" + _className, "cs", false);
+	}
+	
+	private void GenerateFile(string templateName, string exportPath, string filenameTemplate, string extension, bool writeHandmade)
+	{
+		string generatedFile = Path.Combine(exportPath, filenameTemplate + ".mygen." + extension);
+		context.ExecuteTemplate("CSharp_IBatis_DataLayer_" + templateName + ".csgen");
+		output.save(generatedFile, false );
+		output.clear();
+	
+		if (writeHandmade)
+		{
+			string handmadeFile = Path.Combine(ConvertToHandmade(exportPath), filenameTemplate + "." + extension);
+			if (!File.Exists(handmadeFile))
+			{
+				context.ExecuteTemplate("CSharp_IBatis_DataLayer_" + templateName + "Handmade.csgen");
+				output.save(handmadeFile, false );
+				output.clear();
+			}
+		}
+	}
+	
+	private string ConvertToHandmade(string path)
+	{
+		string GENERATED = "Generated";
+		string HANDMADE = "Handmade";
+		if (path.EndsWith("Generated"))
+			return path.Substring(0, path.Length - GENERATED.Length) + "Handmade";
+		return path;
+	}
+}
+%>
+##|BODY_END

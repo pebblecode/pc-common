@@ -121,7 +121,7 @@ namespace PebbleCode.Repository
         [DebuggerStepThrough]
         protected void Log(string message)
         {
-            _loggingService.Warning(new CommonLoggingData(message, LogCategories.EntityFramework));
+            _loggingService.Warning(new CommonLoggingData(message, Category.EntityFramework));
         }
 
         /// <summary>

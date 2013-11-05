@@ -113,6 +113,12 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject.MockingKernel">
+      <HintPath>..\packages\Ninject.MockingKernel.3.0.0.5\lib\net45-full\Ninject.MockingKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.MockingKernel.Moq">
+      <HintPath>..\packages\Ninject.MockingKernel.Moq.3.0.0.5\lib\net45-full\Ninject.MockingKernel.Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>

@@ -2,8 +2,8 @@
 <sqlMap namespace="VersionedThing" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<alias>
-		<typeAlias alias="VersionedThing" type="PC.Entities.Tests.Integration.Entities.VersionedThing, PC.Entities.Tests.Integration" />
-		<typeAlias alias="VersionedThingList" type="PC.Entities.Tests.Integration.Entities.VersionedThingList, PC.Entities.Tests.Integration" />
+		<typeAlias alias="VersionedThing" type="PebbleCode.Entities.Tests.Integration.Entities.VersionedThing, PC.Tests" />
+		<typeAlias alias="VersionedThingList" type="PebbleCode.Entities.Tests.Integration.Entities.VersionedThingList, PC.Tests" />
 	</alias>
 			
 	<resultMaps>
@@ -11,7 +11,7 @@
 			<result property="DbId" column="id" type="int" dbType="Int"/>
 			<result property="DbName" column="name" type="string" dbType="varchar"/>
 			<result property="DbVersionNo" column="version_no" type="int" dbType="Int"/>
-			<result property="DbVersionDate" column="version_date" type="DateTime" dbType="DateTime"/>
+			<result property="DbVersionDate" column="version_date" type="Byte" dbType="Binary"/>
 		</resultMap>
 	</resultMaps>
 

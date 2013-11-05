@@ -2,15 +2,15 @@
 <sqlMap namespace="Widget" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<alias>
-		<typeAlias alias="Widget" type="PC.Entities.Tests.Integration.Entities.Widget, PC.Entities.Tests.Integration" />
-		<typeAlias alias="WidgetList" type="PC.Entities.Tests.Integration.Entities.WidgetList, PC.Entities.Tests.Integration" />
+		<typeAlias alias="Widget" type="PebbleCode.Entities.Tests.Integration.Entities.Widget, PC.Tests" />
+		<typeAlias alias="WidgetList" type="PebbleCode.Entities.Tests.Integration.Entities.WidgetList, PC.Tests" />
 	</alias>
 			
 	<resultMaps>
 		<resultMap id="WidgetResult" class="Widget">
 			<result property="DbId" column="id" type="int" dbType="Int"/>
 			<result property="DbThingId" column="thing_id" type="int" dbType="Int"/>
-			<result property="DbDescription" column="description" type="string" dbType="varchar"/>
+			<result property="DbDescription" column="DESCRIPTION" type="string" dbType="varchar"/>
 		</resultMap>
 	</resultMaps>
 
@@ -20,7 +20,7 @@
 		<sql id="WidgetColumnNamesFragment">
 			widget.id,
 			widget.thing_id,
-			widget.description
+			widget.DESCRIPTION
 		</sql>
 	
 		<!-- Select entity by primary key -->
@@ -115,7 +115,7 @@
 				widget
 				(
 					thing_id,
-					description
+					DESCRIPTION
 				)
 			VALUES
 				(
@@ -132,7 +132,7 @@
 				widget
 			SET
 				thing_id=#DbThingId#,
-				description=#DbDescription#
+				DESCRIPTION=#DbDescription#
 			WHERE
 				id=#DbId#
 		</update>

@@ -1,6 +1,6 @@
 ﻿using PebbleCode.Entities;
 
-namespace PebbleCode.Tests.Entities
+namespace PebbleCode.Entities.Tests.Integration.Entities
 {
     public class TestUpdateContext : UpdateContext<TestUpdateContextConstants>
     {

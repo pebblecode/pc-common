@@ -4,7 +4,7 @@ using PebbleCode.Framework;
 using PebbleCode.Framework.IoC;
 using PebbleCode.Repository;
 
-namespace PC.Entities.Tests.Integration.Repository
+namespace PebbleCode.Entities.Tests.Integration.Repository
 {
 
     /// <summary>

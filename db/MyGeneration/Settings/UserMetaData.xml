@@ -1,0 +1,91 @@
+<MyMeta>
+  <Global>
+    <Databases>
+      <Database p="pc_test">
+        <Column>
+          <Properties />
+        </Column>
+        <Table>
+          <Properties />
+        </Table>
+      </Database>
+    </Databases>
+  </Global>
+  <Databases>
+    <Database p="pc_test" n="">
+      <Tables>
+        <Table p="field_test" n="">
+          <Columns>
+            <Column p="enum_field" n="enum_field">
+              <Properties>
+                <Property k="EnumType" v="TestEnum" />
+              </Properties>
+            </Column>
+            <Column p="enum_field_nullable" n="">
+              <Properties>
+                <Property k="EnumType" v="TestEnum" />
+              </Properties>
+            </Column>
+            <Column p="object_field" n="">
+              <Properties>
+                <Property k="SerialisedType" v="PropertyBag" />
+                <Property k="InitialValue" v="new PropertyBag()" />
+              </Properties>
+            </Column>
+            <Column p="object_field_nullable" n="">
+              <Properties>
+                <Property k="SerialisedType" v="PropertyBag" />
+                <Property k="InitialValue" v="null" />
+              </Properties>
+            </Column>
+            <Column p="int_date_field" n="">
+              <Properties>
+                <Property k="IntDate" v="ignored" />
+              </Properties>
+            </Column>
+            <Column p="int_date_field_nullable" n="">
+              <Properties>
+                <Property k="IntDate" v="ignored" />
+              </Properties>
+            </Column>
+            <Column p="node_id_field" n="">
+              <Properties>
+                <Property k="IsNodeId" v="true" />
+              </Properties>
+            </Column>
+            <Column p="node_id_field_nullable" n="">
+              <Properties>
+                <Property k="IsNodeId" v="true" />
+              </Properties>
+            </Column>
+          </Columns>
+        </Table>
+        <Table p="node_builder_test" n="">
+          <Columns>
+            <Column p="field1" n="">
+              <Properties>
+                <Property k="NodeBuilder" v="true" />
+              </Properties>
+            </Column>
+            <Column p="field2" n="">
+              <Properties>
+                <Property k="NodeBuilder" v="true" />
+              </Properties>
+            </Column>
+            <Column p="node_id_field" n="">
+              <Properties>
+                <Property k="IsNodeId" v="true" />
+              </Properties>
+            </Column>
+          </Columns>
+        </Table>
+        <Table p="controlled_update_thing" n="controlled_update_thing" />
+        <Table p="widget" n="">
+          <Columns>
+            <Column p="DESCRIPTION" n="Description" />
+          </Columns>
+        </Table>
+      </Tables>
+    </Database>
+  </Databases>
+</MyMeta>

@@ -2,8 +2,8 @@
 <sqlMap namespace="Thing" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<alias>
-		<typeAlias alias="Thing" type="PC.Entities.Tests.Integration.Entities.Thing, PC.Entities.Tests.Integration" />
-		<typeAlias alias="ThingList" type="PC.Entities.Tests.Integration.Entities.ThingList, PC.Entities.Tests.Integration" />
+		<typeAlias alias="Thing" type="PebbleCode.Entities.Tests.Integration.Entities.Thing, PC.Tests" />
+		<typeAlias alias="ThingList" type="PebbleCode.Entities.Tests.Integration.Entities.ThingList, PC.Tests" />
 	</alias>
 			
 	<resultMaps>

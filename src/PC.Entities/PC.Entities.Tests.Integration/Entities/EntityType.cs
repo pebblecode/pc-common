@@ -5,7 +5,7 @@ using System.Text;
 
 using PebbleCode.Framework.Collections;
 
-namespace PebbleCode.Tests.Entities
+namespace PebbleCode.Entities.Tests.Integration.Entities
 {
     public static class EntityType
     {
