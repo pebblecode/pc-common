@@ -2,8 +2,8 @@
 <sqlMap namespace="FieldTest" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<alias>
-		<typeAlias alias="FieldTest" type="PebbleCode.Entities.Tests.Integration.Entities.FieldTest, PC.Tests" />
-		<typeAlias alias="FieldTestList" type="PebbleCode.Entities.Tests.Integration.Entities.FieldTestList, PC.Tests" />
+		<typeAlias alias="FieldTest" type="PebbleCode.Entities.Tests.Integration.Entities.FieldTest, PC.Entities.Tests.Integration" />
+		<typeAlias alias="FieldTestList" type="PebbleCode.Entities.Tests.Integration.Entities.FieldTestList, PC.Entities.Tests.Integration" />
 	</alias>
 			
 	<resultMaps>

@@ -2,8 +2,8 @@
 <sqlMap namespace="VersionedThing" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<alias>
-		<typeAlias alias="VersionedThing" type="PebbleCode.Entities.Tests.Integration.Entities.VersionedThing, PC.Tests" />
-		<typeAlias alias="VersionedThingList" type="PebbleCode.Entities.Tests.Integration.Entities.VersionedThingList, PC.Tests" />
+		<typeAlias alias="VersionedThing" type="PebbleCode.Entities.Tests.Integration.Entities.VersionedThing, PC.Entities.Tests.Integration" />
+		<typeAlias alias="VersionedThingList" type="PebbleCode.Entities.Tests.Integration.Entities.VersionedThingList, PC.Entities.Tests.Integration" />
 	</alias>
 			
 	<resultMaps>

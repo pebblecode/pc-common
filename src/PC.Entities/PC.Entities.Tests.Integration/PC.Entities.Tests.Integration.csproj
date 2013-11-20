@@ -181,10 +181,16 @@
     <Compile Include="TransactionTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
-    <EmbeddedResource Include="Repository\Maps\Config\providers.config" />
-    <EmbeddedResource Include="Repository\Maps\Config\sqlMap.config" />
+    <EmbeddedResource Include="Repository\Maps\Config\providers.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repository\Maps\Config\sqlMap.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Repository\Maps\Config\sqlMapList.mygen.xml" />

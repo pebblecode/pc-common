@@ -2,8 +2,8 @@
 <sqlMap namespace="ControlledUpdateThing" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<alias>
-		<typeAlias alias="ControlledUpdateThing" type="PebbleCode.Entities.Tests.Integration.Entities.ControlledUpdateThing, PC.Tests" />
-		<typeAlias alias="ControlledUpdateThingList" type="PebbleCode.Entities.Tests.Integration.Entities.ControlledUpdateThingList, PC.Tests" />
+		<typeAlias alias="ControlledUpdateThing" type="PebbleCode.Entities.Tests.Integration.Entities.ControlledUpdateThing, PC.Entities.Tests.Integration" />
+		<typeAlias alias="ControlledUpdateThingList" type="PebbleCode.Entities.Tests.Integration.Entities.ControlledUpdateThingList, PC.Entities.Tests.Integration" />
 	</alias>
 			
 	<resultMaps>
