@@ -1,0 +1,19 @@
+USE pc_test
+CREATE LOGIN pctest WITH PASSWORD = 'pctest'
+GO
+CREATE USER pctest FROM LOGIN pctest
+GO
+CREATE ROLE PCTestsRole
+GO
+GRANT EXECUTE TO PCTestsRole
+GO
+GRANT SELECT TO PCTestsRole
+GO
+GRANT INSERT TO PCTestsRole
+GO
+GRANT DELETE TO PCTestsRole
+GO
+GRANT UPDATE TO PCTestsRole
+GO
+exec sp_addrolemember 'PCTestsRole', 'pctest'
+GO
