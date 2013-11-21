@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Bede.Logging.Models;
 
 namespace PebbleCode.Monitoring
 {
@@ -9,11 +10,11 @@ namespace PebbleCode.Monitoring
     {
         private readonly List<ServiceMonitor> _monitors = new List<ServiceMonitor>();
 
-        public void AddMonitoredServices(string groupName)
+        public void AddMonitoredServices(string groupName, ILoggingService loggingService = null)
         {
             foreach (ServiceMonitorConfiguration config in GetServiceMonitorConfigs(groupName))
             {
-                _monitors.Add(ServiceMonitor.Create(config));
+                _monitors.Add(ServiceMonitor.Create(config, loggingService));
             }
         }
 

@@ -1,4 +1,6 @@
-﻿namespace PebbleCode.Monitoring
+﻿using Bede.Logging.Models;
+
+namespace PebbleCode.Monitoring
 {
     /// <summary>
     /// A fake service monitor that represents the currently running process.
@@ -6,7 +8,7 @@
     public class DummyServiceMonitor : ServiceMonitor
     {
         public DummyServiceMonitor(string name)
-            : base(name, @"localhost")
+            : base(name, @"localhost", new NullLogger())
         {
         }
 
