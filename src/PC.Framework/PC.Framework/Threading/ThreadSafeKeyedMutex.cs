@@ -69,11 +69,12 @@ namespace PebbleCode.Framework.Threading
         /// <param name="mutexId"></param>
         public void ReleaseMutex(int mutexId)
         {
-            Mutex mutex = _mutexes[mutexId];
-            mutex.ReleaseMutex();
+            Mutex mutex = null;
 
             lock (_mutexes)
             {
+                mutex = _mutexes[mutexId];
+                mutex.ReleaseMutex();
                 _mutexes.SafeRemove(mutexId);
             }
 
