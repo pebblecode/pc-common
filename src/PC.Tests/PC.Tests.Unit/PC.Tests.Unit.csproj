@@ -110,6 +110,7 @@
     <Compile Include="PC.Framework\ExtensionsTests_ToTempFile.cs" />
     <Compile Include="PC.Framework\PageInfoTests.cs" />
     <Compile Include="PC.Framework\ResolverTests.cs" />
+    <Compile Include="PC.Framework\ThreadSafeKeyedMutexTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilityTests\SaltedHashTest.cs" />
   </ItemGroup>
