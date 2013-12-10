@@ -13,22 +13,25 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using PC.Entities.Tests.Integration.Entities;
-using PC.Entities.Tests.Integration.Repository;
+
+using IBatisNet.DataMapper;
+
 using PebbleCode.Entities;
+using PebbleCode.Entities.Tests.Integration.Repository;
 using PebbleCode.Framework.Collections;
+using PebbleCode.Framework.Dates;
 using PebbleCode.Framework.IoC;
-using PebbleCode.Framework.Logging;
+using PebbleCode.Repository;
 using PebbleCode.Repository.Exceptions;
 
-using PebbleCode.Tests.Entities;
+using PebbleCode.Entities.Tests.Integration.Entities;
 
 namespace PebbleCode.Repository
 {
 	/// <summary>
 	/// Add support for this repo to the global DB context accessor
 	/// </summary>
-    public partial class TestDbContext
+    public partial class DbContext
     {
         [Inject]
         public FieldTestRepository FieldTestRepo { get; set; }

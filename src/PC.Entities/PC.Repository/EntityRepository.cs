@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-
+using Bede.Logging.Models;
+using Bede.Logging.Providers;
 using IBatisNet.DataMapper;
 using IBatisNet.DataMapper.Configuration;
 
@@ -14,7 +15,8 @@ using PebbleCode.Entities;
 using PebbleCode.Framework;
 using PebbleCode.Framework.Configuration;
 using PebbleCode.Framework.Utilities;
-using PebbleCode.Framework.Logging;
+using log4net;
+using PC.Entities;
 
 
 namespace PebbleCode.Repository
@@ -25,6 +27,7 @@ namespace PebbleCode.Repository
         private static ISqlMapper _mapper = null;
         private static bool _isInitialized;
         private static object _initializeLock = new object();
+        private static ILoggingService _loggingService = new Log4NetLoggingService(LogManager.GetLogger("EntitiesLogger"));
 
         /// <summary>
         /// Private initialisation routine. Only runs once.
@@ -49,7 +52,7 @@ namespace PebbleCode.Repository
                 Stream sqlMapFileStream = assembly.GetManifestResourceStream(DatabaseSettings.SqlMap_Resource);
                 if (sqlMapFileStream == null)
                     throw new Exception(string.Format("Couldn't load SQL Map Resource {0} from Assembly {1}", DatabaseSettings.SqlMap_Resource, DatabaseSettings.SqlMap_Assembly));
-                    
+
                 // Load the SQL map configuration XML
                 XmlDocument docSqlMap = new XmlDocument();
                 docSqlMap.Load(sqlMapFileStream);
@@ -76,7 +79,7 @@ namespace PebbleCode.Repository
 
                 // Mapper
                 DomSqlMapBuilder builder = new DomSqlMapBuilder();
-                    _mapper = builder.Configure(docSqlMap);
+                _mapper = builder.Configure(docSqlMap);
 
                 // Set flag
                 _isInitialized = true;
@@ -118,7 +121,7 @@ namespace PebbleCode.Repository
         [DebuggerStepThrough]
         protected void Log(string message)
         {
-            Logger.WriteDebug(message, Category.EntityFramework);
+            _loggingService.Warning(new CommonLoggingData(message, Category.EntityFramework));
         }
 
         /// <summary>

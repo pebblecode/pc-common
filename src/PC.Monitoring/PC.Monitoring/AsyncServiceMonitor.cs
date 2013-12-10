@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using PebbleCode.Framework.Logging;
+using Bede.Logging.Models;
 
 namespace PebbleCode.Monitoring
 {
@@ -11,8 +11,8 @@ namespace PebbleCode.Monitoring
     {
         private readonly int _timeout;
 
-        protected AsyncServiceMonitor(string name, string host, int timeout)
-            : base(name, host)
+        protected AsyncServiceMonitor(string name, string host, int timeout, ILoggingService loggingService = null)
+            : base(name, host, loggingService)
         {
             this._timeout = timeout;
         }
@@ -45,7 +45,7 @@ namespace PebbleCode.Monitoring
             }
             catch (Exception ex)
             {
-                Logger.WriteError("{0} error: {1}", Category.Service, ServiceMonitorTypeName, ex);
+                LoggingService.Error(new CommonFormattedLoggingData("AsyncServiceMonitor", null, "{0} error: {1}", ServiceMonitorTypeName, ex));
                 return false;
             }
             finally

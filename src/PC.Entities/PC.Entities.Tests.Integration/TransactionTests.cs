@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using NUnit.Framework;
-using PC.Entities.Tests.Integration.Entities;
+using PebbleCode.Entities.Tests.Integration.Entities;
 using PebbleCode.Repository;
 using PebbleCode.Tests;
 

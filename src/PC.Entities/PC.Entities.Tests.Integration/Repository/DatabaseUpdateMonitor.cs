@@ -1,4 +1,4 @@
-﻿namespace PC.Entities.Tests.Integration.Repository
+﻿namespace PebbleCode.Entities.Tests.Integration.Repository
 {
     /// <summary>
     /// A static class with empty implementation for PC TEsts. Stub calls to support generated code.

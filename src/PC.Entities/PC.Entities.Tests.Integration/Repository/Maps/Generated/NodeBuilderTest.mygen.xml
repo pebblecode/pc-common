@@ -2,8 +2,8 @@
 <sqlMap namespace="NodeBuilderTest" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<alias>
-		<typeAlias alias="NodeBuilderTest" type="PC.Entities.Tests.Integration.Entities.NodeBuilderTest, PC.Entities.Tests.Integration" />
-		<typeAlias alias="NodeBuilderTestList" type="PC.Entities.Tests.Integration.Entities.NodeBuilderTestList, PC.Entities.Tests.Integration" />
+		<typeAlias alias="NodeBuilderTest" type="PebbleCode.Entities.Tests.Integration.Entities.NodeBuilderTest, PC.Entities.Tests.Integration" />
+		<typeAlias alias="NodeBuilderTestList" type="PebbleCode.Entities.Tests.Integration.Entities.NodeBuilderTestList, PC.Entities.Tests.Integration" />
 	</alias>
 			
 	<resultMaps>

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using PC.Entities.Tests.Integration.Entities;
+using PebbleCode.Entities.Tests.Integration.Entities;
 using PebbleCode.Framework.IoC;
-using PebbleCode.Tests.Entities;
 using PebbleCode.Repository;
 
 namespace PebbleCode.Tests.Unit.MockTests

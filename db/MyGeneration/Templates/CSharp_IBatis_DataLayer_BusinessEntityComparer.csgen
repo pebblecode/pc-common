@@ -1,0 +1,162 @@
+﻿##|TYPE Template
+##|UNIQUEID 7cd89168-6cc5-4f94-97e6-41540f600d6e
+##|TITLE BusinessEntityComparer
+##|NAMESPACE IBatis.DataLayer
+##|SOURCE_TYPE Source
+##|OUTPUT_LANGUAGE None
+##|GUI_ENGINE .Net Script
+##|GUI_LANGUAGE C#
+##|GUI_BEGIN
+
+public class GeneratedGui : DotNetScriptGui
+{
+	public GeneratedGui(ZeusContext context) : base(context) {}
+
+	//-----------------------------------------
+	// The User Interface Entry Point
+	//-----------------------------------------
+	public override void Setup()
+	{
+		// ** UNCOMMENT CODE BELOW TO SEE UI **
+
+		//ui.Width  = 100;
+		//ui.Height = 100;
+		//GuiLabel lblDemo = ui.AddLabel("lblDemo", "Demo", "Demo Tooltip");
+		//ui.ShowGui = true;
+	}
+
+}
+##|GUI_END
+##|BODY_MODE Markup
+##|BODY_ENGINE .Net Script
+##|BODY_LANGUAGE C#
+##|BODY_TAG_START <%
+##|BODY_TAG_END %>
+##|BODY_BEGIN
+<%#NAMESPACE System.IO, System.Text, System.Text.RegularExpressions, System.Globalization, System.Collections.Generic%><%
+public class GeneratedTemplate : DotNetScriptTemplate
+{
+	%><%#FILE CSharp_IBatis_DataLayer_Common.cs%><%
+	
+	// Constructor
+	public GeneratedTemplate(ZeusContext context) : base(context) {}
+
+	//---------------------------------------------------
+	// Render() is where you want to write your logic    
+	//---------------------------------------------------
+	public override void Render()
+	{
+		// Call a method defined in IBatis_Boardbooks_Common.cs
+		AssignMemberVariables();
+
+		// Class name??
+		string classPrefix = _isVersioned ? "Versioned" : "";
+		
+		// Now output the template
+%>/*****************************************************************************/
+/***                                                                       ***/
+/***    This is an automatically generated file. It is generated using     ***/
+/***    MyGeneration in conjunction with IBatisBusinessObject template.    ***/
+/***                                                                       ***/
+/***    DO NOT MODIFY THIS FILE DIRECTLY!                                  ***/
+/***                                                                       ***/
+/***    If you need to make changes either modify the template and         ***/
+/***    regenerate or derive a class from this class and override.         ***/
+/***                                                                       ***/
+/*****************************************************************************/
+
+using NUnit.Framework;
+using PC.Tests;
+using PebbleCode.Framework.Dates;
+using <%= _entityNamespace %>;
+
+namespace <%= _rootNamespace %>.Tests.EntityComparers
+{
+    public class <%= _className %>Comparer : EntityComparerBase
+    {
+        /// <summary>
+        /// Compare two <%= _className %> entities
+        /// </summary>
+        /// <param name="expected"></param>
+        /// <param name="actual"></param>
+        public static void Compare(<%= _className %> expected, <%= _className %> actual)
+        {
+            // Check for nulls
+            if (expected == null && actual == null) return;
+            if (expected == null) Assert.Fail("Expected null, got <%= _className %>");
+            if (actual == null) Assert.Fail("Expected <%= _className %>, got null");
+
+            // Compare simple properties<%
+			
+		foreach (IColumn column in _columns)
+		{
+			if (IsExcluded(column)) continue;
+			if (IsVersionedOrControlledUpdateField(column)) continue;
+			if (IsSerialised(column)) continue;
+			
+			if (IsIntDate(column))
+			{
+			%>
+			Assert.AreEqual(DbConvert.ToDateInt(expected.<%= ColumnToPropertyName(column) %>), DbConvert.ToDateInt(actual.<%= ColumnToPropertyName(column) %>), "<%= _className %>.<%= ColumnToPropertyName(column) %> not equal");<%
+			}
+			else if (ColumnToMemberType(column) == "DateTime" ||
+				ColumnToMemberType(column) == "DateTime?" ||
+				ColumnToMemberType(column) == "byte[]" )
+			{
+			%>
+			Compare(expected.<%= ColumnToPropertyName(column) %>, actual.<%= ColumnToPropertyName(column) %>, "<%= _className %>.<%= ColumnToPropertyName(column) %>");<%
+			}
+			else
+			{%>
+			Assert.AreEqual(expected.<%= ColumnToPropertyName(column) %>, actual.<%= ColumnToPropertyName(column) %>, "<%= _className %>.<%= ColumnToPropertyName(column) %> not equal");<%
+			}
+		}
+			
+		IList<IForeignKey> foreignKeys = GetPrimaryForeignKeys();
+		foreach (IForeignKey foreignKey in foreignKeys)
+		{
+			KeyDetails fkInfo = GetForeignKeyDetails(foreignKey);%>
+			
+			// Compare <%= fkInfo.PropertyName %>
+			if (expected.<%= fkInfo.PropertyName %>Populated && actual.<%= fkInfo.PropertyName %>Populated)
+				<%= fkInfo.ClassName %>Comparer.Compare(expected.<%= fkInfo.PropertyName %>, actual.<%= fkInfo.PropertyName %>);<%
+		}
+					
+		foreignKeys = GetNonPrimaryForeignKeys();
+		foreach (IForeignKey foreignKey in foreignKeys)
+		{
+			KeyDetails pkInfo = GetPrimaryKeyDetails(foreignKey);%>
+			
+			// Compare <%= pkInfo.PropertyName %>
+			if (expected.<%= pkInfo.PropertyName %>Populated && actual.<%= pkInfo.PropertyName %>Populated)
+				<%= pkInfo.ClassName %>Comparer.Compare(expected.<%= pkInfo.PropertyName %>, actual.<%= pkInfo.PropertyName %>);<%
+		}%>
+		}
+
+        /// <summary>
+        /// Compare lists of <%= _className %> entities
+        /// </summary>
+        /// <param name="expected"></param>
+        /// <param name="actual"></param>
+        public static void Compare(<%= _listClassName %> expected, <%= _listClassName %> actual)
+        {
+            // Check for nulls
+            if (expected == null && actual == null)  return;
+            if (expected == null) Assert.Fail("Expected null, got list");
+            if (actual == null) Assert.Fail("Expected list, got null");
+
+            // Check counts
+            Assert.AreEqual(expected.Count, actual.Count, "List counts not equal");
+
+            // Now compare each entity in the list
+            expected.SortById();
+            actual.SortById();
+            for (int index = 0; index < expected.Count; index++)
+				Compare(expected[index], actual[index]);
+        }
+    }
+}<%
+	}
+}
+%>
+##|BODY_END

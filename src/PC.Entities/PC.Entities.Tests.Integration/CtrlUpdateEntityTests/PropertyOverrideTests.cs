@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using PC.Entities.Tests.Integration.Entities;
+using PebbleCode.Entities.Tests.Integration.Entities;
 using PebbleCode.Framework.Utilities;
-using PebbleCode.Tests.Entities;
 
 namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
 {

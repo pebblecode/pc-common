@@ -1,0 +1,1283 @@
+﻿##|TYPE Template
+##|UNIQUEID 959c736b-3bd1-4a69-a10a-ef4d5925b54d
+##|TITLE RepositoryClass
+##|NAMESPACE IBatis.DataLayer
+##|SOURCE_TYPE Source
+##|OUTPUT_LANGUAGE None
+##|GUI_ENGINE .Net Script
+##|GUI_LANGUAGE C#
+##|GUI_BEGIN
+
+public class GeneratedGui : DotNetScriptGui
+{
+	public GeneratedGui(ZeusContext context) : base(context) {}
+
+	//-----------------------------------------
+	// The User Interface Entry Point
+	//-----------------------------------------
+	public override void Setup()
+	{
+		// ** UNCOMMENT CODE BELOW TO SEE UI **
+
+		//ui.Width  = 100;
+		//ui.Height = 100;
+		//GuiLabel lblDemo = ui.AddLabel("lblDemo", "Demo", "Demo Tooltip");
+		//ui.ShowGui = true;
+	}
+
+}
+##|GUI_END
+##|BODY_MODE Markup
+##|BODY_ENGINE .Net Script
+##|BODY_LANGUAGE C#
+##|BODY_TAG_START <%
+##|BODY_TAG_END %>
+##|BODY_BEGIN
+<%#NAMESPACE System.IO, System.Text, System.Text.RegularExpressions, System.Globalization, System.Collections.Generic%><%
+public class GeneratedTemplate : DotNetScriptTemplate
+{
+	%><%#FILE CSharp_IBatis_DataLayer_Common.cs%><%
+	
+	// Constructor
+	public GeneratedTemplate(ZeusContext context) : base(context) {}
+
+	//---------------------------------------------------
+	// Render() is where you want to write your logic    
+	//---------------------------------------------------
+	public override void Render()
+	{
+		// Call a method defined in IBatis_Boardbooks_Common.cs
+		AssignMemberVariables();
+		
+		// Now output the template
+%>/*****************************************************************************/
+/***                                                                       ***/
+/***    This is an automatically generated file. It is generated using     ***/
+/***    MyGeneration in conjunction with IBatisBusinessObject template.    ***/
+/***                                                                       ***/
+/***    DO NOT MODIFY THIS FILE DIRECTLY!                                  ***/
+/***                                                                       ***/
+/***    If you need to make changes either modify the template and         ***/
+/***    regenerate or derive a class from this class and override.         ***/
+/***                                                                       ***/
+/*****************************************************************************/
+
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+using IBatisNet.DataMapper;
+
+using PebbleCode.Entities;
+using PebbleCode.Entities.Tests.Integration.Repository;
+using PebbleCode.Framework.Collections;
+using PebbleCode.Framework.Dates;
+using PebbleCode.Framework.IoC;
+using PebbleCode.Repository;
+using PebbleCode.Repository.Exceptions;
+
+using <%= _entityNamespace %>;
+
+namespace <%= _rootNamespace %>.Repository
+{
+	/// <summary>
+	/// Add support for this repo to the global DB context accessor
+	/// </summary>
+    public partial class DbContext
+    {
+        [Inject]
+        public <%=_className %>Repository <%=_className %>Repo { get; set; }
+    }
+	
+	/// <summary>
+	/// Provides access to the <%= _className %> Repository
+	/// </summary>
+	public partial class <%=_className %>Repository : <%= _workingSource.IsTable ? "Editable" : "" %>EntityRepository<<%=_className %>, <%=_listClassName %>>
+	{
+		/// <summary>
+		/// Get all the instances of <%= _className %> from the store
+		/// </summary>
+		/// <returns>All the entities in the system</returns>
+		public override <%= _listClassName %> GetAll()
+		{
+			return GetAll(EntityType.None);
+		}
+		
+		/// <summary>
+		/// Get all the instances of <%= _className %> from the store
+		/// </summary>
+		/// <returns>All the entities in the system</returns>
+		public override <%= _listClassName %> GetAll(Flags toPopulate)
+		{	
+            Log("GetAll", toPopulate);
+			<%= _listClassName %> result = (<%= _listClassName %>)this.Mapper.QueryWithRowDelegate<<%= _className %>>("Select<%= _className %>", null, OnAfterLoadRowDelegateHandler);
+			Populate(result, toPopulate);
+			return result;
+		}
+
+		/// <summary>
+		/// Get several instances of <%= _className %> from the store
+        /// </summary>
+        /// <param name="<%= ToVariableName(_pk.Name) %>s">The ids of the entities to get</param>
+        /// <returns>A collection of the entities with the given ids</returns>
+        public override <%= _listClassName %> Get(<%= ColumnToVariableType(_pk) %>[] <%= ToVariableName(_pk.Name) %>s)
+		{
+			return Get(<%= ToVariableName(_pk.Name) %>s, EntityType.None);
+		}
+
+		/// <summary>
+		/// Get several instances of <%= _className %> from the store
+        /// </summary>
+        /// <param name="<%= ToVariableName(_pk.Name) %>s">The ids of the entities to get</param>
+        /// <returns>A collection of the entities with the given ids</returns>
+        public override <%= _listClassName %> Get(<%= ColumnToVariableType(_pk) %>[] <%= ToVariableName(_pk.Name) %>s, Flags toPopulate)
+		{
+			if (<%= ToVariableName(_pk.Name) %>s == null) throw new ArgumentNullException("<%= ToVariableName(_pk.Name) %>s");
+			Log("Get(ids)", <%= ToVariableName(_pk.Name) %>s, toPopulate);
+			if (<%= ToVariableName(_pk.Name) %>s.Length == 0) return new <%= _listClassName %>();
+			<%= _listClassName %> result = (<%= _listClassName %>)this.Mapper.QueryWithRowDelegate<<%= _className %>>("Select<%= _className %>s", <%= ToVariableName(_pk.Name) %>s, OnAfterLoadRowDelegateHandler);
+			Populate(result, toPopulate);
+			return result;
+		}
+
+		/// <summary>
+		/// Get an instance of <%= _className %> from the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_pk.Name) %>">The id of the entity to get</param>
+		/// <returns>The entity with the given Id</returns>
+		public override <%= _className %> Get(<%= ColumnToVariableType(_pk) %> <%= ToVariableName(_pk.Name) %>)
+		{
+			return Get(<%= ToVariableName(_pk.Name) %>, EntityType.None);
+		}
+
+		/// <summary>
+		/// Get an instance of <%= _className %> from the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_pk.Name) %>">The id of the entity to get</param>
+		/// <returns>The entity with the given Id</returns>
+		public override <%= _className %> Get(<%= ColumnToVariableType(_pk) %> <%= ToVariableName(_pk.Name) %>, Flags toPopulate)
+		{
+            Log("Get(id)", <%= ToVariableName(_pk.Name) %>, toPopulate);
+			<%= _className %> <%= ToVariableName(_className) %> = this.Mapper.QueryForObject<<%= _className %>>("Select<%= _className %>", <%= ToVariableName(_pk.Name) %>);
+			if (<%= ToVariableName(_className) %> != null)
+			{
+				OnAfterLoadEntity(<%= ToVariableName(_className) %>);
+				Populate(<%= ToVariableName(_className) %>, toPopulate);
+			}
+			return <%= ToVariableName(_className) %>;
+		}
+<%
+		
+		WriteLookUps(false);
+
+		if (!_doingSummary && _workingSource.IsTable)
+		{
+			if (!_isVersioned)
+			{
+	%>  
+		/// <summary>
+		/// Delete a <%= _className %> from the store.
+		/// Does NOT delete references. Make sure all sub entities deleted first.
+		/// </summary>
+        /// <param name="<%= ToVariableName(_pk.Name) %>">The id of the entity to delete</param>
+        public virtual void Delete(<%= ColumnToVariableType(_pk) %> <%= ToVariableName(_pk.Name) %>)
+		{
+            Log("Delete", <%= ToVariableName(_pk.Name) %>, EntityType.None);
+			if (this.Mapper.Delete("Delete<%= _className %>", <%= ToVariableName(_pk.Name) %>) != 1)
+				Throw<%= _className %>EntityException(<%= ToVariableName(_pk.Name) %>);
+			RaiseModelChanged();
+		}<%
+			}
+		%>
+		
+		/// <summary>
+		/// Delete a <%= _className %> from the store
+		/// </summary>
+        /// <param name="<%= ToVariableName(_className) %>">The entity to delete</param>
+		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
+        public override void Delete(Flags toDelete, <%= _className %> <%= ToVariableName(_className) %>)
+		{
+			Delete(new List<Entity>(), toDelete, new List<<%= _className %>>{ <%= ToVariableName(_className) %> });
+		}
+
+		/// <summary>
+		/// Delete multiple <%= _className %> entities from the store.
+		/// </summary>
+        /// <param name="<%= ToVariableName(_className) %>s">The entities to delete</param>
+		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
+        public override void Delete(Flags toDelete, IEnumerable<<%= _className %>> <%= ToVariableName(_className) %>s)
+		{
+			Delete(new List<Entity>(), toDelete, <%= ToVariableName(_className) %>s);
+		}
+		
+		/// <summary>
+		/// Delete <%= _className %> entities from the store, including sub entites marked for deletion
+		/// </summary>
+        /// <param name="entitiesBeingHandled">Entities already being deleted further up the delete stack</param>
+		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to delete</param>
+		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
+		internal void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, IEnumerable<<%= _className %>> <%= ToVariableName(_className) %>s)
+		{
+            if (<%= ToVariableName(_className) %>s == null)
+				throw new ArgumentNullException("<%= ToVariableName(_className) %>s");
+			Log("Delete", <%= ToVariableName(_className) %>s.Select<<%= _className %>, int>(entity => entity.Identity).ToArray<int>(), EntityType.None);
+			
+			// Copy the list of entities being handled, and add this new set of entities to it.
+			// We're handling those now.
+            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            entitiesNowBeingHandled.AddRange(<%= ToVariableName(_className) %>s);
+
+			// Loop over each entity and delete it.
+			foreach (<%= _className %> <%= ToVariableName(_className) %> in <%= ToVariableName(_className) %>s)
+			{
+                // Already being deleted higher up the stack?
+                if (entitiesBeingHandled.ContainsEntity(<%= ToVariableName(_className) %>))
+                    continue;
+					
+                //Allow partial/subclasses to perform additional processing
+                OnBeforeDeleteEntity(<%= ToVariableName(_className) %>);
+<%				
+			// Loop over all foreign keys where we are the primary key.
+			// That means we have a collection (we are the parent) and
+			// should save them here
+			foreach(IForeignKey foreignKey in GetPrimaryForeignKeys())
+			{
+				KeyDetails fkInfo = GetForeignKeyDetails(foreignKey);
+				
+				%>
+				// Delete child entities
+				if ((toDelete & EntityType.<%= fkInfo.ClassName %>) == EntityType.<%= fkInfo.ClassName %>
+					&& <%= ToVariableName(_className) %>.<%= fkInfo.PropertyName %>Populated)
+				{
+					foreach (<%= fkInfo.ClassName %> <%= ToVariableName("child" + fkInfo.ClassName) %> in <%= ToVariableName(_className) %>.<%= fkInfo.PropertyName %>)
+					{
+						if (!entitiesBeingHandled.ContainsEntity(<%= ToVariableName("child" + fkInfo.ClassName) %>))
+							<%= fkInfo.ClassName %>Repo.Delete(entitiesNowBeingHandled, toDelete, <%= ToVariableName("child" + fkInfo.ClassName) %>);
+					}
+				}
+<% 
+			}%>
+				// Now delete the entity
+				if (this.Mapper.Delete("Delete<%= _className %>", <%= ToVariableName(_className) %><% if (!_isVersioned){ %>.Identity<%}%>) != 1)
+					Throw<%= _className %>EntityException(<%= ToVariableName(_className) %>.Identity);
+				<%= ToVariableName(_className) %>.ResetChanged();                 
+				//Allow partial/subclasses to perform additional processing
+				OnAfterDeleteEntity(<%= ToVariableName(_className) %>);
+			}
+			
+			//Save to the repository updates table
+			if (<%= ToVariableName(_className) %>s.Count() > 0)
+				RaiseModelChanged();
+		}
+		
+		/// <summary>
+		/// Delete all entries in this table - use with care!
+		/// Does NOT delete references. Make sure all sub entities deleted first.
+		/// Also note that events and OnAfter events will not be called for each valuation
+		/// </summary>
+		public override void DeleteAll()
+		{
+            Log("DeleteAll", EntityType.None);
+			int deleted = this.Mapper.Delete("DeleteAll<%= _className %>", null);
+			
+			//Save to the repository updates table
+			if (deleted > 0)
+				RaiseModelChanged();
+		}
+
+		/// <summary>
+		/// Save (insert/update) a <%= _className %> into the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to save</param>
+		public override void Save(params <%= _className %>[] <%= ToVariableName(_className) %>s)
+		{
+            Save(EntityType.None, <%= ToVariableName(_className) %>s);
+		}
+
+		/// <summary>
+		/// Save (insert/update) a <%= _className %> into the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to save</param>
+		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
+		public override void Save(Flags toSave, params <%= _className %>[] <%= ToVariableName(_className) %>s)
+		{
+            Save(new List<Entity>(), toSave, <%= ToVariableName(_className) %>s);
+		}
+
+		/// <summary>
+		/// Save (insert/update) a <%= _className %> into the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_listClassName) %>">The <%= _className %>s to save</param>
+		public override void Save(<%= _listClassName %> <%= ToVariableName(_listClassName) %>)
+		{
+            Save(EntityType.None, <%= ToVariableName(_listClassName) %>);
+		}
+
+		/// <summary>
+		/// Save (insert/update) a <%= _className %> into the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_listClassName) %>">The <%= _className %>s to save</param>
+		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
+		public override void Save(Flags toSave, <%= _listClassName %> <%= ToVariableName(_listClassName) %>)
+		{
+            Save(new List<Entity>(), toSave, <%= ToVariableName(_listClassName) %>.ToArray());
+		}
+
+		/// <summary>
+		/// Save (insert/update) a <%= _className %> into the store
+		/// </summary>
+        /// <param name="entitiesBeingHandled">Entities already being saved further up the save stack</param>
+		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to save</param>
+		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
+		internal void Save(List<Entity> entitiesBeingHandled, Flags toSave, params <%= _className %>[] <%= ToVariableName(_className) %>s)
+		{
+            if (<%= ToVariableName(_className) %>s == null)
+				throw new ArgumentNullException("<%= ToVariableName(_className) %>s");
+			Log("Save", <%= ToVariableName(_className) %>s.Select<<%= _className %>, int>(entity => entity.Identity).ToArray<int>(), EntityType.None);
+			
+			// Copy the list of entities being handled, and add this new set of entities to it.
+			// We're handling those now.
+            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            entitiesNowBeingHandled.AddRange(<%= ToVariableName(_className) %>s);
+			
+			// Loop over each entity and save it.
+			foreach (<%= _className %> <%= ToVariableName(_className) %> in <%= ToVariableName(_className) %>s)
+			{
+				<% if (_isControlledUpdate) { %>using (<%= (new CultureInfo("en-GB")).TextInfo.ToTitleCase(_rootNamespace.ToLower()) %>UpdateContexts.PebbleAdmin(<%= ToVariableName(_className) %>)) {<%}%>
+			
+                // Already being saved higher up the stack?
+                if (entitiesBeingHandled.ContainsEntity(<%= ToVariableName(_className) %>))
+                    continue;
+					
+				// Allow derived/partial class to do extra work
+				OnBeforeSaveEntity(<%= ToVariableName(_className) %>);<%
+				
+			// Loop over all foreign keys where we are the foreign key.
+			// That means we have a single instance of those entities and
+			// should save them here
+			foreach(IForeignKey foreignKey in GetNonPrimaryForeignKeys())
+			{
+				KeyDetails pkInfo = GetPrimaryKeyDetails(foreignKey);
+				
+				%>
+				
+				// Save parent entity... so we can update our key to it
+				if ((toSave & EntityType.<%= pkInfo.ClassName %>) == EntityType.<%= pkInfo.ClassName %>
+					&& <%= ToVariableName(_className) %>.<%= pkInfo.PropertyName %>Populated)
+				{
+					if (!entitiesBeingHandled.ContainsEntity(<%= ToVariableName(_className) %>.<%= pkInfo.PropertyName %>))
+					{
+						<%= pkInfo.ClassName %>Repo.Save(entitiesNowBeingHandled, toSave, <%= ToVariableName(_className) %>.<%= pkInfo.PropertyName %>);
+						<%= ToVariableName(_className) %>.<%= ToPropertyName(pkInfo.ColumnName) %> = <%= ToVariableName(_className) %>.<%= pkInfo.PropertyName %>.Identity;
+					}
+				}<%
+			}	
+				%>
+				
+				bool saved = false;
+				
+				try
+				{
+					// Save the entity
+					if (<%= ToVariableName(_className) %>.IsNew)
+					{
+						this.Mapper.Insert("Insert<%= _className %>", <%= ToVariableName(_className) %>);
+						saved = true;
+					}
+					else if (<%= ToVariableName(_className) %>.IsChanged)
+					{
+						if (this.Mapper.Update("Update<%= _className %>", <%= ToVariableName(_className) %>) != 1)
+							Throw<%= _className %>EntityException(<%= ToVariableName(_className) %>.Identity);
+						saved = true;
+					}
+				}
+				catch (Exception ex)
+				{
+					throw EntityLogger.WriteUnexpectedException(
+						ex, 
+						"Failed to insert/update Entity",
+						Category.EntityFramework,
+						<%= ToVariableName(_className) %>);
+				}<%
+				
+			// Loop over all foreign keys where we are the primary key.
+			// That means we have a collection (we are the parent) and
+			// should save them here
+			foreach(IForeignKey foreignKey in GetPrimaryForeignKeys())
+			{
+				KeyDetails fkInfo = GetForeignKeyDetails(foreignKey);
+				
+				%>
+				
+				// Save child entities... update their key to us
+				if ((toSave & EntityType.<%= fkInfo.ClassName %>) == EntityType.<%= fkInfo.ClassName %>
+					&& <%= ToVariableName(_className) %>.<%= fkInfo.PropertyName %>Populated)
+				{
+					foreach (<%= fkInfo.ClassName %> <%= ToVariableName("child" + fkInfo.ClassName) %> in <%= ToVariableName(_className) %>.<%= fkInfo.PropertyName %>)
+					{
+						<%= ToVariableName("child" + fkInfo.ClassName) %>.<%= ToPropertyName(fkInfo.ColumnName) %> = <%= ToVariableName(_className) %>.Identity;
+						if (!entitiesBeingHandled.ContainsEntity(<%= ToVariableName("child" + fkInfo.ClassName) %>))
+						{
+                            if (<%= ToVariableName("child" + fkInfo.ClassName) %>.IsDeleted)
+                                <%= fkInfo.ClassName %>Repo.Delete(entitiesNowBeingHandled, toSave, <%= ToVariableName("child" + fkInfo.ClassName) %>);
+                            else
+								<%= fkInfo.ClassName %>Repo.Save(entitiesNowBeingHandled, toSave, <%= ToVariableName("child" + fkInfo.ClassName) %>);
+						}
+					}
+				}<%
+			}	
+				%>
+				
+				// Post save protocol 
+				if (saved)
+				{
+					// Allow derived/partial class to do extra work
+					OnAfterSaveEntity(<%= ToVariableName(_className) %>);
+					<% if (_isVersioned) {%>try
+					{
+						VersionedEntityInfo versionInfo = this.Mapper.QueryForObject<VersionedEntityInfo>(
+							"Select<%= _className %>VersionInfo", 
+							<%= ToVariableName(_className) %>.Identity);
+						<%= ToVariableName(_className) %>.Reset(versionInfo);
+					}
+					catch (Exception ex)
+					{
+						throw EntityLogger.WriteUnexpectedException(
+							ex, 
+							"Failed to reset version information",
+							Category.EntityFramework,
+							<%= ToVariableName(_className) %>);
+					}<%	} else { %>				
+					<%= ToVariableName(_className) %>.Reset();<% }%>
+					
+					//The insert/update will have resulted in a new database_update row, inform interested parties
+					RaiseModelChanged();
+				}
+			<% if (_isControlledUpdate) { %>}<%}%>
+			}
+		}
+
+		/// <summary>
+		/// Throws an exception describing the entity we could not find
+		/// </summary>
+		/// <param name="<%= ToVariableName(_pk.Name) %>">The entity objects Id</param>
+		private void Throw<%= _className %>EntityException(<%= ColumnToVariableType(_pk) %> <%= ToVariableName(_pk.Name) %>)
+		{
+			throw new EntityNotFoundException(new EntityDescriptor(<%= ToVariableName(_pk.Name) %>, typeof(<%= _className %>)));	
+		}		
+<% 
+		}  // End of... if (!_doingSummary)
+%>    		
+        /// <summary>
+        /// Populate the sub entities of <%= ToVariableName(_listClassName) %>
+        /// </summary>
+        /// <param name="<%= ToVariableName(_className) %>s"></param>
+        /// <param name="toPopulate"></param>
+        public override void Populate(IEnumerable<<%=_className %>> <%=ToVariableName(_className) %>s, Flags toPopulate)
+        {
+            Log("Populate", <%=ToVariableName(_className) %>s.GetIdenties(), toPopulate);
+
+            // Implement breadth first loading of related entities.
+			// Any entity that has been requested to be loaded, should be loaded at this level where possible.
+			// Remove all sub entity types that this entity relates to directly.
+            Flags stillToPopulate = toPopulate;
+<% 			// Loop over all foreign keys (both those we where are primary and not)
+			foreach(IForeignKey foreignKey in GetPrimaryForeignKeys())
+			{
+				KeyDetails fkInfo = GetForeignKeyDetails(foreignKey);
+%>			stillToPopulate = stillToPopulate.Remove(EntityType.<%= fkInfo.ClassName %>);
+<% 			}
+			foreach(IForeignKey foreignKey in GetNonPrimaryForeignKeys())
+			{
+				KeyDetails pkInfo = GetPrimaryKeyDetails(foreignKey);
+%>			stillToPopulate = stillToPopulate.Remove(EntityType.<%= pkInfo.ClassName %>);
+<% 			}
+
+			// Loop over all foreign keys where we are the primary key.
+			// That means we have collections of those entities
+			foreach(IForeignKey foreignKey in GetPrimaryForeignKeys())
+			{
+				KeyDetails fkInfo = GetForeignKeyDetails(foreignKey);
+				KeyDetails pkInfo = GetPrimaryKeyDetails(foreignKey);%>
+			// Get sub entities: <%= fkInfo.ClassName %>
+			if ((toPopulate & EntityType.<%= fkInfo.ClassName %>) == EntityType.<%= fkInfo.ClassName %>)
+            {
+				// Grab the ones that actually need populating
+				IEnumerable<<%=_className %>> toBePopulated = <%=ToVariableName(_className) %>s.Where(entity => entity.<%= fkInfo.PropertyName %>Populated == false);
+				
+				// And load the sub entities for those ones.
+                <%= fkInfo.ListClassName %> <%= ToVariableName("child" + fkInfo.ListClassName) %> = toBePopulated.Count() > 0
+                    ? <%= fkInfo.ClassName %>Repo.GetBy<%= ToPascalCase(fkInfo.ColumnName) %>(
+						toBePopulated.GetIdenties()<% if (fkInfo.ForeignKeyIsNullable) { %>.Select(i => new Nullable<int>(i)).ToArray()<%}%>, 
+						stillToPopulate)
+                    : new <%= fkInfo.ListClassName %>();
+                Dictionary<<%= fkInfo.KeyPropertyType %>, List<<%= fkInfo.ClassName %>>> <%= ToVariableName(fkInfo.ListClassName) %>By<%= ToPascalCase(fkInfo.ColumnName) %> = <%= ToVariableName("child" + fkInfo.ListClassName) %>.MapBy<%= ToPascalCase(fkInfo.ColumnName) %>;
+				
+				// Now go over all the entites. For ones that need popualting, populate collection
+				// directly. For those already populated, make a check on sub entities to ensure
+				// they are loaded to the required level
+				<%= fkInfo.ListClassName %> toBeChecked = new <%= fkInfo.ListClassName %>();
+                foreach (<%= _className %> <%= ToVariableName(_className) %> in <%=ToVariableName(_className) %>s)
+                {
+					if (!<%= ToVariableName(_className) %>.<%= fkInfo.PropertyName %>Populated)
+					{
+						var <%= fkInfo.ListClassName %>sFor<%= _className %> = <%= ToVariableName(fkInfo.ListClassName) %>By<%= ToPascalCase(fkInfo.ColumnName) %>.ContainsKey(<%= ToVariableName(_className) %>.Identity)
+							? <%= ToVariableName(fkInfo.ListClassName) %>By<%= ToPascalCase(fkInfo.ColumnName) %>[<%= ToVariableName(_className) %>.Identity]
+							: null;
+						if (<%= fkInfo.ListClassName %>sFor<%= _className %> != null)
+						{
+							<%= fkInfo.ListClassName %>sFor<%= _className %>.ForEach(entity => entity.<%= pkInfo.PropertyName %> = <%= ToVariableName(_className) %>);
+						}
+						<%= ToVariableName(_className) %>.Populate<%= fkInfo.PropertyName %>(<%= fkInfo.ListClassName %>sFor<%= _className %>);
+					}
+					else
+					{
+						toBeChecked.AddRange(<%= ToVariableName(_className) %>.<%= fkInfo.PropertyName %>);
+					}
+                }
+				
+				// If there's any "to be checked" (because they were already loaded) let the entities own
+				// repo do whatever checks it needs to do
+                if (toBeChecked.Count > 0)
+					<%= fkInfo.ClassName %>Repo.Populate(toBeChecked, stillToPopulate);
+            }
+<% 
+			
+			}
+			
+			// Loop over all foreign keys where we are the foreign key.
+			// That means we have a single instance of those entities
+			foreach(IForeignKey foreignKey in GetNonPrimaryForeignKeys())
+			{
+				KeyDetails pkInfo = GetPrimaryKeyDetails(foreignKey);
+
+%>			
+			// Get parent entities: <%= pkInfo.ClassName %>
+			if ((toPopulate & EntityType.<%= pkInfo.ClassName %>) == EntityType.<%= pkInfo.ClassName %>)
+            {
+				// Grab the ids for the ones that actually need populating
+				IEnumerable<<%=_className %>> toBePopulated = <%=ToVariableName(_className) %>s.Where(entity => entity.<%= pkInfo.PropertyName %>RequiresPopulation);
+				int[] idsToLoad = toBePopulated.Select(entity => entity.<%= pkInfo.KeyPropertyNameWithValue %>).ToList().ToArray();
+				
+				// And load the sub entities for those ones.
+                <%= pkInfo.ListClassName %> <%= ToVariableName("parent" + pkInfo.ListClassName) %> = toBePopulated.Count() > 0
+                    ? <%= pkInfo.ClassName %>Repo.Get(idsToLoad, stillToPopulate)
+                    : new <%= pkInfo.ListClassName %>();
+                Dictionary<int, <%= pkInfo.ClassName %>> <%= ToVariableName(pkInfo.ListClassName) %>ById = <%= ToVariableName("parent" + pkInfo.ListClassName) %>.MapById;
+				
+				// Now go over all the entites. For ones that need popualting, populate entities
+				// directly. For those already populated, make a check on sub entities to ensure
+				// they are loaded to the required level
+				<%= pkInfo.ListClassName %> toBeChecked = new <%= pkInfo.ListClassName %>();
+                foreach (<%= _className %> <%= ToVariableName(_className) %> in <%=ToVariableName(_className) %>s)
+                {
+					if (<%= ToVariableName(_className) %>.<%= pkInfo.PropertyName %>RequiresPopulation)
+					{
+						<%= ToVariableName(_className) %>.<%= pkInfo.PropertyName %> =
+							<%= ToVariableName(pkInfo.ListClassName) %>ById.ContainsKey(<%= ToVariableName(_className) %>.<%= pkInfo.KeyPropertyNameWithValue %>)
+							? <%= ToVariableName(pkInfo.ListClassName) %>ById[<%= ToVariableName(_className) %>.<%= pkInfo.KeyPropertyNameWithValue %>]
+							: null;
+					}
+					else if (<%= ToVariableName(_className) %>.<%= pkInfo.PropertyName %>Populated)
+					{
+						toBeChecked.Add(<%= ToVariableName(_className) %>.<%= pkInfo.PropertyName %>);
+					}
+                }
+				
+				// If there's any "to be checked" (because they were already loaded) let the entiies own
+				// repo do whatever checks it needs to do
+                if (toBeChecked.Count > 0)
+					<%= pkInfo.ClassName %>Repo.Populate(toBeChecked, stillToPopulate);
+            }
+<%			}
+%>        }
+		
+		/// <summary>
+		/// Notified listeners in the process, as well as via the database,
+		/// that the indicated model has changed
+		/// </summary>
+		private void RaiseModelChanged()
+		{		
+			//Allow other clients to learn of changes
+            DatabaseUpdateMonitor.IndicateChanged();
+		}
+	}
+
+	/// <summary>
+	/// Provides static access to the <%= _className %> store
+	/// </summary>
+	public static partial class <%=_className %>Repo
+	{
+        private static <%=_className %>Repository _instance = new <%=_className %>Repository();
+		
+		/// <summary>
+		/// Get all the instances of <%= _className %> from the store
+		/// </summary>
+		/// <returns>All the entities in the system</returns>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static <%= GetListClassName(_className) %> GetAll()
+		{
+			return _instance.GetAll();
+		}
+
+		/// <summary>
+		/// Get all the instances of <%= _className %> from the store
+		/// </summary>
+		/// <returns>All the entities in the system</returns>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static <%= _listClassName %> GetAll(Flags toPopulate)
+		{
+			return _instance.GetAll(toPopulate);
+		}
+		
+		/// <summary>
+		/// Get several instances of <%= _className %> from the store
+		/// </summary>
+        /// <param name="<%= ToVariableName(_pk.Name) %>s">The ids of the entities to get</param>
+        /// <returns>A list of the entities with the given ids</returns>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static <%= GetListClassName(_className) %> Get(<%= ColumnToVariableType(_pk) %>[] <%= ToVariableName(_pk.Name) %>s)
+		{
+			return _instance.Get(<%= ToVariableName(_pk.Name) %>s);
+		}
+		
+		/// <summary>
+		/// Get several instances of <%= _className %> from the store
+		/// </summary>
+        /// <param name="<%= ToVariableName(_pk.Name) %>s">The ids of the entities to get</param>
+        /// <returns>A list of the entities with the given ids</returns>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static <%= GetListClassName(_className) %> Get(<%= ColumnToVariableType(_pk) %>[] <%= ToVariableName(_pk.Name) %>s, Flags toPopulate)
+		{
+			return _instance.Get(<%= ToVariableName(_pk.Name) %>s, toPopulate);
+		}
+
+		/// <summary>
+		/// Get an instance of <%= _className %> from the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_pk.Name) %>">The id of the entity to get</param>
+		/// <returns>The entity with the given Id</returns>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static <%= _className %> Get(<%= ColumnToVariableType(_pk) %> <%= ToVariableName(_pk.Name) %>)
+		{
+			return _instance.Get(<%= ToVariableName(_pk.Name) %>);
+		}
+
+		/// <summary>
+		/// Get an instance of <%= _className %> from the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_pk.Name) %>">The id of the entity to get</param>
+		/// <returns>The entity with the given Id</returns>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static <%= _className %> Get(<%= ColumnToVariableType(_pk) %> <%= ToVariableName(_pk.Name) %>, Flags toPopulate)
+		{
+			return _instance.Get(<%= ToVariableName(_pk.Name) %>, toPopulate);
+		}
+<%
+ 
+		WriteLookUps(true);
+
+%>  
+		/// <summary>
+		/// Ensure the specified types of sub entities are populated
+		/// </summary>
+		/// <param name="<%= ToVariableName(_className) %>">The entity to check</param>
+		/// <param name="toPopulate">The types of entities to populate</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static void Populate(<%= _className %> <%= ToVariableName(_className) %>, Flags toPopulate)
+		{
+			_instance.Populate(<%= ToVariableName(_className) %>, toPopulate);
+		}
+
+		/// <summary>
+		/// Refreshes the objects in this collection
+		/// </summary>
+		/// <param name="<%= ToVariableName(_className) %>">The list to refresh from database</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+        public static void Refresh(<%= _className %> <%= ToVariableName(_className) %>, Flags toPopulate)
+		{
+			_instance.Refresh(new <%= _className %>List(<%= ToVariableName(_className) %>), toPopulate);
+		}
+
+		/// <summary>
+		/// Refreshes the objects in this collection
+		/// </summary>
+		/// <param name="<%= ToVariableName(_listClassName) %>">The list to refresh from database</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+        public static void Refresh(<%= _listClassName %> <%= ToVariableName(_listClassName) %>, Flags toPopulate)
+		{
+			_instance.Refresh(<%= ToVariableName(_listClassName) %>, toPopulate);
+		}
+		
+		/// <summary>
+		/// Ensure the specified types of sub entities are populated
+		/// </summary>
+		/// <param name="<%= ToVariableName(_listClassName) %>">The entity to check</param>
+		/// <param name="toPopulate">The types of entities to populate</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static void Populate(<%= _listClassName %> <%= ToVariableName(_listClassName) %>, Flags toPopulate)
+		{
+			_instance.Populate(<%= ToVariableName(_listClassName) %>, toPopulate);
+		}
+<%
+ 		if (!_doingSummary && _workingSource.IsTable)
+		{
+			if (!_isVersioned)
+			{
+%>  
+		/// <summary>
+		/// Delete a <%= _className %> from the store
+		/// Does NOT delete references.
+		/// </summary>
+        /// <param name="<%= ToVariableName(_pk.Name) %>">The id of the entity to delete</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+        public static void Delete(<%= ColumnToVariableType(_pk) %> <%= ToVariableName(_pk.Name) %>)
+		{
+			_instance.Delete(<%= ToVariableName(_pk.Name) %>);
+		}
+<%
+			}
+%>
+		/// <summary>
+		/// Delete a <%= _className %> from the store
+		/// </summary>
+		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
+        /// <param name="<%= ToVariableName(_className) %>">The <%= _className %> entitiy to delete</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+        public static void Delete(Flags toDelete, <%= _className %> <%= ToVariableName(_className) %>)
+		{
+			_instance.Delete(toDelete, <%= ToVariableName(_className) %>);
+		}
+		
+		/// <summary>
+		/// Delete several <%= _className %> entities from the store
+		/// </summary>
+		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
+        /// <param name="<%= ToVariableName(_className) %>s">The <%= _className %> entities to delete</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+        public static void Delete(Flags toDelete, params <%= _className %>[] <%= ToVariableName(_className) %>s)
+		{
+			_instance.Delete(toDelete, <%= ToVariableName(_className) %>s);
+		}
+		
+		/// <summary>
+		/// Delete several <%= _className %> entities from the store
+		/// </summary>
+		/// <param name="entitiesBeingHandled"></param>
+		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
+        /// <param name="<%= ToVariableName(_className) %>s">The <%= _className %> entities to delete</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+        internal static void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, params <%= _className %>[] <%= ToVariableName(_className) %>s)
+        {
+            _instance.Delete(entitiesBeingHandled, toDelete, <%= ToVariableName(_className) %>s);
+        }
+		
+		/// <summary>
+		/// Delete all <%= _className %> from the store - use with care!
+		/// Does NOT delete references.
+		/// </summary>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static void DeleteAll()
+		{
+			_instance.DeleteAll();
+		}
+
+		/// <summary>
+		/// Save (insert/update) one or more <%= _className %> into the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to save</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static void Save(params <%= _className %>[] <%= ToVariableName(_className) %>s)
+		{
+			_instance.Save(<%= ToVariableName(_className) %>s);
+		}
+
+		/// <summary>
+		/// Save (insert/update) one or more <%= _className %> into the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to save</param>
+		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static void Save(Flags toSave, params <%= _className %>[] <%= ToVariableName(_className) %>s)
+		{
+			_instance.Save(toSave, <%= ToVariableName(_className) %>s);
+		}
+
+		/// <summary>
+		/// Save (insert/update) one or more <%= _className %> into the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_listClassName) %>">The <%= _className %>s to save</param>
+		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static void Save(Flags toSave, <%= _listClassName %> <%= ToVariableName(_listClassName) %>)
+		{
+			_instance.Save(toSave, <%= ToVariableName(_listClassName) %>);
+		}
+
+		/// <summary>
+		/// Save (insert/update) one or more <%= _className %> into the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_listClassName) %>">The <%= _className %>s to save</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+		public static void Save(<%= _listClassName %> <%= ToVariableName(_listClassName) %>)
+		{
+			_instance.Save(<%= ToVariableName(_listClassName) %>);
+		}
+		
+		/// <summary>
+		/// Save (insert/update) one or more <%= _className %> into the store
+		/// </summary>
+		/// <param name="<%= ToVariableName(_className) %>s">The <%= _className %>s to save</param>
+		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
+		[Obsolete("Create an instance of the repository instead of static repository methods.")]
+        internal static void Save(List<Entity> entitiesBeingHandled, Flags toSave, params <%= _className %>[] <%= ToVariableName(_className) %>s)
+        {
+            _instance.Save(entitiesBeingHandled, toSave, <%= ToVariableName(_className) %>s);
+        }<%
+		}
+%>
+	}
+}<%
+	}
+	
+	private void WriteLookUps(bool staticVersion)
+	{
+		// Add extra look ups for unique index columns
+		foreach(IIndex index in GetUniqueIndexes())
+		{
+			%>
+		/// <summary>
+        /// Get an instance of the object from the database, by <%= index.Alias %>
+        /// </summary><%
+			foreach(IColumn column in index.Columns)
+			{
+			%>
+        /// <param name="<%= ToVariableName(column.Name) %>">Index column value</param><%
+			}
+		%>
+        /// <returns>The entity with the given index column values</returns>
+        public <%= staticVersion ? "static" : "virtual" %> <%= _className %> GetBy<%= index.Alias %>(<%
+			bool isFirst=true;
+			foreach(IColumn column in index.Columns)
+			{
+				if (!isFirst)
+				{
+					%>, <%
+				}
+			%><%= ColumnToMemberType(column) %> <%= ToVariableName(column.Name) %><%
+				isFirst = false;
+			}%>)
+		{
+			return GetBy<%= index.Alias %>(<%
+			isFirst=true;
+			foreach(IColumn column in index.Columns)
+			{
+				if (!isFirst)
+				{
+					%>, <%
+				}
+			%><%= ToVariableName(column.Name) %><%
+				isFirst = false;
+			}%>, EntityType.None);
+		}
+		
+		/// <summary>
+        /// Get an instance of the object from the database, by <%= index.Alias %>
+        /// </summary><%
+			foreach(IColumn column in index.Columns)
+			{
+			%>
+        /// <param name="<%= ToVariableName(column.Name) %>">Index column value</param><%
+			}
+		%>
+        /// <returns>The entity with the given index column values</returns>
+        public <%= staticVersion ? "static" : "virtual" %> <%= _className %> GetBy<%= index.Alias %>(<%
+			isFirst=true;
+			foreach(IColumn column in index.Columns)
+			{
+				if (!isFirst)
+				{
+					%>, <%
+				}
+			%><%= ColumnToMemberType(column) %> <%= ToVariableName(column.Name) %><%
+				isFirst = false;
+			}%>, Flags toPopulate)
+		{<%
+		if (staticVersion)
+		{%>
+			return _instance.GetBy<%= index.Alias %>(<%
+			isFirst=true;
+			foreach(IColumn column in index.Columns)
+			{
+				if (!isFirst)
+				{
+					%>, <%
+				}
+			%><%= ToVariableName(column.Name) %><%
+				isFirst = false;
+			}%>, toPopulate);<%
+		}
+		else
+		{%>
+            Log("GetBy<%= index.Alias %>", toPopulate);
+			Dictionary<string, object> parameters = new Dictionary<string, object>();<%
+			foreach(IColumn column in index.Columns)
+			{
+				string valueSuffix = "";
+				if (IsEnum(column))
+					valueSuffix = ".ToString()";
+			
+			%>
+			parameters.Add("<%= ToPascalCase(column.Name) %>", <%= ToVariableName(column.Name)%><%= valueSuffix %>);<%
+			}
+			%>
+			<%= _className %> <%= ToVariableName(_className) %> = this.Mapper.QueryForObject<<%= _className %>>("Select<%= _className %>By<%= index.Alias %>", parameters);
+			if (<%= ToVariableName(_className) %> != null)
+			{
+				OnAfterLoadEntity(<%= ToVariableName(_className) %>);
+				Populate(<%= ToVariableName(_className) %>, toPopulate);
+			}
+			return <%= ToVariableName(_className) %>;<%
+		}%>
+		}
+		<%
+		}
+		
+		// Add extra look ups for foreign key columns
+		foreach(IForeignKey foreignKey in GetNonPrimaryForeignKeys())
+		{
+			WriteLookUp(foreignKey.ForeignColumns[0], staticVersion);
+			WriteDelete(foreignKey.ForeignColumns[0], staticVersion);
+		}
+		
+		// And looks ups for any column with a look up property
+		foreach (IColumn column in _columns)
+		{
+			if (column.Properties.ContainsKey("lookUp"))
+			{
+				WriteLookUp(column, staticVersion);
+				WriteDelete(column, staticVersion);
+			}
+		}
+		
+		// Add any multi column look ups
+		Dictionary<string, List<LookupColumnInfo>> multiColumnLookUps = GetMultiColumnListLookUps();
+		foreach (string key in multiColumnLookUps.Keys)
+		{
+			WriteLookUp(key, multiColumnLookUps[key], true, staticVersion);
+			WriteDelete(key, multiColumnLookUps[key], true, staticVersion);
+		}
+
+		multiColumnLookUps = GetMultiColumnEntityLookUps();
+		foreach (string key in multiColumnLookUps.Keys)
+		{
+			WriteLookUp(key, multiColumnLookUps[key], false, staticVersion);
+			WriteDelete(key, multiColumnLookUps[key], false, staticVersion);
+		}
+	}
+	
+	private void WriteLookUp(IColumn lookUpColumn, bool staticVersion)
+	{
+		foreach(ResultMap resultMap in GetResultMaps(lookUpColumn)){
+			string valueSuffix = "";
+			if (IsEnum(lookUpColumn))
+				valueSuffix = ".ToString()";
+%>
+		/// <summary>
+        /// Get <%= _className %> from the store, by <%= ToVariableName(lookUpColumn.Name) %>
+        /// </summary>
+        /// <param name="<%= ToVariableName(lookUpColumn.Name) %>">Search value</param>
+        /// <returns>All entities with the given search value</returns>
+        public <%= staticVersion ? "static" : "virtual" %> <%= _listClassName %> Get<%= resultMap.Method %>(<%= ColumnToMemberType(lookUpColumn) %> <%= ToVariableName(lookUpColumn.Name) %>)
+		{
+			return Get<%= resultMap.Method %>(<%= ToVariableName(lookUpColumn.Name) %>, EntityType.None);
+		}
+
+		/// <summary>
+        /// Get <%= _className %> from the store, by <%= ToVariableName(lookUpColumn.Name) %>
+        /// </summary>
+        /// <param name="<%= ToVariableName(lookUpColumn.Name) %>">Search value</param>
+        /// <param name="toPopulate">Entities to populate</param>
+        /// <returns>All entities with the given search value</returns>
+        public <%= staticVersion ? "static" : "virtual" %> <%= _listClassName %> Get<%= resultMap.Method %>(<%= ColumnToMemberType(lookUpColumn) %> <%= ToVariableName(lookUpColumn.Name) %>, Flags toPopulate)
+		{<%
+		if (staticVersion)
+		{%>
+			return _instance.Get<%= resultMap.Method %>(<%= ToVariableName(lookUpColumn.Name) %>, toPopulate);<%
+		}
+		else
+		{%>
+            Log("Get<%= resultMap.Method %>", toPopulate);<%
+			if (IsIntDate(lookUpColumn))
+			{
+			%>
+			<%= _listClassName %> result = (<%= _listClassName %>)this.Mapper.QueryWithRowDelegate<<%= _className %>>("Select<%= resultMap.Id %>", DbConvert.ToDateInt(<%= ToVariableName(lookUpColumn.Name) %><%= valueSuffix %>), OnAfterLoadRowDelegateHandler);<%
+			}
+			else
+			{
+			%>
+			<%= _listClassName %> result = (<%= _listClassName %>)this.Mapper.QueryWithRowDelegate<<%= _className %>>("Select<%= resultMap.Id %>", <%= ToVariableName(lookUpColumn.Name) %><%= valueSuffix %>, OnAfterLoadRowDelegateHandler);<%
+			}
+			%>
+			Populate(result, toPopulate);
+			return result;<%
+		}%>
+		}
+
+		/// <summary>
+		/// Get entities from the database, by multiple <%= ToVariableName(lookUpColumn.Name) %>s
+        /// </summary>
+        /// <param name="<%= ToVariableName(lookUpColumn.Name) %>s"></param>
+        /// <returns>All entities with one of the given search values</returns>
+        public <%= staticVersion ? "static" : "virtual" %> <%= GetListClassName(_className) %> Get<%= resultMap.Method %>(<%= ColumnToMemberType(lookUpColumn) %>[] <%= ToVariableName(lookUpColumn.Name) %>s)
+		{
+			return Get<%= resultMap.Method %>(<%= ToVariableName(lookUpColumn.Name) %>s, EntityType.None);
+		}
+
+		/// <summary>
+		/// Get entities from the database, by multiple <%= ToVariableName(lookUpColumn.Name) %>s
+        /// </summary>
+        /// <param name="<%= ToVariableName(lookUpColumn.Name) %>s">Search values</param>
+		/// <param name="toPopulate">Entities to populate</param>
+        /// <returns>All entities with one of the given search values</returns>
+        public <%= staticVersion ? "static" : "virtual" %> <%= GetListClassName(_className) %> Get<%= resultMap.Method %>(<%= ColumnToMemberType(lookUpColumn) %>[] <%= ToVariableName(lookUpColumn.Name) %>s, Flags toPopulate)
+		{<%
+		if (staticVersion)
+		{%>
+			return _instance.Get<%= resultMap.Method %>(<%= ToVariableName(lookUpColumn.Name) %>s, toPopulate);<%
+		}
+		else
+		{
+			if (IsEnum(lookUpColumn))
+			{
+				valueSuffix = "Strings";
+			%>
+			// Convert enum values to string
+			List<string> <%= ToVariableName(lookUpColumn.Name) %>s<%= valueSuffix %> = new List<string>(<%= ToVariableName(lookUpColumn.Name) %>s.Select<<%= ColumnToMemberType(lookUpColumn) %>, string>((x) => x.ToString()));
+			<%
+			}
+
+			if (IsIntDate(lookUpColumn))
+			{
+				valueSuffix = "Ints";
+			%>
+			// Convert date values to ints
+			List<int> <%= ToVariableName(lookUpColumn.Name) %>s<%= valueSuffix %> = new List<int>(<%= ToVariableName(lookUpColumn.Name) %>s.Select<<%= ColumnToMemberType(lookUpColumn) %>, int>((x) => DbConvert.ToDateInt(x)));
+			<%
+			}			
+			%>
+            Log("Get<%= resultMap.Method %>", toPopulate);
+			<%= _listClassName %> result = (<%= _listClassName %>)this.Mapper.QueryWithRowDelegate<<%= _className %>>("Select<%= resultMap.Id %>s", <%= ToVariableName(lookUpColumn.Name) %>s<%= valueSuffix %>, OnAfterLoadRowDelegateHandler);
+			Populate(result, toPopulate);
+			return result;<%
+		}%>
+		}
+<%
+		}
+	}
+	
+	private void WriteDelete(IColumn lookUpColumn, bool staticVersion)
+	{
+		string valueSuffix = "";
+		string valuePrefix = "";
+		if (IsEnum(lookUpColumn))
+			valueSuffix = ".ToString()";
+		if (IsIntDate(lookUpColumn))
+		{
+			valuePrefix = "DbConvert.ToDateInt(";
+			valueSuffix = ")";
+		}
+		
+%>
+		/// <summary>
+        /// Delete <%= _className %> from the store, by <%= ToVariableName(lookUpColumn.Name) %>.
+		/// WARNING: No version checking will be done and no sub entities will be deleted
+        /// </summary>
+        /// <param name="<%= ToVariableName(lookUpColumn.Name) %>">Search value</param>
+        /// <returns>All entities with the given search value</returns>
+        public <%= staticVersion ? "static" : "virtual" %> void DeleteBy<%= ToPascalCase(lookUpColumn.Name) %>(<%= ColumnToMemberType(lookUpColumn) %> <%= ToVariableName(lookUpColumn.Name) %>)
+		{<%
+		if (staticVersion)
+		{%>
+			_instance.DeleteBy<%= ToPascalCase(lookUpColumn.Name) %>(<%= ToVariableName(lookUpColumn.Name) %>);<%
+		}
+		else
+		{%>
+            Log("DeleteBy<%= ToPascalCase(lookUpColumn.Name) %>");
+			int deleted = this.Mapper.Delete("Delete<%= _className %>By<%= ToPascalCase(lookUpColumn.Name) %>", <%= valuePrefix %><%= ToVariableName(lookUpColumn.Name) %><%= valueSuffix %>);
+			if (deleted > 0) RaiseModelChanged();<%
+		}%>
+		}
+
+		/// <summary>
+		/// Delete entities from the database, by multiple <%= ToVariableName(lookUpColumn.Name) %>s
+		/// WARNING: No version checking will be done and no sub entities will be deleted
+        /// </summary>
+        /// <param name="<%= ToVariableName(lookUpColumn.Name) %>s">Search values</param>
+        public <%= staticVersion ? "static" : "virtual" %> void DeleteBy<%= ToPascalCase(lookUpColumn.Name) %>(<%= ColumnToMemberType(lookUpColumn) %>[] <%= ToVariableName(lookUpColumn.Name) %>s)
+		{<%
+		if (staticVersion)
+		{%>
+			_instance.DeleteBy<%= ToPascalCase(lookUpColumn.Name) %>(<%= ToVariableName(lookUpColumn.Name) %>s);<%
+		}
+		else
+		{
+			if (IsEnum(lookUpColumn))
+			{
+				valueSuffix = "Strings";
+			%>
+			// Convert enum values to string
+			List<string> <%= ToVariableName(lookUpColumn.Name) %>s<%= valueSuffix %> = new List<string>(<%= ToVariableName(lookUpColumn.Name) %>s.Select<<%= ColumnToMemberType(lookUpColumn) %>, string>((x) => x.ToString()));
+			<%
+			}
+
+			if (IsIntDate(lookUpColumn))
+			{
+				valueSuffix = "Ints";
+			%>
+			// Convert date values to ints
+			List<int> <%= ToVariableName(lookUpColumn.Name) %>s<%= valueSuffix %> = new List<int>(<%= ToVariableName(lookUpColumn.Name) %>s.Select<<%= ColumnToMemberType(lookUpColumn) %>, int>((x) => DbConvert.ToDateInt(x)));
+			<%
+			}			
+			%>
+            Log("DeleteBy<%= ToPascalCase(lookUpColumn.Name) %>");
+			int deleted = this.Mapper.Delete("Delete<%= _className %>By<%= ToPascalCase(lookUpColumn.Name) %>s", <%= ToVariableName(lookUpColumn.Name) %>s<%= valueSuffix %>);
+			if (deleted > 0) RaiseModelChanged();<%
+		}%>
+		}
+<%
+	}
+
+	private void WriteLookUp(string name, List<LookupColumnInfo> lookUpColumns, bool listLookUp, bool staticVersion)
+	{
+		foreach(ResultMap resultMap in GetResultMaps(name)){
+%>
+		/// <summary>
+        /// Get <%= _className %> from the store (<%= name %>)
+        /// </summary><%
+			bool first = true;
+			string paramString = "";
+			string paramDefString = "";
+			foreach (LookupColumnInfo lookUpColumnInfo in lookUpColumns)
+			{
+				IColumn lookUpColumn = lookUpColumnInfo.Column;
+				
+				if (!first)
+				{
+					paramString += ", ";
+					paramDefString += ", ";
+				}
+				first = false;
+				paramString += ToVariableName(lookUpColumn.Name);
+				paramDefString += ColumnToMemberType(lookUpColumn) + " " + ToVariableName(lookUpColumn.Name);
+			%>
+		/// <param name="<%= ToVariableName(lookUpColumn.Name) %>">Search value</param><%
+		}
+		%>
+        /// <returns>All entities with the given search values</returns>
+        public <%= staticVersion ? "static" : "virtual" %> <%= listLookUp ? _listClassName : _className %> Get<%= resultMap.Method %>(<%= paramDefString %>)
+		{
+			return Get<%= resultMap.Method %>(EntityType.None, <%= paramString %>);
+		}
+
+		/// <summary>
+        /// Get <%= _className %> from the store (<%= name %>)
+        /// </summary><%
+			foreach (LookupColumnInfo lookUpColumnInfo in lookUpColumns)
+			{
+				IColumn lookUpColumn = lookUpColumnInfo.Column;
+		%>
+		/// <param name="<%= ToVariableName(lookUpColumn.Name) %>">Search value</param><%
+			}%>
+        /// <returns>All entities with the given search values</returns>
+        public <%= staticVersion ? "static" : "virtual" %> <%= listLookUp ? _listClassName : _className %> Get<%= resultMap.Method %>(Flags toPopulate, <%= paramDefString %>)
+		{<%
+			if (staticVersion)
+			{%>
+			return _instance.Get<%= resultMap.Method %>(toPopulate, <%= paramString %>);<%
+			}
+			else
+			{%>
+            return <%= listLookUp ? "GetList" : "GetEntity" %>(
+                "Select<%= resultMap.Id %>",
+                toPopulate,<%
+				first = true;
+				foreach (LookupColumnInfo lookUpColumnInfo in lookUpColumns)
+				{
+					IColumn lookUpColumn = lookUpColumnInfo.Column;
+					%><%= first ? "" : "," %><% 
+					if (IsIntDate(lookUpColumn))
+					{%>
+				new Param("<%= ToVariableName(lookUpColumn.Name) %>", DbConvert.ToDateInt(<%= ToVariableName(lookUpColumn.Name) %>))<%
+					}
+					else
+					{%>
+				new Param("<%= ToVariableName(lookUpColumn.Name) %>", <%= ToVariableName(lookUpColumn.Name) %>)<%
+					}
+					first = false;
+				}%>);<%
+			}%>
+		}
+<%
+		}
+	}
+
+
+	private void WriteDelete(string name, List<LookupColumnInfo> lookUpColumns, bool listLookUp, bool staticVersion)
+	{
+%>
+		/// <summary>
+        /// Delete <%= _className %> from the store (<%= name %>)
+		/// WARNING: No version checking will be done and no sub entities will be deleted
+        /// </summary><%
+		bool first = true;
+		string paramString = "";
+		string paramDefString = "";
+		foreach (LookupColumnInfo lookUpColumnInfo in lookUpColumns)
+		{
+			IColumn lookUpColumn = lookUpColumnInfo.Column;
+			
+			if (!first)
+			{
+				paramString += ", ";
+				paramDefString += ", ";
+			}
+			first = false;
+			paramString += ToVariableName(lookUpColumn.Name);
+			paramDefString += ColumnToMemberType(lookUpColumn) + " " + ToVariableName(lookUpColumn.Name);
+		%>
+		/// <param name="<%= ToVariableName(lookUpColumn.Name) %>">Search value</param><%
+		}%>
+        public <%= staticVersion ? "static" : "virtual" %> void Delete<%= name %>(<%= paramDefString %>)
+		{<%
+		if (staticVersion)
+		{%>
+			_instance.Delete<%= name %>(<%= paramString %>);<%
+		}
+		else
+		{%>
+            Delete(
+                "Delete<%= _className %><%= name %>",<%
+			first = true;
+			foreach (LookupColumnInfo lookUpColumnInfo in lookUpColumns)
+			{
+				IColumn lookUpColumn = lookUpColumnInfo.Column;
+				%><%= first ? "" : "," %><% 
+				if (IsIntDate(lookUpColumn))
+				{%>
+				new Param("<%= ToVariableName(lookUpColumn.Name) %>", DbConvert.ToDateInt(<%= ToVariableName(lookUpColumn.Name) %>))<%
+				}
+				else
+				{%>
+				new Param("<%= ToVariableName(lookUpColumn.Name) %>", <%= ToVariableName(lookUpColumn.Name) %>)<%
+				}
+				first = false;
+			}%>);<%
+		}%>
+		}
+<%
+	}
+
+}
+%>
+##|BODY_END

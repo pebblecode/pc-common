@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DefaultSettings Version="1.3.0.3" FirstTime="false">
+  <Setting Name="FontFamily" value="" />
+  <Setting Name="DbDriver" value="SQL" />
+  <Setting Name="ConnectionString" value="Provider=SQLNCLI11;Integrated Security=SSPI;Persist Security Info=False;User ID=sa;Initial Catalog=pc_test;Data Source=localhost" />
+  <Setting Name="LanguageMappingFile" value="C:\Program Files (x86)\MyGeneration13\Settings\Languages.xml" />
+  <Setting Name="Language" value="C#" />
+  <Setting Name="DbTargetMappingFile" value="C:\Program Files (x86)\MyGeneration13\Settings\DbTargets.xml" />
+  <Setting Name="DbTarget" value="SqlClient" />
+  <Setting Name="UserMetaDataFileName" value="C:\Program Files (x86)\MyGeneration13\Settings\UserMetaData.xml" />
+  <Setting Name="EnableLineNumbering" value="True" />
+  <Setting Name="EnableClipboard" value="True" />
+  <Setting Name="CodePage" value="-1" />
+  <Setting Name="Tabs" value="4" />
+  <Setting Name="ScriptTimeout" value="-1" />
+  <Setting Name="DefaultTemplateDirectory" value="P:\db\MyGeneration\Templates" />
+  <Setting Name="DefaultOutputDirectory" value="C:\Program Files (x86)\MyGeneration13\GeneratedCode" />
+  <Setting Name="UseProxyServer" value="False" />
+  <Setting Name="ProxyServerUri" value="" />
+  <Setting Name="ProxyAuthUsername" value="" />
+  <Setting Name="ProxyAuthPassword" value="" />
+  <Setting Name="ProxyAuthDomain" value="" />
+  <Setting Name="WindowState" value="Maximized" />
+  <Setting Name="WindowPosTop" value="-830" />
+  <Setting Name="WindowPosLeft" value="227" />
+  <Setting Name="WindowPosWidth" value="800" />
+  <Setting Name="WindowPosHeight" value="593" />
+  <Setting Name="CheckForNewBuild" value="True" />
+  <Setting Name="CompactMemoryOnStartup" value="True" />
+  <Setting Name="DomainOverride" value="True" />
+  <Setting Name="PC_TEST" value="Database=pc_test;Data Source=localhost;User Id=pctest;Password=pctest;port=3400;" />
+  <Setting Name="SQL" value="Provider=SQLNCLI11;Integrated Security=SSPI;Persist Security Info=False;User ID=sa;Initial Catalog=pc_test;Data Source=localhost" />
+  <SavedSettings name="pc-foundation connection" driver="SQL" connstr="Provider=SQLNCLI11;Integrated Security=SSPI;Persist Security Info=False;User ID=sa;Initial Catalog=pc_test;Data Source=localhost" dbtargetpath="C:\Program Files (x86)\MyGeneration13\Settings\DbTargets.xml" languagepath="C:\Program Files (x86)\MyGeneration13\Settings\Languages.xml" usermetapath="C:\Program Files (x86)\MyGeneration13\Settings\UserMetaData.xml" language="C#" dbtarget="SqlClient" />
+  <RecentFile>C:\Users\HP4540s\Projects\pc-common\db\MyGeneration\Templates\CSharp_IBatis_DataLayer_BusinessEntityComparer.csgen</RecentFile>
+  <RecentFile>C:\Users\HP4540s\Projects\pc-common\db\MyGeneration\Templates\CSharp_IBatis_DataLayer_BusinessEntity.csgen</RecentFile>
+  <RecentFile>C:\Users\HP4540s\Projects\sgp-core\db\MyGeneration\sgp.zprj</RecentFile>
+</DefaultSettings>

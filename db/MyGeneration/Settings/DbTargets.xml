@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DbTargets>
+	<DbTarget From="SQL" To="SqlClient">
+		<Type From="bigint" To="SqlDbType.BigInt" />
+		<Type From="binary" To="SqlDbType.Binary" />
+		<Type From="bit" To="SqlDbType.Bit" />
+		<Type From="char" To="SqlDbType.Char" />
+		<Type From="date" To="SqlDbType.Date" />
+		<Type From="datetime" To="SqlDbType.DateTime" />
+		<Type From="decimal" To="SqlDbType.Decimal" />
+		<Type From="float" To="SqlDbType.Float" />
+		<Type From="image" To="SqlDbType.Image" />
+		<Type From="int" To="SqlDbType.Int" />
+		<Type From="money" To="SqlDbType.Money" />
+		<Type From="nchar" To="SqlDbType.NChar" />
+		<Type From="ntext" To="SqlDbType.NText" />
+		<Type From="numeric" To="SqlDbType.Decimal" />
+		<Type From="nvarchar" To="SqlDbType.NVarChar" />
+		<Type From="real" To="SqlDbType.Real" />
+		<Type From="smalldatetime" To="SqlDbType.SmallDateTime" />
+		<Type From="smallint" To="SqlDbType.SmallInt" />
+		<Type From="smallmoney" To="SqlDbType.SmallMoney" />
+		<Type From="text" To="SqlDbType.Text" />
+		<Type From="timestamp" To="SqlDbType.Timestamp" />
+		<Type From="tinyint" To="SqlDbType.TinyInt" />
+		<Type From="uniqueidentifier" To="SqlDbType.UniqueIdentifier" />
+		<Type From="varbinary" To="SqlDbType.VarBinary" />
+		<Type From="varchar" To="SqlDbType.VarChar" />
+		<Type From="xml" To="SqlDbType.Xml" />
+		<Type From="sql_variant" To="SqlDbType.Variant" />
+	</DbTarget>
+</DbTargets>

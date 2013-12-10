@@ -2,8 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using NUnit.Framework;
-using PC.Entities.Tests.Integration.Entities;
-using PebbleCode.Tests.Entities;
+using PebbleCode.Entities.Tests.Integration.Entities;
 using PebbleCode.Framework.Collections;
 
 namespace PebbleCode.Tests.Unit.CodeGenTests
@@ -40,10 +39,9 @@ namespace PebbleCode.Tests.Unit.CodeGenTests
             Assert.AreEqual(typeof(string), GetPropertyType((FieldTest f) => f.StringFieldNullable));
             Assert.AreEqual(typeof(string), GetPropertyType((FieldTest f) => f.TextField));
             Assert.AreEqual(typeof(string), GetPropertyType((FieldTest f) => f.TextFieldNullable));
-            Assert.AreEqual(typeof(DateTime), GetPropertyType((FieldTest f) => f.TimestampField));
-            Assert.AreEqual(typeof(DateTime?), GetPropertyType((FieldTest f) => f.TimestampFieldNullable));
-            Assert.AreEqual(typeof(bool), GetPropertyType((FieldTest f) => f.TinyintField));
-            Assert.AreEqual(typeof(bool?), GetPropertyType((FieldTest f) => f.TinyintFieldNullable));
+            Assert.AreEqual(typeof(byte[]), GetPropertyType((FieldTest f) => f.TimestampField));
+            Assert.AreEqual(typeof(int), GetPropertyType((FieldTest f) => f.TinyintField));
+            Assert.AreEqual(typeof(int?), GetPropertyType((FieldTest f) => f.TinyintFieldNullable));
         }
 
         private Type GetPropertyType<T, P>(Expression<Func<T, P>> action)

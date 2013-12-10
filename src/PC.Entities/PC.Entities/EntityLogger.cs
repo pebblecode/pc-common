@@ -1,9 +1,8 @@
-﻿using PebbleCode.Framework.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using Bede.Logging.Models;
+using Bede.Logging.Providers;
+using log4net;
 
 namespace PebbleCode.Entities
 {
@@ -12,6 +11,8 @@ namespace PebbleCode.Entities
     /// </summary>
     public class EntityLogger
     {
+        private static readonly ILoggingService _loggingService = new Log4NetLoggingService(LogManager.GetLogger("EntitiesLogger"));
+
         /// <summary>
         /// Writes to the debug log is so configured
         /// </summary>
@@ -20,7 +21,7 @@ namespace PebbleCode.Entities
         /// <param name="entities"></param>
         public static void WriteDebug(string message, string category, params Entity[] entities)
         {
-            Logger.WriteDebug(FormatEntityMessage(message, entities), category, null);
+            _loggingService.Debug(GenerateLoggingData(message, category, entities));
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace PebbleCode.Entities
         /// <param name="entities"></param>
         public static void WriteInfo(string message, string category, params Entity[] entities)
         {
-            Logger.WriteInfo(FormatEntityMessage(message, entities), category, null);
+            _loggingService.Information(GenerateLoggingData(message, category, entities));
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace PebbleCode.Entities
         /// <param name="entities"></param>
         public static void WriteWarning(string message, string category, params Entity[] entities)
         {
-            Logger.WriteWarning(FormatEntityMessage(message, entities), category, null);
+            _loggingService.Warning(GenerateLoggingData(message, category, entities));
         }
 
         /// <summary>
@@ -54,7 +55,9 @@ namespace PebbleCode.Entities
         /// <param name="entities"></param>
         public static Exception WriteError(string message, string category, params Entity[] entities)
         {
-            return Logger.WriteError(FormatEntityMessage(message, entities), category, null);
+            var loggingData = GenerateLoggingData(message, category, entities);
+            _loggingService.Error(loggingData);
+            return new Exception(loggingData.Message);
         }
 
         /// <summary>
@@ -67,7 +70,9 @@ namespace PebbleCode.Entities
         /// <returns></returns>
         public static Exception WriteUnexpectedException(Exception exception, string additionalMessage, string category, params Entity[] entities)
         {
-            return Logger.WriteUnexpectedException(exception, FormatEntityMessage(additionalMessage, entities), category);
+            var loggingData = GenerateLoggingData(additionalMessage, category, entities);
+            _loggingService.Error(loggingData, exception);
+            return new Exception(additionalMessage, exception);
         }
 
         /// <summary>
@@ -76,7 +81,7 @@ namespace PebbleCode.Entities
         /// <param name="message"></param>
         /// <param name="entities"></param>
         /// <returns></returns>
-        private static string FormatEntityMessage(string message, Entity[] entities)
+        private static string FormatEntityMessage(string message, Entity[] entities = null)
         {
             List<string> entityMessages = new List<string>();
             if (entities != null && entities.Length > 0)
@@ -91,6 +96,18 @@ namespace PebbleCode.Entities
             {
                 return message;
             }
+        }
+
+        /// <summary>
+        /// Generates the logging data for the log message
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="category"></param>
+        /// <param name="entities"></param>
+        /// <returns></returns>
+        private static CommonLoggingData GenerateLoggingData(string message, string category, Entity[] entities = null)
+        {
+            return new CommonLoggingData(FormatEntityMessage(message, entities), category);
         }
     }
 }

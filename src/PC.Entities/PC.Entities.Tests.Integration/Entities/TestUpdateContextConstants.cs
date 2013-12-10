@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PebbleCode.Tests.Entities
+namespace PebbleCode.Entities.Tests.Integration.Entities
 {
     public class TestUpdateContextConstants
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using PebbleCode.Entities;
 
-namespace PebbleCode.Tests.Entities
+namespace PebbleCode.Entities.Tests.Integration.Entities
 {
     public sealed class PebblecodeUpdateContexts : UpdateContext<TestUpdateContextConstants>
     {

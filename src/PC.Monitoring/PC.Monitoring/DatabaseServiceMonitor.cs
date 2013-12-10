@@ -1,7 +1,7 @@
 ﻿using System;
 using FB.DataAccess;
 using PebbleCode.Framework.Configuration;
-using PebbleCode.Framework.Logging;
+using Bede.Logging.Models;
 
 namespace PebbleCode.Monitoring
 {
@@ -13,8 +13,8 @@ namespace PebbleCode.Monitoring
         private readonly string _connectionString;
         private bool _useSqlServer;
 
-        public DatabaseServiceMonitor(ServiceMonitorConfiguration config)
-            : base(config.Name, DatabaseSettings.DatabaseHost)
+        public DatabaseServiceMonitor(ServiceMonitorConfiguration config, ILoggingService loggingService = null)
+            : base(config.Name, DatabaseSettings.DatabaseHost, loggingService)
         {
             var connectionString = SettingsRepository.LoadAppSetting("connectionString", "Server={0};Database={1};User Id={2};Password={3};");
             var server = SettingsRepository.LoadAppSetting("db.host", "localhost");
@@ -49,7 +49,7 @@ namespace PebbleCode.Monitoring
             }
             else
             {
-                Logger.WriteError("{0} error: {1}", Category.Service, ServiceName, db.LastException);
+                LoggingService.Error(new CommonFormattedLoggingData("DatabaseServiceMonitor", null, "{0} error: {1}", ServiceName, db.LastException));
                 return MonitoredServiceStatus.CreateErrorStatus(ServiceName);
             }
         }

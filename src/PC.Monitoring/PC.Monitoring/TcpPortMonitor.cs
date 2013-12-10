@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using Bede.Logging.Models;
 
 namespace PebbleCode.Monitoring
 {
@@ -11,8 +12,8 @@ namespace PebbleCode.Monitoring
         private readonly string _ipAddress;
         private readonly int _port;
 
-        public TcpPortMonitor(ServiceMonitorConfiguration config)
-            : base(config.Name, config.Settings["ipAddress"].Value, Int32.Parse(config.Settings["timeout"].Value))
+        public TcpPortMonitor(ServiceMonitorConfiguration config, ILoggingService loggingService = null)
+            : base(config.Name, config.Settings["ipAddress"].Value, Int32.Parse(config.Settings["timeout"].Value), loggingService)
         {
             _ipAddress = config.Settings["ipAddress"].Value;
             _port = Int32.Parse(config.Settings["port"].Value); ;

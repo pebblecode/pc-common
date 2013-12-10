@@ -1,0 +1,576 @@
+﻿##|TYPE Template
+##|UNIQUEID 7beee9ee-6782-408a-ad84-f797e09434f4
+##|TITLE StoredProcWrapper
+##|NAMESPACE C#
+##|SOURCE_TYPE Source
+##|OUTPUT_LANGUAGE C#
+##|GUI_ENGINE .Net Script
+##|GUI_LANGUAGE C#
+##|GUI_BEGIN
+
+public class GeneratedGui : DotNetScriptGui
+{
+	public GeneratedGui(ZeusContext context) : base(context) {}
+
+	//-----------------------------------------
+	// The User Interface Entry Point
+	//-----------------------------------------
+	public override void Setup()
+	{
+		ui.Width  = 600;
+		ui.Height = 500;
+		ui.ShowGui = true;
+		
+		// Setup Database selection combobox.
+		ui.AddLabel( "databaseNameLabel", "Select a database:", "Select a database in the dropdown below." );
+		GuiComboBox databaseName = ui.AddComboBox( "databaseName", "Select a database." );
+		
+		if( MyMeta.IsConnected )
+		{
+			databaseName.BindData( MyMeta.Databases );
+			if( MyMeta.DefaultDatabase != null ) 
+			{
+				databaseName.SelectedValue = MyMeta.DefaultDatabase.Alias;
+			}
+		}
+		
+		// Grab default output path
+		string defaultOutputPath = "";
+		if( input.Contains( "defaultOutputPath" ) ) 
+			defaultOutputPath = input["defaultOutputPath"].ToString();
+		defaultOutputPath = System.IO.Path.Combine(defaultOutputPath, "db.cs");
+
+		// Set up output file picker
+		ui.AddLabel( "outputFileClassLabel", "Class File:", "Select an output file");
+		GuiTextBox outputClassFile = ui.AddTextBox( "outputClassFile", defaultOutputPath, "Select an output file" );
+		GuiFilePicker outputClassFilePicker = ui.AddFilePicker("outputClassFilePicker", "...", "Select a class output file", "outputClassFile", false);
+
+		// Set up output file picker
+		ui.AddLabel( "outputFileInterfaceLabel", "Interface File:", "Select an output file");
+		GuiTextBox outputInterfaceFile = ui.AddTextBox( "outputInterfaceFile", defaultOutputPath, "Select an output file" );
+		GuiFilePicker outputInterfaceFilePicker = ui.AddFilePicker("outputInterfaceFilePicker", "...", "Select an interface output file", "outputInterfaceFile", false);
+
+		// Set up sp names
+		ui.AddLabel( "spPrefixesLabel", "Enter ; separated sp prefixes to process:", "Enter ; separated sp prefixes to process");
+		GuiTextBox namespaceTextBox = ui.AddTextBox( "spPrefixes", "sp_engine;sp_sched;sp_utility", "Enter sp prefixes to process" );
+	}
+
+}
+##|GUI_END
+##|BODY_MODE Markup
+##|BODY_ENGINE .Net Script
+##|BODY_LANGUAGE C#
+##|BODY_TAG_START <%
+##|BODY_TAG_END %>
+##|BODY_BEGIN
+<%#NAMESPACE System.IO, System.Text, System.Text.RegularExpressions, System.Globalization, System.Collections.Generic%><%
+public class GeneratedTemplate : DotNetScriptTemplate
+{
+	public GeneratedTemplate(ZeusContext context) : base(context) {}
+
+	private List<string> _prefixesToProcess = new List<string>();
+	
+	//---------------------------------------------------
+	// Render() is where you want to write your logic    
+	//---------------------------------------------------
+	public override void Render()
+	{
+		// Gather inputs
+		string databaseName = input["databaseName"].ToString();
+		string outputInterfaceFile = input["outputInterfaceFile"].ToString();
+		string outputClassFile = input["outputClassFile"].ToString();
+		string spPrefixes = input["spPrefixes"].ToString();
+
+		// Process prefixes
+		string[] spPrefixesArray = spPrefixes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+		foreach (string spPrefix in spPrefixesArray)
+			_prefixesToProcess.Add(spPrefix.Trim()); 
+
+		// Output class
+		OutputClassFile(databaseName);
+		output.save(outputClassFile, false);
+		output.clear();
+
+		// Output interface
+		OutputInterfaceFile(databaseName);
+		output.save(outputInterfaceFile, false);
+		output.clear();
+	}
+	
+	private void OutputClassFile(string databaseName)
+	{
+
+%>/*****************************************************************
+/*
+/*   IMPORTANT!!!
+/*
+/*   DO NOT MODIFY THIS FILE DIRECTLY!
+/*
+/*   If you need to make changes either modify the template and
+/*   regenerate or derive a class from this class and override.
+/*
+/*   Generation Date/Time: <%= DateTime.Now.ToString("dd/MM/yyyy HH:mm") %>
+*/
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Text;
+
+using MySql.Data.MySqlClient;
+
+using PebbleCode.Framework.Logging;
+using SGP.Framework.Configuration;
+using FB.DataAccess.Monitor;
+
+namespace FB.DataAccess
+{
+    /// <summary>
+    /// Data Store encapsulation class
+    /// </summary>
+	public partial class MySqlDataStore : IDataStore
+	{<%
+		
+		// Loop over stored procs
+		// And create a static method for each one
+		IDatabase db = MyMeta.Databases[databaseName];
+		foreach(IProcedure procedure in db.Procedures)
+		{
+			if (Skip(procedure))
+				continue;
+
+			WriteFunctionHeader(procedure, false);%>
+		{
+			// Open a connection to the db
+			MySqlConnection connection = GetConnection(Database.Engine);
+
+			// Try and do some db work, releasing the connection in the finally
+			try
+            {
+				// Create a command to fire the stored proc
+                using (MySqlCommand command = new MySqlCommand("<%= procedure.Name %>", connection))
+				{
+					command.CommandType = CommandType.StoredProcedure;
+<% 			if (procedure.Parameters.Count > 0)
+			{%>
+					// Set up all parameters<%
+				foreach(IParameter parameter in procedure.Parameters)
+				{
+					string variableName = ParamToVarName(parameter);%>
+					// Parameter: <%= parameter.Name %><%
+					if (parameter.Direction == ParamDirection.Output)
+					{%>
+					MySqlParameter <%= variableName %>Param = new MySqlParameter("<%= parameter.Name %>", <%= parameter.DbTargetType.ToString() %>);<%
+					}
+					else
+					{%>
+					MySqlParameter <%= variableName %>Param = new MySqlParameter("<%= parameter.Name %>", <%= variableName %>);<%
+					}%>
+					<%= variableName %>Param.Direction = <%= ParamToDirectionEnum(parameter) %>;<%
+					if (parameter.Direction == ParamDirection.Input || parameter.Direction == ParamDirection.InputOutput)
+					{%>
+					<%= variableName %>Param.Value = <%= variableName %>;<%
+					}%>
+					command.Parameters.Add(<%= variableName %>Param);
+<%
+				}
+			}
+%>			
+					// Run the command<%
+			
+			// Run the command. Either as an adapter.fill or a command.execute
+			if (_outputResultSet)
+			{%>
+					DataSet resultSet = new DataSet();
+					using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+					{
+						long startTicks = Profiler.AccurateTicksNow();
+						adapter.Fill(resultSet);
+						Profiler.Write("<%= procedure.Name %>", startTicks, Category.DbProfiler);
+					}<%
+			}
+			else
+			{%>
+					long startTicks = Profiler.AccurateTicksNow();
+					command.ExecuteNonQuery();
+					Profiler.Write("<%= procedure.Name %>", startTicks, Category.DbProfiler);<%
+			}
+			
+			// If its just one result, return it now
+			if (!_outputResultSet && _outputs.Count == 1)
+			{%>
+				
+					// Return the only result
+					if (<%= ParamToVarName(_outputs[0]) %>Param.Value == DBNull.Value)
+						return <%= ParamToTypeDefault(_outputs[0]) %>;
+					else
+<%				if (_returnType == "bool")
+				{
+%>						return Convert.ToBoolean(<%= ParamToVarName(_outputs[0]) %>Param.Value);<%
+				}
+				else
+				{
+%>						return (<%= _returnType %>)<%= ParamToVarName(_outputs[0]) %>Param.Value;<%
+				}
+			}
+			
+			// Populate all the out and ref params.
+			else if (_outputs.Count > 1 || (_outputResultSet && _outputs.Count > 0))
+			{%>
+				
+					// Get the outputs back<%
+				foreach(IParameter outputParam in _outputs)
+				{
+					string varType = ParamToVarType(outputParam);
+					if (varType == "bool")
+					{%>
+					<%= ParamToVarName(outputParam) %> = <%= ParamToVarName(outputParam) %>Param.Value == DBNull.Value ? <%= ParamToTypeDefault(outputParam) %> : Convert.ToBoolean(<%= ParamToVarName(outputParam) %>Param.Value);<%
+					}
+					else if (varType == "DateTime")
+					{%>
+					<%= ParamToVarName(outputParam) %> = <%= ParamToVarName(outputParam) %>Param.Value == DBNull.Value ? <%= ParamToTypeDefault(outputParam) %> : Convert.To<%= ParamToVarType(outputParam) %>(<%= ParamToVarName(outputParam) %>Param.Value);<%
+					}
+					else
+					{%>
+					<%= ParamToVarName(outputParam) %> = <%= ParamToVarName(outputParam) %>Param.Value == DBNull.Value ? <%= ParamToTypeDefault(outputParam) %> : (<%= ParamToVarType(outputParam) %>)<%= ParamToVarName(outputParam) %>Param.Value;<%
+					}
+				}
+			}
+			
+			// If its a resultSet, process it and return it now
+			if (_outputMultiTableResultSet)
+			{
+				int count = 0;
+				List<string> outputEntities = new List<string>();
+				foreach(string outputEntityForTable in _outputEntitiesForTables)
+				{
+					string varName = StripUnderscoresAndCapitalise(outputEntityForTable, true) + "s";
+					outputEntities.Add(varName);
+					%>
+					
+					// Process <%= outputEntityForTable %>
+					List<<%= outputEntityForTable %>> <%= varName %> = new List<<%= outputEntityForTable %>>();
+					if (resultSet.Tables.Count > <%= count.ToString() %>)
+					{
+						// Loop over rows and create a result for each one
+						foreach (DataRow resultRow in resultSet.Tables[<%= count.ToString() %>].Rows)
+							<%= varName %>.Add(ConvertDataRowTo<%= outputEntityForTable %>(resultRow));
+					}<%
+					count++;
+				}
+				
+				string[] constructorParams = outputEntities.ToArray();
+			%>
+				
+					// Clean up the result set
+					DisposeDataSet(resultSet);
+					resultSet = null;
+					
+					// Now create the combined result and return it
+					return new <%= _outputEntityType %>(<%= string.Join(", ", constructorParams) %>);<%
+			}
+			else if (_outputResultSet)
+			{%>
+
+					// Create result
+					List<<%= _outputEntityType %>> result = new List<<%= _outputEntityType %>>();
+					
+					// Any tables and rows?
+					if (resultSet.Tables.Count == 0 || resultSet.Tables[0].Rows.Count == 0)
+						return result;
+
+					// Loop over rows and create a result for each one
+					foreach (DataRow resultRow in resultSet.Tables[0].Rows)
+						result.Add(ConvertDataRowTo<%= _outputEntityType %>(resultRow));
+				
+					// Clean up the result set
+					DisposeDataSet(resultSet);
+					resultSet = null;
+					
+					// Return the processed results
+					return result;<%
+			}
+			
+			%>
+				}
+			}
+			finally
+			{
+				ReleaseConnection(Database.Engine);
+			}
+		}
+<%
+		}
+
+%>	}
+}
+<%
+	}
+	
+	private void OutputInterfaceFile(string databaseName)
+	{
+
+%>/*****************************************************************
+/*
+/*   IMPORTANT!!!
+/*
+/*   DO NOT MODIFY THIS FILE DIRECTLY!
+/*
+/*   If you need to make changes either modify the template and
+/*   regenerate or derive a class from this class and override.
+/*
+/*   Generation Date/Time: <%= DateTime.Now.ToString("dd/MM/yyyy HH:mm") %>
+*/
+
+using System;
+using System.Collections.Generic;
+using FB.DataAccess.Monitor;
+
+namespace FB.DataAccess
+{
+    /// <summary>
+    /// Data Store interface
+    /// </summary>
+	public partial interface IDataStore
+	{<%
+		
+		// Loop over stored procs
+		// And create a method for each one
+		IDatabase db = MyMeta.Databases[databaseName];
+		
+		foreach(IProcedure procedure in db.Procedures)
+		{
+			if (Skip(procedure))
+				continue;
+				
+			WriteFunctionHeader(procedure, true);%>;
+<%
+		}
+
+%>	}
+}
+<%
+	}
+	
+	private string _outputEntityType;
+	private string[] _outputEntitiesForTables;
+	private bool _outputResultSet;
+	private bool _outputMultiTableResultSet;
+	private List<IParameter> _outputs;
+	private List<IParameter> _inputs;
+	private string _returnType;
+	
+	/// Used by Interface and class templates to write the same function
+	/// header for a given stored proc
+	private void WriteFunctionHeader(IProcedure procedure, bool isForInterface)
+	{
+		string methodName = GetMethodName(procedure.Name);
+		_outputEntityType = GetOutputEntityType(procedure);
+		_outputEntitiesForTables = GetOutputEntitiesForTables(procedure);
+		_outputResultSet = (_outputEntityType != null);
+		_outputMultiTableResultSet = (_outputEntityType != null && _outputEntitiesForTables != null);
+		_outputs = GetOutputs(procedure);
+		_inputs = GetInputs(procedure, _outputs.Count, _outputResultSet);
+		
+		string accessModifier = "";
+		if (!isForInterface)
+			accessModifier = "public ";
+			
+		_returnType = "void";
+		if (_outputMultiTableResultSet)
+			_returnType = _outputEntityType;
+		else if (_outputResultSet)
+			_returnType = string.Format("List<{0}>", _outputEntityType);
+		else if (_outputs.Count == 1)
+			_returnType = ParamToVarType(_outputs[0]);
+		
+		string[] inputParamDefinitions = new string[_inputs.Count];
+		int inputParamsIndex = 0;
+		foreach(IParameter inputParam in _inputs)
+		{
+			string paramDefinition = "";
+			
+			switch (inputParam.Direction)
+			{
+				case ParamDirection.Input:
+					paramDefinition = string.Format("{0} {1}", ParamToVarType(inputParam), ParamToVarName(inputParam));
+					break;
+					
+				case ParamDirection.InputOutput:
+					string prefix = "";
+					if (_outputs.Count > 1 || _outputResultSet)
+						prefix = "ref ";
+					paramDefinition = string.Format("{0}{1} {2}", prefix, ParamToVarType(inputParam), ParamToVarName(inputParam));
+					break;
+
+				case ParamDirection.Output:
+					paramDefinition = string.Format("out {0} {1}", ParamToVarType(inputParam), ParamToVarName(inputParam));
+					break;
+			}
+			
+			inputParamDefinitions[inputParamsIndex++] = paramDefinition;
+		}
+%>
+        /// <summary>
+        /// Wrapper method for <%= procedure.Name %> stored proc
+        /// </summary><%
+			foreach(IParameter inputParam in _inputs)
+			{%>
+		/// <param name="<%= ParamToVarName(inputParam) %>"></param><%
+			}
+		%>
+		<%= accessModifier %><%= _returnType %> <%= methodName %>(<%= string.Join(", ", inputParamDefinitions) %>)<%
+	}
+	
+	/// Method to see if the procedure has any meta data that
+	/// dictates we should output an entity
+	private string GetOutputEntityType(IProcedure procedure)
+	{
+		if (procedure.Properties.ContainsKey("resultObject"))
+		{
+			string outputEntity = procedure.Properties["resultObject"].Value;
+			if (outputEntity != null && outputEntity.Trim().Length > 0)
+				return outputEntity.Trim();
+		}
+		return null;
+	}
+	
+	/// If an output is made up of multiple tables, the resultObjectTables
+	/// meta property can be used to say that the resultObject is made up of
+	/// properties representing each table.
+	private string[] GetOutputEntitiesForTables(IProcedure procedure)
+	{
+		if (procedure.Properties.ContainsKey("resultObjectTables"))
+		{
+			string outputEntityTables = procedure.Properties["resultObjectTables"].Value;
+			if (outputEntityTables != null && outputEntityTables.Trim().Length > 0)
+				return outputEntityTables.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+		}
+		return null;
+	}
+	
+	/// Method to see if we should skip certain procs
+	private bool Skip(IProcedure procedure)
+	{
+		foreach (string prefixToProcess in _prefixesToProcess)
+		{
+			if (procedure.Name.StartsWith(prefixToProcess))
+				return false;
+		}
+		return true;
+	}
+	
+	/// Get all of the outputs a proc has
+	private List<IParameter> GetOutputs(IProcedure procedure)
+	{
+		List<IParameter> outputs = new List<IParameter>();
+		foreach(IParameter parameter in procedure.Parameters)
+		{
+			if (parameter.Direction == ParamDirection.Output || parameter.Direction == ParamDirection.InputOutput)
+				outputs.Add(parameter);
+		}
+		return outputs;
+	}
+	
+	/// Get all of the inputs a proc has
+	private List<IParameter> GetInputs(IProcedure procedure, int outputCount, bool outputResultSet)
+	{
+		List<IParameter> inputs = new List<IParameter>();
+		foreach(IParameter parameter in procedure.Parameters)
+		{
+			if (parameter.Direction == ParamDirection.Input ||
+				parameter.Direction == ParamDirection.InputOutput ||
+				(parameter.Direction == ParamDirection.Output && (outputCount > 1 || outputResultSet)))
+			{
+				inputs.Add(parameter);
+			}
+		}
+		return inputs;
+	}
+	
+	/// Create the value of a dircetion enum for a given parameter
+	private string ParamToDirectionEnum(IParameter parameter)
+	{
+		switch(parameter.Direction)
+		{
+			case ParamDirection.Input: return "ParameterDirection.Input";
+			case ParamDirection.InputOutput: return "ParameterDirection.InputOutput";
+			case ParamDirection.Output: return "ParameterDirection.Output";
+			default: return "ParameterDirection.Input";
+		}
+	}
+	
+	/// Create a variable name for a given parameter
+	private string ParamToVarType(IParameter parameter)
+	{
+		return parameter.LanguageType;
+	}
+	
+	/// Create a variable name for a given parameter
+	private string ParamToTypeDefault(IParameter parameter)
+	{
+		switch (parameter.LanguageType)
+		{
+			case "string": return "null";
+			case "DateTime": return "DateTime.MinValue";
+			case "byte[]": return "null";
+			case "bool" : return "false";
+			default: return "0";
+		}
+	}
+	
+	/// Create a variable name for a given parameter
+	private string ParamToVarName(IParameter parameter)
+	{
+		string paramName = parameter.Name;
+		if (paramName.StartsWith("p_") || paramName.StartsWith("v_"))
+			paramName = paramName.Substring(2);
+		return StripUnderscoresAndCapitalise(paramName, true);
+	}
+	
+	/// Method to convert a proc name into a method name
+	private string GetMethodName(string procedureName)
+	{
+		// Strip prefix from beginning
+		foreach (string prefix in _prefixesToProcess)
+		{
+			if (procedureName.StartsWith(prefix))
+			{
+				procedureName = procedureName.Substring(prefix.Length, procedureName.Length - prefix.Length);
+				break;
+			}
+		}
+		
+		// Strip out underscores and capitalise, including first part
+		return StripUnderscoresAndCapitalise(procedureName, false);
+	}
+	
+	/// Method split names on underscore and capitalise each word
+	/// Camelise == true; to not capitalise the first word
+	private string StripUnderscoresAndCapitalise(string source, bool camelise)
+	{
+		bool isFirst = true;
+		string result = "";
+		
+		// Split on _
+		string[] parts = source.Split(new string[] {"_"}, StringSplitOptions.RemoveEmptyEntries);
+		foreach (string part in parts)
+		{
+			if (isFirst && camelise)
+			{
+				result += part.ToLower();
+			}
+			else
+			{
+				result += part.Substring(0, 1).ToUpper();
+				if (part.Length > 1)
+					result += part.Substring(1, part.Length - 1).ToLower();
+			}
+			isFirst = false;
+		}
+		
+		return result;
+	}
+}
+%>
+##|BODY_END
