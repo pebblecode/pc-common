@@ -22,7 +22,6 @@ using PebbleCode.Framework.Collections;
 using PebbleCode.Framework.Dates;
 using PebbleCode.Framework.IoC;
 using PebbleCode.Repository;
-using PebbleCode.Repository;
 using PebbleCode.Repository.Exceptions;
 
 using PebbleCode.Entities.Tests.Integration.Entities;

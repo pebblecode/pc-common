@@ -84,8 +84,8 @@
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="PC.Entities">
-      <HintPath>..\packages\PC.Entities.6.0.0.183\lib\net40\PC.Entities.dll</HintPath>
-    </Reference>-->
+      <HintPath>..\..\PC.Entities\PC.Entities\bin\Debug\PC.Entities.dll</HintPath>
+    </Reference>
     <Reference Include="PC.Framework">
       <HintPath>..\packages\PC.Framework.6.0.0.183\lib\net40\PC.Framework.dll</HintPath>
     </Reference>

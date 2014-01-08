@@ -2,8 +2,10 @@
 using System.Linq;
 using NUnit.Framework;
 using PebbleCode.Entities.Tests.Integration.Entities;
+using PebbleCode.Entities.Tests.Integration.Repository;
 using PebbleCode.Framework.IoC;
 using PebbleCode.Repository;
+using PC.Entities.Tests.Integration.Repository;
 
 namespace PebbleCode.Tests.Unit.MockTests
 {

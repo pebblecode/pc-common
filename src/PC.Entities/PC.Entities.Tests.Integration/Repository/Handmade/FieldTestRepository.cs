@@ -5,7 +5,6 @@ using System.Linq;
 using PebbleCode.Framework;
 using PebbleCode.Framework.Collections;
 using PebbleCode.Entities;
-using PC.Entities.Tests.Integration.Entities;
 
 namespace PC.Entities.Tests.Integration.Repository
 {

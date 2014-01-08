@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PC.Entities.Tests.Integration.Entities;
 using PebbleCode.Entities;
+using PebbleCode.Entities.Tests.Integration.Entities;
 
-namespace PebbleCode.Entities.Tests.Integration.Entities
+namespace PC.Entities.Tests
 {
     public sealed class IntegrationUpdateContexts : UpdateContext<TestUpdateContextConstants, int>
     {

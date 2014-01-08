@@ -74,7 +74,7 @@ namespace PebbleCode.Entities
             {
                 FieldInfo field = GetType().GetField(propertyName);
                 object oldValue = field != null ? field.GetValue(this) : null;
-                EntityLogger.WriteWarning("{0} property cannot be overriden from {1} to {2} by {3} context".fmt(propertyName, oldValue,
+                EntityLogger<TPrimaryKey>.WriteWarning("{0} property cannot be overriden from {1} to {2} by {3} context".fmt(propertyName, oldValue,
                                                                                           newValue, UpdateContext.Name),
                     "EntityUpdate", null);
                 return false;

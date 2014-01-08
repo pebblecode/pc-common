@@ -82,7 +82,7 @@ namespace PebbleCode.Entities
         /// <param name="message"></param>
         /// <param name="entities"></param>
         /// <returns></returns>
-        private static string FormatEntityMessage(string message, Entity[] entities = null)
+        private static string FormatEntityMessage(string message, Entity<TPrimaryKey>[] entities = null)
         {
             List<string> entityMessages = new List<string>();
             if (entities != null && entities.Length > 0)
@@ -106,7 +106,7 @@ namespace PebbleCode.Entities
         /// <param name="category"></param>
         /// <param name="entities"></param>
         /// <returns></returns>
-        private static CommonLoggingData GenerateLoggingData(string message, string category, Entity[] entities = null)
+        private static CommonLoggingData GenerateLoggingData(string message, string category, Entity<TPrimaryKey>[] entities = null)
         {
             return new CommonLoggingData(FormatEntityMessage(message, entities), category);
         }

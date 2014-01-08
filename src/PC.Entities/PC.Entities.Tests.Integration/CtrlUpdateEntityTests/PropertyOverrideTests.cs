@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using PebbleCode.Entities.Tests.Integration.Entities;
 using PebbleCode.Framework.Utilities;
+using PC.Entities.Tests;
 
 namespace PebbleCode.Tests.Unit.CtrlUpdateEntityTests
 {

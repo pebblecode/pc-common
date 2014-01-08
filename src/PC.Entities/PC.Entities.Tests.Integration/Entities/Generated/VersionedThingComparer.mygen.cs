@@ -10,17 +10,12 @@
 /***                                                                       ***/
 /*****************************************************************************/
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using NUnit.Framework;
 using PC.Tests;
 using PebbleCode.Framework.Dates;
 using PebbleCode.Entities.Tests.Integration.Entities;
 
-namespace PebbleCode.Tests.EntityComparers
+namespace PC.Entities.Tests.Integration.Tests.EntityComparers
 {
     public class VersionedThingComparer : EntityComparerBase
     {
