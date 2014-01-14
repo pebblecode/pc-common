@@ -108,11 +108,13 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Framework">
-      <HintPath>..\packages\PC.Framework.6.0.0.183\lib\net40\PC.Framework.dll</HintPath>
+    <Reference Include="PC.Framework, Version=6.1.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Framework.6.1.0.6\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Tests">
-      <HintPath>..\..\PC.Tests\PC.Tests\bin\Debug\PC.Tests.dll</HintPath>
+    <Reference Include="PC.Tests, Version=6.1.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Tests.6.1.0.6\lib\net40\PC.Tests.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
