@@ -6,7 +6,7 @@ using PebbleCode.Framework;
 using PebbleCode.Framework.Collections;
 using PebbleCode.Entities;
 
-namespace PebbleCode.Repository
+namespace PebbleCode.Entities.Tests.Integration.Repository
 {
 	/// <summary>
 	/// Hand written part of partial class

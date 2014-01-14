@@ -16,7 +16,8 @@ namespace PebbleCode.Entities
     /// </summary>
     /// <typeparam name="UpdateContextConstants"></typeparam>
     [Serializable]
-    public abstract class ControlledUpdateEntity<UpdateContextConstants> : VersionedEntity
+    public abstract class ControlledUpdateEntity<UpdateContextConstants, TPrimaryKey> : VersionedEntity<TPrimaryKey>
+        where TPrimaryKey : IComparable
     {
         private Dictionary<string, string> _propertyAuthorization;
 
@@ -24,8 +25,8 @@ namespace PebbleCode.Entities
         private IAuthorizationController _autorizationAdapter;
 
         [NonSerialized]
-        private UpdateContext<UpdateContextConstants> _updateContext;
-        public UpdateContext<UpdateContextConstants> UpdateContext
+        private UpdateContext<UpdateContextConstants, TPrimaryKey> _updateContext;
+        public UpdateContext<UpdateContextConstants, TPrimaryKey> UpdateContext
         {
             get { return _updateContext; }
             set { _updateContext = value; }
@@ -73,7 +74,7 @@ namespace PebbleCode.Entities
             {
                 FieldInfo field = GetType().GetField(propertyName);
                 object oldValue = field != null ? field.GetValue(this) : null;
-                EntityLogger.WriteWarning("{0} property cannot be overriden from {1} to {2} by {3} context".fmt(propertyName, oldValue,
+                EntityLogger<TPrimaryKey>.WriteWarning("{0} property cannot be overriden from {1} to {2} by {3} context".fmt(propertyName, oldValue,
                                                                                           newValue, UpdateContext.Name),
                     "EntityUpdate", null);
                 return false;

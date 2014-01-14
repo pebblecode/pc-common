@@ -6,7 +6,7 @@ using PebbleCode.Entities;
 
 namespace PebbleCode.Entities.Tests.Integration.Entities
 {
-    public abstract class ConcreteControlledUpdateEntity : ControlledUpdateEntity<TestUpdateContextConstants>
+    public abstract class ConcreteControlledUpdateEntity<TPrimaryKey> : ControlledUpdateEntity<TestUpdateContextConstants, int>
     {
     }
 }

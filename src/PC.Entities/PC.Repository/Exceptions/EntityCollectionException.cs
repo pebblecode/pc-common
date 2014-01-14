@@ -11,14 +11,15 @@ namespace PebbleCode.Repository.Exceptions
     /// Base class for any exception which requires a list of errors to be associated with it
     /// </summary>
     [Serializable]
-    public abstract class EntityCollectionException : Exception
+    public abstract class EntityCollectionException<TPrimaryKey> : Exception
+        where TPrimaryKey : IComparable
     {
-        private Collection<EntityDescriptor> _entities = new Collection<EntityDescriptor>();
+        private Collection<EntityDescriptor<TPrimaryKey>> _entities = new Collection<EntityDescriptor<TPrimaryKey>>();
 
         /// <summary>
         /// The current list of entities associated with this exception
         /// </summary>
-        public Collection<EntityDescriptor> Entities { get { return _entities; } }
+        public Collection<EntityDescriptor<TPrimaryKey>> Entities { get { return _entities; } }
 
         /// <summary>
         /// Contsructor
@@ -43,7 +44,7 @@ namespace PebbleCode.Repository.Exceptions
         /// <param name="message">The system message to use on the exception</param>
         /// <param name="entity">An entity descriptor to prime the collection with. Useful when there is only one entity. 
         /// If there is more than one entity then add them via the Entities property</param>
-        protected EntityCollectionException(string message, EntityDescriptor entity)
+        protected EntityCollectionException(string message, EntityDescriptor<TPrimaryKey> entity)
             : this(message, entity, null)
         { }
 
@@ -54,7 +55,7 @@ namespace PebbleCode.Repository.Exceptions
         /// <param name="entity">An entity descriptor to prime the collection with. Useful when there is only one entity. 
         /// If there is more than one entity then add them via the Entities property</param>
         /// <param name="innerException">The lower level exception</param>
-        protected EntityCollectionException(string message, EntityDescriptor entity, Exception innerException)
+        protected EntityCollectionException(string message, EntityDescriptor<TPrimaryKey> entity, Exception innerException)
             : base(string.Format(message, entity.EntityType, entity.EntityId), innerException)
         {
             if (entity != null)
@@ -73,7 +74,7 @@ namespace PebbleCode.Repository.Exceptions
                 throw new ArgumentNullException("info");
 
             // Deserialize any field is required
-            _entities = (Collection<EntityDescriptor>)info.GetValue("Entities", typeof(Collection<EntityDescriptor>));
+            _entities = (Collection<EntityDescriptor<TPrimaryKey>>)info.GetValue("Entities", typeof(Collection<EntityDescriptor<TPrimaryKey>>));
         }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace PebbleCode.Repository.Exceptions
             base.GetObjectData(info, context);
 
             // Serialize each field
-            info.AddValue("Entities", _entities, typeof(Collection<EntityDescriptor>));
+            info.AddValue("Entities", _entities, typeof(Collection<EntityDescriptor<TPrimaryKey>>));
         }
     }
 }

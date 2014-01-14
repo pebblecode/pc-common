@@ -12,9 +12,10 @@ namespace PebbleCode.Repository
     /// <summary>
     /// The base class for IBatis data repositories (entities and views)
     /// </summary>
-    public abstract class EntityRepository<TEntity, TList> : EntityRepository, IEntityRepository<TEntity, TList>
-        where TEntity : Entity
-        where TList : EntityList<TEntity>, new()
+    public abstract class EntityRepository<TEntity, TList, TPrimaryKey> : EntityRepository, IEntityRepository<TEntity, TList, TPrimaryKey>
+        where TEntity : Entity<TPrimaryKey>
+        where TList : EntityList<TEntity, TPrimaryKey>, new()
+        where TPrimaryKey : IComparable
     {
 		/// <summary>
 		/// Get all the instances of entity from the store
@@ -33,28 +34,28 @@ namespace PebbleCode.Repository
         /// </summary>
         /// <param name="ids">The ids of the entities to get</param>
         /// <returns>A collection of the entities with the given ids</returns>
-        public abstract TList Get(int[] ids);
+        public abstract TList Get(TPrimaryKey[] ids);
 
         /// <summary>
         /// Get several instances of entity from the store
         /// </summary>
         /// <param name="ids">The ids of the entities to get</param>
         /// <returns>A collection of the entities with the given ids</returns>
-        public abstract TList Get(int[] ids, Flags toPopulate);
+        public abstract TList Get(TPrimaryKey[] ids, Flags toPopulate);
 
 		/// <summary>
         /// Get an instance of entity from the store
 		/// </summary>
 		/// <param name="id">The id of the entity to get</param>
 		/// <returns>The entity with the given Id</returns>
-        public abstract TEntity Get(int id);
+        public abstract TEntity Get(TPrimaryKey id);
 
 		/// <summary>
         /// Get an instance of entity from the store
 		/// </summary>
 		/// <param name="id">The id of the entity to get</param>
 		/// <returns>The entity with the given Id</returns>
-        public abstract TEntity Get(int id, Flags toPopulate);
+        public abstract TEntity Get(TPrimaryKey id, Flags toPopulate);
 
         /// <summary>
         /// Get a single entity from the database using a specific statement and named parameters
@@ -135,7 +136,7 @@ namespace PebbleCode.Repository
         /// <param name="entityList"></param>
         public void Refresh(TList entityList, Flags toPopulate)
         {
-            List<int> allIds = new List<int>(entityList.MapById.Keys);
+            List<TPrimaryKey> allIds = new List<TPrimaryKey>(entityList.MapById.Keys);
             TList latestObjects = this.Get(allIds.ToArray());
             entityList.Clear();
             entityList.AddRange(latestObjects);
@@ -243,9 +244,9 @@ namespace PebbleCode.Repository
         /// <param name="method"></param>
         /// <param name="additionalEntities"></param>
         [DebuggerStepThrough]
-        protected void Log(string method, int id, Flags additionalEntities)
+        protected void Log(string method, TPrimaryKey id, Flags additionalEntities)
         {
-            Log(method, new int[] { id }, additionalEntities);
+            Log(method, new TPrimaryKey[] { id }, additionalEntities);
         }
 
         /// <summary>
@@ -254,7 +255,7 @@ namespace PebbleCode.Repository
         /// <param name="method"></param>
         /// <param name="additionalEntities"></param>
         [DebuggerStepThrough]
-        protected void Log(string method, int[] ids, Flags additionalEntities)
+        protected void Log(string method, TPrimaryKey[] ids, Flags additionalEntities)
         {
             Log(string.Format("{0}Repository.{1};{2}{3}",
                 typeof(TEntity).Name,

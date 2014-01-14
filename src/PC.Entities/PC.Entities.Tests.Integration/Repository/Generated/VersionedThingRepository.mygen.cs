@@ -26,7 +26,7 @@ using PebbleCode.Repository.Exceptions;
 
 using PebbleCode.Entities.Tests.Integration.Entities;
 
-namespace PebbleCode.Repository
+namespace PC.Entities.Tests.Integration.Repository
 {
 	/// <summary>
 	/// Add support for this repo to the global DB context accessor
@@ -40,7 +40,7 @@ namespace PebbleCode.Repository
 	/// <summary>
 	/// Provides access to the VersionedThing Repository
 	/// </summary>
-	public partial class VersionedThingRepository : EditableEntityRepository<VersionedThing, VersionedThingList>
+	public partial class VersionedThingRepository : EditableEntityRepository<VersionedThing, VersionedThingList, int>
 	{
 		/// <summary>
 		/// Get all the instances of VersionedThing from the store
@@ -123,7 +123,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, VersionedThing versionedThing)
 		{
-			Delete(new List<Entity>(), toDelete, new List<VersionedThing>{ versionedThing });
+			Delete(new List<Entity<int>>(), toDelete, new List<VersionedThing>{ versionedThing });
 		}
 
 		/// <summary>
@@ -133,7 +133,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         public override void Delete(Flags toDelete, IEnumerable<VersionedThing> versionedThings)
 		{
-			Delete(new List<Entity>(), toDelete, versionedThings);
+			Delete(new List<Entity<int>>(), toDelete, versionedThings);
 		}
 		
 		/// <summary>
@@ -142,7 +142,7 @@ namespace PebbleCode.Repository
         /// <param name="entitiesBeingHandled">Entities already being deleted further up the delete stack</param>
 		/// <param name="versionedThings">The VersionedThings to delete</param>
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
-		internal void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, IEnumerable<VersionedThing> versionedThings)
+		internal void Delete(List<Entity<int>> entitiesBeingHandled, Flags toDelete, IEnumerable<VersionedThing> versionedThings)
 		{
             if (versionedThings == null)
 				throw new ArgumentNullException("versionedThings");
@@ -150,7 +150,7 @@ namespace PebbleCode.Repository
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<int>> entitiesNowBeingHandled = new List<Entity<int>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(versionedThings);
 
 			// Loop over each entity and delete it.
@@ -207,7 +207,7 @@ namespace PebbleCode.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, params VersionedThing[] versionedThings)
 		{
-            Save(new List<Entity>(), toSave, versionedThings);
+            Save(new List<Entity<int>>(), toSave, versionedThings);
 		}
 
 		/// <summary>
@@ -226,7 +226,7 @@ namespace PebbleCode.Repository
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		public override void Save(Flags toSave, VersionedThingList versionedThingList)
 		{
-            Save(new List<Entity>(), toSave, versionedThingList.ToArray());
+            Save(new List<Entity<int>>(), toSave, versionedThingList.ToArray());
 		}
 
 		/// <summary>
@@ -235,7 +235,7 @@ namespace PebbleCode.Repository
         /// <param name="entitiesBeingHandled">Entities already being saved further up the save stack</param>
 		/// <param name="versionedThings">The VersionedThings to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
-		internal void Save(List<Entity> entitiesBeingHandled, Flags toSave, params VersionedThing[] versionedThings)
+		internal void Save(List<Entity<int>> entitiesBeingHandled, Flags toSave, params VersionedThing[] versionedThings)
 		{
             if (versionedThings == null)
 				throw new ArgumentNullException("versionedThings");
@@ -243,7 +243,7 @@ namespace PebbleCode.Repository
 			
 			// Copy the list of entities being handled, and add this new set of entities to it.
 			// We're handling those now.
-            List<Entity> entitiesNowBeingHandled = new List<Entity>(entitiesBeingHandled);
+            List<Entity<int>> entitiesNowBeingHandled = new List<Entity<int>>(entitiesBeingHandled);
             entitiesNowBeingHandled.AddRange(versionedThings);
 			
 			// Loop over each entity and save it.
@@ -277,7 +277,7 @@ namespace PebbleCode.Repository
 				}
 				catch (Exception ex)
 				{
-					throw EntityLogger.WriteUnexpectedException(
+					throw EntityLogger<int>.WriteUnexpectedException(
 						ex, 
 						"Failed to insert/update Entity",
 						Category.EntityFramework,
@@ -298,7 +298,7 @@ namespace PebbleCode.Repository
 					}
 					catch (Exception ex)
 					{
-						throw EntityLogger.WriteUnexpectedException(
+						throw EntityLogger<int>.WriteUnexpectedException(
 							ex, 
 							"Failed to reset version information",
 							Category.EntityFramework,
@@ -318,7 +318,7 @@ namespace PebbleCode.Repository
 		/// <param name="id">The entity objects Id</param>
 		private void ThrowVersionedThingEntityException(int id)
 		{
-			throw new EntityNotFoundException(new EntityDescriptor(id, typeof(VersionedThing)));	
+			throw new EntityNotFoundException<int>(new EntityDescriptor<int>(id, typeof(VersionedThing)));	
 		}		
     		
         /// <summary>
@@ -489,7 +489,7 @@ namespace PebbleCode.Repository
 		/// <param name="toDelete">Entity types to cascade to, if they are loaded</param>
         /// <param name="versionedThings">The VersionedThing entities to delete</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Delete(List<Entity> entitiesBeingHandled, Flags toDelete, params VersionedThing[] versionedThings)
+        internal static void Delete(List<Entity<int>> entitiesBeingHandled, Flags toDelete, params VersionedThing[] versionedThings)
         {
             _instance.Delete(entitiesBeingHandled, toDelete, versionedThings);
         }
@@ -552,7 +552,7 @@ namespace PebbleCode.Repository
 		/// <param name="versionedThings">The VersionedThings to save</param>
 		/// <param name="toSave">Entity types to cascade to, if they are loaded</param>
 		[Obsolete("Create an instance of the repository instead of static repository methods.")]
-        internal static void Save(List<Entity> entitiesBeingHandled, Flags toSave, params VersionedThing[] versionedThings)
+        internal static void Save(List<Entity<int>> entitiesBeingHandled, Flags toSave, params VersionedThing[] versionedThings)
         {
             _instance.Save(entitiesBeingHandled, toSave, versionedThings);
         }

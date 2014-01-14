@@ -112,7 +112,7 @@
       <HintPath>..\packages\PC.Framework.6.0.0.183\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
     <Reference Include="PC.Tests">
-      <HintPath>..\packages\PC.Tests.6.1.0.2\lib\net40\PC.Tests.dll</HintPath>
+      <HintPath>..\..\PC.Tests\PC.Tests\bin\Debug\PC.Tests.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

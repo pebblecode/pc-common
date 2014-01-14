@@ -7,7 +7,8 @@ namespace PebbleCode.Entities
     /// <summary>
     /// Interface for all versioned business entities
     /// </summary>
-    public interface IVersionedEntity : IEntity
+    public interface IVersionedEntity<TPrimaryKey> : IEntity<TPrimaryKey>
+        where TPrimaryKey : IComparable
     {
         /// <summary>
         /// Public accessor for _versionNo

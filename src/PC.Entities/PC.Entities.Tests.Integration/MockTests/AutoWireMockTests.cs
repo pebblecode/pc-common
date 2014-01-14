@@ -2,8 +2,10 @@
 using System.Linq;
 using NUnit.Framework;
 using PebbleCode.Entities.Tests.Integration.Entities;
+using PebbleCode.Entities.Tests.Integration.Repository;
 using PebbleCode.Framework.IoC;
 using PebbleCode.Repository;
+using PC.Entities.Tests.Integration.Repository;
 
 namespace PebbleCode.Tests.Unit.MockTests
 {
@@ -20,7 +22,7 @@ namespace PebbleCode.Tests.Unit.MockTests
             Widget expectedWidget = new Widget();
             expectedWidget.Description = "Testing";
             expectedWidget.DbId = MOCK_ID;
-            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget>(expectedWidget);
+            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget, int>(expectedWidget);
 
             // Make a call to WidgetRepo.Get to get a non specified widget
             Widget widget = Kernel.Get<WidgetRepository>().Get(NON_MOCK_ID);
@@ -36,7 +38,7 @@ namespace PebbleCode.Tests.Unit.MockTests
             Widget expectedWidget = new Widget();
             expectedWidget.Description = "Testing";
             expectedWidget.DbId = MOCK_ID;
-            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget>(expectedWidget);
+            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget, int>(expectedWidget);
 
             // Make a call to WidgetRepo.GetByThingId to get a non specified widget
             WidgetList widgets = Kernel.Get<WidgetRepository>().GetByThingId(MOCK_ID);
@@ -54,7 +56,7 @@ namespace PebbleCode.Tests.Unit.MockTests
             Widget expectedWidget = new Widget();
             expectedWidget.Description = "Testing";
             expectedWidget.DbId = MOCK_ID;
-            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget>(expectedWidget);
+            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget, int>(expectedWidget);
 
             // Make a call to WidgetRepo.Get to get the specified widget
             Widget widget = Kernel.Get<WidgetRepository>().Get(MOCK_ID);
@@ -72,12 +74,12 @@ namespace PebbleCode.Tests.Unit.MockTests
             Widget expectedWidget1 = new Widget();
             expectedWidget1.Description = "Testing";
             expectedWidget1.DbId = MOCK_ID_1;
-            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget>(expectedWidget1);
+            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget, int>(expectedWidget1);
 
             Widget expectedWidget2 = new Widget();
             expectedWidget2.Description = "TestingAgain";
             expectedWidget2.DbId = MOCK_ID_2;
-            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget>(expectedWidget2);
+            AutoWireUpMockRepositoryGetById<WidgetRepository, Widget, int>(expectedWidget2);
 
             // Make a call to WidgetRepo.Get to get the specified widget
             Widget widget = Kernel.Get<WidgetRepository>().Get(MOCK_ID_1);
@@ -92,7 +94,7 @@ namespace PebbleCode.Tests.Unit.MockTests
         public void AutoWireUpMockRepositorySave_SaveParamArray()
         {
             IEnumerable<Widget> savedItems = null;
-            AutoWireUpMockRepositorySave<WidgetRepository, Widget>(instruments => savedItems = instruments);
+            AutoWireUpMockRepositorySave<WidgetRepository, Widget, int>(instruments => savedItems = instruments);
 
             var repo = Kernel.Get<WidgetRepository>();
             repo.Save(
@@ -113,7 +115,7 @@ namespace PebbleCode.Tests.Unit.MockTests
         public void AutoWireUpMockRepositorySave_SaveWidgetList()
         {
             IEnumerable<Widget> savedItems = null;
-            AutoWireUpMockRepositorySave<WidgetRepository, Widget>(instruments => savedItems = instruments);
+            AutoWireUpMockRepositorySave<WidgetRepository, Widget, int>(instruments => savedItems = instruments);
 
             var repo = Kernel.Get<WidgetRepository>();
             repo.Save(new WidgetList(
@@ -135,7 +137,7 @@ namespace PebbleCode.Tests.Unit.MockTests
         public void AutoWireUpMockRepositorySave_SaveParamArray_WithFlags()
         {
             IEnumerable<Widget> savedItems = null;
-            AutoWireUpMockRepositorySave<WidgetRepository, Widget>(instruments => savedItems = instruments);
+            AutoWireUpMockRepositorySave<WidgetRepository, Widget, int>(instruments => savedItems = instruments);
 
             var repo = Kernel.Get<WidgetRepository>();
             repo.Save(EntityType.Widget, 
@@ -156,7 +158,7 @@ namespace PebbleCode.Tests.Unit.MockTests
         public void AutoWireUpMockRepositorySave_SaveWidgetList_WithFlags()
         {
             IEnumerable<Widget> savedItems = null;
-            AutoWireUpMockRepositorySave<WidgetRepository, Widget>(items => savedItems = items);
+            AutoWireUpMockRepositorySave<WidgetRepository, Widget, int>(items => savedItems = items);
 
             var repo = Kernel.Get<WidgetRepository>();
             repo.Save(EntityType.Widget, new WidgetList(
