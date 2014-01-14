@@ -83,14 +83,17 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Entities">
-      <HintPath>..\..\PC.Entities\PC.Entities\bin\Debug\PC.Entities.dll</HintPath>
+    <Reference Include="PC.Entities, Version=6.1.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Entities.6.1.0.5\lib\net40\PC.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Framework">
-      <HintPath>..\packages\PC.Framework.6.0.0.183\lib\net40\PC.Framework.dll</HintPath>
+    <Reference Include="PC.Framework, Version=6.1.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Framework.6.1.0.5\lib\net40\PC.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="PC.Repository">
-      <HintPath>..\packages\PC.Entities.6.0.0.183\lib\net40\PC.Repository.dll</HintPath>
+    <Reference Include="PC.Repository, Version=6.1.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PC.Entities.6.1.0.5\lib\net40\PC.Repository.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
