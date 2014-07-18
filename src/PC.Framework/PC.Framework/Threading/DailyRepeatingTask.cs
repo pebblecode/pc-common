@@ -11,10 +11,17 @@ namespace PebbleCode.Framework.Threading
     /// </summary>
     public abstract class DailyRepeatingTask : RepeatingTask
     {
-        public DailyRepeatingTask(TimeSpan timeToRun, ILoggingService loggingService)
+        private readonly TimeSpan _timeToRun;
+
+        protected DailyRepeatingTask(TimeSpan timeToRun, ILoggingService loggingService)
             : base(TimeSpan.FromHours(24), loggingService)
         {
-            Start(timeToRun);
+            _timeToRun = timeToRun;
+        }
+
+        public override void Start()
+        {
+            Start(_timeToRun);
         }
     }
 }
