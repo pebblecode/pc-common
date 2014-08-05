@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using PebbleCode.Framework.Collections.ThreadSafe;
 using System.Threading;
+using PebbleCode.Framework.Collections.ThreadSafe;
 
 namespace PebbleCode.Framework.Threading
 {
@@ -12,15 +9,15 @@ namespace PebbleCode.Framework.Threading
     /// a range of ids. Adapted from AcquireRegisterPlayerMutex/ReleaseRegisterPlayerMutex
     /// in FB.Engine.Room (FreeBingo project)
     /// </summary>
-    public class ThreadSafeKeyedMutex
+    public class ThreadSafeKeyedMutex<T>
     {
-        private ThreadSafeDictionary<int, Mutex> _mutexes = new ThreadSafeDictionary<int, Mutex>();
+        private ThreadSafeDictionary<T, Mutex> _mutexes = new ThreadSafeDictionary<T, Mutex>();
 
         /// <summary>
         /// Get the mutex for a given mutexId
         /// </summary>
-        /// <param name="mutexId"></param>
-        public void AcquireMutex(int mutexId)
+        /// <param name="mutexKey"></param>
+        public void AcquireMutex(T mutexKey)
         {
             Mutex mutex = null;
 
@@ -28,9 +25,9 @@ namespace PebbleCode.Framework.Threading
             lock (_mutexes)
             {
                 // No mutex for this mutex id yet
-                if (!_mutexes.SafeContainsKey(mutexId))
+                if (!_mutexes.SafeContainsKey(mutexKey))
                 {
-                    _mutexes.SafeAdd(mutexId, new Mutex(true));
+                    _mutexes.SafeAdd(mutexKey, new Mutex(true));
                     return;
                 }
 
@@ -41,7 +38,7 @@ namespace PebbleCode.Framework.Threading
                 // Wait on the mutex, and then try adding again. But we MUST wait
                 // on the mutex OUTSIDE of this lock, otherwise we hold up all
                 // other acquires
-                mutex = _mutexes[mutexId];
+                mutex = _mutexes[mutexKey];
             }
 
             // Wait on the mutex now, but then release immediately, we don't need
@@ -60,22 +57,22 @@ namespace PebbleCode.Framework.Threading
 
             // Go back and try to get the mutex again. We can't just take it
             // incase others are waiting
-            AcquireMutex(mutexId);
+            AcquireMutex(mutexKey);
         }
 
         /// <summary>
         /// Release the mutex for a given player
         /// </summary>
-        /// <param name="mutexId"></param>
-        public void ReleaseMutex(int mutexId)
+        /// <param name="mutexKey"></param>
+        public void ReleaseMutex(T mutexKey)
         {
             Mutex mutex = null;
 
             lock (_mutexes)
             {
-                mutex = _mutexes[mutexId];
+                mutex = _mutexes[mutexKey];
                 mutex.ReleaseMutex();
-                _mutexes.SafeRemove(mutexId);
+                _mutexes.SafeRemove(mutexKey);
             }
 
             mutex.Close();
