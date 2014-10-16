@@ -7,8 +7,7 @@ namespace PebbleCode.Monitoring
     public interface IMonitoringContract
     {
         [OperationContract]
-        [XmlSerializerFormat]
-        [WebInvoke(UriTemplate = "/GetStatus", Method = "GET", ResponseFormat = WebMessageFormat.Xml, RequestFormat = WebMessageFormat.Xml)]
+        [WebInvoke(UriTemplate = "/GetStatus", Method = "GET")]
         GetHealthStatusResponse GetStatus();
     }
 }
